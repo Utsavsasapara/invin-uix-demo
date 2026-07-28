@@ -1,46 +1,82 @@
 import { useState } from 'react';
-import { ComponentPage, PlaygroundSection } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
 import { Checkbox } from 'invin-uix/ui/checkbox';
 import { Label } from 'invin-uix/ui/label';
+import { Card, CardContent } from 'invin-uix/ui/card';
+import { Separator } from 'invin-uix/ui/separator';
+import { Button } from 'invin-uix/ui/button';
 
 export default function CheckboxDemo() {
   const [checked, setChecked] = useState(false);
+  const [items, setItems] = useState([
+    { id: 'email', label: 'Email notifications', checked: true },
+    { id: 'sms', label: 'SMS notifications', checked: false },
+    { id: 'push', label: 'Push notifications', checked: true },
+    { id: 'slack', label: 'Slack messages', checked: false },
+  ]);
+
+  const toggleItem = (id, v) => setItems(prev => prev.map(i => i.id === id ? { ...i, checked: v } : i));
+  const allChecked = items.every(i => i.checked);
+  const someChecked = items.some(i => i.checked) && !allChecked;
 
   return (
     <ComponentPage
       name="Checkbox"
-      description="A checkbox control built on Radix UI with size variants, indeterminate state, and accessible labeling."
+      description="Toggle control for binary or multi-select choices. Built on Radix UI with keyboard support, indeterminate state, and 3 sizes. Accent fill on checked."
       importCode={`import { Checkbox } from 'invin-uix/ui/checkbox';`}
     >
+
+      {/* ─── Props Table ────────────────────────────────────────── */}
+      <PropsTable
+        props={[
+          { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Checkbox dimensions (14px / 16px / 20px)' },
+          { name: 'checked', type: 'boolean | "indeterminate"', default: '—', description: 'Controlled checked state' },
+          { name: 'defaultChecked', type: 'boolean', default: '—', description: 'Uncontrolled initial state' },
+          { name: 'onCheckedChange', type: '(checked: boolean | "indeterminate") => void', default: '—', description: 'Change callback' },
+          { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables interaction (50% opacity)' },
+          { name: 'id', type: 'string', default: '—', description: 'Links with Label via htmlFor' },
+        ]}
+      />
+
+      <Separator variant="bold" />
+
+      {/* ─── Basic ──────────────────────────────────────────────── */}
       <PlaygroundSection
-        title="Basic Usage"
-        description="Checkbox with a label. Click either to toggle."
+        title="Basic with Label"
+        description="Click the checkbox or the label text to toggle. Always pair with Label for accessibility."
         code={`<div className="flex items-center gap-2">
-  <Checkbox id="agree" />
-  <Label htmlFor="agree">I agree to the terms</Label>
+  <Checkbox id="terms" />
+  <Label htmlFor="terms">Accept terms and conditions</Label>
 </div>`}
       >
-        <div className="flex items-center gap-2">
-          <Checkbox id="agree" />
-          <Label htmlFor="agree">I agree to the terms</Label>
+        <div className="space-y-3">
+          <div className="flex items-center gap-2">
+            <Checkbox id="terms" />
+            <Label htmlFor="terms">Accept terms and conditions</Label>
+          </div>
+          <div className="flex items-center gap-2">
+            <Checkbox id="newsletter" defaultChecked />
+            <Label htmlFor="newsletter">Subscribe to newsletter</Label>
+          </div>
         </div>
       </PlaygroundSection>
 
+      {/* ─── Sizes ──────────────────────────────────────────────── */}
       <PlaygroundSection
         title="Sizes"
-        description="Three sizes: sm, md (default), lg."
+        description="sm (14px), md (16px, default), lg (20px). Check icon scales proportionally."
         code={`<Checkbox size="sm" defaultChecked />
 <Checkbox size="md" defaultChecked />
 <Checkbox size="lg" defaultChecked />`}
       >
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-6">
           <div className="flex items-center gap-2">
             <Checkbox size="sm" defaultChecked id="cb-sm" />
-            <Label htmlFor="cb-sm" className="text-xs">Small</Label>
+            <Label htmlFor="cb-sm">Small</Label>
           </div>
           <div className="flex items-center gap-2">
             <Checkbox size="md" defaultChecked id="cb-md" />
-            <Label htmlFor="cb-md" className="text-sm">Medium</Label>
+            <Label htmlFor="cb-md">Medium</Label>
           </div>
           <div className="flex items-center gap-2">
             <Checkbox size="lg" defaultChecked id="cb-lg" />
@@ -49,71 +85,110 @@ export default function CheckboxDemo() {
         </div>
       </PlaygroundSection>
 
+      {/* ─── Controlled ─────────────────────────────────────────── */}
       <PlaygroundSection
         title="Controlled"
-        description="Controlled checkbox with onCheckedChange callback."
+        description="Manage state externally with checked + onCheckedChange."
         code={`const [checked, setChecked] = useState(false);
-<Checkbox checked={checked} onCheckedChange={setChecked} />`}
+
+<Checkbox checked={checked} onCheckedChange={setChecked} />
+<span>{checked ? 'Checked' : 'Unchecked'}</span>`}
       >
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           <Checkbox checked={checked} onCheckedChange={setChecked} id="controlled" />
           <Label htmlFor="controlled">
-            {checked ? 'Checked' : 'Unchecked'} (click to toggle)
+            State: <strong className="text-[var(--invin-accent)]">{checked ? 'Checked' : 'Unchecked'}</strong>
           </Label>
         </div>
       </PlaygroundSection>
 
+      {/* ─── Disabled ───────────────────────────────────────────── */}
       <PlaygroundSection
         title="Disabled"
-        description="Disabled checkboxes in both checked and unchecked states."
+        description="Prevents interaction. Works in both checked and unchecked states."
         code={`<Checkbox disabled />
 <Checkbox disabled defaultChecked />`}
       >
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-6">
           <div className="flex items-center gap-2">
             <Checkbox disabled id="dis-un" />
-            <Label htmlFor="dis-un" className="text-muted-foreground">Disabled unchecked</Label>
+            <Label htmlFor="dis-un" className="opacity-50">Disabled off</Label>
           </div>
           <div className="flex items-center gap-2">
             <Checkbox disabled defaultChecked id="dis-ch" />
-            <Label htmlFor="dis-ch" className="text-muted-foreground">Disabled checked</Label>
+            <Label htmlFor="dis-ch" className="opacity-50">Disabled on</Label>
           </div>
         </div>
       </PlaygroundSection>
 
+      <Separator variant="bold" />
+
+      {/* ─── Use Cases ──────────────────────────────────────────── */}
+      <div className="space-y-3">
+        <h3 className="text-[length:var(--invin-text-sub-heading)] font-[700]">Use cases</h3>
+        <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">Common patterns in real forms.</p>
+      </div>
+
       <PlaygroundSection
-        title="Checkbox Group"
-        description="Multiple checkboxes for multi-select patterns."
-        code={`<div className="space-y-2">
-  <div className="flex items-center gap-2">
-    <Checkbox id="email" defaultChecked />
-    <Label htmlFor="email">Email notifications</Label>
-  </div>
-  <div className="flex items-center gap-2">
-    <Checkbox id="sms" />
-    <Label htmlFor="sms">SMS notifications</Label>
-  </div>
-  <div className="flex items-center gap-2">
-    <Checkbox id="push" defaultChecked />
-    <Label htmlFor="push">Push notifications</Label>
-  </div>
+        title="Select all + items"
+        description="Parent checkbox controls all children. Shows indeterminate when partially selected."
+        code={`<Checkbox
+  checked={allChecked ? true : someChecked ? 'indeterminate' : false}
+  onCheckedChange={(v) => setItems(items.map(i => ({ ...i, checked: !!v })))}
+/>
+
+{items.map(item => (
+  <Checkbox checked={item.checked} onCheckedChange={(v) => toggle(item.id, v)} />
+))}`}
+      >
+        <Card className="w-full max-w-sm">
+          <CardContent className="py-3 space-y-3">
+            <div className="flex items-center gap-2 pb-2 border-b border-[var(--invin-border)]">
+              <Checkbox
+                id="select-all"
+                checked={allChecked ? true : someChecked ? 'indeterminate' : false}
+                onCheckedChange={(v) => setItems(items.map(i => ({ ...i, checked: !!v })))}
+              />
+              <Label htmlFor="select-all" className="font-[600]">Select all</Label>
+              <span className="text-[10px] text-[var(--invin-text-faint)] ml-auto">{items.filter(i => i.checked).length}/{items.length}</span>
+            </div>
+            {items.map(item => (
+              <div key={item.id} className="flex items-center gap-2">
+                <Checkbox
+                  id={item.id}
+                  checked={item.checked}
+                  onCheckedChange={(v) => toggleItem(item.id, v)}
+                />
+                <Label htmlFor={item.id}>{item.label}</Label>
+              </div>
+            ))}
+          </CardContent>
+        </Card>
+      </PlaygroundSection>
+
+      <PlaygroundSection
+        title="Form agreement"
+        description="Required checkbox before form submission."
+        code={`<div className="flex items-start gap-2">
+  <Checkbox id="agree" />
+  <Label htmlFor="agree" className="leading-relaxed">
+    I agree to the <a>Terms</a> and <a>Privacy Policy</a>
+  </Label>
 </div>`}
       >
-        <div className="space-y-3">
-          <div className="flex items-center gap-2">
-            <Checkbox id="email-notif" defaultChecked />
-            <Label htmlFor="email-notif">Email notifications</Label>
-          </div>
-          <div className="flex items-center gap-2">
-            <Checkbox id="sms-notif" />
-            <Label htmlFor="sms-notif">SMS notifications</Label>
-          </div>
-          <div className="flex items-center gap-2">
-            <Checkbox id="push-notif" defaultChecked />
-            <Label htmlFor="push-notif">Push notifications</Label>
-          </div>
-        </div>
+        <Card className="w-full max-w-sm">
+          <CardContent className="py-4 space-y-4">
+            <div className="flex items-start gap-2">
+              <Checkbox id="agree-terms" className="mt-0.5" />
+              <Label htmlFor="agree-terms" className="leading-relaxed">
+                I agree to the <span className="text-[var(--invin-accent)] cursor-pointer">Terms of Service</span> and <span className="text-[var(--invin-accent)] cursor-pointer">Privacy Policy</span>
+              </Label>
+            </div>
+            <Button fullWidth disabled>Create Account</Button>
+          </CardContent>
+        </Card>
       </PlaygroundSection>
+
     </ComponentPage>
   );
 }

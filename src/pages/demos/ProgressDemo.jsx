@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-import { ComponentPage, PlaygroundSection } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
 import { Progress } from 'invin-uix/ui/progress';
 import { Label } from 'invin-uix/ui/label';
-import { Button } from 'invin-uix/ui/button';
+import { Card, CardContent } from 'invin-uix/ui/card';
+import { Separator } from 'invin-uix/ui/separator';
 
 export default function ProgressDemo() {
   const [progress, setProgress] = useState(0);
@@ -17,17 +18,29 @@ export default function ProgressDemo() {
   return (
     <ComponentPage
       name="Progress"
-      description="A progress bar built on Radix UI with size variants and color variants for different states."
+      description="Determinate progress bar built on Radix UI. 3 sizes, 4 colour variants, smooth animation. Use for uploads, tasks, or any measurable progress."
       importCode={`import { Progress } from 'invin-uix/ui/progress';`}
     >
+      <PropsTable
+        props={[
+          { name: 'value', type: 'number (0–100)', default: '0', description: 'Current progress percentage' },
+          { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Bar height (4px / 8px / 12px)' },
+          { name: 'variant', type: "'default' | 'success' | 'warning' | 'destructive'", default: "'default'", description: 'Fill colour' },
+        ]}
+      />
+
+      <Separator variant="bold" />
+
       <PlaygroundSection
-        title="Basic Usage"
-        description="Animated progress bar."
-        code={`<Progress value={60} />`}
+        title="Animated"
+        description="Auto-incrementing progress (resets at 100%)."
+        code={`const [progress, setProgress] = useState(0);
+// increment in useEffect...
+<Progress value={progress} />`}
       >
         <div className="w-full max-w-md space-y-2">
-          <div className="flex justify-between text-xs text-muted-foreground">
-            <span>Progress</span>
+          <div className="flex justify-between text-[length:var(--invin-text-label)] text-[var(--invin-text-dim)]">
+            <span>Loading...</span>
             <span>{progress}%</span>
           </div>
           <Progress value={progress} />
@@ -36,77 +49,108 @@ export default function ProgressDemo() {
 
       <PlaygroundSection
         title="Sizes"
-        description="sm, md (default), lg heights."
+        description="sm (4px), md (8px, default), lg (12px)."
         code={`<Progress value={60} size="sm" />
 <Progress value={60} size="md" />
 <Progress value={60} size="lg" />`}
       >
         <div className="w-full max-w-md space-y-4">
           <div className="space-y-1">
-            <Label className="text-xs">Small (h-1)</Label>
+            <Label>Small (4px)</Label>
             <Progress value={60} size="sm" />
           </div>
           <div className="space-y-1">
-            <Label className="text-xs">Medium (h-2) — default</Label>
+            <Label>Medium (8px) — default</Label>
             <Progress value={60} size="md" />
           </div>
           <div className="space-y-1">
-            <Label className="text-xs">Large (h-3)</Label>
+            <Label>Large (12px)</Label>
             <Progress value={60} size="lg" />
           </div>
         </div>
       </PlaygroundSection>
 
       <PlaygroundSection
-        title="Variants"
-        description="Color variants for different states."
+        title="Colour variants"
+        description="Semantic colours for different states."
         code={`<Progress value={80} variant="default" />
 <Progress value={80} variant="success" />
-<Progress value={80} variant="warning" />
-<Progress value={80} variant="destructive" />`}
+<Progress value={50} variant="warning" />
+<Progress value={30} variant="destructive" />`}
       >
         <div className="w-full max-w-md space-y-4">
           <div className="space-y-1">
-            <Label className="text-xs">Default (primary)</Label>
-            <Progress value={80} variant="default" size="md" />
+            <Label>Default (accent)</Label>
+            <Progress value={80} variant="default" />
           </div>
           <div className="space-y-1">
-            <Label className="text-xs">Success</Label>
-            <Progress value={80} variant="success" size="md" />
+            <Label>Success</Label>
+            <Progress value={80} variant="success" />
           </div>
           <div className="space-y-1">
-            <Label className="text-xs">Warning</Label>
-            <Progress value={50} variant="warning" size="md" />
+            <Label>Warning</Label>
+            <Progress value={50} variant="warning" />
           </div>
           <div className="space-y-1">
-            <Label className="text-xs">Destructive</Label>
-            <Progress value={30} variant="destructive" size="md" />
+            <Label>Destructive</Label>
+            <Progress value={30} variant="destructive" />
           </div>
         </div>
       </PlaygroundSection>
 
+      <Separator variant="bold" />
+
+      <div className="space-y-3">
+        <h3 className="text-[length:var(--invin-text-sub-heading)] font-[700]">Use cases</h3>
+        <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">Common patterns.</p>
+      </div>
+
       <PlaygroundSection
-        title="Static Values"
-        description="Common usage: showing upload, download, or task completion."
-        code={`<Progress value={25} />  // 25%
-<Progress value={50} />  // 50%
-<Progress value={100} variant="success" /> // Complete`}
+        title="Task completion"
+        description="Multiple task progresses in a dashboard card."
+        code={`<Progress value={100} variant="success" size="sm" />
+<Progress value={50} variant="warning" size="sm" />
+<Progress value={25} size="sm" />`}
       >
-        <div className="w-full max-w-md space-y-3">
-          <div className="space-y-1">
-            <div className="flex justify-between text-xs"><span>Upload</span><span>25%</span></div>
-            <Progress value={25} />
-          </div>
-          <div className="space-y-1">
-            <div className="flex justify-between text-xs"><span>Processing</span><span>50%</span></div>
-            <Progress value={50} variant="warning" />
-          </div>
-          <div className="space-y-1">
-            <div className="flex justify-between text-xs"><span>Complete</span><span>100%</span></div>
-            <Progress value={100} variant="success" />
-          </div>
-        </div>
+        <Card className="w-full max-w-sm">
+          <CardContent className="py-3 space-y-3">
+            {[
+              { label: 'Security audit', value: 100, variant: 'success' },
+              { label: 'Data migration', value: 65, variant: 'default' },
+              { label: 'Documentation', value: 30, variant: 'warning' },
+              { label: 'Bug fixes', value: 10, variant: 'destructive' },
+            ].map(t => (
+              <div key={t.label} className="space-y-1">
+                <div className="flex justify-between text-[length:var(--invin-text-label)]">
+                  <span>{t.label}</span>
+                  <span className="text-[var(--invin-text-faint)]">{t.value}%</span>
+                </div>
+                <Progress value={t.value} variant={t.variant} size="sm" />
+              </div>
+            ))}
+          </CardContent>
+        </Card>
       </PlaygroundSection>
+
+      <PlaygroundSection
+        title="Storage usage"
+        description="Show capacity with percentage label."
+        code={`<div className="flex justify-between">
+  <span>Used</span><span>7.2 GB / 10 GB</span>
+</div>
+<Progress value={72} />`}
+      >
+        <Card className="w-full max-w-sm">
+          <CardContent className="py-3 space-y-2">
+            <div className="flex justify-between text-[length:var(--invin-text-body)]">
+              <span>Storage used</span>
+              <span className="text-[var(--invin-text-dim)]">7.2 GB / 10 GB</span>
+            </div>
+            <Progress value={72} size="md" />
+          </CardContent>
+        </Card>
+      </PlaygroundSection>
+
     </ComponentPage>
   );
 }

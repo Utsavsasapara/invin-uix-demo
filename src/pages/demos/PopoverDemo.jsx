@@ -1,26 +1,42 @@
-import { ComponentPage, PlaygroundSection } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
 import { Popover, PopoverTrigger, PopoverContent } from 'invin-uix/ui/popover';
 import { Button } from 'invin-uix/ui/button';
 import { Input } from 'invin-uix/ui/input';
 import { Label } from 'invin-uix/ui/label';
-import { Settings } from 'invin-uix/ui/icons';
+import { Separator } from 'invin-uix/ui/separator';
+import { Card, CardContent } from 'invin-uix/ui/card';
+import { Switch } from 'invin-uix/ui/switch';
+import { Settings, Filter, Share2, Bell } from 'invin-uix/ui/icons';
 
 export default function PopoverDemo() {
   return (
     <ComponentPage
       name="Popover"
-      description="A floating panel triggered by a button click, positioned relative to the trigger. Useful for forms, settings, and contextual content."
+      description="Floating panel triggered by click, positioned relative to a trigger element. Built on Radix — portal rendering, focus trap, keyboard dismiss (Escape), outside-click dismiss. For forms, settings, and contextual content."
       importCode={`import { Popover, PopoverTrigger, PopoverContent } from 'invin-uix/ui/popover';`}
     >
+      <PropsTable
+        props={[
+          { name: 'align', type: "'start' | 'center' | 'end'", default: "'center'", description: 'Horizontal alignment relative to trigger (on PopoverContent)' },
+          { name: 'sideOffset', type: 'number (px)', default: '4', description: 'Gap between trigger and popover (on PopoverContent)' },
+          { name: 'side', type: "'top' | 'bottom' | 'left' | 'right'", default: "'bottom'", description: 'Which side to appear on (auto-flips if no space)' },
+          { name: 'open', type: 'boolean', default: '—', description: 'Controlled open state (on Popover root)' },
+          { name: 'onOpenChange', type: '(open: boolean) => void', default: '—', description: 'Open/close callback (on Popover root)' },
+        ]}
+      />
+
+      <Separator variant="bold" />
+
+      {/* ─── Basic ──────────────────────────────────────────────── */}
       <PlaygroundSection
-        title="Basic Usage"
-        description="Click to open a floating popover panel."
+        title="Basic"
+        description="Click trigger to open. Click outside or press Escape to close."
         code={`<Popover>
   <PopoverTrigger asChild>
     <Button variant="outline">Open Popover</Button>
   </PopoverTrigger>
   <PopoverContent>
-    <p>Popover content here.</p>
+    <p>Any content here — forms, lists, settings.</p>
   </PopoverContent>
 </Popover>`}
       >
@@ -30,26 +46,17 @@ export default function PopoverDemo() {
           </PopoverTrigger>
           <PopoverContent>
             <div className="space-y-2">
-              <h4 className="font-medium text-sm">Dimensions</h4>
-              <p className="text-xs text-muted-foreground">Set the dimensions for the layer.</p>
-              <div className="grid grid-cols-2 gap-2">
-                <div className="space-y-1">
-                  <Label htmlFor="pop-w" className="text-xs">Width</Label>
-                  <Input id="pop-w" defaultValue="100%" size="sm" />
-                </div>
-                <div className="space-y-1">
-                  <Label htmlFor="pop-h" className="text-xs">Height</Label>
-                  <Input id="pop-h" defaultValue="auto" size="sm" />
-                </div>
-              </div>
+              <p className="text-[length:var(--invin-text-card-title)] font-[600]">Popover Title</p>
+              <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">Any content here — forms, lists, settings panels. Click outside or press Escape to close.</p>
             </div>
           </PopoverContent>
         </Popover>
       </PlaygroundSection>
 
+      {/* ─── Alignment ──────────────────────────────────────────── */}
       <PlaygroundSection
         title="Alignment"
-        description="Control how the popover aligns relative to the trigger."
+        description="Control horizontal alignment relative to the trigger."
         code={`<PopoverContent align="start">...</PopoverContent>
 <PopoverContent align="center">...</PopoverContent>
 <PopoverContent align="end">...</PopoverContent>`}
@@ -58,48 +65,189 @@ export default function PopoverDemo() {
           {['start', 'center', 'end'].map(align => (
             <Popover key={align}>
               <PopoverTrigger asChild>
-                <Button variant="outline" size="sm" className="capitalize">{align}</Button>
+                <Button variant="outline" size="sm">{align}</Button>
               </PopoverTrigger>
               <PopoverContent align={align}>
-                <p className="text-sm">Aligned to <strong>{align}</strong></p>
+                <p className="text-[length:var(--invin-text-body)]">Aligned to <strong className="text-[var(--invin-accent)]">{align}</strong></p>
               </PopoverContent>
             </Popover>
           ))}
         </div>
       </PlaygroundSection>
 
+      {/* ─── Side ───────────────────────────────────────────────── */}
       <PlaygroundSection
-        title="Settings Panel"
-        description="Common use case: compact settings form in a popover."
+        title="Side"
+        description="Choose which side the popover appears on. Auto-flips if no space."
+        code={`<PopoverContent side="top">...</PopoverContent>
+<PopoverContent side="bottom">...</PopoverContent>
+<PopoverContent side="left">...</PopoverContent>
+<PopoverContent side="right">...</PopoverContent>`}
+      >
+        <div className="flex flex-wrap gap-3">
+          {['top', 'bottom', 'left', 'right'].map(side => (
+            <Popover key={side}>
+              <PopoverTrigger asChild>
+                <Button variant="outline" size="sm">{side}</Button>
+              </PopoverTrigger>
+              <PopoverContent side={side} align="center">
+                <p className="text-[length:var(--invin-text-body)]">Side: <strong className="text-[var(--invin-accent)]">{side}</strong></p>
+              </PopoverContent>
+            </Popover>
+          ))}
+        </div>
+      </PlaygroundSection>
+
+      <Separator variant="bold" />
+
+      {/* ─── Use Cases ──────────────────────────────────────────── */}
+      <div className="space-y-3">
+        <h3 className="text-[length:var(--invin-text-sub-heading)] font-[700]">Use cases</h3>
+        <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">Common patterns.</p>
+      </div>
+
+      <PlaygroundSection
+        title="Quick settings"
+        description="Compact settings form in a popover — no need for a full dialog."
         code={`<Popover>
   <PopoverTrigger asChild>
-    <Button variant="ghost" size="icon"><Settings /></Button>
+    <Button variant="ghost" size="icon-sm"><Settings /></Button>
   </PopoverTrigger>
-  <PopoverContent>
-    {/* Settings form */}
+  <PopoverContent align="end">
+    <Label>Font size</Label>
+    <Input defaultValue="14px" size="sm" />
   </PopoverContent>
 </Popover>`}
       >
         <Popover>
           <PopoverTrigger asChild>
-            <Button variant="ghost" size="icon"><Settings style={{ width: 16, height: 16 }} /></Button>
+            <Button variant="ghost" size="icon-sm"><Settings style={{ width: 14, height: 14 }} /></Button>
           </PopoverTrigger>
-          <PopoverContent align="end">
+          <PopoverContent align="start">
             <div className="space-y-3">
-              <h4 className="font-medium text-sm">Display Settings</h4>
-              <div className="space-y-1">
-                <Label htmlFor="pop-font" className="text-xs">Font size</Label>
-                <Input id="pop-font" defaultValue="14px" size="sm" />
+              <p className="text-[length:var(--invin-text-card-title)] font-[600]">Display</p>
+              <div className="space-y-1.5">
+                <Label>Font size</Label>
+                <Input defaultValue="13.5px" size="sm" />
               </div>
-              <div className="space-y-1">
-                <Label htmlFor="pop-line" className="text-xs">Line height</Label>
-                <Input id="pop-line" defaultValue="1.5" size="sm" />
+              <div className="space-y-1.5">
+                <Label>Line height</Label>
+                <Input defaultValue="1.5" size="sm" />
               </div>
-              <Button size="sm" block>Apply</Button>
+              <div className="flex items-center justify-between">
+                <Label>Compact mode</Label>
+                <Switch size="sm" />
+              </div>
+              <Button size="sm" fullWidth>Apply</Button>
             </div>
           </PopoverContent>
         </Popover>
       </PlaygroundSection>
+
+      <PlaygroundSection
+        title="Notification panel"
+        description="Bell icon trigger with notification list inside."
+        code={`<Popover>
+  <PopoverTrigger asChild>
+    <Button variant="ghost" size="icon-sm"><Bell /></Button>
+  </PopoverTrigger>
+  <PopoverContent align="end">
+    {/* notification list */}
+  </PopoverContent>
+</Popover>`}
+      >
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button variant="ghost" size="icon-sm"><Bell style={{ width: 14, height: 14 }} /></Button>
+          </PopoverTrigger>
+          <PopoverContent align="end" className="w-80">
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <p className="text-[length:var(--invin-text-card-title)] font-[600]">Notifications</p>
+                <Button variant="ghost" size="sm">Mark all read</Button>
+              </div>
+              <Separator className="my-0" />
+              {[
+                { text: 'New deployment completed', time: '2m ago' },
+                { text: 'Alice commented on PR #42', time: '15m ago' },
+                { text: 'Security scan passed', time: '1h ago' },
+              ].map((n, i) => (
+                <div key={i} className="py-1.5 cursor-pointer hover:bg-[var(--invin-surface-hover)] -mx-2 px-2 rounded-md">
+                  <p className="text-[length:var(--invin-text-body)]">{n.text}</p>
+                  <p className="text-[10px] text-[var(--invin-text-faint)]">{n.time}</p>
+                </div>
+              ))}
+            </div>
+          </PopoverContent>
+        </Popover>
+      </PlaygroundSection>
+
+      <PlaygroundSection
+        title="Share popover"
+        description="Copy-link pattern with a share popover."
+        code={`<Popover>
+  <PopoverTrigger asChild>
+    <Button variant="outline" size="sm"><Share2 /> Share</Button>
+  </PopoverTrigger>
+  <PopoverContent>
+    <Input defaultValue="https://app.invin.io/..." readOnly />
+    <Button size="sm">Copy Link</Button>
+  </PopoverContent>
+</Popover>`}
+      >
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button variant="outline" size="sm"><Share2 style={{ width: 14, height: 14 }} /> Share</Button>
+          </PopoverTrigger>
+          <PopoverContent>
+            <div className="space-y-3">
+              <p className="text-[length:var(--invin-text-card-title)] font-[600]">Share link</p>
+              <p className="text-[length:var(--invin-text-label)] text-[var(--invin-text-dim)]">Anyone with this link can view.</p>
+              <div className="flex gap-2">
+                <Input defaultValue="https://app.invin.io/project/abc" readOnly size="sm" className="flex-1" />
+                <Button size="sm">Copy</Button>
+              </div>
+            </div>
+          </PopoverContent>
+        </Popover>
+      </PlaygroundSection>
+
+      <PlaygroundSection
+        title="Filter popover"
+        description="Compact filter form that doesn't need a full sheet."
+        code={`<Popover>
+  <PopoverTrigger asChild>
+    <Button variant="outline" size="sm"><Filter /> Filter</Button>
+  </PopoverTrigger>
+  <PopoverContent align="start">
+    {/* filter inputs */}
+  </PopoverContent>
+</Popover>`}
+      >
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button variant="outline" size="sm"><Filter style={{ width: 14, height: 14 }} /> Filter</Button>
+          </PopoverTrigger>
+          <PopoverContent align="start">
+            <div className="space-y-3">
+              <p className="text-[length:var(--invin-text-card-title)] font-[600]">Filters</p>
+              <div className="space-y-1.5">
+                <Label>Status</Label>
+                <Input placeholder="All" size="sm" />
+              </div>
+              <div className="space-y-1.5">
+                <Label>Assigned to</Label>
+                <Input placeholder="Anyone" size="sm" />
+              </div>
+              <div className="flex gap-2">
+                <Button variant="outline" size="sm" className="flex-1">Reset</Button>
+                <Button size="sm" className="flex-1">Apply</Button>
+              </div>
+            </div>
+          </PopoverContent>
+        </Popover>
+      </PlaygroundSection>
+
     </ComponentPage>
   );
 }

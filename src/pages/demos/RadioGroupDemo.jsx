@@ -1,20 +1,53 @@
 import { useState } from 'react';
-import { ComponentPage, PlaygroundSection } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
 import { RadioGroup, RadioGroupItem } from 'invin-uix/ui/radio-group';
 import { Label } from 'invin-uix/ui/label';
+import { Card, CardContent } from 'invin-uix/ui/card';
+import { Separator } from 'invin-uix/ui/separator';
+import { Badge } from 'invin-uix/ui/badge';
 
 export default function RadioGroupDemo() {
+  const [plan, setPlan] = useState('pro');
   const [value, setValue] = useState('comfortable');
 
   return (
     <ComponentPage
       name="Radio Group"
-      description="A radio button group built on Radix UI for single-selection from a list of options."
+      description="Single-selection from a list of options. Built on Radix UI with arrow-key navigation, focus management, and ARIA roles. Accent dot indicator on selected."
       importCode={`import { RadioGroup, RadioGroupItem } from 'invin-uix/ui/radio-group';`}
     >
+
+      {/* ─── Props Table ────────────────────────────────────────── */}
+      <div className="space-y-4">
+        <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)]">RadioGroup (Root)</p>
+        <PropsTable
+          props={[
+            { name: 'value', type: 'string', default: '—', description: 'Controlled selected value' },
+            { name: 'defaultValue', type: 'string', default: '—', description: 'Uncontrolled initial value' },
+            { name: 'onValueChange', type: '(value: string) => void', default: '—', description: 'Selection change callback' },
+            { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables entire group' },
+            { name: 'orientation', type: "'vertical' | 'horizontal'", default: "'vertical'", description: 'Layout direction for arrow key navigation' },
+          ]}
+        />
+      </div>
+      <div className="space-y-4">
+        <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)]">RadioGroupItem</p>
+        <PropsTable
+          props={[
+            { name: 'value', type: 'string (required)', default: '—', description: 'Option value' },
+            { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Radio button size (14px / 16px / 20px)' },
+            { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables this individual option' },
+            { name: 'id', type: 'string', default: '—', description: 'Links with Label via htmlFor' },
+          ]}
+        />
+      </div>
+
+      <Separator variant="bold" />
+
+      {/* ─── Basic ──────────────────────────────────────────────── */}
       <PlaygroundSection
-        title="Basic Usage"
-        description="Radio group with labeled options."
+        title="Basic"
+        description="Vertical radio group with labels. Arrow keys cycle between options."
         code={`<RadioGroup defaultValue="comfortable">
   <div className="flex items-center gap-2">
     <RadioGroupItem value="default" id="r1" />
@@ -46,24 +79,25 @@ export default function RadioGroupDemo() {
         </RadioGroup>
       </PlaygroundSection>
 
+      {/* ─── Sizes ──────────────────────────────────────────────── */}
       <PlaygroundSection
         title="Sizes"
-        description="RadioGroupItem supports sm, md (default), lg sizes."
-        code={`<RadioGroupItem size="sm" />
-<RadioGroupItem size="md" />
-<RadioGroupItem size="lg" />`}
+        description="sm (14px), md (16px, default), lg (20px). Dot indicator scales with size."
+        code={`<RadioGroupItem size="sm" value="sm" />
+<RadioGroupItem size="md" value="md" />
+<RadioGroupItem size="lg" value="lg" />`}
       >
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-8">
           <RadioGroup defaultValue="sm">
             <div className="flex items-center gap-2">
               <RadioGroupItem value="sm" size="sm" id="sz-sm" />
-              <Label htmlFor="sz-sm" className="text-xs">Small</Label>
+              <Label htmlFor="sz-sm">Small</Label>
             </div>
           </RadioGroup>
           <RadioGroup defaultValue="md">
             <div className="flex items-center gap-2">
               <RadioGroupItem value="md" size="md" id="sz-md" />
-              <Label htmlFor="sz-md" className="text-sm">Medium</Label>
+              <Label htmlFor="sz-md">Medium</Label>
             </div>
           </RadioGroup>
           <RadioGroup defaultValue="lg">
@@ -75,56 +109,19 @@ export default function RadioGroupDemo() {
         </div>
       </PlaygroundSection>
 
+      {/* ─── Horizontal ─────────────────────────────────────────── */}
       <PlaygroundSection
-        title="Controlled"
-        description="Controlled with onValueChange callback."
-        code={`const [value, setValue] = useState('comfortable');
-<RadioGroup value={value} onValueChange={setValue}>...</RadioGroup>`}
-      >
-        <div className="space-y-3">
-          <RadioGroup value={value} onValueChange={setValue} className="space-y-2">
-            <div className="flex items-center gap-2">
-              <RadioGroupItem value="default" id="ctrl-1" />
-              <Label htmlFor="ctrl-1">Default</Label>
-            </div>
-            <div className="flex items-center gap-2">
-              <RadioGroupItem value="comfortable" id="ctrl-2" />
-              <Label htmlFor="ctrl-2">Comfortable</Label>
-            </div>
-            <div className="flex items-center gap-2">
-              <RadioGroupItem value="compact" id="ctrl-3" />
-              <Label htmlFor="ctrl-3">Compact</Label>
-            </div>
-          </RadioGroup>
-          <p className="text-xs text-muted-foreground">Selected: <strong>{value}</strong></p>
-        </div>
-      </PlaygroundSection>
-
-      <PlaygroundSection
-        title="Disabled"
-        description="Individual items or entire group can be disabled."
-        code={`<RadioGroup disabled defaultValue="option1">...</RadioGroup>`}
-      >
-        <RadioGroup disabled defaultValue="option1" className="space-y-2">
-          <div className="flex items-center gap-2">
-            <RadioGroupItem value="option1" id="dis-1" />
-            <Label htmlFor="dis-1" className="text-muted-foreground">Option 1 (selected)</Label>
-          </div>
-          <div className="flex items-center gap-2">
-            <RadioGroupItem value="option2" id="dis-2" />
-            <Label htmlFor="dis-2" className="text-muted-foreground">Option 2</Label>
-          </div>
-        </RadioGroup>
-      </PlaygroundSection>
-
-      <PlaygroundSection
-        title="Horizontal Layout"
-        description="Use flex for inline radio options."
+        title="Horizontal layout"
+        description="Use flex on the group for inline options."
         code={`<RadioGroup defaultValue="left" className="flex gap-4">
+  <div className="flex items-center gap-2">
+    <RadioGroupItem value="left" id="h1" />
+    <Label htmlFor="h1">Left</Label>
+  </div>
   ...
 </RadioGroup>`}
       >
-        <RadioGroup defaultValue="left" className="flex gap-4">
+        <RadioGroup defaultValue="center" className="flex gap-6">
           <div className="flex items-center gap-2">
             <RadioGroupItem value="left" id="h-left" />
             <Label htmlFor="h-left">Left</Label>
@@ -139,6 +136,108 @@ export default function RadioGroupDemo() {
           </div>
         </RadioGroup>
       </PlaygroundSection>
+
+      {/* ─── Controlled ─────────────────────────────────────────── */}
+      <PlaygroundSection
+        title="Controlled"
+        description="value + onValueChange for external state management."
+        code={`const [value, setValue] = useState('comfortable');
+
+<RadioGroup value={value} onValueChange={setValue}>
+  ...
+</RadioGroup>
+<p>Selected: {value}</p>`}
+      >
+        <div className="space-y-3">
+          <RadioGroup value={value} onValueChange={setValue} className="space-y-2">
+            <div className="flex items-center gap-2"><RadioGroupItem value="default" id="ctrl-1" /><Label htmlFor="ctrl-1">Default</Label></div>
+            <div className="flex items-center gap-2"><RadioGroupItem value="comfortable" id="ctrl-2" /><Label htmlFor="ctrl-2">Comfortable</Label></div>
+            <div className="flex items-center gap-2"><RadioGroupItem value="compact" id="ctrl-3" /><Label htmlFor="ctrl-3">Compact</Label></div>
+          </RadioGroup>
+          <p className="text-[length:var(--invin-text-label)] text-[var(--invin-text-dim)]">Selected: <strong className="text-[var(--invin-accent)]">{value}</strong></p>
+        </div>
+      </PlaygroundSection>
+
+      {/* ─── Disabled ───────────────────────────────────────────── */}
+      <PlaygroundSection
+        title="Disabled"
+        description="Disable the entire group or individual items."
+        code={`<RadioGroup disabled defaultValue="opt1">
+  ...
+</RadioGroup>`}
+      >
+        <RadioGroup disabled defaultValue="opt1" className="space-y-2">
+          <div className="flex items-center gap-2"><RadioGroupItem value="opt1" id="dis-1" /><Label htmlFor="dis-1" className="opacity-50">Option 1 (selected)</Label></div>
+          <div className="flex items-center gap-2"><RadioGroupItem value="opt2" id="dis-2" /><Label htmlFor="dis-2" className="opacity-50">Option 2</Label></div>
+          <div className="flex items-center gap-2"><RadioGroupItem value="opt3" id="dis-3" /><Label htmlFor="dis-3" className="opacity-50">Option 3</Label></div>
+        </RadioGroup>
+      </PlaygroundSection>
+
+      <Separator variant="bold" />
+
+      {/* ─── Use Cases ──────────────────────────────────────────── */}
+      <div className="space-y-3">
+        <h3 className="text-[length:var(--invin-text-sub-heading)] font-[700]">Use cases</h3>
+        <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">Common patterns in real applications.</p>
+      </div>
+
+      <PlaygroundSection
+        title="Plan selection"
+        description="Radio group for pricing/plan selection in a card."
+        code={`<RadioGroup value={plan} onValueChange={setPlan}>
+  {plans.map(p => (
+    <Card hover selected={plan === p.value}>
+      <RadioGroupItem value={p.value} />
+      <span>{p.name} — {p.price}</span>
+    </Card>
+  ))}
+</RadioGroup>`}
+      >
+        <RadioGroup value={plan} onValueChange={setPlan} className="space-y-2 w-full max-w-sm">
+          {[
+            { value: 'free', name: 'Free', price: '$0/mo', desc: '5 projects, 1GB' },
+            { value: 'pro', name: 'Pro', price: '$29/mo', desc: 'Unlimited, 100GB' },
+            { value: 'enterprise', name: 'Enterprise', price: 'Custom', desc: 'SSO, SLA, dedicated' },
+          ].map(p => (
+            <label key={p.value} className={`flex items-center gap-3 p-3 rounded-[var(--invin-radius-btn-sm,9px)] border cursor-pointer transition-colors ${plan === p.value ? 'border-[var(--invin-accent)] bg-[var(--invin-accent-soft)]' : 'border-[var(--invin-border)] hover:bg-[var(--invin-surface-hover)]'}`}>
+              <RadioGroupItem value={p.value} />
+              <div className="flex-1">
+                <div className="flex items-center gap-2">
+                  <span className="text-[length:var(--invin-text-body)] font-[600]">{p.name}</span>
+                  {p.value === 'pro' && <Badge variant="default" size="sm">Popular</Badge>}
+                </div>
+                <p className="text-[10px] text-[var(--invin-text-dim)]">{p.desc}</p>
+              </div>
+              <span className="text-[length:var(--invin-text-body)] font-[600]">{p.price}</span>
+            </label>
+          ))}
+        </RadioGroup>
+      </PlaygroundSection>
+
+      <PlaygroundSection
+        title="Settings preference"
+        description="Theme or density selection in a settings panel."
+        code={`<Label>Display density</Label>
+<RadioGroup defaultValue="comfortable" className="mt-2 space-y-2">
+  <div className="flex items-center gap-2">
+    <RadioGroupItem value="comfortable" id="pref-1" />
+    <Label htmlFor="pref-1">Comfortable</Label>
+  </div>
+  ...
+</RadioGroup>`}
+      >
+        <Card className="w-full max-w-sm">
+          <CardContent className="py-4">
+            <p className="text-[length:var(--invin-text-card-title)] font-[600] mb-3">Display density</p>
+            <RadioGroup defaultValue="comfortable" className="space-y-2">
+              <div className="flex items-center gap-2"><RadioGroupItem value="compact" id="pref-compact" /><Label htmlFor="pref-compact">Compact — smaller text and spacing</Label></div>
+              <div className="flex items-center gap-2"><RadioGroupItem value="comfortable" id="pref-comfortable" /><Label htmlFor="pref-comfortable">Comfortable — balanced</Label></div>
+              <div className="flex items-center gap-2"><RadioGroupItem value="spacious" id="pref-spacious" /><Label htmlFor="pref-spacious">Spacious — more breathing room</Label></div>
+            </RadioGroup>
+          </CardContent>
+        </Card>
+      </PlaygroundSection>
+
     </ComponentPage>
   );
 }

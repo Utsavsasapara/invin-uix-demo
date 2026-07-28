@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, lazy, Suspense } from 'react';
 
 import { Button } from 'invin-uix/ui/button';
 import { Badge } from 'invin-uix/ui/badge';
@@ -12,21 +12,26 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from 'invin-uix/ui/tabs';
 import { Progress } from 'invin-uix/ui/progress';
 import { Checkbox } from 'invin-uix/ui/checkbox';
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from 'invin-uix/ui/table';
-import { ScrollArea } from 'invin-uix/ui/scroll-area';
 import { Tooltip } from 'invin-uix/ui/tooltip';
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuLabel } from 'invin-uix/ui/dropdown-menu';
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogFooter, DialogTitle, DialogDescription } from 'invin-uix/ui/dialog';
-import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle } from 'invin-uix/ui/sheet';
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from 'invin-uix/ui/select';
 import { Toaster, toast } from 'invin-uix/ui/toast';
-import { Breadcrumb } from 'invin-uix/ui/breadcrumb';
 import { Menu } from 'invin-uix/ui/menu';
+import { Topbar } from 'invin-uix/ui/topbar';
+import { Sidebar } from 'invin-uix/ui/sidebar';
+import { Alert, AlertTitle, AlertDescription } from 'invin-uix/ui/alert';
+import { Slider } from 'invin-uix/ui/slider';
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from 'invin-uix/ui/accordion';
 import {
   LayoutDashboard, Users, Package, FileText, Settings, Bell, Search,
   Plus, MoreHorizontal, ArrowUp, ArrowDown, Eye, Download,
-  Mail, CheckCircle2, Clock, AlertCircle, TrendingUp, Menu as MenuIcon,
-  LogOut, User, CreditCard, Activity, Home
+  Mail, CheckCircle2, Clock, AlertCircle, TrendingUp,
+  LogOut, User, CreditCard, Activity, Sun, Moon, Info
 } from 'invin-uix/ui/icons';
+import { useTheme } from './useTheme.jsx';
+
+const UIGuidePage = lazy(() => import('./pages/UIGuidePage.jsx'));
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -47,12 +52,12 @@ const recentOrders = [
 ];
 
 const activities = [
-  { icon: CheckCircle2, text: 'Invoice #INV001 paid', time: '2 min ago', color: 'text-success' },
-  { icon: Mail, text: 'New message from Carol', time: '15 min ago', color: 'text-primary' },
-  { icon: AlertCircle, text: 'Payment failed for INV004', time: '1 hour ago', color: 'text-destructive' },
-  { icon: Users, text: '3 new team members joined', time: '3 hours ago', color: 'text-primary' },
-  { icon: TrendingUp, text: 'Revenue milestone reached', time: '5 hours ago', color: 'text-success' },
-  { icon: Clock, text: 'Subscription renewal reminder', time: '1 day ago', color: 'text-warning' },
+  { icon: CheckCircle2, text: 'Invoice #INV001 paid', time: '2 min ago', color: 'text-[var(--invin-ok)]' },
+  { icon: Mail, text: 'New message from Carol', time: '15 min ago', color: 'text-[var(--invin-accent)]' },
+  { icon: AlertCircle, text: 'Payment failed for INV004', time: '1 hour ago', color: 'text-[var(--invin-error)]' },
+  { icon: Users, text: '3 new team members joined', time: '3 hours ago', color: 'text-[var(--invin-accent)]' },
+  { icon: TrendingUp, text: 'Revenue milestone reached', time: '5 hours ago', color: 'text-[var(--invin-ok)]' },
+  { icon: Clock, text: 'Subscription renewal reminder', time: '1 day ago', color: 'text-[var(--invin-warn)]' },
 ];
 
 const tasks = [
@@ -66,135 +71,123 @@ const tasks = [
 const icon = (Icon) => <Icon style={{ width: 16, height: 16 }} />;
 
 const sidebarItems = [
-  { key: 'dashboard', label: 'Dashboard', icon: icon(LayoutDashboard) },
-  { key: 'demo', label: 'Demo Components', icon: icon(FileText) },
-  { key: 'divider1', type: 'divider', label: '' },
-  { key: 'nav', type: 'group', label: 'Workspace', children: [
-    { key: 'customers', label: 'Customers', icon: icon(Users) },
-    { key: 'products', label: 'Products', icon: icon(Package) },
-    { key: 'messages', label: 'Messages', icon: icon(Mail) },
+  { key: 'overview', type: 'group', label: 'Overview', children: [
+    { key: 'dashboard', label: 'Dashboard', icon: icon(LayoutDashboard) },
+    { key: 'ui-guide', label: 'UI Guide', icon: icon(FileText) },
+    { key: 'demo', label: 'Components', icon: icon(Package) },
   ]},
-  { key: 'divider2', type: 'divider', label: '' },
+  { key: 'governance', type: 'group', label: 'Governance', children: [
+    { key: 'compliance', label: 'Compliance Management', icon: icon(Activity), 
+      children: [
+        { key: 'opt1', label: 'Option 1',icon: icon(Activity)},
+        { key: 'opt2', label: 'Option 2',icon: icon(Activity) },
+      ]
+    },
+    { key: 'documents', label: 'Documents', icon: icon(FileText) },
+    { key: 'evidence', label: 'Evidence Library', icon: icon(Package) },
+    { key: 'audit', label: 'Compliance Audit', icon: icon(CreditCard) },
+    { key: 'integration', label: 'Integration Control', icon: icon(Settings) },
+    { key: 'risk', label: 'Risk Management', icon: icon(AlertCircle) },
+    { key: 'vendor', label: 'Vendor Management', icon: icon(Users) },
+  ]},
   { key: 'settings', label: 'Settings', icon: icon(Settings) },
 ];
 
 // ─── App ─────────────────────────────────────────────────────────────────────
 
 function App() {
-  const [dark, setDark] = useState(false);
+  const { dark, toggleDark } = useTheme();
   const [taskList, setTaskList] = useState(tasks);
   const [searchOpen, setSearchOpen] = useState(false);
   const [activeNav, setActiveNav] = useState(['dashboard']);
-
-  const toggleDark = (v) => {
-    setDark(v);
-    document.documentElement.setAttribute('data-theme', v ? 'dark' : 'light');
-  };
+  const [collapsed, setCollapsed] = useState(false);
 
   const handleNavClick = ({ key }) => {
     setActiveNav([key]);
     if (key === 'demo') window.__setPage?.('demo');
+    if (key === 'ui-guide') window.__setPage?.('ui-guide');
   };
 
   return (
     <>
       <Toaster position="top-right" />
-      <div className="min-h-screen bg-background text-foreground flex">
+      <div className="min-h-screen bg-bg text-foreground">
 
-        {/* ─── Sidebar (using Menu component) ─────────────────── */}
-        <aside className="hidden lg:flex w-56 flex-col border-r border-border fixed inset-y-0 left-0 bg-background z-30">
-          <div className="flex items-center gap-2 px-4 h-14 border-b border-border">
-            <div className="h-7 w-7 rounded-md bg-primary flex items-center justify-center text-primary-foreground font-bold text-xs">IN</div>
-            <span className="font-semibold text-sm">Invin UI</span>
-            <Badge variant="outline" size="sm" className="ml-auto">v2</Badge>
-          </div>
-
-          <ScrollArea className="flex-1 px-2 py-3">
-            <Menu
-              mode="inline"
-              selectedKeys={activeNav}
-              defaultOpenKeys={['nav']}
-              onClick={handleNavClick}
-              items={sidebarItems}
-            />
-          </ScrollArea>
-
-          <div className="px-3 py-3 border-t border-border space-y-3">
-            <div className="flex items-center gap-2 text-xs text-muted-foreground">
-              <span>Dark mode</span>
-              <Switch size="sm" checked={dark} onCheckedChange={toggleDark} className="ml-auto" />
-            </div>
-            <Separator />
-            <div className="flex items-center gap-2">
+        {/* ─── Sidebar ────────────────────────────────────────── */}
+        <Sidebar
+          product="Gsos"
+          collapsed={collapsed}
+          onCollapsedChange={setCollapsed}
+          footer={
+            <div className={`flex items-center gap-2 ${collapsed ? "justify-center" : ""}`}>
               <Avatar size="sm"><AvatarImage src="https://i.pravatar.cc/100?u=admin" /><AvatarFallback>AD</AvatarFallback></Avatar>
-              <div className="flex-1 min-w-0">
-                <p className="text-xs font-medium truncate">Admin User</p>
-                <p className="text-[10px] text-muted-foreground truncate">admin@invin.io</p>
-              </div>
-              <Tooltip title="Log out">
-                <Button variant="ghost" size="icon-sm" onClick={() => toast({ title: 'Logged out', variant: 'success' })}><LogOut style={{ width: 14, height: 14 }} /></Button>
-              </Tooltip>
+              {!collapsed && (
+                <div className="flex-1 min-w-0">
+                  <p className="text-[length:var(--invin-text-label)] font-[500] truncate">Admin User</p>
+                  <p className="text-[10px] text-[var(--invin-text-dim)] truncate">admin@invin.io</p>
+                </div>
+              )}
+              {!collapsed && (
+                <Tooltip title="Log out">
+                  <Button variant="ghost" size="icon-sm" onClick={() => toast({ title: 'Logged out', variant: 'success' })}><LogOut style={{ width: 14, height: 14 }} /></Button>
+                </Tooltip>
+              )}
             </div>
-          </div>
-        </aside>
-
-        {/* ─── Mobile Sheet Sidebar ───────────────────────────── */}
-        <Sheet>
-          <SheetTrigger asChild>
-            <Button variant="ghost" size="icon" className="lg:hidden fixed top-3 left-3 z-40">
-              <MenuIcon className="h-5 w-5" />
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="left">
-            <SheetHeader><SheetTitle>Navigation</SheetTitle></SheetHeader>
-            <Menu
-              mode="inline"
-              selectedKeys={activeNav}
-              onClick={handleNavClick}
-              items={sidebarItems}
-              style={{ marginTop: '12px' }}
-            />
-          </SheetContent>
-        </Sheet>
+          }
+        >
+          <Menu
+            mode="sidebar"
+            collapsed={collapsed}
+            collapsedTooltip
+            selectedKeys={activeNav}
+            defaultOpenKeys={collapsed ? [] : ['overview', 'governance']}
+            onClick={handleNavClick}
+            items={sidebarItems}
+          />
+        </Sidebar>
 
         {/* ─── Main ─────────────────────────────────────────── */}
-        <main className="flex-1 lg:ml-56">
+        <main
+          className="transition-[margin-left] duration-200 ease-out"
+          style={{ marginLeft: collapsed ? 'var(--invin-sidebar-collapsed-w)' : 'var(--invin-sidebar-w)' }}
+        >
 
           {/* Top Bar */}
-          <header className="sticky top-0 z-20 h-14 flex items-center justify-between border-b border-border bg-background px-6">
-            <Breadcrumb
-              items={[
-                { title: 'Home', href: '#', icon: <Home style={{ width: 12, height: 12, marginRight: 4, display: 'inline' }} /> },
-                { title: 'Dashboard' },
-              ]}
-            />
-
-            <div className="flex items-center gap-1">
-              <Tooltip title="Search (⌘K)">
-                <Button shape="circle" variant="ghost" size="icon" onClick={() => setSearchOpen(true)}><Search className="h-4 w-4" /></Button>
-              </Tooltip>
-
-              <Tooltip title="Notifications">
-                <Badge count={3} size="lg">
-                  <Button shape="circle" variant="ghost" size="icon" onClick={() => toast({ title: '3 unread notifications' })}><Bell className="h-4 w-4" /></Button>
-                </Badge>
-              </Tooltip>
-
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Avatar className="cursor-pointer ml-2"><AvatarImage src="https://i.pravatar.cc/100?u=admin" /><AvatarFallback>A</AvatarFallback></Avatar>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" style={{ minWidth: '180px' }}>
-                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem shortcut="⌘P"><User style={{ width: 14, height: 14 }} />Profile</DropdownMenuItem>
-                  <DropdownMenuItem shortcut="⌘S"><Settings style={{ width: 14, height: 14 }} />Settings</DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem danger><LogOut style={{ width: 14, height: 14 }} />Log out</DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
-          </header>
+          <Topbar
+            left={
+              <h1 className="text-[length:var(--invin-text-card-title)] font-[700] tracking-[-0.02em]">Dashboard</h1>
+            }
+            right={
+              <div className="flex items-center gap-1">
+                <Tooltip title="Search (⌘K)">
+                  <Button variant="ghost" size="icon-sm" onClick={() => setSearchOpen(true)}><Search style={{ width: 16, height: 16 }} /></Button>
+                </Tooltip>
+                <Tooltip title={dark ? "Switch to light mode" : "Switch to dark mode"}>
+                  <Button variant="ghost" size="icon-sm" onClick={() => toggleDark(!dark)}>
+                    {dark ? <Sun style={{ width: 16, height: 16 }} /> : <Moon style={{ width: 16, height: 16 }} />}
+                  </Button>
+                </Tooltip>
+                <Tooltip title="Notifications">
+                  <Badge count={3} size="sm">
+                    <Button variant="ghost" size="icon-sm" onClick={() => toast({ title: '3 unread notifications' })}><Bell style={{ width: 16, height: 16 }} /></Button>
+                  </Badge>
+                </Tooltip>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Avatar className="cursor-pointer ml-2" size="sm"><AvatarImage src="https://i.pravatar.cc/100?u=admin" /><AvatarFallback>A</AvatarFallback></Avatar>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" style={{ minWidth: '180px' }}>
+                    <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem shortcut="⌘P"><User style={{ width: 14, height: 14 }} />Profile</DropdownMenuItem>
+                    <DropdownMenuItem shortcut="⌘S"><Settings style={{ width: 14, height: 14 }} />Settings</DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem danger><LogOut style={{ width: 14, height: 14 }} />Log out</DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
+            }
+          />
 
           {/* Search Dialog */}
           <Dialog open={searchOpen} onOpenChange={setSearchOpen}>
@@ -206,11 +199,25 @@ function App() {
 
           <div className="p-6 space-y-6">
 
+            {/* Render UI Guide page or Dashboard content */}
+            {activeNav.includes('ui-guide') ? (
+              <Suspense fallback={<div className="flex items-center justify-center py-20 text-[var(--invin-text-dim)]">Loading...</div>}>
+                <UIGuidePage />
+              </Suspense>
+            ) : (
+            <>
+            {/* ─── Alert Banner ─────────────────────────────── */}
+            <Alert variant="info" closable onClose={() => {}}>
+              <Info style={{ width: 16, height: 16 }} />
+              <AlertTitle>System Update Scheduled</AlertTitle>
+              <AlertDescription>Maintenance window: Sunday 2am–4am UTC. All services will be briefly unavailable.</AlertDescription>
+            </Alert>
+
             {/* Page title */}
             <div className="flex items-center justify-between">
               <div>
                 <h1 className="text-2xl font-bold tracking-tight">Dashboard</h1>
-                <p className="text-sm text-muted-foreground">Welcome back. Here's what's happening.</p>
+                <p className="text-sm text-text-dim">Welcome back. Here's what's happening.</p>
               </div>
               <div className="flex gap-2">
                 <Tooltip title="Export report as CSV">
@@ -222,17 +229,17 @@ function App() {
             {/* ─── Stats ──────────────────────────────────────── */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {stats.map(({ label, value, change, up, icon: Icon }) => (
-                <Card key={label}>
-                  <CardContent className="pt-5 pb-4">
+                <Card key={label} hover>
+                  <CardContent>
                     <div className="flex items-center justify-between">
-                      <p className="text-xs font-medium text-muted-foreground">{label}</p>
-                      <Icon className="h-4 w-4 text-muted-foreground" />
+                      <p className="text-xs font-medium text-text-dim">{label}</p>
+                      <Icon className="h-4 w-4 text-text-dim" />
                     </div>
-                    <p className="text-2xl font-bold mt-1">{value}</p>
+                    <p className="mt-1 text-[length:var(--invin-text-kpi)]">{value}</p>
                     <div className="flex items-center gap-1 mt-1">
-                      {up ? <ArrowUp className="h-3 w-3 text-success" /> : <ArrowDown className="h-3 w-3 text-destructive" />}
-                      <span className={`text-xs ${up ? 'text-success' : 'text-destructive'}`}>{change}</span>
-                      <span className="text-xs text-muted-foreground ml-1">from last month</span>
+                      {up ? <ArrowUp className="h-3 w-3 text-ok" /> : <ArrowDown className="h-3 w-3 text-error" />}
+                      <span className={`text-xs ${up ? 'text-ok' : 'text-error'}`}>{change}</span>
+                      <span className="text-xs text-text-dim ml-1">from last month</span>
                     </div>
                   </CardContent>
                 </Card>
@@ -273,14 +280,14 @@ function App() {
                               <Avatar size="xs"><AvatarFallback>{order.customer[0]}</AvatarFallback></Avatar>
                               <div>
                                 <p className="text-sm font-medium">{order.customer}</p>
-                                <p className="text-xs text-muted-foreground">{order.email}</p>
+                                <p className="text-xs text-text-dim">{order.email}</p>
                               </div>
                             </div>
                           </TableCell>
                           <TableCell>
                             <Badge variant={order.status === 'Completed' ? 'success' : order.status === 'Pending' ? 'warning' : 'destructive'} size="sm">{order.status}</Badge>
                           </TableCell>
-                          <TableCell className="text-sm text-muted-foreground">{order.date}</TableCell>
+                          <TableCell className="text-sm text-text-dim">{order.date}</TableCell>
                           <TableCell className="text-right font-medium">{order.amount}</TableCell>
                         </TableRow>
                       ))}
@@ -299,19 +306,17 @@ function App() {
                   <CardDescription>Recent events in your workspace.</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <ScrollArea className="h-[320px]">
                     <div className="space-y-4">
                       {activities.map((item, i) => (
                         <div key={i} className="flex gap-3">
                           <div className={`mt-0.5 ${item.color}`}><item.icon className="h-4 w-4" /></div>
                           <div className="flex-1 min-w-0">
                             <p className="text-sm">{item.text}</p>
-                            <p className="text-xs text-muted-foreground">{item.time}</p>
+                            <p className="text-xs text-text-dim">{item.time}</p>
                           </div>
                         </div>
                       ))}
                     </div>
-                  </ScrollArea>
                 </CardContent>
               </Card>
             </div>
@@ -360,13 +365,13 @@ function App() {
                             if (v) toast({ title: 'Task completed!', variant: 'success', duration: 2000 });
                           }}
                         />
-                        <span className={`text-sm flex-1 ${task.done ? 'line-through text-muted-foreground' : ''}`}>{task.text}</span>
+                        <span className={`text-sm flex-1 ${task.done ? 'line-through text-text-dim' : ''}`}>{task.text}</span>
                         <Badge variant={task.priority === 'high' ? 'destructive' : task.priority === 'medium' ? 'warning' : 'secondary'} size="sm">{task.priority}</Badge>
                       </div>
                     ))}
                   </div>
                   <Separator style={{ margin: '12px 0' }} />
-                  <div className="flex items-center justify-between text-xs text-muted-foreground">
+                  <div className="flex items-center justify-between text-xs text-text-dim">
                     <span>Progress</span>
                     <span>{Math.round((taskList.filter(t => t.done).length / taskList.length) * 100)}%</span>
                   </div>
@@ -401,7 +406,7 @@ function App() {
                           </div>
                           <div className="flex-1 min-w-0">
                             <p className="text-sm font-medium">{member.name}</p>
-                            <p className="text-xs text-muted-foreground">{member.role}</p>
+                            <p className="text-xs text-text-dim">{member.role}</p>
                           </div>
                           <DropdownMenu>
                             <DropdownMenuTrigger asChild>
@@ -427,20 +432,20 @@ function App() {
                   <CardContent className="space-y-3">
                     <div className="flex justify-between text-sm">
                       <span>Used</span>
-                      <span className="text-muted-foreground">7.2 GB / 10 GB</span>
+                      <span className="text-text-dim">7.2 GB / 10 GB</span>
                     </div>
                     <Progress value={72} />
                     <div className="grid grid-cols-3 gap-2 text-center">
-                      <div className="p-2 rounded-md" style={{ backgroundColor: 'var(--invin-color-surface-elevated, #f9fafb)' }}>
-                        <p className="text-xs text-muted-foreground">Docs</p>
+                      <div className="p-2 rounded-md bg-[var(--invin-surface-hover)]">
+                        <p className="text-xs text-text-dim">Docs</p>
                         <p className="text-sm font-medium">3.1 GB</p>
                       </div>
-                      <div className="p-2 rounded-md" style={{ backgroundColor: 'var(--invin-color-surface-elevated, #f9fafb)' }}>
-                        <p className="text-xs text-muted-foreground">Media</p>
+                      <div className="p-2 rounded-md bg-[var(--invin-surface-hover)]">
+                        <p className="text-xs text-text-dim">Media</p>
                         <p className="text-sm font-medium">2.8 GB</p>
                       </div>
-                      <div className="p-2 rounded-md" style={{ backgroundColor: 'var(--invin-color-surface-elevated, #f9fafb)' }}>
-                        <p className="text-xs text-muted-foreground">Other</p>
+                      <div className="p-2 rounded-md bg-[var(--invin-surface-hover)]">
+                        <p className="text-xs text-text-dim">Other</p>
                         <p className="text-sm font-medium">1.3 GB</p>
                       </div>
                     </div>
@@ -448,6 +453,111 @@ function App() {
                 </Card>
               </div>
             </div>
+
+            <Separator>Analytics & Preferences</Separator>
+
+            {/* ─── Tabs Section ───────────────────────────────── */}
+            <Card>
+              <CardContent className="pt-4">
+                <Tabs defaultValue="overview">
+                  <TabsList variant="pill" size="sm">
+                    <TabsTrigger variant="pill" value="overview">All <span className="ml-1 opacity-60">(5)</span></TabsTrigger>
+                    <TabsTrigger variant="pill" value="analytics">Integrations <span className="ml-1 opacity-60">(3)</span></TabsTrigger>
+                    <TabsTrigger variant="pill" value="reports">Credentials <span className="ml-1 opacity-60">(2)</span></TabsTrigger>
+                  </TabsList>
+                  <TabsContent value="overview">
+                    <div className="grid grid-cols-3 gap-4 mt-4">
+                      <div className="text-center p-4 rounded-lg bg-[var(--invin-surface-hover)]">
+                        <p className="text-[length:var(--invin-text-kpi)] font-[700]">94%</p>
+                        <p className="text-xs text-text-dim mt-1">Compliance Score</p>
+                      </div>
+                      <div className="text-center p-4 rounded-lg bg-[var(--invin-surface-hover)]">
+                        <p className="text-[length:var(--invin-text-kpi)] font-[700]">12</p>
+                        <p className="text-xs text-text-dim mt-1">Open Issues</p>
+                      </div>
+                      <div className="text-center p-4 rounded-lg bg-[var(--invin-surface-hover)]">
+                        <p className="text-[length:var(--invin-text-kpi)] font-[700]">3</p>
+                        <p className="text-xs text-text-dim mt-1">Pending Reviews</p>
+                      </div>
+                    </div>
+                  </TabsContent>
+                  <TabsContent value="analytics">
+                    <p className="text-sm text-text-dim py-4">Analytics charts and trend data would render here.</p>
+                  </TabsContent>
+                  <TabsContent value="reports">
+                    <p className="text-sm text-text-dim py-4">Generated reports and export options.</p>
+                  </TabsContent>
+                </Tabs>
+              </CardContent>
+            </Card>
+
+            {/* ─── Preferences (Switch, Slider) ───────────────── */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <Card>
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-base">Preferences</CardTitle>
+                  <CardDescription>Quick settings for your workspace.</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm font-medium">Email Notifications</p>
+                      <p className="text-xs text-text-dim">Receive alerts via email</p>
+                    </div>
+                    <Switch defaultChecked size="sm" />
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm font-medium">Auto-scan Assets</p>
+                      <p className="text-xs text-text-dim">Scan new assets automatically</p>
+                    </div>
+                    <Switch size="sm" />
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm font-medium">Real-time Sync</p>
+                      <p className="text-xs text-text-dim">Keep data in sync across devices</p>
+                    </div>
+                    <Switch defaultChecked size="sm" />
+                  </div>
+                  <Separator />
+                  <div className="space-y-2">
+                    <div className="flex justify-between text-sm">
+                      <span>Alert Threshold</span>
+                      <span className="text-text-dim">75%</span>
+                    </div>
+                    <Slider defaultValue={[75]} max={100} />
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* ─── Accordion FAQ ─────────────────────────────── */}
+              <Card>
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-base">Quick Help</CardTitle>
+                  <CardDescription>Common questions about this module.</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Accordion type="single" collapsible defaultValue="q1">
+                    <AccordionItem value="q1">
+                      <AccordionTrigger>How do I add a new compliance framework?</AccordionTrigger>
+                      <AccordionContent>Navigate to Compliance Management → Frameworks → Add New. Select from 50+ pre-built templates or create a custom framework.</AccordionContent>
+                    </AccordionItem>
+                    <AccordionItem value="q2">
+                      <AccordionTrigger>What triggers an automatic scan?</AccordionTrigger>
+                      <AccordionContent>Scans trigger on new asset discovery, configuration changes, or on the scheduled interval you set in Settings → Scanning.</AccordionContent>
+                    </AccordionItem>
+                    <AccordionItem value="q3">
+                      <AccordionTrigger>How do I export an audit report?</AccordionTrigger>
+                      <AccordionContent>Click the Export button in the top-right of any compliance view. Reports are available in PDF, CSV, and JSON formats.</AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
+                </CardContent>
+              </Card>
+            </div>
+
+            </>
+            )}
 
           </div>
         </main>

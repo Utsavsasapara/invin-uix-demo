@@ -1,45 +1,259 @@
+import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
 import { Avatar, AvatarImage, AvatarFallback } from 'invin-uix/ui/avatar';
+import { Badge } from 'invin-uix/ui/badge';
 import { Card, CardContent } from 'invin-uix/ui/card';
 import { Separator } from 'invin-uix/ui/separator';
-import { Label } from 'invin-uix/ui/label';
 
 export default function AvatarDemo() {
   return (
-    <div className="space-y-6">
-      <div><p className="text-sm text-muted-foreground">User images with fallback initials and multiple sizes.</p></div>
-      <Card>
-        <CardContent className="pt-6 space-y-6">
-          <div>
-            <Label className="mb-2 block text-xs text-muted-foreground uppercase tracking-wide">Sizes</Label>
-            <div className="flex items-end gap-4">
-              <Avatar size="xs"><AvatarImage src="https://i.pravatar.cc/100?u=a1" /><AvatarFallback>XS</AvatarFallback></Avatar>
-              <Avatar size="sm"><AvatarImage src="https://i.pravatar.cc/100?u=a2" /><AvatarFallback>SM</AvatarFallback></Avatar>
-              <Avatar><AvatarImage src="https://i.pravatar.cc/100?u=a3" /><AvatarFallback>MD</AvatarFallback></Avatar>
-              <Avatar size="lg"><AvatarImage src="https://i.pravatar.cc/100?u=a4" /><AvatarFallback>LG</AvatarFallback></Avatar>
-              <Avatar size="xl"><AvatarImage src="https://i.pravatar.cc/100?u=a5" /><AvatarFallback>XL</AvatarFallback></Avatar>
+    <ComponentPage
+      name="Avatar"
+      description="Circular user image with automatic fallback to initials. Supports 5 sizes, image loading detection, delayed fallback, and composable patterns (stacked groups, status badges)."
+      importCode={`import { Avatar, AvatarImage, AvatarFallback } from 'invin-uix/ui/avatar';`}
+    >
+
+      {/* ─── Props Table ────────────────────────────────────────── */}
+      <div className="space-y-4">
+        <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)]">Avatar</p>
+        <PropsTable
+          props={[
+            { name: 'size', type: "'xs' | 'sm' | 'md' | 'lg' | 'xl'", default: "'md'", description: 'Preset size (24px to 64px)' },
+            { name: 'className', type: 'string', default: '—', description: 'Additional classes (border, ring, etc.)' },
+          ]}
+        />
+      </div>
+      <div className="space-y-4">
+        <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)]">AvatarImage</p>
+        <PropsTable
+          props={[
+            { name: 'src', type: 'string', default: '—', description: 'Image URL' },
+            { name: 'alt', type: 'string', default: '—', description: 'Alt text for accessibility' },
+            { name: 'onLoadingStatusChange', type: "(status: 'loading' | 'loaded' | 'error') => void", default: '—', description: 'Callback when image loading state changes' },
+          ]}
+        />
+      </div>
+      <div className="space-y-4">
+        <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)]">AvatarFallback</p>
+        <PropsTable
+          props={[
+            { name: 'delayMs', type: 'number', default: '0', description: 'Delay before showing fallback (prevents flash if image loads fast)' },
+            { name: 'children', type: 'ReactNode', default: '—', description: 'Initials, emoji, or icon to show' },
+          ]}
+        />
+      </div>
+
+      <Separator variant="bold" />
+
+      {/* ─── Sizes ──────────────────────────────────────────────── */}
+      <PlaygroundSection
+        title="Sizes"
+        description="Five presets: xs (24px), sm (32px), md (40px, default), lg (48px), xl (64px)."
+        code={`<Avatar size="xs"><AvatarImage src="..." alt="User" /><AvatarFallback>XS</AvatarFallback></Avatar>
+<Avatar size="sm"><AvatarImage src="..." alt="User" /><AvatarFallback>SM</AvatarFallback></Avatar>
+<Avatar><AvatarImage src="..." alt="User" /><AvatarFallback>MD</AvatarFallback></Avatar>
+<Avatar size="lg"><AvatarImage src="..." alt="User" /><AvatarFallback>LG</AvatarFallback></Avatar>
+<Avatar size="xl"><AvatarImage src="..." alt="User" /><AvatarFallback>XL</AvatarFallback></Avatar>`}
+      >
+        <div className="flex items-end gap-4">
+          <Avatar size="xs"><AvatarImage src="https://i.pravatar.cc/100?u=a1" alt="User" /><AvatarFallback>XS</AvatarFallback></Avatar>
+          <Avatar size="sm"><AvatarImage src="https://i.pravatar.cc/100?u=a2" alt="User" /><AvatarFallback>SM</AvatarFallback></Avatar>
+          <Avatar><AvatarImage src="https://i.pravatar.cc/100?u=a3" alt="User" /><AvatarFallback>MD</AvatarFallback></Avatar>
+          <Avatar size="lg"><AvatarImage src="https://i.pravatar.cc/100?u=a4" alt="User" /><AvatarFallback>LG</AvatarFallback></Avatar>
+          <Avatar size="xl"><AvatarImage src="https://i.pravatar.cc/100?u=a5" alt="User" /><AvatarFallback>XL</AvatarFallback></Avatar>
+        </div>
+      </PlaygroundSection>
+
+      {/* ─── Fallbacks ──────────────────────────────────────────── */}
+      <PlaygroundSection
+        title="Fallbacks"
+        description="When image is unavailable or src is empty, the fallback shows. Use initials, single chars, or emoji."
+        code={`// Initials
+<Avatar><AvatarFallback>JD</AvatarFallback></Avatar>
+<Avatar><AvatarFallback>AB</AvatarFallback></Avatar>
+
+// Broken image → fallback shows automatically
+<Avatar><AvatarImage src="/broken-url.jpg" alt="User" /><AvatarFallback>BR</AvatarFallback></Avatar>
+
+// Emoji or icon
+<Avatar><AvatarFallback>🎉</AvatarFallback></Avatar>`}
+      >
+        <div className="flex items-center gap-4">
+          <Avatar><AvatarFallback>JD</AvatarFallback></Avatar>
+          <Avatar><AvatarFallback>AB</AvatarFallback></Avatar>
+          <Avatar><AvatarImage src="/broken-url-that-will-fail.jpg" alt="User" /><AvatarFallback>BR</AvatarFallback></Avatar>
+          <Avatar size="lg"><AvatarFallback>SC</AvatarFallback></Avatar>
+          <Avatar><AvatarFallback>🎉</AvatarFallback></Avatar>
+        </div>
+      </PlaygroundSection>
+
+      {/* ─── Stacked Group ──────────────────────────────────────── */}
+      <PlaygroundSection
+        title="Stacked Group"
+        description="Overlapping avatars with negative margin. Add a border matching your background for clean separation."
+        code={`<div className="flex -space-x-3">
+  <Avatar size="sm" className="border-2 border-[var(--invin-bg)]">
+    <AvatarImage src="..." alt="User 1" /><AvatarFallback>U1</AvatarFallback>
+  </Avatar>
+  <Avatar size="sm" className="border-2 border-[var(--invin-bg)]">
+    <AvatarImage src="..." alt="User 2" /><AvatarFallback>U2</AvatarFallback>
+  </Avatar>
+  <Avatar size="sm" className="border-2 border-[var(--invin-bg)]">
+    <AvatarFallback>+5</AvatarFallback>
+  </Avatar>
+</div>`}
+      >
+        <div className="flex -space-x-3">
+          <Avatar size="sm" className="border-2 border-[var(--invin-bg)]"><AvatarImage src="https://i.pravatar.cc/100?u=s1" alt="User 1" /><AvatarFallback>U1</AvatarFallback></Avatar>
+          <Avatar size="sm" className="border-2 border-[var(--invin-bg)]"><AvatarImage src="https://i.pravatar.cc/100?u=s2" alt="User 2" /><AvatarFallback>U2</AvatarFallback></Avatar>
+          <Avatar size="sm" className="border-2 border-[var(--invin-bg)]"><AvatarImage src="https://i.pravatar.cc/100?u=s3" alt="User 3" /><AvatarFallback>U3</AvatarFallback></Avatar>
+          <Avatar size="sm" className="border-2 border-[var(--invin-bg)]"><AvatarImage src="https://i.pravatar.cc/100?u=s4" alt="User 4" /><AvatarFallback>U4</AvatarFallback></Avatar>
+          <Avatar size="sm" className="border-2 border-[var(--invin-bg)]"><AvatarFallback>+5</AvatarFallback></Avatar>
+        </div>
+      </PlaygroundSection>
+
+      {/* ─── With Badge (Status Dot) ────────────────────────────── */}
+      <PlaygroundSection
+        title="With Status Badge"
+        description="Wrap Avatar in Badge dot mode to show online/offline status."
+        code={`import { Badge } from 'invin-uix/ui/badge';
+
+// Online
+<Badge dot color="#22c55e">
+  <Avatar size="sm"><AvatarImage src="..." /><AvatarFallback>SC</AvatarFallback></Avatar>
+</Badge>
+
+// Away
+<Badge dot color="#f59e0b">
+  <Avatar size="sm"><AvatarFallback>JR</AvatarFallback></Avatar>
+</Badge>
+
+// Offline
+<Badge dot color="#9ca3af">
+  <Avatar size="sm"><AvatarFallback>LP</AvatarFallback></Avatar>
+</Badge>`}
+      >
+        <div className="flex items-center gap-4">
+          <Badge dot color="#22c55e">
+            <Avatar size="sm"><AvatarImage src="https://i.pravatar.cc/100?u=st1" alt="Sarah" /><AvatarFallback>SC</AvatarFallback></Avatar>
+          </Badge>
+          <Badge dot color="#22c55e">
+            <Avatar><AvatarImage src="https://i.pravatar.cc/100?u=st2" alt="John" /><AvatarFallback>JR</AvatarFallback></Avatar>
+          </Badge>
+          <Badge dot color="#f59e0b">
+            <Avatar size="sm"><AvatarFallback>LP</AvatarFallback></Avatar>
+          </Badge>
+          <Badge dot color="#9ca3af">
+            <Avatar size="sm"><AvatarFallback>MC</AvatarFallback></Avatar>
+          </Badge>
+        </div>
+      </PlaygroundSection>
+
+      <Separator variant="bold" />
+
+      {/* ─── Use Cases ──────────────────────────────────────────── */}
+      <div className="space-y-3">
+        <h3 className="text-[length:var(--invin-text-sub-heading)] font-[700]">Use cases</h3>
+        <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">Common patterns in real applications.</p>
+      </div>
+
+      <PlaygroundSection
+        title="User list item"
+        description="Avatar + name + role in a settings or team page."
+        code={`<div className="flex items-center gap-3">
+  <Avatar size="sm">
+    <AvatarImage src="..." alt="Sarah Connor" />
+    <AvatarFallback>SC</AvatarFallback>
+  </Avatar>
+  <div>
+    <p className="text-sm font-medium">Sarah Connor</p>
+    <p className="text-xs text-[var(--invin-text-dim)]">Engineer</p>
+  </div>
+</div>`}
+      >
+        <Card>
+          <CardContent className="py-3">
+            <div className="space-y-3">
+              {[
+                { name: 'Sarah Connor', role: 'Engineer', img: 'u=team10' },
+                { name: 'John Reese', role: 'Designer', img: 'u=team11' },
+                { name: 'Lisa Park', role: 'Marketing', img: 'u=team12' },
+                { name: 'Mike Chen', role: 'Product', img: 'u=team13' },
+              ].map(m => (
+                <div key={m.name} className="flex items-center gap-3">
+                  <Avatar size="sm"><AvatarImage src={`https://i.pravatar.cc/100?${m.img}`} alt={m.name} /><AvatarFallback>{m.name[0]}{m.name.split(' ')[1][0]}</AvatarFallback></Avatar>
+                  <div>
+                    <p className="text-[length:var(--invin-text-body)] font-[500]">{m.name}</p>
+                    <p className="text-[10px] text-[var(--invin-text-dim)]">{m.role}</p>
+                  </div>
+                </div>
+              ))}
             </div>
-          </div>
-          <Separator />
-          <div>
-            <Label className="mb-2 block text-xs text-muted-foreground uppercase tracking-wide">Fallbacks</Label>
-            <div className="flex items-center gap-4">
-              <Avatar><AvatarFallback>JD</AvatarFallback></Avatar>
-              <Avatar><AvatarFallback>AB</AvatarFallback></Avatar>
-              <Avatar><AvatarFallback>🎉</AvatarFallback></Avatar>
-            </div>
-          </div>
-          <Separator />
-          <div>
-            <Label className="mb-2 block text-xs text-muted-foreground uppercase tracking-wide">Stacked</Label>
-            <div className="flex -space-x-3">
-              <Avatar size="sm" className="border-2 border-background"><AvatarImage src="https://i.pravatar.cc/100?u=s1" /><AvatarFallback>1</AvatarFallback></Avatar>
-              <Avatar size="sm" className="border-2 border-background"><AvatarImage src="https://i.pravatar.cc/100?u=s2" /><AvatarFallback>2</AvatarFallback></Avatar>
-              <Avatar size="sm" className="border-2 border-background"><AvatarImage src="https://i.pravatar.cc/100?u=s3" /><AvatarFallback>3</AvatarFallback></Avatar>
-              <Avatar size="sm" className="border-2 border-background"><AvatarFallback>+5</AvatarFallback></Avatar>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
+      </PlaygroundSection>
+
+      <PlaygroundSection
+        title="Comment thread"
+        description="Avatar with timestamp and message body."
+        code={`<div className="flex gap-3">
+  <Avatar size="sm">
+    <AvatarImage src="..." alt="Alice" />
+    <AvatarFallback>A</AvatarFallback>
+  </Avatar>
+  <div>
+    <div className="flex items-center gap-2">
+      <span className="font-medium text-sm">Alice</span>
+      <span className="text-xs text-[var(--invin-text-faint)]">2 min ago</span>
     </div>
+    <p className="text-sm text-[var(--invin-text-dim)] mt-0.5">Looks great! Ship it.</p>
+  </div>
+</div>`}
+      >
+        <Card>
+          <CardContent className="py-3">
+            <div className="space-y-4">
+              {[
+                { name: 'Alice', time: '2 min ago', msg: 'Looks great! Ship it.', img: 'u=c1' },
+                { name: 'Bob', time: '5 min ago', msg: 'Can we add a hover state to the cards?', img: 'u=c2' },
+                { name: 'Carol', time: '10 min ago', msg: 'Updated the token values in colour.css.', img: 'u=c3' },
+              ].map(c => (
+                <div key={c.name} className="flex gap-3">
+                  <Avatar size="sm"><AvatarImage src={`https://i.pravatar.cc/100?${c.img}`} alt={c.name} /><AvatarFallback>{c.name[0]}</AvatarFallback></Avatar>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-[length:var(--invin-text-body)] font-[500]">{c.name}</span>
+                      <span className="text-[10px] text-[var(--invin-text-faint)]">{c.time}</span>
+                    </div>
+                    <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)] mt-0.5">{c.msg}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      </PlaygroundSection>
+
+      <PlaygroundSection
+        title="Account dropdown trigger"
+        description="Small avatar as a clickable trigger for a user menu."
+        code={`<Avatar size="sm" className="cursor-pointer ring-2 ring-transparent hover:ring-[var(--invin-accent)]/50 transition-all">
+  <AvatarImage src="..." alt="You" />
+  <AvatarFallback>ME</AvatarFallback>
+</Avatar>`}
+      >
+        <div className="flex items-center gap-4">
+          <Avatar size="sm" className="cursor-pointer ring-2 ring-transparent hover:ring-[var(--invin-accent)]/50 transition-all">
+            <AvatarImage src="https://i.pravatar.cc/100?u=me" alt="You" />
+            <AvatarFallback>ME</AvatarFallback>
+          </Avatar>
+          <Avatar className="cursor-pointer ring-2 ring-transparent hover:ring-[var(--invin-accent)]/50 transition-all">
+            <AvatarImage src="https://i.pravatar.cc/100?u=me2" alt="You" />
+            <AvatarFallback>YO</AvatarFallback>
+          </Avatar>
+          <span className="text-[length:var(--invin-text-label)] text-[var(--invin-text-faint)]">← hover these</span>
+        </div>
+      </PlaygroundSection>
+
+    </ComponentPage>
   );
 }

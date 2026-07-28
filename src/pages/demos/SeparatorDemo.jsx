@@ -1,63 +1,218 @@
-import { Card, CardContent } from 'invin-uix/ui/card';
+import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
 import { Separator } from 'invin-uix/ui/separator';
-import { Label } from 'invin-uix/ui/label';
+import { Card, CardContent } from 'invin-uix/ui/card';
+import { Badge } from 'invin-uix/ui/badge';
+import { Button } from 'invin-uix/ui/button';
 
 export default function SeparatorDemo() {
   return (
-    <div className="space-y-6">
-      <div><p className="text-sm text-muted-foreground">A divider line to separate content. Supports text, dashed style, and orientation.</p></div>
+    <ComponentPage
+      name="Separator"
+      description="Horizontal or vertical divider line. Supports text labels with placement, dashed style, bold variant, and vertical orientation for inline content."
+      importCode={`import { Separator } from 'invin-uix/ui/separator';`}
+    >
 
-      <Card>
-        <CardContent className="pt-6 space-y-6">
+      {/* ─── Props Table ────────────────────────────────────────── */}
+      <PropsTable
+        props={[
+          { name: 'orientation', type: "'horizontal' | 'vertical'", default: "'horizontal'", description: 'Direction of the divider' },
+          { name: 'variant', type: "'default' | 'bold'", default: "'default'", description: 'Thickness — default (1px) or bold (2px)' },
+          { name: 'dashed', type: 'boolean', default: 'false', description: 'Dashed line instead of solid' },
+          { name: 'children', type: 'ReactNode', default: '—', description: 'Text shown inline within the divider' },
+          { name: 'titlePlacement', type: "'left' | 'center' | 'right'", default: "'center'", description: 'Text position when children provided' },
+          { name: 'plain', type: 'boolean', default: 'false', description: 'Lighter text weight (400 vs 500)' },
+          { name: 'decorative', type: 'boolean', default: 'true', description: 'If true, uses role="none" (no semantic separator)' },
+        ]}
+      />
+
+      <Separator variant="bold" />
+
+      {/* ─── Default vs Bold ────────────────────────────────────── */}
+      <PlaygroundSection
+        title="Default & Bold"
+        description="Default is 1px for subtle content breaks. Bold (2px) for major section dividers."
+        code={`<Separator />
+<Separator variant="bold" />`}
+      >
+        <div className="w-full space-y-6">
           <div>
-            <Label className="mb-3 block text-xs text-muted-foreground uppercase tracking-wide">Basic</Label>
-            <p className="text-sm">Content above the separator.</p>
+            <p className="text-[length:var(--invin-text-label)] text-[var(--invin-text-faint)] mb-2">Default (1px)</p>
             <Separator />
-            <p className="text-sm">Content below the separator.</p>
           </div>
-
           <div>
-            <Label className="mb-3 block text-xs text-muted-foreground uppercase tracking-wide">Dashed</Label>
-            <Separator dashed />
+            <p className="text-[length:var(--invin-text-label)] text-[var(--invin-text-faint)] mb-2">Bold (2px)</p>
+            <Separator variant="bold" />
           </div>
+        </div>
+      </PlaygroundSection>
 
-          <div>
-            <Label className="mb-3 block text-xs text-muted-foreground uppercase tracking-wide">With Text (center)</Label>
-            <Separator>Section Title</Separator>
-          </div>
+      {/* ─── Dashed ─────────────────────────────────────────────── */}
+      <PlaygroundSection
+        title="Dashed"
+        description="Dashed style for preview, draft, or less permanent boundaries."
+        code={`<Separator dashed />
+<Separator dashed variant="bold" />`}
+      >
+        <div className="w-full space-y-6">
+          <Separator dashed />
+          <Separator dashed variant="bold" />
+        </div>
+      </PlaygroundSection>
 
-          <div>
-            <Label className="mb-3 block text-xs text-muted-foreground uppercase tracking-wide">With Text (left)</Label>
-            <Separator titlePlacement="left">Left Title</Separator>
-          </div>
+      {/* ─── With Text ──────────────────────────────────────────── */}
+      <PlaygroundSection
+        title="With Text Label"
+        description="Inline text creates a labeled section divider. Useful for grouping content."
+        code={`<Separator>Section Title</Separator>
+<Separator variant="bold">Important Section</Separator>
+<Separator dashed>Draft Content</Separator>`}
+      >
+        <div className="w-full space-y-2">
+          <Separator>Section Title</Separator>
+          <Separator variant="bold">Important Section</Separator>
+          <Separator dashed>Draft Content</Separator>
+        </div>
+      </PlaygroundSection>
 
-          <div>
-            <Label className="mb-3 block text-xs text-muted-foreground uppercase tracking-wide">With Text (right)</Label>
-            <Separator titlePlacement="right">Right Title</Separator>
-          </div>
+      {/* ─── Text Placement ─────────────────────────────────────── */}
+      <PlaygroundSection
+        title="Text Placement"
+        description="Position the label text at left, center, or right."
+        code={`<Separator titlePlacement="left">Left</Separator>
+<Separator titlePlacement="center">Center</Separator>
+<Separator titlePlacement="right">Right</Separator>`}
+      >
+        <div className="w-full space-y-2">
+          <Separator titlePlacement="left">Left Aligned</Separator>
+          <Separator titlePlacement="center">Center (default)</Separator>
+          <Separator titlePlacement="right">Right Aligned</Separator>
+        </div>
+      </PlaygroundSection>
 
-          <div>
-            <Label className="mb-3 block text-xs text-muted-foreground uppercase tracking-wide">Dashed + Text</Label>
-            <Separator dashed titlePlacement="left">Dashed Left</Separator>
-          </div>
+      {/* ─── Plain Text ─────────────────────────────────────────── */}
+      <PlaygroundSection
+        title="Plain Text"
+        description="Lighter weight text (400) for less prominent dividers."
+        code={`<Separator plain>Less emphasis</Separator>
+<Separator>Normal emphasis</Separator>`}
+      >
+        <div className="w-full space-y-2">
+          <Separator plain>Less emphasis (plain)</Separator>
+          <Separator>Normal emphasis</Separator>
+        </div>
+      </PlaygroundSection>
 
-          <div>
-            <Label className="mb-3 block text-xs text-muted-foreground uppercase tracking-wide">Plain Text (lighter)</Label>
-            <Separator plain>Plain Text</Separator>
-          </div>
+      {/* ─── Vertical ───────────────────────────────────────────── */}
+      <PlaygroundSection
+        title="Vertical"
+        description="Inline vertical divider between text or buttons. Height matches text line-height."
+        code={`<div className="flex items-center">
+  <span>Home</span>
+  <Separator orientation="vertical" />
+  <span>Products</span>
+  <Separator orientation="vertical" />
+  <span>About</span>
+</div>`}
+      >
+        <div className="flex items-center text-[length:var(--invin-text-body)]">
+          <span>Home</span>
+          <Separator orientation="vertical" />
+          <span>Products</span>
+          <Separator orientation="vertical" />
+          <span>About</span>
+          <Separator orientation="vertical" />
+          <span>Contact</span>
+        </div>
+      </PlaygroundSection>
 
-          <div>
-            <Label className="mb-3 block text-xs text-muted-foreground uppercase tracking-wide">Vertical</Label>
-            <div className="flex items-center">
-              <span className="text-sm">Link 1</span>
-              <Separator orientation="vertical" />
-              <span className="text-sm">Link 2</span>
-              <Separator orientation="vertical" />
-              <span className="text-sm">Link 3</span>
+      <Separator variant="bold" />
+
+      {/* ─── Use Cases ──────────────────────────────────────────── */}
+      <div className="space-y-3">
+        <h3 className="text-[length:var(--invin-text-sub-heading)] font-[700]">Use cases</h3>
+        <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">Common patterns in real layouts.</p>
+      </div>
+
+      <PlaygroundSection
+        title="Card content sections"
+        description="Separate different content areas within a card."
+        code={`<Card>
+  <CardContent>
+    <h3>Profile</h3>
+    <p>User information here...</p>
+    <Separator />
+    <h3>Preferences</h3>
+    <p>Settings here...</p>
+  </CardContent>
+</Card>`}
+      >
+        <Card>
+          <CardContent className="py-4 space-y-3">
+            <div>
+              <p className="text-[length:var(--invin-text-card-title)] font-[600]">Profile</p>
+              <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)] mt-1">Name, email, avatar and other details</p>
             </div>
+            <Separator />
+            <div>
+              <p className="text-[length:var(--invin-text-card-title)] font-[600]">Preferences</p>
+              <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)] mt-1">Theme, language, notifications</p>
+            </div>
+            <Separator />
+            <div>
+              <p className="text-[length:var(--invin-text-card-title)] font-[600]">Danger Zone</p>
+              <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)] mt-1">Delete account, export data</p>
+            </div>
+          </CardContent>
+        </Card>
+      </PlaygroundSection>
+
+      <PlaygroundSection
+        title="Form section headers"
+        description="Label different groups in a long form."
+        code={`<Separator titlePlacement="left">Personal Info</Separator>
+{/* ...form fields... */}
+<Separator titlePlacement="left">Address</Separator>
+{/* ...form fields... */}`}
+      >
+        <div className="w-full space-y-3">
+          <Separator titlePlacement="left">Personal Info</Separator>
+          <div className="grid grid-cols-2 gap-3 pl-1">
+            <div className="h-8 rounded-[8px] border border-[var(--invin-border)] bg-[var(--invin-field-bg)]" />
+            <div className="h-8 rounded-[8px] border border-[var(--invin-border)] bg-[var(--invin-field-bg)]" />
           </div>
-        </CardContent>
-      </Card>
-    </div>
+          <Separator titlePlacement="left">Address</Separator>
+          <div className="grid grid-cols-2 gap-3 pl-1">
+            <div className="h-8 rounded-[8px] border border-[var(--invin-border)] bg-[var(--invin-field-bg)]" />
+            <div className="h-8 rounded-[8px] border border-[var(--invin-border)] bg-[var(--invin-field-bg)]" />
+          </div>
+        </div>
+      </PlaygroundSection>
+
+      <PlaygroundSection
+        title="Toolbar with vertical separators"
+        description="Group related actions in a toolbar."
+        code={`<div className="flex items-center gap-1">
+  <Button variant="ghost" size="icon-sm">...</Button>
+  <Button variant="ghost" size="icon-sm">...</Button>
+  <Separator orientation="vertical" />
+  <Button variant="ghost" size="icon-sm">...</Button>
+  <Separator orientation="vertical" />
+  <Badge variant="outline" size="sm">Saved</Badge>
+</div>`}
+      >
+        <div className="flex items-center gap-1 p-1.5 rounded-[8px] border border-[var(--invin-border)] w-fit">
+          <Button variant="ghost" size="icon-sm">B</Button>
+          <Button variant="ghost" size="icon-sm">I</Button>
+          <Button variant="ghost" size="icon-sm">U</Button>
+          <Separator orientation="vertical" />
+          <Button variant="ghost" size="icon-sm">L</Button>
+          <Button variant="ghost" size="icon-sm">C</Button>
+          <Button variant="ghost" size="icon-sm">R</Button>
+          <Separator orientation="vertical" />
+          <Badge variant="outline" size="sm">Saved</Badge>
+        </div>
+      </PlaygroundSection>
+
+    </ComponentPage>
   );
 }

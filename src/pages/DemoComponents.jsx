@@ -45,7 +45,7 @@ function Section({ id, title, description, children }) {
     <div id={id} className="space-y-4 scroll-mt-20">
       <div>
         <h2 className="text-xl font-semibold">{title}</h2>
-        {description && <p className="text-sm text-muted-foreground mt-1">{description}</p>}
+        {description && <p className="text-sm text-text-dim mt-1">{description}</p>}
       </div>
       {children}
     </div>
@@ -62,21 +62,21 @@ function DemoComponents() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex">
+    <div className="min-h-screen bg-bg text-foreground flex">
 
       {/* ─── Sidebar ──────────────────────────────────────── */}
-      <aside className="hidden lg:flex w-52 flex-col border-r border-border fixed inset-y-0 left-0 bg-background z-30">
+      <aside className="hidden lg:flex w-52 flex-col border-r border-border fixed inset-y-0 left-0 bg-bg z-30">
         <div className="flex items-center gap-2 px-4 h-14 border-b border-border">
           <Button variant="ghost" size="sm" onClick={() => window.__setPage?.('dashboard')}>← Back</Button>
         </div>
         <div className="px-3 py-3">
-          <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-medium px-2 mb-2">Components</p>
+          <p className="text-[10px] uppercase tracking-wider text-text-dim font-medium px-2 mb-2">Components</p>
           <nav className="space-y-0.5">
             {components.map((c) => (
               <button
                 key={c.id}
                 onClick={() => scrollTo(c.id)}
-                className={`flex items-center w-full px-2 py-1.5 rounded-md text-sm transition-colors ${active === c.id ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:text-foreground hover:bg-muted'}`}
+                className={`flex items-center w-full px-2 py-1.5 rounded-md text-sm transition-colors ${active === c.id ? 'bg-primary text-primary-foreground' : 'text-text-dim hover:text-foreground hover:bg-bg-elevated'}`}
               >
                 {c.label}
               </button>
@@ -89,10 +89,10 @@ function DemoComponents() {
       <main className="flex-1 lg:ml-52">
 
         {/* Header */}
-        <header className="sticky top-0 z-20 border-b border-border bg-background px-6 h-14 flex items-center justify-between">
+        <header className="sticky top-0 z-20 border-b border-border bg-bg px-6 h-14 flex items-center justify-between">
           <h1 className="text-lg font-bold">Component Demo</h1>
           <div className="flex items-center gap-2">
-            <span className="text-sm text-muted-foreground">Dark</span>
+            <span className="text-sm text-text-dim">Dark</span>
             <Switch size="sm" checked={dark} onCheckedChange={(v) => { setDark(v); document.documentElement.setAttribute('data-theme', v ? 'dark' : 'light'); }} />
           </div>
         </header>
@@ -106,7 +106,7 @@ function DemoComponents() {
           <Card>
             <CardContent className="pt-6 space-y-6">
               <div>
-                <Label className="mb-2 block text-xs text-muted-foreground uppercase tracking-wide">Variants</Label>
+                <Label className="mb-2 block text-xs text-text-dim uppercase tracking-wide">Variants</Label>
                 <div className="flex flex-wrap gap-3">
                   <Button variant="primary">Primary</Button>
                   <Button variant="destructive">Destructive</Button>
@@ -119,7 +119,7 @@ function DemoComponents() {
               </div>
               <Separator />
               <div>
-                <Label className="mb-2 block text-xs text-muted-foreground uppercase tracking-wide">States</Label>
+                <Label className="mb-2 block text-xs text-text-dim uppercase tracking-wide">States</Label>
                 <div className="flex flex-wrap gap-3">
                   <Button disabled>Disabled</Button>
                   <Button variant="outline" disabled>Disabled Outline</Button>
@@ -129,7 +129,7 @@ function DemoComponents() {
               </div>
               <Separator />
               <div>
-                <Label className="mb-2 block text-xs text-muted-foreground uppercase tracking-wide">Ripple (default on, disable with ripple=false)</Label>
+                <Label className="mb-2 block text-xs text-text-dim uppercase tracking-wide">Ripple (default on, disable with ripple=false)</Label>
                 <div className="flex flex-wrap gap-3">
                   <Button>With Ripple</Button>
                   <Button ripple={false}>No Ripple</Button>
@@ -139,7 +139,7 @@ function DemoComponents() {
               </div>
               <Separator />
               <div>
-                <Label className="mb-2 block text-xs text-muted-foreground uppercase tracking-wide">With Icons</Label>
+                <Label className="mb-2 block text-xs text-text-dim uppercase tracking-wide">With Icons</Label>
                 <div className="flex flex-wrap gap-3">
                   <Button><Download className="h-4 w-4" /> Download</Button>
                   <Button variant="outline"><Settings className="h-4 w-4" /> Settings</Button>
@@ -153,7 +153,7 @@ function DemoComponents() {
               </div>
               <Separator />
               <div>
-                <Label className="mb-2 block text-xs text-muted-foreground uppercase tracking-wide">Sizes</Label>
+                <Label className="mb-2 block text-xs text-text-dim uppercase tracking-wide">Sizes</Label>
                 <div className="flex flex-wrap items-center gap-3">
                   <Button size="sm">Small</Button>
                   <Button size="md">Medium</Button>
@@ -171,7 +171,7 @@ function DemoComponents() {
           <Card>
             <CardContent className="pt-6 space-y-6">
               <div>
-                <Label className="mb-2 block text-xs text-muted-foreground uppercase tracking-wide">Label Variants</Label>
+                <Label className="mb-2 block text-xs text-text-dim uppercase tracking-wide">Label Variants</Label>
                 <div className="flex flex-wrap gap-3">
                   <Badge variant="default">Default</Badge>
                   <Badge variant="secondary">Secondary</Badge>
@@ -183,7 +183,7 @@ function DemoComponents() {
               </div>
               <Separator />
               <div>
-                <Label className="mb-2 block text-xs text-muted-foreground uppercase tracking-wide">Count (notification bubble)</Label>
+                <Label className="mb-2 block text-xs text-text-dim uppercase tracking-wide">Count (notification bubble)</Label>
                 <div className="flex flex-wrap items-center gap-6">
                   <Badge count={5}>
                     <Button size="icon" variant="outline"><Bell className="h-4 w-4" /></Button>
@@ -201,7 +201,7 @@ function DemoComponents() {
               </div>
               <Separator />
               <div>
-                <Label className="mb-2 block text-xs text-muted-foreground uppercase tracking-wide">Dot</Label>
+                <Label className="mb-2 block text-xs text-text-dim uppercase tracking-wide">Dot</Label>
                 <div className="flex flex-wrap items-center gap-6">
                   <Badge dot>
                     <Button size="icon" variant="outline"><Bell className="h-4 w-4" /></Button>
@@ -216,7 +216,7 @@ function DemoComponents() {
               </div>
               <Separator />
               <div>
-                <Label className="mb-2 block text-xs text-muted-foreground uppercase tracking-wide">Custom Colors</Label>
+                <Label className="mb-2 block text-xs text-text-dim uppercase tracking-wide">Custom Colors</Label>
                 <div className="flex flex-wrap items-center gap-6">
                   <Badge count={8} color="#8b5cf6">
                     <Button size="icon" variant="outline"><Star className="h-4 w-4" /></Button>
@@ -231,7 +231,7 @@ function DemoComponents() {
               </div>
               <Separator />
               <div>
-                <Label className="mb-2 block text-xs text-muted-foreground uppercase tracking-wide">Status</Label>
+                <Label className="mb-2 block text-xs text-text-dim uppercase tracking-wide">Status</Label>
                 <div className="flex flex-wrap items-center gap-6">
                   <Badge status="success" text="Active" />
                   <Badge status="processing" text="Running" />
@@ -242,7 +242,7 @@ function DemoComponents() {
               </div>
               <Separator />
               <div>
-                <Label className="mb-2 block text-xs text-muted-foreground uppercase tracking-wide">Sizes</Label>
+                <Label className="mb-2 block text-xs text-text-dim uppercase tracking-wide">Sizes</Label>
                 <div className="flex flex-wrap items-center gap-6">
                   <Badge count={5} size="sm">
                     <Button size="icon" variant="outline"><Bell className="h-4 w-4" /></Button>
@@ -281,7 +281,7 @@ function DemoComponents() {
           <Card>
             <CardContent className="pt-6 space-y-6">
               <div>
-                <Label className="mb-2 block text-xs text-muted-foreground uppercase tracking-wide">Profile loading</Label>
+                <Label className="mb-2 block text-xs text-text-dim uppercase tracking-wide">Profile loading</Label>
                 <div className="flex items-center gap-4">
                   <Skeleton variant="circle" className="h-12 w-12" />
                   <div className="space-y-2 flex-1">
@@ -292,7 +292,7 @@ function DemoComponents() {
               </div>
               <Separator />
               <div>
-                <Label className="mb-2 block text-xs text-muted-foreground uppercase tracking-wide">Card loading</Label>
+                <Label className="mb-2 block text-xs text-text-dim uppercase tracking-wide">Card loading</Label>
                 <Skeleton className="h-40 w-full rounded-lg" />
                 <div className="mt-3 space-y-2">
                   <Skeleton variant="text" className="w-3/4" />
@@ -338,7 +338,7 @@ function DemoComponents() {
           <Card>
             <CardContent className="pt-6 space-y-6">
               <div>
-                <Label className="mb-2 block text-xs text-muted-foreground uppercase tracking-wide">Sizes</Label>
+                <Label className="mb-2 block text-xs text-text-dim uppercase tracking-wide">Sizes</Label>
                 <div className="flex items-end gap-4">
                   <Avatar size="xs"><AvatarImage src="https://i.pravatar.cc/100?u=a1" /><AvatarFallback>XS</AvatarFallback></Avatar>
                   <Avatar size="sm"><AvatarImage src="https://i.pravatar.cc/100?u=a2" /><AvatarFallback>SM</AvatarFallback></Avatar>
@@ -349,7 +349,7 @@ function DemoComponents() {
               </div>
               <Separator />
               <div>
-                <Label className="mb-2 block text-xs text-muted-foreground uppercase tracking-wide">Fallbacks (no image)</Label>
+                <Label className="mb-2 block text-xs text-text-dim uppercase tracking-wide">Fallbacks (no image)</Label>
                 <div className="flex items-center gap-4">
                   <Avatar><AvatarFallback>JD</AvatarFallback></Avatar>
                   <Avatar><AvatarFallback>AB</AvatarFallback></Avatar>
@@ -358,7 +358,7 @@ function DemoComponents() {
               </div>
               <Separator />
               <div>
-                <Label className="mb-2 block text-xs text-muted-foreground uppercase tracking-wide">Stacked</Label>
+                <Label className="mb-2 block text-xs text-text-dim uppercase tracking-wide">Stacked</Label>
                 <div className="flex -space-x-3">
                   <Avatar size="sm" className="border-2 border-background"><AvatarImage src="https://i.pravatar.cc/100?u=s1" /><AvatarFallback>1</AvatarFallback></Avatar>
                   <Avatar size="sm" className="border-2 border-background"><AvatarImage src="https://i.pravatar.cc/100?u=s2" /><AvatarFallback>2</AvatarFallback></Avatar>
@@ -396,7 +396,7 @@ function DemoComponents() {
               </CardHeader>
               <CardContent>
                 <p className="text-3xl font-bold">$45,231</p>
-                <p className="text-sm text-muted-foreground mt-1">+20.1% from last month</p>
+                <p className="text-sm text-text-dim mt-1">+20.1% from last month</p>
               </CardContent>
               <CardFooter>
                 <Badge variant="success">Trending up</Badge>
@@ -416,7 +416,7 @@ function DemoComponents() {
                         <Avatar size="sm"><AvatarImage src={`https://i.pravatar.cc/100?u=team${i}`} /><AvatarFallback>{name[0]}</AvatarFallback></Avatar>
                         <div>
                           <p className="text-sm font-medium">{name}</p>
-                          <p className="text-xs text-muted-foreground">{name.toLowerCase().replace(' ', '.')}@company.com</p>
+                          <p className="text-xs text-text-dim">{name.toLowerCase().replace(' ', '.')}@company.com</p>
                         </div>
                       </div>
                       <Badge variant="secondary" size="sm">{['Admin', 'Editor', 'Viewer'][i]}</Badge>
@@ -470,7 +470,7 @@ function DemoComponents() {
           <Card>
             <CardContent className="pt-6 space-y-6">
               <div>
-                <Label className="mb-2 block text-xs text-muted-foreground uppercase tracking-wide">Lucide Icons (sample)</Label>
+                <Label className="mb-2 block text-xs text-text-dim uppercase tracking-wide">Lucide Icons (sample)</Label>
                 <div className="flex flex-wrap gap-4">
                   {[
                     { icon: Search, name: 'Search' },
@@ -506,40 +506,40 @@ function DemoComponents() {
                       <div className="flex items-center justify-center h-10 w-10 rounded-md border border-border">
                         <Icon className="h-5 w-5" />
                       </div>
-                      <span className="text-[10px] text-muted-foreground truncate w-full text-center">{name}</span>
+                      <span className="text-[10px] text-text-dim truncate w-full text-center">{name}</span>
                     </div>
                   ))}
                 </div>
               </div>
               <Separator />
               <div>
-                <Label className="mb-2 block text-xs text-muted-foreground uppercase tracking-wide">Icon Sizes</Label>
+                <Label className="mb-2 block text-xs text-text-dim uppercase tracking-wide">Icon Sizes</Label>
                 <div className="flex items-end gap-6">
                   <div className="flex flex-col items-center gap-1">
                     <Zap className="h-3 w-3" />
-                    <span className="text-[10px] text-muted-foreground">12px</span>
+                    <span className="text-[10px] text-text-dim">12px</span>
                   </div>
                   <div className="flex flex-col items-center gap-1">
                     <Zap className="h-4 w-4" />
-                    <span className="text-[10px] text-muted-foreground">16px</span>
+                    <span className="text-[10px] text-text-dim">16px</span>
                   </div>
                   <div className="flex flex-col items-center gap-1">
                     <Zap className="h-5 w-5" />
-                    <span className="text-[10px] text-muted-foreground">20px</span>
+                    <span className="text-[10px] text-text-dim">20px</span>
                   </div>
                   <div className="flex flex-col items-center gap-1">
                     <Zap className="h-6 w-6" />
-                    <span className="text-[10px] text-muted-foreground">24px</span>
+                    <span className="text-[10px] text-text-dim">24px</span>
                   </div>
                   <div className="flex flex-col items-center gap-1">
                     <Zap className="h-8 w-8" />
-                    <span className="text-[10px] text-muted-foreground">32px</span>
+                    <span className="text-[10px] text-text-dim">32px</span>
                   </div>
                 </div>
               </div>
               <Separator />
               <div>
-                <Label className="mb-2 block text-xs text-muted-foreground uppercase tracking-wide">Icons with color</Label>
+                <Label className="mb-2 block text-xs text-text-dim uppercase tracking-wide">Icons with color</Label>
                 <div className="flex items-center gap-4">
                   <Heart className="h-6 w-6 text-destructive" />
                   <Star className="h-6 w-6 text-warning" />
@@ -550,21 +550,21 @@ function DemoComponents() {
               </div>
               <Separator />
               <div>
-                <Label className="mb-2 block text-xs text-muted-foreground uppercase tracking-wide">Product Icons</Label>
+                <Label className="mb-2 block text-xs text-text-dim uppercase tracking-wide">Product Icons</Label>
                 <div className="flex flex-wrap gap-4">
                   {['siem', 'ai-firewall', 'ndr', 'soar', 'asm', 'bas', 'nac', 'vm', 'tip', 'redops'].map((name) => (
                     <div key={name} className="flex flex-col items-center gap-1 w-16">
                       <div className="flex items-center justify-center h-10 w-10 rounded-md border border-border">
                         <ProductIcon name={name} size="md" />
                       </div>
-                      <span className="text-[10px] text-muted-foreground truncate w-full text-center">{name}</span>
+                      <span className="text-[10px] text-text-dim truncate w-full text-center">{name}</span>
                     </div>
                   ))}
                 </div>
               </div>
               <Separator />
               <div>
-                <Label className="mb-2 block text-xs text-muted-foreground uppercase tracking-wide">Icons in context</Label>
+                <Label className="mb-2 block text-xs text-text-dim uppercase tracking-wide">Icons in context</Label>
                 <div className="space-y-3">
                   <Alert variant="info">
                     <Info className="h-4 w-4" />
@@ -572,7 +572,7 @@ function DemoComponents() {
                     <AlertDescription>Alerts can use any Lucide icon as a prefix.</AlertDescription>
                   </Alert>
                   <div className="flex items-center gap-2 border border-border rounded-md px-3 py-2">
-                    <Search className="h-4 w-4 text-muted-foreground" />
+                    <Search className="h-4 w-4 text-text-dim" />
                     <Input placeholder="Search with icon..." style={{ border: 'none', padding: 0, boxShadow: 'none', height: 'auto' }} />
                   </div>
                 </div>
@@ -588,7 +588,7 @@ function DemoComponents() {
           <Card>
             <CardContent className="pt-6 space-y-6">
               <div>
-                <Label className="mb-2 block text-xs text-muted-foreground uppercase tracking-wide">Basic</Label>
+                <Label className="mb-2 block text-xs text-text-dim uppercase tracking-wide">Basic</Label>
                 <div className="flex flex-wrap gap-3">
                   <Tooltip title="This is a tooltip">
                     <Button variant="outline">Hover me</Button>
@@ -603,7 +603,7 @@ function DemoComponents() {
               </div>
               <Separator />
               <div>
-                <Label className="mb-2 block text-xs text-muted-foreground uppercase tracking-wide">Placements</Label>
+                <Label className="mb-2 block text-xs text-text-dim uppercase tracking-wide">Placements</Label>
                 <div className="grid grid-cols-3 gap-3 mx-auto py-4">
                   <Tooltip title="topLeft" placement="topLeft"><Button variant="dashed" size="sm" className="w-full">TL</Button></Tooltip>
                   <Tooltip title="top" placement="top"><Button variant="dashed" size="sm" className="w-full">Top</Button></Tooltip>
@@ -618,7 +618,7 @@ function DemoComponents() {
               </div>
               <Separator />
               <div>
-                <Label className="mb-2 block text-xs text-muted-foreground uppercase tracking-wide">Custom Colors</Label>
+                <Label className="mb-2 block text-xs text-text-dim uppercase tracking-wide">Custom Colors</Label>
                 <div className="flex flex-wrap gap-3">
                   <Tooltip title="Primary" color="var(--invin-color-primary, #3b82f6)"><Button variant="outline">Blue</Button></Tooltip>
                   <Tooltip title="Success" color="var(--invin-color-success, #16a34a)"><Button variant="outline">Green</Button></Tooltip>
@@ -629,7 +629,7 @@ function DemoComponents() {
               </div>
               <Separator />
               <div>
-                <Label className="mb-2 block text-xs text-muted-foreground uppercase tracking-wide">Trigger Modes</Label>
+                <Label className="mb-2 block text-xs text-text-dim uppercase tracking-wide">Trigger Modes</Label>
                 <div className="flex flex-wrap gap-3">
                   <Tooltip title="Hover triggered (default)" trigger="hover"><Button variant="outline">Hover</Button></Tooltip>
                   <Tooltip title="Click triggered!" trigger="click"><Button variant="outline">Click me</Button></Tooltip>
@@ -638,7 +638,7 @@ function DemoComponents() {
               </div>
               <Separator />
               <div>
-                <Label className="mb-2 block text-xs text-muted-foreground uppercase tracking-wide">No Arrow</Label>
+                <Label className="mb-2 block text-xs text-text-dim uppercase tracking-wide">No Arrow</Label>
                 <div className="flex flex-wrap gap-3">
                   <Tooltip title="No arrow tooltip" arrow={false}><Button variant="ghost">No arrow</Button></Tooltip>
                   <Tooltip title="With arrow (default)"><Button variant="ghost">With arrow</Button></Tooltip>
@@ -646,8 +646,8 @@ function DemoComponents() {
               </div>
               <Separator />
               <div>
-                <Label className="mb-2 block text-xs text-muted-foreground uppercase tracking-wide">Auto-Shift (edge detection)</Label>
-                <p className="text-xs text-muted-foreground mb-3">Buttons at edges — tooltip auto-repositions to stay in viewport.</p>
+                <Label className="mb-2 block text-xs text-text-dim uppercase tracking-wide">Auto-Shift (edge detection)</Label>
+                <p className="text-xs text-text-dim mb-3">Buttons at edges — tooltip auto-repositions to stay in viewport.</p>
                 <div className="flex justify-between">
                   <Tooltip title="I auto-shift from the left edge"><Button variant="outline" size="sm">Left Edge</Button></Tooltip>
                   <Tooltip title="I auto-shift from the right edge"><Button variant="outline" size="sm">Right Edge</Button></Tooltip>
@@ -655,7 +655,7 @@ function DemoComponents() {
               </div>
               <Separator />
               <div>
-                <Label className="mb-2 block text-xs text-muted-foreground uppercase tracking-wide">Long Content</Label>
+                <Label className="mb-2 block text-xs text-text-dim uppercase tracking-wide">Long Content</Label>
                 <div className="flex flex-wrap gap-3">
                   <Tooltip title="This is a longer tooltip message that demonstrates how the text wraps within the max-width container. It stays readable and positioned correctly.">
                     <Button variant="outline">Long text tooltip</Button>

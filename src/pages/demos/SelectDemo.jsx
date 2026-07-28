@@ -1,17 +1,50 @@
-import { ComponentPage, PlaygroundSection } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem, SelectGroup, SelectLabel, SelectSeparator } from 'invin-uix/ui/select';
 import { Label } from 'invin-uix/ui/label';
+import { Button } from 'invin-uix/ui/button';
+import { Input } from 'invin-uix/ui/input';
+import { Card, CardContent } from 'invin-uix/ui/card';
+import { Separator } from 'invin-uix/ui/separator';
 
 export default function SelectDemo() {
   return (
     <ComponentPage
       name="Select"
-      description="A dropdown select built on Radix UI with keyboard navigation, size variants, and grouped options."
-      importCode={`import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from 'invin-uix/ui/select';`}
+      description="Dropdown select built on Radix UI. Full keyboard navigation, portal rendering, grouped options, size variants matching Input/Button, and built-in error handling."
+      importCode={`import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from 'invin-uix/ui/select';
+// Optional: SelectGroup, SelectLabel, SelectSeparator`}
     >
+
+      {/* ─── Props Table ────────────────────────────────────────── */}
+      <div className="space-y-4">
+        <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)]">SelectTrigger</p>
+        <PropsTable
+          props={[
+            { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Height — sm (28px), md (38px), lg (44px). Matches Input/Button.' },
+            { name: 'error', type: 'string', default: '—', description: 'Error message — renders below trigger and sets aria-invalid' },
+            { name: 'placeholder', type: '—', default: '—', description: 'Use <SelectValue placeholder="..." /> inside trigger' },
+            { name: 'disabled', type: 'boolean', default: 'false', description: 'Set on <Select disabled> root' },
+          ]}
+        />
+      </div>
+      <div className="space-y-4">
+        <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)]">Select (Root)</p>
+        <PropsTable
+          props={[
+            { name: 'value', type: 'string', default: '—', description: 'Controlled value' },
+            { name: 'defaultValue', type: 'string', default: '—', description: 'Uncontrolled default' },
+            { name: 'onValueChange', type: '(value: string) => void', default: '—', description: 'Change callback' },
+            { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the entire select' },
+          ]}
+        />
+      </div>
+
+      <Separator variant="bold" />
+
+      {/* ─── Basic ──────────────────────────────────────────────── */}
       <PlaygroundSection
-        title="Basic Usage"
-        description="Simple select with placeholder and options."
+        title="Basic"
+        description="Simple select with placeholder and items."
         code={`<Select>
   <SelectTrigger>
     <SelectValue placeholder="Select a fruit" />
@@ -39,57 +72,61 @@ export default function SelectDemo() {
         </div>
       </PlaygroundSection>
 
+      {/* ─── Sizes ──────────────────────────────────────────────── */}
       <PlaygroundSection
         title="Sizes"
-        description="Three trigger sizes: sm, md (default), lg."
+        description="Matches Input and Button heights exactly. sm=28px, md=38px, lg=44px."
         code={`<SelectTrigger size="sm">...</SelectTrigger>
 <SelectTrigger size="md">...</SelectTrigger>
 <SelectTrigger size="lg">...</SelectTrigger>`}
       >
-        <div className="flex flex-col gap-3 w-full max-w-xs">
+        <div className="space-y-3 w-full max-w-xs">
           <Select>
-            <SelectTrigger size="sm"><SelectValue placeholder="Small" /></SelectTrigger>
+            <SelectTrigger size="sm"><SelectValue placeholder="Small (28px)" /></SelectTrigger>
             <SelectContent><SelectItem value="a">Option A</SelectItem><SelectItem value="b">Option B</SelectItem></SelectContent>
           </Select>
           <Select>
-            <SelectTrigger size="md"><SelectValue placeholder="Medium (default)" /></SelectTrigger>
+            <SelectTrigger size="md"><SelectValue placeholder="Medium (38px) — default" /></SelectTrigger>
             <SelectContent><SelectItem value="a">Option A</SelectItem><SelectItem value="b">Option B</SelectItem></SelectContent>
           </Select>
           <Select>
-            <SelectTrigger size="lg"><SelectValue placeholder="Large" /></SelectTrigger>
+            <SelectTrigger size="lg"><SelectValue placeholder="Large (44px)" /></SelectTrigger>
             <SelectContent><SelectItem value="a">Option A</SelectItem><SelectItem value="b">Option B</SelectItem></SelectContent>
           </Select>
         </div>
       </PlaygroundSection>
 
+      {/* ─── Height alignment demo ──────────────────────────────── */}
       <PlaygroundSection
-        title="With Label"
-        description="Paired with Label for form patterns."
-        code={`<Label htmlFor="country">Country</Label>
-<Select>
-  <SelectTrigger id="country">
-    <SelectValue placeholder="Choose country" />
-  </SelectTrigger>
-  ...
-</Select>`}
+        title="Aligned with Input & Button"
+        description="Select, Input, and Button at the same size will align perfectly in a row."
+        code={`<div className="flex gap-2">
+  <Select>
+    <SelectTrigger size="md"><SelectValue placeholder="Role" /></SelectTrigger>
+    <SelectContent>...</SelectContent>
+  </Select>
+  <Input placeholder="Name" />
+  <Button>Submit</Button>
+</div>`}
       >
-        <div className="space-y-2 w-full max-w-xs">
-          <Label htmlFor="country">Country</Label>
+        <div className="flex gap-2 w-full max-w-md items-start">
           <Select>
-            <SelectTrigger id="country"><SelectValue placeholder="Choose country" /></SelectTrigger>
+            <SelectTrigger><SelectValue placeholder="Role" /></SelectTrigger>
             <SelectContent>
-              <SelectItem value="us">United States</SelectItem>
-              <SelectItem value="uk">United Kingdom</SelectItem>
-              <SelectItem value="in">India</SelectItem>
-              <SelectItem value="de">Germany</SelectItem>
+              <SelectItem value="admin">Admin</SelectItem>
+              <SelectItem value="editor">Editor</SelectItem>
+              <SelectItem value="viewer">Viewer</SelectItem>
             </SelectContent>
           </Select>
+          <Input placeholder="Name" />
+          <Button>Submit</Button>
         </div>
       </PlaygroundSection>
 
+      {/* ─── Grouped ────────────────────────────────────────────── */}
       <PlaygroundSection
-        title="Grouped Options"
-        description="Use SelectGroup and SelectLabel for categorized options."
+        title="Grouped options"
+        description="Use SelectGroup + SelectLabel for categorized items. SelectSeparator between groups."
         code={`<SelectContent>
   <SelectGroup>
     <SelectLabel>Fruits</SelectLabel>
@@ -126,12 +163,13 @@ export default function SelectDemo() {
         </div>
       </PlaygroundSection>
 
+      {/* ─── Disabled ───────────────────────────────────────────── */}
       <PlaygroundSection
         title="Disabled"
-        description="Disabled select prevents interaction."
+        description="Set disabled on the Select root to disable the entire component."
         code={`<Select disabled>
   <SelectTrigger><SelectValue placeholder="Disabled" /></SelectTrigger>
-  ...
+  <SelectContent>...</SelectContent>
 </Select>`}
       >
         <div className="w-full max-w-xs">
@@ -141,6 +179,174 @@ export default function SelectDemo() {
           </Select>
         </div>
       </PlaygroundSection>
+
+      {/* ─── Error State ────────────────────────────────────────── */}
+      <PlaygroundSection
+        title="Error state"
+        description="Pass error='message' to SelectTrigger. Renders red border + error text below."
+        code={`<Select>
+  <SelectTrigger error="Please select a country.">
+    <SelectValue placeholder="Choose country" />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectItem value="us">United States</SelectItem>
+    <SelectItem value="uk">United Kingdom</SelectItem>
+  </SelectContent>
+</Select>`}
+      >
+        <div className="space-y-1.5 w-full max-w-xs">
+          <Label>Country</Label>
+          <Select>
+            <SelectTrigger error="Please select a country.">
+              <SelectValue placeholder="Choose country" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="us">United States</SelectItem>
+              <SelectItem value="uk">United Kingdom</SelectItem>
+              <SelectItem value="in">India</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+      </PlaygroundSection>
+
+      <Separator variant="bold" />
+
+      {/* ─── Use Cases ──────────────────────────────────────────── */}
+      <div className="space-y-3">
+        <h3 className="text-[length:var(--invin-text-sub-heading)] font-[700]">Use cases</h3>
+        <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">Common patterns in real forms.</p>
+      </div>
+
+      <PlaygroundSection
+        title="Form with mixed controls"
+        description="Select alongside inputs in a registration form."
+        code={`<Input placeholder="Full name" />
+<Input type="email" placeholder="Email" />
+<Select>
+  <SelectTrigger><SelectValue placeholder="Role" /></SelectTrigger>
+  <SelectContent>...</SelectContent>
+</Select>
+<Button fullWidth>Create Account</Button>`}
+      >
+        <Card className="w-full max-w-sm">
+          <CardContent className="py-4">
+            <div className="space-y-4">
+              <div className="space-y-1.5">
+                <Label htmlFor="reg-name">Full name</Label>
+                <Input id="reg-name" placeholder="John Doe" />
+              </div>
+              <div className="space-y-1.5">
+                <Label htmlFor="reg-email">Email</Label>
+                <Input id="reg-email" type="email" placeholder="john@example.com" />
+              </div>
+              <div className="space-y-1.5">
+                <Label>Role</Label>
+                <Select>
+                  <SelectTrigger><SelectValue placeholder="Select role" /></SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="admin">Admin</SelectItem>
+                    <SelectItem value="editor">Editor</SelectItem>
+                    <SelectItem value="viewer">Viewer</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <Button fullWidth>Create Account</Button>
+            </div>
+          </CardContent>
+        </Card>
+      </PlaygroundSection>
+
+      <PlaygroundSection
+        title="Filter row"
+        description="Multiple selects in a horizontal filter bar."
+        code={`<div className="flex gap-2">
+  <Select><SelectTrigger size="sm"><SelectValue placeholder="Status" /></SelectTrigger>...</Select>
+  <Select><SelectTrigger size="sm"><SelectValue placeholder="Priority" /></SelectTrigger>...</Select>
+  <Select><SelectTrigger size="sm"><SelectValue placeholder="Assignee" /></SelectTrigger>...</Select>
+</div>`}
+      >
+        <div className="flex flex-wrap gap-2">
+          <Select>
+            <SelectTrigger size="sm"><SelectValue placeholder="Status" /></SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All</SelectItem>
+              <SelectItem value="open">Open</SelectItem>
+              <SelectItem value="closed">Closed</SelectItem>
+            </SelectContent>
+          </Select>
+          <Select>
+            <SelectTrigger size="sm"><SelectValue placeholder="Priority" /></SelectTrigger>
+            <SelectContent>
+              <SelectItem value="high">High</SelectItem>
+              <SelectItem value="medium">Medium</SelectItem>
+              <SelectItem value="low">Low</SelectItem>
+            </SelectContent>
+          </Select>
+          <Select>
+            <SelectTrigger size="sm"><SelectValue placeholder="Assignee" /></SelectTrigger>
+            <SelectContent>
+              <SelectItem value="alice">Alice</SelectItem>
+              <SelectItem value="bob">Bob</SelectItem>
+              <SelectItem value="carol">Carol</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+      </PlaygroundSection>
+
+      <PlaygroundSection
+        title="Settings panel"
+        description="Select for preference options in a settings card."
+        code={`<Label>Theme</Label>
+<Select defaultValue="dark">
+  <SelectTrigger><SelectValue /></SelectTrigger>
+  <SelectContent>
+    <SelectItem value="light">Light</SelectItem>
+    <SelectItem value="dark">Dark</SelectItem>
+    <SelectItem value="system">System</SelectItem>
+  </SelectContent>
+</Select>`}
+      >
+        <Card className="w-full max-w-sm">
+          <CardContent className="py-4 space-y-4">
+            <div className="space-y-1.5">
+              <Label>Theme</Label>
+              <Select defaultValue="dark">
+                <SelectTrigger><SelectValue /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="light">Light</SelectItem>
+                  <SelectItem value="dark">Dark</SelectItem>
+                  <SelectItem value="system">System</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="space-y-1.5">
+              <Label>Language</Label>
+              <Select defaultValue="en">
+                <SelectTrigger><SelectValue /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="en">English</SelectItem>
+                  <SelectItem value="es">Spanish</SelectItem>
+                  <SelectItem value="fr">French</SelectItem>
+                  <SelectItem value="de">German</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="space-y-1.5">
+              <Label>Timezone</Label>
+              <Select defaultValue="utc">
+                <SelectTrigger><SelectValue /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="utc">UTC</SelectItem>
+                  <SelectItem value="ist">IST (India)</SelectItem>
+                  <SelectItem value="est">EST (US East)</SelectItem>
+                  <SelectItem value="pst">PST (US West)</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </CardContent>
+        </Card>
+      </PlaygroundSection>
+
     </ComponentPage>
   );
 }
