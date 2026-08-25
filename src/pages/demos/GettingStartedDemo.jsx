@@ -1,7 +1,6 @@
 import { Card, CardContent } from 'invin-uix/ui/card';
 import { Badge } from 'invin-uix/ui/badge';
 import { Separator } from 'invin-uix/ui/separator';
-import { Button } from 'invin-uix/ui/button';
 import { CheckCircle2, Package, Palette, Code, Layers, Sparkles } from 'invin-uix/ui/icons';
 
 function Step({ num, title, children }) {
@@ -41,7 +40,7 @@ export default function GettingStartedDemo() {
       <div>
         <div className="flex items-center gap-2 mb-3">
           <Badge variant="info" size="sm">Guide</Badge>
-          <Badge variant="outline" size="sm">v0.1</Badge>
+          <Badge variant="outline" size="sm">v1.0</Badge>
         </div>
         <h2 className="text-[length:var(--invin-text-page-title)] font-[700] tracking-[-0.02em]">Getting Started</h2>
         <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)] mt-1 max-w-2xl leading-relaxed">
@@ -59,7 +58,7 @@ export default function GettingStartedDemo() {
             { label: 'Node.js', value: '18+', desc: 'LTS recommended' },
             { label: 'React', value: '18 or 19', desc: 'With react-dom' },
             { label: 'Tailwind CSS', value: 'v4', desc: '@tailwindcss/vite plugin' },
-            { label: 'Package Manager', value: 'pnpm / npm', desc: 'pnpm preferred' },
+            { label: 'Package Manager', value: 'npm / pnpm', desc: 'npm or pnpm' },
           ].map(r => (
             <Card key={r.label}>
               <CardContent className="py-3">
@@ -85,10 +84,14 @@ export default function GettingStartedDemo() {
 cd my-app`} />
         </Step>
 
-        <Step num="2" title="Install Tailwind CSS v4 with Vite plugin">
-          <CodeBlock code={`pnpm add tailwindcss @tailwindcss/vite`} />
-          <p className="text-[length:var(--invin-text-label)] text-[var(--invin-text-dim)] mt-2">
-            Add the plugin to <code className="text-[var(--invin-accent)] bg-[var(--invin-surface-hover)] px-1 py-0.5 rounded text-[11px]">vite.config.js</code>:
+        <Step num="2" title="Install dependencies">
+          <CodeBlock code={`npm install invin-uix
+npm install -D tailwindcss @tailwindcss/vite`} />
+        </Step>
+
+        <Step num="3" title="Configure Vite">
+          <p className="text-[length:var(--invin-text-label)] text-[var(--invin-text-dim)] mb-2">
+            Edit <code className="text-[var(--invin-accent)] bg-[var(--invin-surface-hover)] px-1 py-0.5 rounded text-[11px]">vite.config.js</code>:
           </p>
           <CodeBlock title="vite.config.js" code={`import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
@@ -99,14 +102,10 @@ export default defineConfig({
 })`} />
         </Step>
 
-        <Step num="3" title="Install invin-uix and fonts">
-          <CodeBlock code={`pnpm add invin-uix @fontsource-variable/inter @fontsource/jetbrains-mono`} />
-          <p className="text-[length:var(--invin-text-label)] text-[var(--invin-text-dim)] mt-2">
-            The library ships design tokens, Tailwind preset, and 43+ React components.
+        <Step num="4" title="Create Tailwind config">
+          <p className="text-[length:var(--invin-text-label)] text-[var(--invin-text-dim)] mb-2">
+            Create <code className="text-[var(--invin-accent)] bg-[var(--invin-surface-hover)] px-1 py-0.5 rounded text-[11px]">tailwind.config.js</code> in your project root:
           </p>
-        </Step>
-
-        <Step num="4" title="Configure Tailwind to use the library preset">
           <CodeBlock title="tailwind.config.js" code={`import invinPreset from 'invin-uix/preset';
 
 export default {
@@ -119,59 +118,73 @@ export default {
 };`} />
         </Step>
 
-        <Step num="5" title="Set up your entry CSS">
+        <Step num="5" title="Setup CSS">
+          <p className="text-[length:var(--invin-text-label)] text-[var(--invin-text-dim)] mb-2">
+            Replace <code className="text-[var(--invin-accent)] bg-[var(--invin-surface-hover)] px-1 py-0.5 rounded text-[11px]">src/index.css</code> with:
+          </p>
           <CodeBlock title="src/index.css" code={`@import "tailwindcss";
+@import "invin-uix/tokens.css";
 @config "../tailwind.config.js";
+@source "../node_modules/invin-uix/dist";
 
-:root {
-  font-family: var(--invin-font-sans);
-  font-size: 13.5px;
-  line-height: 1.5;
-  color-scheme: light dark;
+/* Base styles - REQUIRED for theming to work */
+html, body, #root {
+  min-height: 100vh;
+  background-color: var(--invin-bg);
   color: var(--invin-text);
-  background: var(--invin-bg);
-  -webkit-font-smoothing: antialiased;
+  font-family: var(--invin-font-sans), system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
 }`} />
         </Step>
 
-        <Step num="6" title="Import tokens and fonts in your entry file">
-          <CodeBlock title="src/main.jsx" code={`import '@fontsource-variable/inter';
-import '@fontsource/jetbrains-mono';
-import './index.css';
-import 'invin-uix/tokens.css';
+        <Step num="6" title="Set theme">
+          <p className="text-[length:var(--invin-text-label)] text-[var(--invin-text-dim)] mb-2">
+            In <code className="text-[var(--invin-accent)] bg-[var(--invin-surface-hover)] px-1 py-0.5 rounded text-[11px]">src/main.jsx</code>, set the theme before rendering:
+          </p>
+          <CodeBlock title="src/main.jsx" code={`import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App.jsx'
+import './index.css'
 
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import App from './App.jsx';
+// Set theme and accent color
+document.documentElement.setAttribute('data-theme', 'dark')
+document.documentElement.setAttribute('data-accent', 'blue')
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
     <App />
-  </StrictMode>
-);`} />
+  </React.StrictMode>,
+)`} />
         </Step>
 
-        <Step num="7" title="Use your first component">
-          <CodeBlock title="src/App.jsx" code={`import { Button } from 'invin-uix/ui/button';
-import { Card, CardContent } from 'invin-uix/ui/card';
+        <Step num="7" title="Use components">
+          <CodeBlock title="src/App.jsx" code={`import { Button } from 'invin-uix/ui/button'
+import { Card, CardHeader, CardTitle, CardContent } from 'invin-uix/ui/card'
 
-export default function App() {
+function App() {
   return (
-    <div className="min-h-screen flex items-center justify-center p-8">
-      <Card>
+    <div style={{ padding: '40px' }}>
+      <Card style={{ maxWidth: '400px' }}>
+        <CardHeader>
+          <CardTitle>Welcome to invin-uix</CardTitle>
+        </CardHeader>
         <CardContent>
-          <h1 className="text-[length:var(--invin-text-sub-heading)] font-[700]">
-            Hello, Invin UI
-          </h1>
-          <p className="text-[var(--invin-text-dim)] mt-1">
-            Your library is ready.
-          </p>
-          <Button className="mt-4">Get Started</Button>
+          <Button variant="primary">Get Started</Button>
+          <Button variant="outline" style={{ marginLeft: '8px' }}>Learn More</Button>
         </CardContent>
       </Card>
     </div>
-  );
-}`} />
+  )
+}
+
+export default App`} />
+        </Step>
+
+        <Step num="8" title="Run">
+          <CodeBlock code={`npm run dev`} />
         </Step>
       </section>
 
@@ -183,14 +196,18 @@ export default function App() {
         <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)] leading-relaxed">
           The library supports <strong className="text-[var(--invin-text)]">dark/light themes</strong> via <code className="text-[var(--invin-accent)] bg-[var(--invin-surface-hover)] px-1 py-0.5 rounded text-[11px]">html[data-theme]</code> and <strong className="text-[var(--invin-text)]">5 accent colours</strong> via <code className="text-[var(--invin-accent)] bg-[var(--invin-surface-hover)] px-1 py-0.5 rounded text-[11px]">html[data-accent]</code>.
         </p>
-        <CodeBlock title="Theme & accent switching" code={`// Dark mode
-document.documentElement.setAttribute('data-theme', 'dark');
+        <CodeBlock title="Theme & accent switching" code={`// Dark mode (default)
+document.documentElement.setAttribute('data-theme', 'dark')
 
 // Light mode
-document.documentElement.setAttribute('data-theme', 'light');
+document.documentElement.setAttribute('data-theme', 'light')
 
-// Accent colour (blue | crimson | violet | pink | amber)
-document.documentElement.setAttribute('data-accent', 'crimson');`} />
+// Accent colours: blue (default) | crimson | violet | pink | amber
+document.documentElement.setAttribute('data-accent', 'blue')
+document.documentElement.setAttribute('data-accent', 'crimson')
+document.documentElement.setAttribute('data-accent', 'violet')
+document.documentElement.setAttribute('data-accent', 'pink')
+document.documentElement.setAttribute('data-accent', 'amber')`} />
       </section>
 
       <Separator />
@@ -202,24 +219,24 @@ document.documentElement.setAttribute('data-accent', 'crimson');`} />
           Every component is available under its own path for optimal tree-shaking:
         </p>
         <CodeBlock code={`// Components
-import { Button } from 'invin-uix/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from 'invin-uix/ui/card';
-import { Badge } from 'invin-uix/ui/badge';
-import { Dialog, DialogTrigger, DialogContent } from 'invin-uix/ui/dialog';
+import { Button } from 'invin-uix/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from 'invin-uix/ui/card'
+import { Badge } from 'invin-uix/ui/badge'
+import { Dialog, DialogTrigger, DialogContent } from 'invin-uix/ui/dialog'
+import { Input } from 'invin-uix/ui/input'
+import { Select, SelectTrigger, SelectContent, SelectItem } from 'invin-uix/ui/select'
 
-// Icons (all lucide-react icons re-exported)
-import { Search, Bell, Settings } from 'invin-uix/ui/icons';
+// Icons (all lucide-react icons re-exported + custom product icons)
+import { Search, Bell, Settings } from 'invin-uix/ui/icons'
+import { ProductIcon } from 'invin-uix/ui/icons'
 
 // Layout components
-import { Sidebar } from 'invin-uix/ui/sidebar';
-import { Topbar } from 'invin-uix/ui/topbar';
-import { Menu } from 'invin-uix/ui/menu';
-
-// Tokens CSS (import once in entry)
-import 'invin-uix/tokens.css';
+import { Sidebar } from 'invin-uix/ui/sidebar'
+import { Topbar } from 'invin-uix/ui/topbar'
+import { Menu } from 'invin-uix/ui/menu'
 
 // Tailwind preset (in tailwind.config.js)
-import invinPreset from 'invin-uix/preset';`} />
+import invinPreset from 'invin-uix/preset'`} />
       </section>
 
       <Separator />
@@ -229,7 +246,7 @@ import invinPreset from 'invin-uix/preset';`} />
         <h3 className="text-[length:var(--invin-text-sub-heading)] font-[700]">What's included</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {[
-            { icon: Layers, title: '43+ Components', desc: 'Button, Card, Dialog, Menu, Sidebar, Table, and more' },
+            { icon: Layers, title: '56+ Components', desc: 'Button, Card, Dialog, DataTable, Sidebar, and more' },
             { icon: Palette, title: 'Design Tokens', desc: 'Colours, typography, spacing, borders, motion' },
             { icon: Sparkles, title: '5 Accent Themes', desc: 'Blue, crimson, violet, pink, amber' },
             { icon: Code, title: 'Tailwind Preset', desc: 'Pre-mapped utilities from CSS variables' },
