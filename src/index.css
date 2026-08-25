@@ -1,30 +1,29 @@
 @import "tailwindcss";
+@import "invin-uix/tokens.css";
 @config "../tailwind.config.js";
-@source "../../Invin-ui/invin-uix/dist";
+@source "../node_modules/invin-uix/dist";
 
+/* ═══════════════════════════════════════════════════════════════════
+   BASE STYLES - Required for theming to work properly
+   ═══════════════════════════════════════════════════════════════════ */
 
-:root {
-  /* ── Typography (Inter + JetBrains Mono via @fontsource) ────── */
-  font-family: var(--invin-font-sans);
+html, body, #root {
+  min-height: 100vh;
+  background-color: var(--invin-bg);
+  color: var(--invin-text);
+  font-family: var(--invin-font-sans), system-ui, sans-serif;
   font-size: 13.5px;
   line-height: 1.5;
-  font-feature-settings: 'tnum';
-  font-variant-numeric: tabular-nums;
-
-  /* ── Color scheme ───────────────────────────────────────────── */
-  color-scheme: light dark;
-  color: var(--invin-text);
-  background: var(--invin-bg);
-
-  /* ── Rendering ──────────────────────────────────────────────── */
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   margin: 0;
+  font-feature-settings: 'tnum';
+  font-variant-numeric: tabular-nums;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 * {
