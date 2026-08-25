@@ -1,4 +1,5 @@
 import { useState, lazy, Suspense } from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from 'invin-uix/ui/button';
 import { Switch } from 'invin-uix/ui/switch';
 import { Badge } from 'invin-uix/ui/badge';
@@ -7,7 +8,7 @@ import { Spinner } from 'invin-uix/ui/spinner';
 import { Menu } from 'invin-uix/ui/menu';
 import { Topbar } from 'invin-uix/ui/topbar';
 import { Sidebar } from 'invin-uix/ui/sidebar';
-import { Sun, Moon } from 'invin-uix/ui/icons';
+import { Sun, Moon, Home } from 'invin-uix/ui/icons';
 import { Tooltip } from 'invin-uix/ui/tooltip';
 import { useTheme } from '../useTheme.jsx';
 
@@ -60,10 +61,34 @@ const PaginationDemo = lazy(() => import('./demos/PaginationDemo.jsx'));
 const CalendarDemo = lazy(() => import('./demos/CalendarDemo.jsx'));
 const DatePickerDemo = lazy(() => import('./demos/DatePickerDemo.jsx'));
 const ChartDemo = lazy(() => import('./demos/ChartDemo.jsx'));
+const LineChartDemo = lazy(() => import('./demos/charts/LineChartDemo.jsx'));
+const AreaChartDemo = lazy(() => import('./demos/charts/AreaChartDemo.jsx'));
+const BarChartDemo = lazy(() => import('./demos/charts/BarChartDemo.jsx'));
+const PieChartDemo = lazy(() => import('./demos/charts/PieChartDemo.jsx'));
+const RadarChartDemo = lazy(() => import('./demos/charts/RadarChartDemo.jsx'));
+const GaugeChartDemo = lazy(() => import('./demos/charts/GaugeChartDemo.jsx'));
+const SparklineDemo = lazy(() => import('./demos/charts/SparklineDemo.jsx'));
 
 // Tier 5: Layout / Utility
 const AspectRatioDemo = lazy(() => import('./demos/AspectRatioDemo.jsx'));
 const TopbarDemo = lazy(() => import('./demos/TopbarDemo.jsx'));
+const TourDemo = lazy(() => import('./demos/TourDemo.jsx'));
+const FlowBuilderDemo = lazy(() => import('./demos/FlowBuilderDemo.jsx'));
+
+// Tier 6: New components
+const StepperDemo = lazy(() => import('./demos/StepperDemo.jsx'));
+const TimelineDemo = lazy(() => import('./demos/TimelineDemo.jsx'));
+const CollapsibleDemo = lazy(() => import('./demos/CollapsibleDemo.jsx'));
+const AlertDialogDemo = lazy(() => import('./demos/AlertDialogDemo.jsx'));
+const ScrollAreaDemo = lazy(() => import('./demos/ScrollAreaDemo.jsx'));
+const SidebarDemo = lazy(() => import('./demos/SidebarDemo.jsx'));
+const KpiCardDemo = lazy(() => import('./demos/KpiCardDemo.jsx'));
+const DataTableDemo = lazy(() => import('./demos/DataTableDemo.jsx'));
+const FileUploadDemo = lazy(() => import('./demos/FileUploadDemo.jsx'));
+const ResizableDemo = lazy(() => import('./demos/ResizableDemo.jsx'));
+const ComboboxDemo = lazy(() => import('./demos/ComboboxDemo.jsx'));
+const CommandDemo = lazy(() => import('./demos/CommandDemo.jsx'));
+const TreeViewDemo = lazy(() => import('./demos/TreeViewDemo.jsx'));
 
 // ─── Component Registry ─────────────────────────────────────────────────────
 
@@ -92,6 +117,8 @@ const categories = [
       { key: 'spinner', label: 'Spinner', component: SpinnerDemo },
       { key: 'icons', label: 'Icons', component: IconsDemo },
       { key: 'typography', label: 'Typography', component: TypographyDemo },
+      { key: 'collapsible', label: 'Collapsible', component: CollapsibleDemo },
+      { key: 'kpi-card', label: 'KPI Card', component: KpiCardDemo },
     ],
   },
   {
@@ -102,6 +129,7 @@ const categories = [
       { key: 'input', label: 'Input', component: InputDemo },
       { key: 'textarea', label: 'Textarea', component: TextareaDemo },
       { key: 'select', label: 'Select', component: SelectDemo },
+      { key: 'combobox', label: 'Combobox', component: ComboboxDemo },
       { key: 'checkbox', label: 'Checkbox', component: CheckboxDemo },
       { key: 'radio-group', label: 'Radio Group', component: RadioGroupDemo },
       { key: 'switch', label: 'Switch', component: SwitchDemo },
@@ -124,6 +152,8 @@ const categories = [
       { key: 'context-menu', label: 'Context Menu', component: ContextMenuDemo },
       { key: 'hover-card', label: 'Hover Card', component: HoverCardDemo },
       { key: 'toast', label: 'Toast', component: ToastDemo },
+      { key: 'alert-dialog', label: 'Alert Dialog', component: AlertDialogDemo },
+      { key: 'command', label: 'Command Palette', component: CommandDemo },
     ],
   },
   {
@@ -138,7 +168,21 @@ const categories = [
       { key: 'pagination', label: 'Pagination', component: PaginationDemo },
       { key: 'calendar', label: 'Calendar', component: CalendarDemo },
       { key: 'date-picker', label: 'Date Picker', component: DatePickerDemo },
-      { key: 'chart', label: 'Chart', component: ChartDemo },
+      { key: 'chart', label: 'Charts', children: [
+        { key: 'chart-overview', label: 'Overview', component: ChartDemo },
+        { key: 'chart-line', label: 'Line Chart', component: LineChartDemo },
+        { key: 'chart-area', label: 'Area Chart', component: AreaChartDemo },
+        { key: 'chart-bar', label: 'Bar Chart', component: BarChartDemo },
+        { key: 'chart-pie', label: 'Pie & Donut', component: PieChartDemo },
+        { key: 'chart-radar', label: 'Radar Chart', component: RadarChartDemo },
+        { key: 'chart-gauge', label: 'Gauge Chart', component: GaugeChartDemo },
+        { key: 'chart-sparkline', label: 'Sparkline', component: SparklineDemo },
+      ]},
+      { key: 'stepper', label: 'Stepper', component: StepperDemo },
+      { key: 'timeline', label: 'Timeline', component: TimelineDemo },
+      { key: 'data-table', label: 'Data Table', component: DataTableDemo },
+      { key: 'file-upload', label: 'File Upload', component: FileUploadDemo },
+      { key: 'tree-view', label: 'Tree View', component: TreeViewDemo },
     ],
   },
   {
@@ -147,20 +191,31 @@ const categories = [
     type: 'group',
     children: [
       { key: 'topbar', label: 'Topbar', component: TopbarDemo },
+      { key: 'sidebar-demo', label: 'Sidebar', component: SidebarDemo },
+      { key: 'scroll-area', label: 'Scroll Area', component: ScrollAreaDemo },
+      { key: 'resizable', label: 'Resizable Panels', component: ResizableDemo },
       { key: 'aspect-ratio', label: 'Aspect Ratio', component: AspectRatioDemo },
+      { key: 'tour', label: 'Tour', component: TourDemo },
+      { key: 'flow-builder', label: 'Flow Builder', component: FlowBuilderDemo },
     ],
   },
 ];
 
-// Flatten for lookup
-const allComponents = categories.flatMap(cat => cat.children);
+// Flatten for lookup (handles nested children like Charts sub-items)
+const allComponents = categories.flatMap(cat =>
+  cat.children.flatMap(c => c.children ? c.children : [c])
+);
 
 // Build menu items for the Menu component
 const menuItems = categories.map(cat => ({
   key: cat.key,
   label: cat.label,
   type: 'group',
-  children: cat.children.map(c => ({ key: c.key, label: c.label })),
+  children: cat.children.map(c =>
+    c.children
+      ? { key: c.key, label: c.label, children: c.children.map(sc => ({ key: sc.key, label: sc.label })) }
+      : { key: c.key, label: c.label }
+  ),
 }));
 
 // ─── Fallback ────────────────────────────────────────────────────────────────
@@ -268,9 +323,11 @@ export default function DemoLayout() {
                   {dark ? <Sun style={{ width: 16, height: 16 }} /> : <Moon style={{ width: 16, height: 16 }} />}
                 </Button>
               </Tooltip>
-              <Button variant="ghost" size="sm" onClick={() => window.__setPage?.('dashboard')}>
-                Dashboard
-              </Button>
+              <Link to="/">
+                <Button variant="ghost" size="sm">
+                  <Home style={{ width: 14, height: 14 }} /> Home
+                </Button>
+              </Link>
             </div>
           }
         />

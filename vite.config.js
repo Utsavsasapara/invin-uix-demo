@@ -4,4 +4,12 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  resolve: {
+    dedupe: ['react', 'react-dom'],
+  },
+  server: {
+    fs: {
+      allow: ['.', '../../Invin-ui/invin-ui-poc'],
+    },
+  },
 })
