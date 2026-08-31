@@ -1,6 +1,6 @@
 import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
-import { Avatar, AvatarImage, AvatarFallback } from 'invin-uix/ui/avatar';
-import { Badge } from 'invin-uix/ui/badge';
+import { Avatar, AvatarImage, AvatarFallback, AvatarGroup } from 'invin-uix/ui/avatar';
+import { NotificationBadge } from 'invin-uix/ui/badge';
 import { Card, CardContent } from 'invin-uix/ui/card';
 import { Separator } from 'invin-uix/ui/separator';
 
@@ -38,6 +38,16 @@ export default function AvatarDemo() {
           props={[
             { name: 'delayMs', type: 'number', default: '0', description: 'Delay before showing fallback (prevents flash if image loads fast)' },
             { name: 'children', type: 'ReactNode', default: '—', description: 'Initials, emoji, or icon to show' },
+          ]}
+        />
+      </div>
+      <div className="space-y-4">
+        <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)]">AvatarGroup</p>
+        <PropsTable
+          props={[
+            { name: 'size', type: "'xs' | 'sm' | 'md' | 'lg' | 'xl'", default: "'md'", description: 'Applied to all avatars and the +N chip' },
+            { name: 'max', type: 'number', default: '—', description: 'Show this many, collapse the rest into a +N chip' },
+            { name: 'children', type: 'ReactNode', default: '—', description: 'Avatar elements' },
           ]}
         />
       </div>
@@ -86,65 +96,65 @@ export default function AvatarDemo() {
         </div>
       </PlaygroundSection>
 
-      {/* ─── Stacked Group ──────────────────────────────────────── */}
+      {/* ─── AvatarGroup ────────────────────────────────────────── */}
       <PlaygroundSection
-        title="Stacked Group"
-        description="Overlapping avatars with negative margin. Add a border matching your background for clean separation."
-        code={`<div className="flex -space-x-3">
-  <Avatar size="sm" className="border-2 border-[var(--invin-bg)]">
-    <AvatarImage src="..." alt="User 1" /><AvatarFallback>U1</AvatarFallback>
-  </Avatar>
-  <Avatar size="sm" className="border-2 border-[var(--invin-bg)]">
-    <AvatarImage src="..." alt="User 2" /><AvatarFallback>U2</AvatarFallback>
-  </Avatar>
-  <Avatar size="sm" className="border-2 border-[var(--invin-bg)]">
-    <AvatarFallback>+5</AvatarFallback>
-  </Avatar>
-</div>`}
+        title="AvatarGroup (stacked)"
+        description="AvatarGroup overlaps its children and adds the background ring for you. Set max to collapse the rest into a +N chip."
+        code={`import { Avatar, AvatarImage, AvatarFallback, AvatarGroup } from 'invin-uix/ui/avatar';
+
+// Show all
+<AvatarGroup size="sm">
+  <Avatar><AvatarImage src="..." /><AvatarFallback>U1</AvatarFallback></Avatar>
+  <Avatar><AvatarImage src="..." /><AvatarFallback>U2</AvatarFallback></Avatar>
+  <Avatar><AvatarFallback>U3</AvatarFallback></Avatar>
+</AvatarGroup>
+
+// Cap at 3 → shows "+N"
+<AvatarGroup size="sm" max={3}>
+  {/* 7 avatars → shows 3 + "+4" */}
+</AvatarGroup>`}
       >
-        <div className="flex -space-x-3">
-          <Avatar size="sm" className="border-2 border-[var(--invin-bg)]"><AvatarImage src="https://i.pravatar.cc/100?u=s1" alt="User 1" /><AvatarFallback>U1</AvatarFallback></Avatar>
-          <Avatar size="sm" className="border-2 border-[var(--invin-bg)]"><AvatarImage src="https://i.pravatar.cc/100?u=s2" alt="User 2" /><AvatarFallback>U2</AvatarFallback></Avatar>
-          <Avatar size="sm" className="border-2 border-[var(--invin-bg)]"><AvatarImage src="https://i.pravatar.cc/100?u=s3" alt="User 3" /><AvatarFallback>U3</AvatarFallback></Avatar>
-          <Avatar size="sm" className="border-2 border-[var(--invin-bg)]"><AvatarImage src="https://i.pravatar.cc/100?u=s4" alt="User 4" /><AvatarFallback>U4</AvatarFallback></Avatar>
-          <Avatar size="sm" className="border-2 border-[var(--invin-bg)]"><AvatarFallback>+5</AvatarFallback></Avatar>
+        <div className="space-y-4">
+          <AvatarGroup size="sm">
+            <Avatar><AvatarImage src="https://i.pravatar.cc/100?u=s1" alt="User 1" /><AvatarFallback>U1</AvatarFallback></Avatar>
+            <Avatar><AvatarImage src="https://i.pravatar.cc/100?u=s2" alt="User 2" /><AvatarFallback>U2</AvatarFallback></Avatar>
+            <Avatar><AvatarImage src="https://i.pravatar.cc/100?u=s3" alt="User 3" /><AvatarFallback>U3</AvatarFallback></Avatar>
+          </AvatarGroup>
+          <AvatarGroup size="sm" max={3}>
+            {['s1','s2','s3','s4','s5','s6','s7'].map(u => (
+              <Avatar key={u}><AvatarImage src={`https://i.pravatar.cc/100?u=grp${u}`} alt={u} /><AvatarFallback>{u.toUpperCase()}</AvatarFallback></Avatar>
+            ))}
+          </AvatarGroup>
         </div>
       </PlaygroundSection>
 
-      {/* ─── With Badge (Status Dot) ────────────────────────────── */}
+      {/* ─── With Status Badge ──────────────────────────────────── */}
       <PlaygroundSection
         title="With Status Badge"
-        description="Wrap Avatar in Badge dot mode to show online/offline status."
-        code={`import { Badge } from 'invin-uix/ui/badge';
+        description="Wrap an Avatar in NotificationBadge dot mode to show online/offline status."
+        code={`import { NotificationBadge } from 'invin-uix/ui/badge';
 
-// Online
-<Badge dot color="#22c55e">
+<NotificationBadge dot color="var(--invin-ok)">
   <Avatar size="sm"><AvatarImage src="..." /><AvatarFallback>SC</AvatarFallback></Avatar>
-</Badge>
+</NotificationBadge>
 
-// Away
-<Badge dot color="#f59e0b">
-  <Avatar size="sm"><AvatarFallback>JR</AvatarFallback></Avatar>
-</Badge>
-
-// Offline
-<Badge dot color="#9ca3af">
+<NotificationBadge dot color="var(--invin-warn)">
   <Avatar size="sm"><AvatarFallback>LP</AvatarFallback></Avatar>
-</Badge>`}
+</NotificationBadge>`}
       >
         <div className="flex items-center gap-4">
-          <Badge dot color="#22c55e">
+          <NotificationBadge dot color="var(--invin-ok)">
             <Avatar size="sm"><AvatarImage src="https://i.pravatar.cc/100?u=st1" alt="Sarah" /><AvatarFallback>SC</AvatarFallback></Avatar>
-          </Badge>
-          <Badge dot color="#22c55e">
+          </NotificationBadge>
+          <NotificationBadge dot color="var(--invin-ok)">
             <Avatar><AvatarImage src="https://i.pravatar.cc/100?u=st2" alt="John" /><AvatarFallback>JR</AvatarFallback></Avatar>
-          </Badge>
-          <Badge dot color="#f59e0b">
+          </NotificationBadge>
+          <NotificationBadge dot color="var(--invin-warn)">
             <Avatar size="sm"><AvatarFallback>LP</AvatarFallback></Avatar>
-          </Badge>
-          <Badge dot color="#9ca3af">
+          </NotificationBadge>
+          <NotificationBadge dot color="var(--invin-text-faint)">
             <Avatar size="sm"><AvatarFallback>MC</AvatarFallback></Avatar>
-          </Badge>
+          </NotificationBadge>
         </div>
       </PlaygroundSection>
 
