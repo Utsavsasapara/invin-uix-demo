@@ -1,30 +1,28 @@
-import { useState } from 'react';
 import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
 import { Textarea } from 'invin-uix/ui/textarea';
+import { Input } from 'invin-uix/ui/input';
 import { Label } from 'invin-uix/ui/label';
 import { Button } from 'invin-uix/ui/button';
 import { Card, CardContent } from 'invin-uix/ui/card';
 import { Separator } from 'invin-uix/ui/separator';
 
 export default function TextareaDemo() {
-  const [charCount, setCharCount] = useState(0);
-  const maxChars = 200;
-
   return (
     <ComponentPage
       name="Textarea"
-      description="Multi-line text input with 3 sizes, vertical resize, focus ring, disabled state, and error validation via aria-invalid. Same design language as Input."
+      description="Multi-line text input with 3 sizes, vertical resize, focus ring, disabled state, error validation via aria-invalid, and a built-in character counter (showCount). Same design language as Input."
       importCode={`import { Textarea } from 'invin-uix/ui/textarea';`}
     >
 
       {/* ─── Props Table ────────────────────────────────────────── */}
       <PropsTable
         props={[
-          { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Min-height and padding preset (60px / 80px / 120px)' },
+          { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Size preset. Min-height + equal padding: sm 60px/8px, md 80px/12px, lg 120px/14px.' },
           { name: 'placeholder', type: 'string', default: '—', description: 'Placeholder text' },
           { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables textarea (50% opacity)' },
           { name: 'error', type: 'string', default: '—', description: 'Error message — renders below textarea and auto-sets aria-invalid' },
-          { name: 'maxLength', type: 'number', default: '—', description: 'Native character limit (browser enforces)' },
+          { name: 'showCount', type: 'boolean', default: 'false', description: 'Show a live character counter. With maxLength shows count/max and turns red at the limit.' },
+          { name: 'maxLength', type: 'number', default: '—', description: 'Native character limit (browser enforces); also drives the counter' },
           { name: 'rows', type: 'number', default: '—', description: 'Initial visible rows (overrides min-height)' },
           { name: 'className', type: 'string', default: '—', description: 'Additional Tailwind/CSS classes' },
         ]}
@@ -35,7 +33,7 @@ export default function TextareaDemo() {
       {/* ─── Sizes ──────────────────────────────────────────────── */}
       <PlaygroundSection
         title="Sizes"
-        description="sm (60px min-height), md (80px, default), lg (120px). All are vertically resizable."
+        description="Min-height and equal padding per size: sm (60px min-height, 8px padding), md (80px, 12px — default), lg (120px, 14px). All are vertically resizable."
         code={`<Textarea size="sm" placeholder="Small" />
 <Textarea size="md" placeholder="Medium (default)" />
 <Textarea size="lg" placeholder="Large" />`}
@@ -90,34 +88,22 @@ export default function TextareaDemo() {
       {/* ─── Character Count ────────────────────────────────────── */}
       <PlaygroundSection
         title="Character count"
-        description="Combine maxLength with state to show a live character counter."
-        code={`const [charCount, setCharCount] = useState(0);
-const maxChars = 200;
+        description="Pass showCount to render a live counter — no state wiring needed. With maxLength it shows count / max and turns red at the limit. Works controlled or uncontrolled."
+        code={`// With a limit — shows "count / 200" and turns red at the limit
+<Textarea showCount maxLength={200} placeholder="Write something..." />
 
-<div className="space-y-1.5">
-  <Label htmlFor="limited">Description</Label>
-  <Textarea
-    id="limited"
-    maxLength={maxChars}
-    placeholder="Write something..."
-    onChange={(e) => setCharCount(e.target.value.length)}
-  />
-  <p className="text-[length:var(--invin-text-label)] text-[var(--invin-text-faint)] text-right">
-    {charCount}/{maxChars}
-  </p>
-</div>`}
+// Without a limit — shows just the running count
+<Textarea showCount placeholder="Notes..." />`}
       >
-        <div className="space-y-1.5 w-full max-w-sm">
-          <Label htmlFor="limited">Description</Label>
-          <Textarea
-            id="limited"
-            maxLength={maxChars}
-            placeholder="Write something..."
-            onChange={(e) => setCharCount(e.target.value.length)}
-          />
-          <p className={`text-[length:var(--invin-text-label)] text-right ${charCount >= maxChars ? 'text-[var(--invin-error)]' : 'text-[var(--invin-text-faint)]'}`}>
-            {charCount}/{maxChars}
-          </p>
+        <div className="space-y-4 w-full max-w-sm">
+          <div className="space-y-1.5">
+            <Label htmlFor="limited">Description</Label>
+            <Textarea id="limited" showCount maxLength={200} placeholder="Write something..." />
+          </div>
+          <div className="space-y-1.5">
+            <Label htmlFor="notes">Notes</Label>
+            <Textarea id="notes" showCount placeholder="No limit — running count only..." />
+          </div>
         </div>
       </PlaygroundSection>
 
@@ -147,11 +133,7 @@ const maxChars = 200;
             <div className="space-y-4">
               <div className="space-y-1.5">
                 <Label htmlFor="fb-subject">Subject</Label>
-                <input
-                  id="fb-subject"
-                  className="flex w-full rounded-md border border-[var(--invin-border)] bg-[var(--invin-field-bg)] text-[var(--invin-text)] h-10 px-3 text-[length:var(--invin-text-body)] outline-none focus:border-[var(--invin-accent)] focus:ring-2 focus:ring-[var(--invin-accent-glow)]/20 transition-[border-color,box-shadow] duration-150 placeholder:text-[var(--invin-text-dim)]"
-                  placeholder="Bug report"
-                />
+                <Input id="fb-subject" placeholder="Bug report" />
               </div>
               <div className="space-y-1.5">
                 <Label htmlFor="fb-msg">Message</Label>
@@ -167,12 +149,16 @@ const maxChars = 200;
         title="Comment box"
         description="Compact textarea with submit button inline."
         code={`<div className="flex gap-2 items-end">
-  <Textarea size="sm" placeholder="Add a comment..." className="flex-1" />
+  <div className="flex-1">
+    <Textarea size="sm" placeholder="Add a comment..." />
+  </div>
   <Button size="sm">Post</Button>
 </div>`}
       >
         <div className="flex gap-2 items-end w-full max-w-md">
-          <Textarea size="sm" placeholder="Add a comment..." className="flex-1 !min-h-[40px]" />
+          <div className="flex-1">
+            <Textarea size="sm" placeholder="Add a comment..." />
+          </div>
           <Button size="sm">Post</Button>
         </div>
       </PlaygroundSection>
