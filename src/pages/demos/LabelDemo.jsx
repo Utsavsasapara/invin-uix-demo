@@ -19,6 +19,7 @@ export default function LabelDemo() {
       <PropsTable
         props={[
           { name: 'htmlFor', type: 'string', default: '—', description: 'ID of the form control this label is for' },
+          { name: 'required', type: 'boolean', default: 'false', description: 'Show a red required asterisk after the label text' },
           { name: 'className', type: 'string', default: '—', description: 'Additional Tailwind/CSS classes' },
           { name: 'children', type: 'ReactNode', default: '—', description: 'Label text content' },
         ]}
@@ -92,15 +93,13 @@ export default function LabelDemo() {
       {/* ─── Required Field ─────────────────────────────────────── */}
       <PlaygroundSection
         title="Required indicator"
-        description="Add a visual asterisk for required fields. The asterisk is purely visual — use the required attribute on the input for form validation."
-        code={`<Label htmlFor="name">
-  Full name <span className="text-[var(--invin-error)]">*</span>
-</Label>
+        description="Pass required to render a red asterisk. It's purely visual — also set the required attribute on the input for actual form validation."
+        code={`<Label htmlFor="name" required>Full name</Label>
 <Input id="name" required placeholder="John Doe" />`}
       >
         <div className="space-y-4 w-full max-w-sm">
           <div className="space-y-2">
-            <Label htmlFor="fullname">Full name <span className="text-[var(--invin-error)]">*</span></Label>
+            <Label htmlFor="fullname" required>Full name</Label>
             <Input id="fullname" required placeholder="John Doe" />
           </div>
           <div className="space-y-2">
