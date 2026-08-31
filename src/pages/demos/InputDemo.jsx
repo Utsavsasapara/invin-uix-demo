@@ -5,7 +5,7 @@ import { Label } from 'invin-uix/ui/label';
 import { Button } from 'invin-uix/ui/button';
 import { Card, CardContent } from 'invin-uix/ui/card';
 import { Separator } from 'invin-uix/ui/separator';
-import { Search, Mail, Lock, Eye, EyeOff, User } from 'invin-uix/ui/icons';
+import { Search, Mail, Lock, Eye, EyeOff, User, Check } from 'invin-uix/ui/icons';
 
 export default function InputDemo() {
   const [showPw, setShowPw] = useState(false);
@@ -13,7 +13,7 @@ export default function InputDemo() {
   return (
     <ComponentPage
       name="Input"
-      description="Form text input with 3 sizes, focus ring, disabled state, error validation styling (aria-invalid), and file input support. Uses --invin-field-bg for subtle background contrast."
+      description="Form text input with 3 sizes, built-in leftIcon/rightIcon slots, focus ring, disabled state, error validation styling (aria-invalid), and file input support."
       importCode={`import { Input } from 'invin-uix/ui/input';`}
     >
 
@@ -21,11 +21,13 @@ export default function InputDemo() {
       <PropsTable
         props={[
           { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Height preset — sm (28px), md (38px), lg (44px). Matches Button heights.' },
+          { name: 'leftIcon', type: 'ReactNode', default: '—', description: 'Icon inside the input on the left. Padding adjusts automatically.' },
+          { name: 'rightIcon', type: 'ReactNode', default: '—', description: 'Icon inside the input on the right. Padding adjusts automatically.' },
           { name: 'type', type: 'string', default: "'text'", description: 'HTML input type (text, email, password, number, file, etc.)' },
           { name: 'placeholder', type: 'string', default: '—', description: 'Placeholder text (styled with text-dim)' },
           { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables input (50% opacity, no interaction)' },
           { name: 'error', type: 'string', default: '—', description: 'Error message — renders below input and auto-sets aria-invalid' },
-          { name: 'className', type: 'string', default: '—', description: 'Additional Tailwind/CSS classes' },
+          { name: 'className', type: 'string', default: '—', description: 'Additional Tailwind/CSS classes for the input' },
         ]}
       />
 
@@ -49,13 +51,14 @@ export default function InputDemo() {
       {/* ─── Types ──────────────────────────────────────────────── */}
       <PlaygroundSection
         title="Input types"
-        description="Works with all standard HTML input types. The styling adapts automatically."
-        code={`<Input type="text" placeholder="Text" />
+        description="Use Input for text-like types: text, email, password, number, search, tel, url. For dates use the DatePicker component; for files use FileUpload — those have consistent, themed UI instead of the browser's native controls."
+        code={`<Input type="text" placeholder="Enter text..." />
 <Input type="email" placeholder="you@example.com" />
-<Input type="password" placeholder="••••••••" />
 <Input type="number" placeholder="0" />
-<Input type="date" />
-<Input type="file" />`}
+<Input type="tel" placeholder="+1 (555) 000-0000" />
+
+// For dates and files, use the dedicated components:
+// <DatePicker /> · <FileUpload />`}
       >
         <div className="space-y-3 w-full max-w-sm">
           <div className="space-y-1.5">
@@ -71,12 +74,8 @@ export default function InputDemo() {
             <Input id="type-number" type="number" placeholder="0" />
           </div>
           <div className="space-y-1.5">
-            <Label htmlFor="type-date">Date</Label>
-            <Input id="type-date" type="date" />
-          </div>
-          <div className="space-y-1.5">
-            <Label htmlFor="type-file">File</Label>
-            <Input id="type-file" type="file" />
+            <Label htmlFor="type-tel">Phone</Label>
+            <Input id="type-tel" type="tel" placeholder="+1 (555) 000-0000" />
           </div>
         </div>
       </PlaygroundSection>
@@ -123,38 +122,29 @@ export default function InputDemo() {
       </div>
 
       <PlaygroundSection
-        title="With icon prefix"
-        description="Wrap input in a relative container and position an icon to the left."
-        code={`<div className="relative">
-  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--invin-text-dim)]" />
-  <Input className="pl-9" placeholder="Search..." />
-</div>`}
+        title="With icons"
+        description="Pass leftIcon / rightIcon and the input adds the icon plus the right padding for you — no manual positioning."
+        code={`<Input leftIcon={<Search style={{ width: 16, height: 16 }} />} placeholder="Search..." />
+<Input leftIcon={<Mail style={{ width: 16, height: 16 }} />} type="email" placeholder="Email address" />
+<Input rightIcon={<Check style={{ width: 16, height: 16 }} />} defaultValue="Available" />`}
       >
         <div className="space-y-3 w-full max-w-sm">
-          <div className="relative">
-            <Search style={{ width: 16, height: 16 }} className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--invin-text-dim)]" />
-            <Input className="pl-9" placeholder="Search..." />
-          </div>
-          <div className="relative">
-            <Mail style={{ width: 16, height: 16 }} className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--invin-text-dim)]" />
-            <Input className="pl-9" type="email" placeholder="Email address" />
-          </div>
-          <div className="relative">
-            <User style={{ width: 16, height: 16 }} className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--invin-text-dim)]" />
-            <Input className="pl-9" placeholder="Username" />
-          </div>
+          <Input leftIcon={<Search style={{ width: 16, height: 16 }} />} placeholder="Search..." />
+          <Input leftIcon={<Mail style={{ width: 16, height: 16 }} />} type="email" placeholder="Email address" />
+          <Input leftIcon={<User style={{ width: 16, height: 16 }} />} placeholder="Username" />
+          <Input rightIcon={<Check style={{ width: 16, height: 16, color: 'var(--invin-ok)' }} />} defaultValue="username-available" />
         </div>
       </PlaygroundSection>
 
       <PlaygroundSection
         title="Password with toggle"
-        description="Toggle visibility button on the right side."
+        description="leftIcon holds the lock; the interactive show/hide Button is layered on the right (it needs pointer events, so it sits outside the decorative rightIcon slot)."
         code={`const [showPw, setShowPw] = useState(false);
 
 <div className="relative">
-  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4" />
   <Input
-    className="pl-9 pr-10"
+    leftIcon={<Lock style={{ width: 16, height: 16 }} />}
+    className="pr-10"
     type={showPw ? 'text' : 'password'}
     placeholder="••••••••"
   />
@@ -162,6 +152,7 @@ export default function InputDemo() {
     variant="ghost" size="icon-sm"
     className="absolute right-1 top-1/2 -translate-y-1/2"
     onClick={() => setShowPw(!showPw)}
+    aria-label={showPw ? 'Hide password' : 'Show password'}
   >
     {showPw ? <EyeOff /> : <Eye />}
   </Button>
@@ -170,10 +161,10 @@ export default function InputDemo() {
         <div className="w-full max-w-sm">
           <Label htmlFor="pw-toggle" className="mb-1.5 block">Password</Label>
           <div className="relative">
-            <Lock style={{ width: 16, height: 16 }} className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--invin-text-dim)]" />
             <Input
               id="pw-toggle"
-              className="pl-9 pr-10"
+              leftIcon={<Lock style={{ width: 16, height: 16 }} />}
+              className="pr-10"
               type={showPw ? 'text' : 'password'}
               placeholder="••••••••"
             />
@@ -194,18 +185,24 @@ export default function InputDemo() {
         title="Input with button"
         description="Search bar or email subscribe pattern with inline button."
         code={`<div className="flex gap-2">
-  <Input placeholder="Enter email..." className="flex-1" />
+  <div className="flex-1">
+    <Input placeholder="Enter email..." />
+  </div>
   <Button>Subscribe</Button>
 </div>`}
       >
         <div className="space-y-3 w-full max-w-md">
           <div className="flex gap-2">
-            <Input placeholder="Enter your email..." className="flex-1" />
+            <div className="flex-1">
+              <Input placeholder="Enter your email..." />
+            </div>
             <Button>Subscribe</Button>
           </div>
           <div className="flex gap-2">
-            <Input placeholder="Search documentation..." className="flex-1" />
-            <Button variant="outline"><Search style={{ width: 14, height: 14 }} /> Search</Button>
+            <div className="flex-1">
+              <Input leftIcon={<Search style={{ width: 16, height: 16 }} />} placeholder="Search documentation..." />
+            </div>
+            <Button variant="outline">Search</Button>
           </div>
         </div>
       </PlaygroundSection>
