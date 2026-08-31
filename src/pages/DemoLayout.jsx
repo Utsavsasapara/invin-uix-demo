@@ -16,6 +16,7 @@ import { useTheme } from '../useTheme.jsx';
 
 // Getting Started
 const GettingStartedDemo = lazy(() => import('./demos/GettingStartedDemo.jsx'));
+const PresetDemo = lazy(() => import('./demos/PresetDemo.jsx'));
 
 // Tier 1: Display
 const ButtonDemo = lazy(() => import('./demos/ButtonDemo.jsx'));
@@ -99,6 +100,7 @@ const categories = [
     type: 'group',
     children: [
       { key: 'getting-started', label: 'Getting Started', component: GettingStartedDemo },
+      { key: 'preset', label: 'Preset (Tailwind)', component: PresetDemo },
     ],
   },
   {
@@ -239,7 +241,7 @@ export default function DemoLayout() {
   const ActiveComponent = activeEntry?.component || GettingStartedDemo;
 
   return (
-    <div className="min-h-screen bg-bg text-foreground">
+    <div className="min-h-screen bg-background text-foreground">
 
       {/* ─── Sidebar ─────────────────────────────────────────── */}
       <Sidebar

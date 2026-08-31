@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
-import { Button } from 'invin-uix/ui/button';
+import { Button, ButtonGroup } from 'invin-uix/ui/button';
 import { Card, CardContent } from 'invin-uix/ui/card';
-import { Badge } from 'invin-uix/ui/badge';
 import { Separator } from 'invin-uix/ui/separator';
-import { Download, Trash2, Plus, Bell, Search, Settings, Send, Copy, Check, ArrowRight, Loader2 } from 'invin-uix/ui/icons';
+import { Download, Trash2, Plus, Bell, Search, Settings, Send, Copy, Check, ArrowRight, ChevronLeft, ChevronRight, AlignLeft, AlignCenter, AlignRight } from 'invin-uix/ui/icons';
 
 export default function ButtonDemo() {
   const [loading, setLoading] = useState(false);
@@ -23,16 +22,18 @@ export default function ButtonDemo() {
   return (
     <ComponentPage
       name="Button"
-      description="Versatile button component built with CVA (Class Variance Authority). Supports 4 variants, 4 sizes, pill shape, full-width, and loading state with spinner."
-      importCode={`import { Button } from 'invin-uix/ui/button';`}
+      description="Versatile button built with CVA (Class Variance Authority). Five variants, four sizes, pill shape, full-width, left/right icon slots, and a loading state with spinner. Pair with ButtonGroup for segmented controls."
+      importCode={`import { Button, ButtonGroup } from 'invin-uix/ui/button';`}
     >
 
       {/* ─── Props Table ────────────────────────────────────────── */}
       <PropsTable
         props={[
-          { name: 'variant', type: "'primary' | 'outline' | 'ghost' | 'destructive'", default: "'primary'", description: 'Visual style of the button' },
+          { name: 'variant', type: "'primary' | 'outline' | 'ghost' | 'destructive' | 'destructive-solid'", default: "'primary'", description: 'Visual style. destructive is subtle (default danger); destructive-solid is a full red fill.' },
           { name: 'size', type: "'sm' | 'md' | 'icon' | 'icon-sm'", default: "'md'", description: 'Size preset — md is default, icon/icon-sm for square icon buttons' },
           { name: 'shape', type: "'default' | 'pill'", default: "'default'", description: 'Border radius — pill gives fully rounded corners' },
+          { name: 'leftIcon', type: 'ReactNode', default: '—', description: 'Icon before the label. Replaced by the spinner while loading (width stays stable).' },
+          { name: 'rightIcon', type: 'ReactNode', default: '—', description: 'Icon after the label.' },
           { name: 'fullWidth', type: 'boolean', default: 'false', description: 'Makes button take full container width' },
           { name: 'loading', type: 'boolean', default: 'false', description: 'Shows spinner and disables interaction' },
           { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the button (0.5 opacity)' },
@@ -47,17 +48,19 @@ export default function ButtonDemo() {
       {/* ─── All Variants ───────────────────────────────────────── */}
       <PlaygroundSection
         title="Variants"
-        description="Four distinct visual styles. Primary is the default action, outline for secondary, ghost for toolbar/subtle, destructive for danger."
+        description="Five visual styles. Primary is the default action, outline for secondary, ghost for toolbar/subtle. Destructive comes in two weights: subtle (default danger) and solid (a confirmed, loud danger action)."
         code={`<Button>Primary</Button>
 <Button variant="outline">Outline</Button>
 <Button variant="ghost">Ghost</Button>
-<Button variant="destructive">Destructive</Button>`}
+<Button variant="destructive">Destructive</Button>
+<Button variant="destructive-solid">Destructive solid</Button>`}
       >
         <div className="flex flex-wrap items-center gap-3">
           <Button>Primary</Button>
           <Button variant="outline">Outline</Button>
           <Button variant="ghost">Ghost</Button>
           <Button variant="destructive">Destructive</Button>
+          <Button variant="destructive-solid">Destructive solid</Button>
         </div>
       </PlaygroundSection>
 
@@ -117,6 +120,91 @@ export default function ButtonDemo() {
           <Button variant="ghost" size="icon" aria-label="Bell"><Bell style={{ width: 16, height: 16 }} /></Button>
           <Button variant="outline" size="icon-sm" aria-label="Settings"><Settings style={{ width: 14, height: 14 }} /></Button>
           <Button variant="ghost" size="icon-sm" aria-label="Plus"><Plus style={{ width: 14, height: 14 }} /></Button>
+        </div>
+      </PlaygroundSection>
+
+      {/* ─── Icon slots (leftIcon / rightIcon) ──────────────────── */}
+      <PlaygroundSection
+        title="Icon slots"
+        description="Pass leftIcon / rightIcon instead of placing icons in children. The left slot doubles as the loading slot, so the button width stays stable when a spinner appears."
+        code={`<Button leftIcon={<Download style={{ width: 14, height: 14 }} />}>Download</Button>
+<Button variant="outline" rightIcon={<ArrowRight style={{ width: 14, height: 14 }} />}>Continue</Button>
+<Button
+  leftIcon={<Send style={{ width: 14, height: 14 }} />}
+  rightIcon={<ArrowRight style={{ width: 14, height: 14 }} />}
+>
+  Send
+</Button>
+
+// While loading, leftIcon is swapped for the spinner — no width jump
+<Button leftIcon={<Download style={{ width: 14, height: 14 }} />} loading>Download</Button>`}
+      >
+        <div className="flex flex-wrap items-center gap-3">
+          <Button leftIcon={<Download style={{ width: 14, height: 14 }} />}>Download</Button>
+          <Button variant="outline" rightIcon={<ArrowRight style={{ width: 14, height: 14 }} />}>Continue</Button>
+          <Button
+            leftIcon={<Send style={{ width: 14, height: 14 }} />}
+            rightIcon={<ArrowRight style={{ width: 14, height: 14 }} />}
+          >
+            Send
+          </Button>
+        </div>
+        <div className="flex flex-wrap items-center gap-3 mt-3">
+          <Button leftIcon={<Download style={{ width: 14, height: 14 }} />} loading>Download</Button>
+          <Button variant="outline" leftIcon={<Settings style={{ width: 14, height: 14 }} />} loading>Saving</Button>
+        </div>
+      </PlaygroundSection>
+
+      {/* ─── ButtonGroup ────────────────────────────────────────── */}
+      <PlaygroundSection
+        title="ButtonGroup"
+        description="Attach a row (or column) of buttons into one segmented control. Adjacent borders collapse and only the outer corners round. Great for toolbars, view switchers, and segmented filters."
+        code={`import { Button, ButtonGroup } from 'invin-uix/ui/button';
+
+// Segmented view switcher
+<ButtonGroup>
+  <Button variant="outline">Day</Button>
+  <Button variant="outline">Week</Button>
+  <Button variant="outline">Month</Button>
+</ButtonGroup>
+
+// Icon toolbar
+<ButtonGroup>
+  <Button variant="outline" size="icon" aria-label="Align left"><AlignLeft /></Button>
+  <Button variant="outline" size="icon" aria-label="Align center"><AlignCenter /></Button>
+  <Button variant="outline" size="icon" aria-label="Align right"><AlignRight /></Button>
+</ButtonGroup>
+
+// Vertical
+<ButtonGroup orientation="vertical">
+  <Button variant="outline">Top</Button>
+  <Button variant="outline">Middle</Button>
+  <Button variant="outline">Bottom</Button>
+</ButtonGroup>`}
+      >
+        <div className="flex flex-col gap-4">
+          <ButtonGroup>
+            <Button variant="outline">Day</Button>
+            <Button variant="outline">Week</Button>
+            <Button variant="outline">Month</Button>
+          </ButtonGroup>
+
+          <ButtonGroup>
+            <Button variant="outline" size="icon" aria-label="Align left"><AlignLeft style={{ width: 16, height: 16 }} /></Button>
+            <Button variant="outline" size="icon" aria-label="Align center"><AlignCenter style={{ width: 16, height: 16 }} /></Button>
+            <Button variant="outline" size="icon" aria-label="Align right"><AlignRight style={{ width: 16, height: 16 }} /></Button>
+          </ButtonGroup>
+
+          <ButtonGroup>
+            <Button variant="outline" size="sm" leftIcon={<ChevronLeft style={{ width: 14, height: 14 }} />}>Prev</Button>
+            <Button variant="outline" size="sm" rightIcon={<ChevronRight style={{ width: 14, height: 14 }} />}>Next</Button>
+          </ButtonGroup>
+
+          <ButtonGroup orientation="vertical" className="w-fit">
+            <Button variant="outline">Top</Button>
+            <Button variant="outline">Middle</Button>
+            <Button variant="outline">Bottom</Button>
+          </ButtonGroup>
         </div>
       </PlaygroundSection>
 
@@ -305,11 +393,17 @@ export default function ButtonDemo() {
 
       <PlaygroundSection
         title="Destructive confirmation"
-        description="Danger action with confirmation pattern."
-        code={`<div className="flex items-center gap-2">
+        description="Two danger weights. Use subtle destructive for the trigger that opens a confirmation, and destructive-solid for the final, committed action inside it."
+        code={`// Trigger (subtle) — invites caution without shouting
+<Button variant="destructive" leftIcon={<Trash2 style={{ width: 14, height: 14 }} />}>
+  Delete Account
+</Button>
+
+// Final confirm (solid) — the committed, irreversible action
+<div className="flex items-center gap-2">
   <Button variant="outline">Cancel</Button>
-  <Button variant="destructive">
-    <Trash2 style={{ width: 14, height: 14 }} /> Delete Account
+  <Button variant="destructive-solid" leftIcon={<Trash2 style={{ width: 14, height: 14 }} />}>
+    Yes, delete permanently
   </Button>
 </div>`}
       >
@@ -322,7 +416,7 @@ export default function ButtonDemo() {
               </div>
               <div className="flex items-center gap-2">
                 <Button variant="outline">Cancel</Button>
-                <Button variant="destructive"><Trash2 style={{ width: 14, height: 14 }} /> Delete Account</Button>
+                <Button variant="destructive-solid" leftIcon={<Trash2 style={{ width: 14, height: 14 }} />}>Yes, delete permanently</Button>
               </div>
             </div>
           </CardContent>
