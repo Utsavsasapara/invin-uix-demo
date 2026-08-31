@@ -1,5 +1,5 @@
 import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
-import { Badge } from 'invin-uix/ui/badge';
+import { Badge, NotificationBadge, StatusBadge } from 'invin-uix/ui/badge';
 import { Button } from 'invin-uix/ui/button';
 import { Card, CardContent } from 'invin-uix/ui/card';
 import { Separator } from 'invin-uix/ui/separator';
@@ -10,26 +10,46 @@ export default function BadgeDemo() {
   return (
     <ComponentPage
       name="Badge"
-      description="Dual-mode component: inline label pills for status/tags AND notification count/dot wrapper. Supports 7 colour variants, 3 sizes, status dots with animation, custom colours, overflow count, and offset positioning."
-      importCode={`import { Badge } from 'invin-uix/ui/badge';`}
+      description="Three focused components: Badge (inline label pill), NotificationBadge (count/dot on an element), and StatusBadge (status dot + text). Badge also accepts count/dot/status for back-compat and delegates automatically."
+      importCode={`import { Badge, NotificationBadge, StatusBadge } from 'invin-uix/ui/badge';`}
     >
 
       {/* ─── Props Table ────────────────────────────────────────── */}
-      <PropsTable
-        props={[
-          { name: 'variant', type: "'default' | 'secondary' | 'destructive' | 'success' | 'warning' | 'info' | 'outline'", default: "'default'", description: 'Label mode colour variant' },
-          { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Size of badge label or notification counter' },
-          { name: 'count', type: 'number | ReactNode', default: '—', description: 'Notification count (triggers wrapper mode)' },
-          { name: 'dot', type: 'boolean', default: 'false', description: 'Show dot indicator instead of count' },
-          { name: 'overflowCount', type: 'number', default: '99', description: 'Max number before showing "99+"' },
-          { name: 'showZero', type: 'boolean', default: 'false', description: 'Show badge when count is 0' },
-          { name: 'color', type: 'string', default: '—', description: 'Custom CSS colour for dot/counter background' },
-          { name: 'status', type: "'default' | 'success' | 'processing' | 'error' | 'warning'", default: '—', description: 'Status dot mode (standalone, no children)' },
-          { name: 'text', type: 'string', default: '—', description: 'Text label next to status dot' },
-          { name: 'offset', type: '[right, top]', default: '—', description: 'Pixel offset for counter/dot position' },
-          { name: 'children', type: 'ReactNode', default: '—', description: 'In label mode: text content. In wrapper mode: element to badge' },
-        ]}
-      />
+      <div className="space-y-4">
+        <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)]">Badge (label pill)</p>
+        <PropsTable
+          props={[
+            { name: 'variant', type: "'default' | 'secondary' | 'destructive' | 'success' | 'warning' | 'info' | 'outline'", default: "'default'", description: 'Colour variant' },
+            { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'sm (11px, tight), md (12px), lg (12px, roomy)' },
+            { name: 'children', type: 'ReactNode', default: '—', description: 'Label text' },
+          ]}
+        />
+      </div>
+      <div className="space-y-4">
+        <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)]">NotificationBadge (count / dot)</p>
+        <PropsTable
+          props={[
+            { name: 'count', type: 'number | ReactNode', default: '—', description: 'Count bubble value' },
+            { name: 'dot', type: 'boolean', default: 'false', description: 'Show a dot instead of a count' },
+            { name: 'overflowCount', type: 'number', default: '99', description: 'Max before showing "99+"' },
+            { name: 'showZero', type: 'boolean', default: 'false', description: 'Show even when count is 0' },
+            { name: 'size', type: "'sm' | 'md'", default: "'md'", description: 'Bubble size — 14px / 18px' },
+            { name: 'color', type: 'string', default: '—', description: 'Custom bubble/dot colour' },
+            { name: 'offset', type: '[right, top]', default: '—', description: 'Pixel offset for the bubble/dot' },
+            { name: 'children', type: 'ReactNode', default: '—', description: 'Element to badge' },
+          ]}
+        />
+      </div>
+      <div className="space-y-4">
+        <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)]">StatusBadge (dot + text)</p>
+        <PropsTable
+          props={[
+            { name: 'status', type: "'default' | 'success' | 'processing' | 'error' | 'warning'", default: '—', description: 'Drives dot colour; processing pulses' },
+            { name: 'text', type: 'string', default: '—', description: 'Text next to the dot' },
+            { name: 'color', type: 'string', default: '—', description: 'Override the dot colour' },
+          ]}
+        />
+      </div>
 
       <Separator variant="bold" />
 
@@ -59,7 +79,7 @@ export default function BadgeDemo() {
       {/* ─── Label Sizes ────────────────────────────────────────── */}
       <PlaygroundSection
         title="Label Sizes"
-        description="Three sizes: sm (10px), md (11px, default), lg (12px)."
+        description="Three sizes, distinct by font size and padding: sm (11px, tight), md (12px, default), lg (12px, roomy)."
         code={`<Badge variant="info" size="sm">Small</Badge>
 <Badge variant="info" size="md">Medium</Badge>
 <Badge variant="info" size="lg">Large</Badge>`}
@@ -81,72 +101,62 @@ export default function BadgeDemo() {
       {/* ─── Notification Count ─────────────────────────────────── */}
       <PlaygroundSection
         title="Notification Count"
-        description="Wrap any element (button, avatar, icon) to show a count bubble in the top-right corner."
-        code={`<Badge count={5}>
-  <Button size="icon" variant="outline">
-    <Bell style={{ width: 16, height: 16 }} />
-  </Button>
-</Badge>
-
-<Badge count={12}>
-  <Avatar size="sm"><AvatarFallback>U</AvatarFallback></Avatar>
-</Badge>
+        description="NotificationBadge wraps any element (button, avatar, icon) to show a count bubble in the top-right corner."
+        code={`<NotificationBadge count={5}>
+  <Button size="icon" variant="outline"><Bell /></Button>
+</NotificationBadge>
 
 // Overflow (shows "99+")
-<Badge count={120} overflowCount={99}>
-  <Button size="icon" variant="outline">
-    <Mail style={{ width: 16, height: 16 }} />
-  </Button>
-</Badge>
+<NotificationBadge count={120} overflowCount={99}>
+  <Avatar size="md"><AvatarFallback>U</AvatarFallback></Avatar>
+</NotificationBadge>
 
 // Show when count is 0
-<Badge count={0} showZero>
-  <Button size="icon" variant="outline">
-    <Bell style={{ width: 16, height: 16 }} />
-  </Button>
-</Badge>`}
+<NotificationBadge count={0} showZero>
+  <Button size="icon" variant="outline"><Bell /></Button>
+</NotificationBadge>`}
       >
         <div className="flex flex-wrap items-center gap-5">
-          <Badge count={5}>
+          <NotificationBadge count={5}>
             <Button size="icon" variant="outline" aria-label="Notifications"><Bell style={{ width: 16, height: 16 }} /></Button>
-          </Badge>
-          <Badge count={12}>
+          </NotificationBadge>
+          <NotificationBadge count={12}>
             <Button size="icon" variant="outline" aria-label="Messages"><Mail style={{ width: 16, height: 16 }} /></Button>
-          </Badge>
-          <Badge count={120} overflowCount={99}>
+          </NotificationBadge>
+          <NotificationBadge count={120} overflowCount={99}>
             <Avatar size="md"><AvatarImage src="https://i.pravatar.cc/100?u=badge3" /><AvatarFallback>U</AvatarFallback></Avatar>
-          </Badge>
-          <Badge count={0} showZero>
+          </NotificationBadge>
+          <NotificationBadge count={0} showZero>
             <Button size="icon" variant="outline" aria-label="Notifications"><Bell style={{ width: 16, height: 16 }} /></Button>
-          </Badge>
+          </NotificationBadge>
         </div>
       </PlaygroundSection>
 
       {/* ─── Counter Size ───────────────────────────────────────── */}
       <PlaygroundSection
         title="Counter Size"
-        description="sm (14px height, 9px font) vs md (18px height, 11px font) for the notification bubble."
-        code={`<Badge count={5} size="sm">
+        description="sm (14px bubble) vs md (18px bubble, default) for the notification counter. Both use 11px text."
+        code={`<NotificationBadge count={5} size="sm">
   <Button size="icon-sm" variant="outline"><Bell /></Button>
-</Badge>
+</NotificationBadge>
 
-<Badge count={5} size="md">
+<NotificationBadge count={5} size="md">
   <Button size="icon" variant="outline"><Bell /></Button>
-</Badge>`}
+</NotificationBadge>`}
       >
         <div className="flex flex-wrap items-center gap-5">
-          <Badge count={5} size="sm">
+          <NotificationBadge count={5} size="sm">
             <Button size="icon-sm" variant="outline" aria-label="Notifications"><Bell style={{ width: 14, height: 14 }} /></Button>
-          </Badge>
-          <Badge count={5} size="md">
+          </NotificationBadge>
+          <NotificationBadge count={5} size="md">
             <Button size="icon" variant="outline" aria-label="Notifications"><Bell style={{ width: 16, height: 16 }} /></Button>
-          </Badge>
-          <Badge count={25} size="sm">
+          </NotificationBadge>
+          <NotificationBadge count={25} size="sm">
             <Avatar size="sm"><AvatarFallback>A</AvatarFallback></Avatar>
-          </Badge>
-          <Badge count={25} size="md">
+          </NotificationBadge>
+          <NotificationBadge count={25} size="md">
             <Avatar size="sm"><AvatarFallback>B</AvatarFallback></Avatar>
-          </Badge>
+          </NotificationBadge>
         </div>
       </PlaygroundSection>
 
@@ -156,32 +166,28 @@ export default function BadgeDemo() {
       <PlaygroundSection
         title="Dot Mode"
         description="Minimal dot indicator without a number. Shows a 7px circle in the top-right corner."
-        code={`<Badge dot>
+        code={`<NotificationBadge dot>
   <Button size="icon" variant="outline"><Bell /></Button>
-</Badge>
-
-<Badge dot>
-  <Avatar size="sm"><AvatarFallback>U</AvatarFallback></Avatar>
-</Badge>
+</NotificationBadge>
 
 // Custom dot colour
-<Badge dot color="#22c55e">
+<NotificationBadge dot color="var(--invin-ok)">
   <Avatar size="sm"><AvatarFallback>U</AvatarFallback></Avatar>
-</Badge>`}
+</NotificationBadge>`}
       >
         <div className="flex flex-wrap items-center gap-5">
-          <Badge dot>
+          <NotificationBadge dot>
             <Button size="icon" variant="outline" aria-label="Notifications"><Bell style={{ width: 16, height: 16 }} /></Button>
-          </Badge>
-          <Badge dot>
+          </NotificationBadge>
+          <NotificationBadge dot>
             <Avatar size="sm"><AvatarImage src="https://i.pravatar.cc/100?u=dot1" /><AvatarFallback>U</AvatarFallback></Avatar>
-          </Badge>
-          <Badge dot color="#22c55e">
+          </NotificationBadge>
+          <NotificationBadge dot color="var(--invin-ok)">
             <Avatar size="sm"><AvatarImage src="https://i.pravatar.cc/100?u=dot2" /><AvatarFallback>U</AvatarFallback></Avatar>
-          </Badge>
-          <Badge dot color="#f59e0b">
+          </NotificationBadge>
+          <NotificationBadge dot color="var(--invin-warn)">
             <Avatar size="sm"><AvatarImage src="https://i.pravatar.cc/100?u=dot3" /><AvatarFallback>U</AvatarFallback></Avatar>
-          </Badge>
+          </NotificationBadge>
         </div>
       </PlaygroundSection>
 
@@ -189,24 +195,23 @@ export default function BadgeDemo() {
       <PlaygroundSection
         title="Custom Colours"
         description="Override the default red counter/dot colour with any CSS colour value."
-        code={`<Badge count={8} color="#8b5cf6">...</Badge>
-<Badge count={3} color="var(--invin-ok)">...</Badge>
-<Badge count={2} color="var(--invin-warn)">...</Badge>
-<Badge count={1} color="var(--invin-accent)">...</Badge>`}
+        code={`<NotificationBadge count={3} color="var(--invin-ok)">...</NotificationBadge>
+<NotificationBadge count={2} color="var(--invin-warn)">...</NotificationBadge>
+<NotificationBadge count={1} color="var(--invin-accent)">...</NotificationBadge>`}
       >
         <div className="flex flex-wrap items-center gap-5">
-          <Badge count={8} color="#8b5cf6">
+          <NotificationBadge count={8} color="var(--invin-purple)">
             <Button size="icon" variant="outline" aria-label="Stars"><Star style={{ width: 16, height: 16 }} /></Button>
-          </Badge>
-          <Badge count={3} color="var(--invin-ok)">
+          </NotificationBadge>
+          <NotificationBadge count={3} color="var(--invin-ok)">
             <Button size="icon" variant="outline" aria-label="Done"><Check style={{ width: 16, height: 16 }} /></Button>
-          </Badge>
-          <Badge count={2} color="var(--invin-warn)">
+          </NotificationBadge>
+          <NotificationBadge count={2} color="var(--invin-warn)">
             <Button size="icon" variant="outline" aria-label="Alerts"><Zap style={{ width: 16, height: 16 }} /></Button>
-          </Badge>
-          <Badge count={1} color="var(--invin-accent)">
+          </NotificationBadge>
+          <NotificationBadge count={1} color="var(--invin-accent)">
             <Button size="icon" variant="outline" aria-label="Activity"><Activity style={{ width: 16, height: 16 }} /></Button>
-          </Badge>
+          </NotificationBadge>
         </div>
       </PlaygroundSection>
 
@@ -214,20 +219,20 @@ export default function BadgeDemo() {
 
       {/* ─── Status Dot Mode ────────────────────────────────────── */}
       <PlaygroundSection
-        title="Status Dot Mode"
-        description="Standalone status indicator with animated dot and text. No children needed. 'processing' status has a pulse animation."
-        code={`<Badge status="success" text="Active" />
-<Badge status="processing" text="Syncing..." />
-<Badge status="error" text="Failed" />
-<Badge status="warning" text="Pending" />
-<Badge status="default" text="Idle" />`}
+        title="Status Dot (StatusBadge)"
+        description="Standalone status indicator with an animated dot and text. 'processing' pulses."
+        code={`<StatusBadge status="success" text="Active" />
+<StatusBadge status="processing" text="Syncing..." />
+<StatusBadge status="error" text="Failed" />
+<StatusBadge status="warning" text="Pending" />
+<StatusBadge status="default" text="Idle" />`}
       >
         <div className="flex flex-wrap items-center gap-4">
-          <Badge status="success" text="Active" />
-          <Badge status="processing" text="Syncing..." />
-          <Badge status="error" text="Failed" />
-          <Badge status="warning" text="Pending" />
-          <Badge status="default" text="Idle" />
+          <StatusBadge status="success" text="Active" />
+          <StatusBadge status="processing" text="Syncing..." />
+          <StatusBadge status="error" text="Failed" />
+          <StatusBadge status="warning" text="Pending" />
+          <StatusBadge status="default" text="Idle" />
         </div>
       </PlaygroundSection>
 
@@ -242,21 +247,17 @@ export default function BadgeDemo() {
       <PlaygroundSection
         title="Notification header"
         description="Topbar notification bell with unread count."
-        code={`<div className="flex items-center gap-2">
-  <Badge count={3} size="sm">
-    <Button variant="ghost" size="icon-sm">
-      <Bell style={{ width: 16, height: 16 }} />
-    </Button>
-  </Badge>
-</div>`}
+        code={`<NotificationBadge count={3} size="sm">
+  <Button variant="ghost" size="icon-sm"><Bell /></Button>
+</NotificationBadge>`}
       >
         <div className="flex items-center gap-1 p-1 rounded-[8px] border border-[var(--invin-border)] w-fit">
-          <Badge count={3} size="sm">
+          <NotificationBadge count={3} size="sm">
             <Button variant="ghost" size="icon-sm" aria-label="Notifications"><Bell style={{ width: 16, height: 16 }} /></Button>
-          </Badge>
-          <Badge count={7} size="sm" color="var(--invin-accent)">
+          </NotificationBadge>
+          <NotificationBadge count={7} size="sm" color="var(--invin-accent)">
             <Button variant="ghost" size="icon-sm" aria-label="Messages"><Mail style={{ width: 16, height: 16 }} /></Button>
-          </Badge>
+          </NotificationBadge>
           <Button variant="ghost" size="icon-sm" aria-label="User"><User style={{ width: 16, height: 16 }} /></Button>
         </div>
       </PlaygroundSection>
@@ -264,32 +265,26 @@ export default function BadgeDemo() {
       <PlaygroundSection
         title="User list with status"
         description="Avatar with online/offline dot indicator."
-        code={`// Online user
-<Badge dot color="#22c55e">
-  <Avatar size="sm"><AvatarImage src="..." /><AvatarFallback>SC</AvatarFallback></Avatar>
-</Badge>
+        code={`// Online / away / offline via token colours
+<NotificationBadge dot color="var(--invin-ok)">
+  <Avatar size="sm"><AvatarFallback>SC</AvatarFallback></Avatar>
+</NotificationBadge>
 
-// Away
-<Badge dot color="#f59e0b">
-  <Avatar size="sm"><AvatarFallback>JR</AvatarFallback></Avatar>
-</Badge>
-
-// Offline
-<Badge dot color="#9ca3af">
+<NotificationBadge dot color="var(--invin-warn)">
   <Avatar size="sm"><AvatarFallback>LP</AvatarFallback></Avatar>
-</Badge>`}
+</NotificationBadge>`}
       >
         <div className="flex flex-wrap items-center gap-4">
           {[
-            { name: 'Sarah C.', color: '#22c55e', img: 'u=team10' },
-            { name: 'John R.', color: '#22c55e', img: 'u=team11' },
-            { name: 'Lisa P.', color: '#f59e0b', img: 'u=team12' },
-            { name: 'Mike C.', color: '#9ca3af', img: 'u=team13' },
+            { name: 'Sarah C.', color: 'var(--invin-ok)', img: 'u=team10' },
+            { name: 'John R.', color: 'var(--invin-ok)', img: 'u=team11' },
+            { name: 'Lisa P.', color: 'var(--invin-warn)', img: 'u=team12' },
+            { name: 'Mike C.', color: 'var(--invin-text-faint)', img: 'u=team13' },
           ].map(u => (
             <div key={u.name} className="flex items-center gap-2">
-              <Badge dot color={u.color}>
+              <NotificationBadge dot color={u.color}>
                 <Avatar size="sm"><AvatarImage src={`https://i.pravatar.cc/100?${u.img}`} /><AvatarFallback>{u.name[0]}</AvatarFallback></Avatar>
-              </Badge>
+              </NotificationBadge>
               <span className="text-[length:var(--invin-text-body)]">{u.name}</span>
             </div>
           ))}
@@ -299,10 +294,10 @@ export default function BadgeDemo() {
       <PlaygroundSection
         title="Status table column"
         description="Status dots in a data list or table row."
-        code={`<Badge status="success" text="Running" />
-<Badge status="processing" text="Deploying..." />
-<Badge status="error" text="Crashed" />
-<Badge status="warning" text="Degraded" />`}
+        code={`<StatusBadge status="success" text="Running" />
+<StatusBadge status="processing" text="Deploying..." />
+<StatusBadge status="error" text="Crashed" />
+<StatusBadge status="warning" text="Degraded" />`}
       >
         <Card>
           <CardContent className="py-3">
@@ -318,7 +313,7 @@ export default function BadgeDemo() {
                     <p className="text-[length:var(--invin-text-body)] font-[500]">{s.name}</p>
                     <p className="text-[10px] text-[var(--invin-text-faint)]">{s.env}</p>
                   </div>
-                  <Badge status={s.status} text={s.text} />
+                  <StatusBadge status={s.status} text={s.text} />
                 </div>
               ))}
             </div>
