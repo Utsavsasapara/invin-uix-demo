@@ -38,7 +38,7 @@ export default function AppLayout() {
   const activeKey = location.pathname === '/' ? '/' : location.pathname;
 
   return (
-    <div className="min-h-screen bg-bg text-foreground">
+    <div className="min-h-screen bg-background text-foreground">
       {/* Sidebar */}
       <Sidebar
         product="InvinUI"

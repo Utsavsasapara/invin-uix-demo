@@ -24,7 +24,7 @@ export default function ContextMenuDemo() {
       >
         <ContextMenu>
           <ContextMenuTrigger>
-            <div className="flex items-center justify-center h-32 w-full border-2 border-dashed border-border rounded-lg text-sm text-text-dim select-none">
+            <div className="flex items-center justify-center h-32 w-full border-2 border-dashed border-border rounded-lg text-sm text-muted-foreground select-none">
               Right-click here to open context menu
             </div>
           </ContextMenuTrigger>

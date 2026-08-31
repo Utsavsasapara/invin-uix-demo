@@ -43,10 +43,10 @@ export default function HoverCardDemo() {
                 </Avatar>
                 <div className="space-y-1">
                   <h4 className="text-sm font-semibold">John Doe</h4>
-                  <p className="text-xs text-text-dim">Software Engineer at Invin</p>
+                  <p className="text-xs text-muted-foreground">Software Engineer at Invin</p>
                   <div className="flex items-center gap-2 pt-1">
                     <Badge variant="secondary" size="sm">Pro</Badge>
-                    <span className="text-xs text-text-dim">Joined Dec 2023</span>
+                    <span className="text-xs text-muted-foreground">Joined Dec 2023</span>
                   </div>
                 </div>
               </div>
@@ -76,7 +76,7 @@ export default function HoverCardDemo() {
             <HoverCardContent>
               <div className="space-y-2">
                 <h4 className="text-sm font-semibold">Getting Started</h4>
-                <p className="text-xs text-text-dim">Learn how to install and configure Invin UI in your React project. Covers installation, theming, and basic usage.</p>
+                <p className="text-xs text-muted-foreground">Learn how to install and configure Invin UI in your React project. Covers installation, theming, and basic usage.</p>
                 <Badge variant="info" size="sm">Documentation</Badge>
               </div>
             </HoverCardContent>

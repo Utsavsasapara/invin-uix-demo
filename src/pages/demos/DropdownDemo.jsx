@@ -199,7 +199,7 @@ export default function DropdownDemo() {
             <DropdownMenuItem>Reload</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-        <span className="text-xs text-text-dim">Bookmarks: {bookmarks ? 'on' : 'off'}, URLs: {urls ? 'on' : 'off'}</span>
+        <span className="text-xs text-muted-foreground">Bookmarks: {bookmarks ? 'on' : 'off'}, URLs: {urls ? 'on' : 'off'}</span>
       </PlaygroundSection>
 
       <PlaygroundSection
@@ -224,7 +224,7 @@ export default function DropdownDemo() {
             </DropdownMenuRadioGroup>
           </DropdownMenuContent>
         </DropdownMenu>
-        <span className="text-xs text-text-dim">Current: {sorting}</span>
+        <span className="text-xs text-muted-foreground">Current: {sorting}</span>
       </PlaygroundSection>
 
       <PlaygroundSection

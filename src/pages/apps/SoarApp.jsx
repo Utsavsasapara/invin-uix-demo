@@ -312,7 +312,7 @@ export default function SoarApp() {
   ];
 
   return (
-    <div className="min-h-screen bg-bg text-foreground">
+    <div className="min-h-screen bg-background text-foreground">
 
       {/* ─── Sidebar ──────────────────────────────────────────── */}
       <Sidebar

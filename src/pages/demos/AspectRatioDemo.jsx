@@ -56,10 +56,10 @@ export default function AspectRatioDemo() {
                 <div className="w-full h-full rounded-lg bg-gradient-to-br from-primary/15 to-primary/5 border border-primary/20 flex flex-col items-center justify-center gap-1 transition-all hover:from-primary/25 hover:to-primary/10 hover:border-primary/40">
                   <Icon style={{ width: 20, height: 20, opacity: 0.6 }} className="text-primary" />
                   <span className="text-sm font-semibold text-primary">{label}</span>
-                  <span className="text-[10px] text-text-dim">{desc}</span>
+                  <span className="text-[10px] text-muted-foreground">{desc}</span>
                 </div>
               </AspectRatio>
-              <p className="text-[10px] text-text-dim text-center leading-tight">{useCase}</p>
+              <p className="text-[10px] text-muted-foreground text-center leading-tight">{useCase}</p>
             </div>
           ))}
         </div>
@@ -86,7 +86,7 @@ export default function AspectRatioDemo() {
               <div className="w-full h-full rounded-lg bg-gradient-to-br from-primary/20 to-success/10 border border-border flex items-center justify-center transition-all">
                 <div className="text-center">
                   <p className="text-lg font-bold text-foreground">{customRatio[0]}:9</p>
-                  <p className="text-xs text-text-dim mt-1">
+                  <p className="text-xs text-muted-foreground mt-1">
                     {customRatio[0] < 9 ? 'Portrait' : customRatio[0] === 9 ? 'Square-ish' : customRatio[0] <= 16 ? 'Landscape' : 'Ultra-wide'}
                   </p>
                 </div>
@@ -164,10 +164,10 @@ export default function AspectRatioDemo() {
       >
         <div className="w-full">
           <AspectRatio ratio={16 / 9}>
-            <div className="w-full h-full rounded-lg bg-bg-elevated border border-border flex flex-col items-center justify-center gap-2">
-              <Video style={{ width: 32, height: 32 }} className="text-text-dim" />
-              <span className="text-sm text-text-dim">Video embed placeholder</span>
-              <span className="text-[10px] text-text-dim">iframe would go here — always 16:9</span>
+            <div className="w-full h-full rounded-lg bg-surface-elevated border border-border flex flex-col items-center justify-center gap-2">
+              <Video style={{ width: 32, height: 32 }} className="text-muted-foreground" />
+              <span className="text-sm text-muted-foreground">Video embed placeholder</span>
+              <span className="text-[10px] text-muted-foreground">iframe would go here — always 16:9</span>
             </div>
           </AspectRatio>
         </div>
@@ -197,11 +197,11 @@ export default function AspectRatioDemo() {
             <div key={item.id}>
               <AspectRatio ratio={4 / 3}>
                 <div className={`w-full h-full rounded-md bg-gradient-to-br ${item.color} border border-border flex items-center justify-center`}>
-                  <Image style={{ width: 20, height: 20 }} className="text-text-dim" />
+                  <Image style={{ width: 20, height: 20 }} className="text-muted-foreground" />
                 </div>
               </AspectRatio>
               <p className="text-xs font-medium mt-1.5">{item.name}</p>
-              <p className="text-[10px] text-text-dim">4:3 constrained</p>
+              <p className="text-[10px] text-muted-foreground">4:3 constrained</p>
             </div>
           ))}
         </div>

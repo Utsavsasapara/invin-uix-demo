@@ -108,7 +108,7 @@ export default function MenuDemo() {
       >
         <div style={{ display: 'flex', gap: '32px', flexWrap: 'wrap' }}>
           <div>
-            <p className="text-xs text-text-dim mb-2">background (default)</p>
+            <p className="text-xs text-muted-foreground mb-2">background (default)</p>
             <div style={{ maxWidth: '220px' }}>
               <Menu
                 mode="vertical"
@@ -125,7 +125,7 @@ export default function MenuDemo() {
             </div>
           </div>
           <div>
-            <p className="text-xs text-text-dim mb-2">border</p>
+            <p className="text-xs text-muted-foreground mb-2">border</p>
             <div style={{ maxWidth: '220px' }}>
               <Menu
                 mode="vertical"
@@ -142,7 +142,7 @@ export default function MenuDemo() {
             </div>
           </div>
           <div>
-            <p className="text-xs text-text-dim mb-2">filled</p>
+            <p className="text-xs text-muted-foreground mb-2">filled</p>
             <div style={{ maxWidth: '220px' }}>
               <Menu
                 mode="vertical"
@@ -341,7 +341,7 @@ export default function MenuDemo() {
           </div>
           <div style={{ display: 'flex', gap: '40px' }}>
             <div>
-              <p className="text-xs text-text-dim mb-2">With tooltip (default)</p>
+              <p className="text-xs text-muted-foreground mb-2">With tooltip (default)</p>
               <div style={{ width: collapsed ? '48px' : '220px', transition: 'width 200ms ease' }}>
                 <Menu
                   mode="sidebar"
@@ -359,7 +359,7 @@ export default function MenuDemo() {
               </div>
             </div>
             <div>
-              <p className="text-xs text-text-dim mb-2">Without tooltip</p>
+              <p className="text-xs text-muted-foreground mb-2">Without tooltip</p>
               <div style={{ width: collapsed ? '48px' : '220px', transition: 'width 200ms ease' }}>
                 <Menu
                   mode="sidebar"

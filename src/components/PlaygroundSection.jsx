@@ -15,7 +15,7 @@ export function PlaygroundSection({ title, description, code, children }) {
     <div className="space-y-3">
       <div>
         <h3 className="text-sm font-semibold text-[var(--invin-text)]">{title}</h3>
-        {description && <p className="text-xs text-text-dim mt-0.5">{description}</p>}
+        {description && <p className="text-xs text-muted-foreground mt-0.5">{description}</p>}
       </div>
 
       <Card>
@@ -30,7 +30,7 @@ export function PlaygroundSection({ title, description, code, children }) {
         {code && (
           <>
             <div className="border-t border-[var(--invin-border)] px-4 py-2 flex items-center justify-between">
-              <span className="text-[11px] text-text-dim font-medium uppercase tracking-wide">
+              <span className="text-[11px] text-muted-foreground font-medium uppercase tracking-wide">
                 {showCode ? 'Code' : 'Preview'}
               </span>
               <Button
