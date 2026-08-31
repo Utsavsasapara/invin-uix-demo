@@ -8,3 +8,4 @@ export default {
     './node_modules/invin-uix/dist/**/*.js',
   ],
 };
+ 
