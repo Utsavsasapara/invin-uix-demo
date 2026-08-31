@@ -7,7 +7,7 @@ export default function SkeletonDemo() {
   return (
     <ComponentPage
       name="Skeleton"
-      description="Animated loading placeholder that mimics content shape while data loads. Three shape variants — compose them to match any layout."
+      description="Animated loading placeholder that mimics content shape while data loads. Three shape variants, plus a lines prop for multi-line text paragraphs — compose them to match any layout."
       importCode={`import { Skeleton } from 'invin-uix/ui/skeleton';`}
     >
 
@@ -15,6 +15,7 @@ export default function SkeletonDemo() {
       <PropsTable
         props={[
           { name: 'variant', type: "'default' | 'circle' | 'text'", default: "'default'", description: 'Shape — default (rounded-md), circle (rounded-full), text (full-width line)' },
+          { name: 'lines', type: 'number', default: '—', description: 'Render a multi-line text paragraph (last line shorter). Implies the text look.' },
           { name: 'className', type: 'string', default: '—', description: 'Width and height via Tailwind classes (h-10, w-40, etc.)' },
         ]}
       />
@@ -31,10 +32,11 @@ export default function SkeletonDemo() {
 // Circle — avatars, icons
 <Skeleton variant="circle" className="h-12 w-12" />
 
-// Text — single line of text (full width, 16px height)
+// Text — single line
 <Skeleton variant="text" />
-<Skeleton variant="text" className="w-3/4" />
-<Skeleton variant="text" className="w-1/2" />`}
+
+// Multi-line paragraph (last line shorter)
+<Skeleton lines={3} />`}
       >
         <div className="flex flex-wrap items-start gap-6">
           <div className="space-y-1">
@@ -46,12 +48,28 @@ export default function SkeletonDemo() {
             <Skeleton variant="circle" className="h-12 w-12" />
           </div>
           <div className="space-y-1 flex-1 min-w-[150px]">
-            <p className="text-[10px] text-[var(--invin-text-faint)] uppercase tracking-[0.05em]">Text lines</p>
-            <div className="space-y-2">
-              <Skeleton variant="text" />
-              <Skeleton variant="text" className="w-3/4" />
-              <Skeleton variant="text" className="w-1/2" />
-            </div>
+            <p className="text-[10px] text-[var(--invin-text-faint)] uppercase tracking-[0.05em]">Text paragraph (lines)</p>
+            <Skeleton lines={3} />
+          </div>
+        </div>
+      </PlaygroundSection>
+
+      {/* ─── Multi-line text ────────────────────────────────────── */}
+      <PlaygroundSection
+        title="Multi-line text (lines)"
+        description="Pass lines to render a text paragraph — no manual stacking. The last line is shorter to mimic real text."
+        code={`<Skeleton lines={2} />
+<Skeleton lines={3} />
+<Skeleton lines={4} />`}
+      >
+        <div className="w-full max-w-md space-y-6">
+          <div className="space-y-1">
+            <p className="text-[10px] text-[var(--invin-text-faint)] uppercase tracking-[0.05em]">lines=2</p>
+            <Skeleton lines={2} />
+          </div>
+          <div className="space-y-1">
+            <p className="text-[10px] text-[var(--invin-text-faint)] uppercase tracking-[0.05em]">lines=4</p>
+            <Skeleton lines={4} />
           </div>
         </div>
       </PlaygroundSection>
@@ -89,18 +107,12 @@ export default function SkeletonDemo() {
         description="Avatar + name + bio lines — matches a typical user card."
         code={`<div className="flex items-center gap-4">
   <Skeleton variant="circle" className="h-12 w-12" />
-  <div className="space-y-2 flex-1">
-    <Skeleton variant="text" className="w-1/3" />
-    <Skeleton variant="text" className="w-2/3" />
-  </div>
+  <Skeleton lines={2} className="flex-1" />
 </div>`}
       >
         <div className="flex items-center gap-4 w-full">
           <Skeleton variant="circle" className="h-12 w-12" />
-          <div className="space-y-2 flex-1">
-            <Skeleton variant="text" className="w-1/3" />
-            <Skeleton variant="text" className="w-2/3" />
-          </div>
+          <Skeleton lines={2} className="flex-1" />
         </div>
       </PlaygroundSection>
 
@@ -110,20 +122,14 @@ export default function SkeletonDemo() {
         code={`<Card>
   <CardContent>
     <Skeleton className="h-36 w-full rounded-lg" />
-    <div className="mt-3 space-y-2">
-      <Skeleton variant="text" className="w-3/4" />
-      <Skeleton variant="text" className="w-1/2" />
-    </div>
+    <Skeleton lines={2} className="mt-3" />
   </CardContent>
 </Card>`}
       >
         <Card>
           <CardContent className="py-4">
             <Skeleton className="h-36 w-full rounded-lg" />
-            <div className="mt-3 space-y-2">
-              <Skeleton variant="text" className="w-3/4" />
-              <Skeleton variant="text" className="w-1/2" />
-            </div>
+            <Skeleton lines={2} className="mt-3" />
           </CardContent>
         </Card>
       </PlaygroundSection>
