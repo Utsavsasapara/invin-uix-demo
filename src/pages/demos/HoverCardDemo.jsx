@@ -29,7 +29,7 @@ export default function HoverCardDemo() {
   </HoverCardContent>
 </HoverCard>`}
       >
-        <p className="text-sm">
+        <p className="text-label">
           Created by{' '}
           <HoverCard>
             <HoverCardTrigger asChild>
@@ -42,11 +42,11 @@ export default function HoverCardDemo() {
                   <AvatarFallback>JD</AvatarFallback>
                 </Avatar>
                 <div className="space-y-1">
-                  <h4 className="text-sm font-semibold">John Doe</h4>
-                  <p className="text-xs text-muted-foreground">Software Engineer at Invin</p>
+                  <h4 className="text-label font-semibold">John Doe</h4>
+                  <p className="text-caption text-muted-foreground">Software Engineer at Invin</p>
                   <div className="flex items-center gap-2 pt-1">
                     <Badge variant="secondary" size="sm">Pro</Badge>
-                    <span className="text-xs text-muted-foreground">Joined Dec 2023</span>
+                    <span className="text-caption text-muted-foreground">Joined Dec 2023</span>
                   </div>
                 </div>
               </div>
@@ -75,8 +75,8 @@ export default function HoverCardDemo() {
             </HoverCardTrigger>
             <HoverCardContent>
               <div className="space-y-2">
-                <h4 className="text-sm font-semibold">Getting Started</h4>
-                <p className="text-xs text-muted-foreground">Learn how to install and configure Invin UI in your React project. Covers installation, theming, and basic usage.</p>
+                <h4 className="text-label font-semibold">Getting Started</h4>
+                <p className="text-caption text-muted-foreground">Learn how to install and configure Invin UI in your React project. Covers installation, theming, and basic usage.</p>
                 <Badge variant="info" size="sm">Documentation</Badge>
               </div>
             </HoverCardContent>

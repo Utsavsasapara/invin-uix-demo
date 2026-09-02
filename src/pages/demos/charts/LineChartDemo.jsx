@@ -60,8 +60,8 @@ export default function LineChartDemo() {
   data={data}
   xKey="month"
   lines={[
-    { key: 'incidents', name: 'Incidents', color: 'var(--invin-error)' },
-    { key: 'resolved', name: 'Resolved', color: 'var(--invin-ok)' },
+    { key: 'incidents', name: 'Incidents', color: 'var(--error)' },
+    { key: 'resolved', name: 'Resolved', color: 'var(--ok)' },
   ]}
   height={280}
 />`}
@@ -70,8 +70,8 @@ export default function LineChartDemo() {
           data={trendData}
           xKey="month"
           lines={[
-            { key: 'incidents', name: 'Incidents', color: 'var(--invin-error)' },
-            { key: 'resolved', name: 'Resolved', color: 'var(--invin-ok)' },
+            { key: 'incidents', name: 'Incidents', color: 'var(--error)' },
+            { key: 'resolved', name: 'Resolved', color: 'var(--ok)' },
           ]}
           height={280}
         />
@@ -87,8 +87,8 @@ export default function LineChartDemo() {
   data={data}
   xKey="month"
   lines={[
-    { key: 'incidents', name: 'Actual', color: 'var(--invin-accent)' },
-    { key: 'falsePositives', name: 'Projected', dashed: true, color: 'var(--invin-text-dim)' },
+    { key: 'incidents', name: 'Actual', color: 'var(--accent)' },
+    { key: 'falsePositives', name: 'Projected', dashed: true, color: 'var(--muted-foreground)' },
   ]}
   height={250}
 />`}
@@ -97,8 +97,8 @@ export default function LineChartDemo() {
           data={trendData}
           xKey="month"
           lines={[
-            { key: 'incidents', name: 'Actual', color: 'var(--invin-accent)' },
-            { key: 'falsePositives', name: 'Projected', dashed: true, color: 'var(--invin-text-dim)' },
+            { key: 'incidents', name: 'Actual', color: 'var(--accent)' },
+            { key: 'falsePositives', name: 'Projected', dashed: true, color: 'var(--muted-foreground)' },
           ]}
           height={250}
         />
@@ -133,23 +133,23 @@ export default function LineChartDemo() {
 
       {/* ─── Props ────────────────────────────────────────────── */}
       <div className="space-y-2">
-        <h3 className="text-[length:var(--invin-text-card-title)] font-[700]">Props</h3>
+        <h3 className="text-[var(--foreground)] font-[700]">Props</h3>
         <div className="overflow-x-auto">
           <table className="w-full text-[12px]">
-            <thead><tr className="border-b border-[var(--invin-border)]">
-              <th className="text-left py-2 pr-4 font-[600] text-[var(--invin-text-dim)]">Prop</th>
-              <th className="text-left py-2 pr-4 font-[600] text-[var(--invin-text-dim)]">Type</th>
-              <th className="text-left py-2 pr-4 font-[600] text-[var(--invin-text-dim)]">Default</th>
-              <th className="text-left py-2 font-[600] text-[var(--invin-text-dim)]">Description</th>
+            <thead><tr className="border-b border-[var(--border)]">
+              <th className="text-left py-2 pr-4 font-[600] text-[var(--muted-foreground)]">Prop</th>
+              <th className="text-left py-2 pr-4 font-[600] text-[var(--muted-foreground)]">Type</th>
+              <th className="text-left py-2 pr-4 font-[600] text-[var(--muted-foreground)]">Default</th>
+              <th className="text-left py-2 font-[600] text-[var(--muted-foreground)]">Description</th>
             </tr></thead>
             <tbody className="font-mono text-[11px]">
-              <tr className="border-b border-[var(--invin-border)]"><td className="py-2 pr-4 text-[var(--invin-accent)]">data</td><td className="py-2 pr-4">Record[]</td><td>—</td><td className="text-[var(--invin-text-dim)]">Array of data points</td></tr>
-              <tr className="border-b border-[var(--invin-border)]"><td className="py-2 pr-4 text-[var(--invin-accent)]">xKey</td><td className="py-2 pr-4">string</td><td>—</td><td className="text-[var(--invin-text-dim)]">Key for X-axis</td></tr>
-              <tr className="border-b border-[var(--invin-border)]"><td className="py-2 pr-4 text-[var(--invin-accent)]">lines</td><td className="py-2 pr-4">{`{key, name?, color?, dashed?}[]`}</td><td>—</td><td className="text-[var(--invin-text-dim)]">Line series config</td></tr>
-              <tr className="border-b border-[var(--invin-border)]"><td className="py-2 pr-4 text-[var(--invin-accent)]">height</td><td className="py-2 pr-4">number</td><td>300</td><td className="text-[var(--invin-text-dim)]">Chart height (px)</td></tr>
-              <tr className="border-b border-[var(--invin-border)]"><td className="py-2 pr-4 text-[var(--invin-accent)]">showGrid</td><td className="py-2 pr-4">boolean</td><td>true</td><td className="text-[var(--invin-text-dim)]">Background grid</td></tr>
-              <tr className="border-b border-[var(--invin-border)]"><td className="py-2 pr-4 text-[var(--invin-accent)]">showDots</td><td className="py-2 pr-4">boolean</td><td>true</td><td className="text-[var(--invin-text-dim)]">Data point dots</td></tr>
-              <tr><td className="py-2 pr-4 text-[var(--invin-accent)]">curved</td><td className="py-2 pr-4">boolean</td><td>true</td><td className="text-[var(--invin-text-dim)]">Smooth curves vs straight</td></tr>
+              <tr className="border-b border-[var(--border)]"><td className="py-2 pr-4 text-[var(--accent)]">data</td><td className="py-2 pr-4">Record[]</td><td>—</td><td className="text-[var(--muted-foreground)]">Array of data points</td></tr>
+              <tr className="border-b border-[var(--border)]"><td className="py-2 pr-4 text-[var(--accent)]">xKey</td><td className="py-2 pr-4">string</td><td>—</td><td className="text-[var(--muted-foreground)]">Key for X-axis</td></tr>
+              <tr className="border-b border-[var(--border)]"><td className="py-2 pr-4 text-[var(--accent)]">lines</td><td className="py-2 pr-4">{`{key, name?, color?, dashed?}[]`}</td><td>—</td><td className="text-[var(--muted-foreground)]">Line series config</td></tr>
+              <tr className="border-b border-[var(--border)]"><td className="py-2 pr-4 text-[var(--accent)]">height</td><td className="py-2 pr-4">number</td><td>300</td><td className="text-[var(--muted-foreground)]">Chart height (px)</td></tr>
+              <tr className="border-b border-[var(--border)]"><td className="py-2 pr-4 text-[var(--accent)]">showGrid</td><td className="py-2 pr-4">boolean</td><td>true</td><td className="text-[var(--muted-foreground)]">Background grid</td></tr>
+              <tr className="border-b border-[var(--border)]"><td className="py-2 pr-4 text-[var(--accent)]">showDots</td><td className="py-2 pr-4">boolean</td><td>true</td><td className="text-[var(--muted-foreground)]">Data point dots</td></tr>
+              <tr><td className="py-2 pr-4 text-[var(--accent)]">curved</td><td className="py-2 pr-4">boolean</td><td>true</td><td className="text-[var(--muted-foreground)]">Smooth curves vs straight</td></tr>
             </tbody>
           </table>
         </div>

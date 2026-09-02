@@ -8,7 +8,7 @@ import { Badge } from 'invin-uix/ui/badge';
 import { Separator } from 'invin-uix/ui/separator';
 import { KpiCard } from 'invin-uix/ui/kpi-card';
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from 'invin-uix/ui/table';
-import { Shield, Activity, AlertCircle, TrendingUp } from 'invin-uix/ui/icons';
+import { Shield, Pulse, WarningCircle, TrendUp } from 'invin-uix/ui/icons';
 
 // ─── Mock Data ───────────────────────────────────────────────────────────────
 
@@ -48,18 +48,18 @@ const threatCategories = [
 
 // Pie Chart — incident severity
 const severityBreakdown = [
-  { name: 'Critical', value: 8, color: 'var(--invin-error)' },
-  { name: 'High', value: 23, color: 'var(--invin-warn)' },
-  { name: 'Medium', value: 45, color: 'var(--invin-accent)' },
-  { name: 'Low', value: 67, color: 'var(--invin-ok)' },
+  { name: 'Critical', value: 8, color: 'var(--error)' },
+  { name: 'High', value: 23, color: 'var(--degraded)' },
+  { name: 'Medium', value: 45, color: 'var(--accent)' },
+  { name: 'Low', value: 67, color: 'var(--ok)' },
   { name: 'Info', value: 120, color: 'var(--chart-5, #8b5cf6)' },
 ];
 
 // Donut Chart — compliance frameworks
 const complianceStatus = [
-  { name: 'Compliant', value: 78, color: 'var(--invin-ok)' },
-  { name: 'Partial', value: 15, color: 'var(--invin-warn)' },
-  { name: 'Non-Compliant', value: 7, color: 'var(--invin-error)' },
+  { name: 'Compliant', value: 78, color: 'var(--ok)' },
+  { name: 'Partial', value: 15, color: 'var(--degraded)' },
+  { name: 'Non-Compliant', value: 7, color: 'var(--error)' },
 ];
 
 // Radar Chart — security coverage
@@ -123,9 +123,9 @@ export default function ChartDemo() {
           data={incidentTrends}
           xKey="month"
           lines={[
-            { key: 'incidents', name: 'Total Incidents', color: 'var(--invin-error)' },
-            { key: 'resolved', name: 'Resolved', color: 'var(--invin-ok)' },
-            { key: 'falsePositives', name: 'False Positives', dashed: true, color: 'var(--invin-text-dim)' },
+            { key: 'incidents', name: 'Total Incidents', color: 'var(--error)' },
+            { key: 'resolved', name: 'Resolved', color: 'var(--ok)' },
+            { key: 'falsePositives', name: 'False Positives', dashed: true, color: 'var(--muted-foreground)' },
           ]}
           height={280}
         />
@@ -160,9 +160,9 @@ export default function ChartDemo() {
           data={networkTraffic}
           xKey="hour"
           areas={[
-            { key: 'inbound', name: 'Inbound', color: 'var(--invin-accent)' },
-            { key: 'outbound', name: 'Outbound', color: 'var(--invin-ok)' },
-            { key: 'blocked', name: 'Blocked', color: 'var(--invin-error)' },
+            { key: 'inbound', name: 'Inbound', color: 'var(--accent)' },
+            { key: 'outbound', name: 'Outbound', color: 'var(--ok)' },
+            { key: 'blocked', name: 'Blocked', color: 'var(--error)' },
           ]}
           stacked
           height={280}
@@ -178,7 +178,7 @@ export default function ChartDemo() {
           xKey="hour"
           areas={[
             { key: 'inbound', name: 'Inbound' },
-            { key: 'outbound', name: 'Outbound', color: 'var(--invin-ok)' },
+            { key: 'outbound', name: 'Outbound', color: 'var(--ok)' },
           ]}
           height={220}
         />
@@ -197,8 +197,8 @@ export default function ChartDemo() {
           data={threatCategories}
           xKey="category"
           bars={[
-            { key: 'count', name: 'Detected', color: 'var(--invin-error)', radius: 4 },
-            { key: 'blocked', name: 'Blocked', color: 'var(--invin-ok)', radius: 4 },
+            { key: 'count', name: 'Detected', color: 'var(--error)', radius: 4 },
+            { key: 'blocked', name: 'Blocked', color: 'var(--ok)', radius: 4 },
           ]}
           height={280}
         />
@@ -217,7 +217,7 @@ export default function ChartDemo() {
             { asset: 'vpn-endpoint', risk: 42 },
           ]}
           xKey="asset"
-          bars={[{ key: 'risk', name: 'Risk Score', color: 'var(--invin-warn)', radius: 4 }]}
+          bars={[{ key: 'risk', name: 'Risk Score', color: 'var(--degraded)', radius: 4 }]}
           horizontal
           height={220}
         />
@@ -231,8 +231,8 @@ export default function ChartDemo() {
           data={incidentTrends.slice(0, 6)}
           xKey="month"
           bars={[
-            { key: 'resolved', name: 'Resolved', color: 'var(--invin-ok)', radius: 0 },
-            { key: 'falsePositives', name: 'False Positives', color: 'var(--invin-text-dim)', radius: 0 },
+            { key: 'resolved', name: 'Resolved', color: 'var(--ok)', radius: 0 },
+            { key: 'falsePositives', name: 'False Positives', color: 'var(--muted-foreground)', radius: 0 },
           ]}
           stacked
           height={220}
@@ -250,11 +250,11 @@ export default function ChartDemo() {
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <p className="text-[11px] font-[500] text-[var(--invin-text-faint)] uppercase mb-2">With labels</p>
+            <p className="text-[11px] font-[500] text-[var(--muted-foreground-faint)] uppercase mb-2">With labels</p>
             <PieChart data={severityBreakdown} height={260} showLabel />
           </div>
           <div>
-            <p className="text-[11px] font-[500] text-[var(--invin-text-faint)] uppercase mb-2">Legend only</p>
+            <p className="text-[11px] font-[500] text-[var(--muted-foreground-faint)] uppercase mb-2">Legend only</p>
             <PieChart data={severityBreakdown} height={260} />
           </div>
         </div>
@@ -273,9 +273,9 @@ export default function ChartDemo() {
           <DonutChart data={complianceStatus} height={250} />
           <DonutChart
             data={[
-              { name: 'Protected', value: 847, color: 'var(--invin-ok)' },
-              { name: 'At Risk', value: 53, color: 'var(--invin-warn)' },
-              { name: 'Unprotected', value: 12, color: 'var(--invin-error)' },
+              { name: 'Protected', value: 847, color: 'var(--ok)' },
+              { name: 'At Risk', value: 53, color: 'var(--degraded)' },
+              { name: 'Unprotected', value: 12, color: 'var(--error)' },
             ]}
             height={250}
             showLabel
@@ -294,7 +294,7 @@ export default function ChartDemo() {
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <p className="text-[11px] font-[500] text-[var(--invin-text-faint)] uppercase mb-2">Single series</p>
+            <p className="text-[11px] font-[500] text-[var(--muted-foreground-faint)] uppercase mb-2">Single series</p>
             <RadarChart
               data={securityCoverage}
               dataKey="domain"
@@ -303,7 +303,7 @@ export default function ChartDemo() {
             />
           </div>
           <div>
-            <p className="text-[11px] font-[500] text-[var(--invin-text-faint)] uppercase mb-2">Team comparison</p>
+            <p className="text-[11px] font-[500] text-[var(--muted-foreground-faint)] uppercase mb-2">Team comparison</p>
             <RadarChart
               data={teamComparison}
               dataKey="metric"
@@ -332,17 +332,17 @@ export default function ChartDemo() {
           </Card>
           <Card>
             <CardContent className="pt-3 pb-3">
-              <GaugeChart value={99.9} label="Uptime" color="var(--invin-ok)" height={140} max={100} />
+              <GaugeChart value={99.9} label="Uptime" color="var(--ok)" height={140} max={100} />
             </CardContent>
           </Card>
           <Card>
             <CardContent className="pt-3 pb-3">
-              <GaugeChart value={38} label="Risk Score" color="var(--invin-warn)" height={140} />
+              <GaugeChart value={38} label="Risk Score" color="var(--degraded)" height={140} />
             </CardContent>
           </Card>
           <Card>
             <CardContent className="pt-3 pb-3">
-              <GaugeChart value={7} label="Critical" color="var(--invin-error)" max={20} height={140} />
+              <GaugeChart value={7} label="Critical" color="var(--error)" max={20} height={140} />
             </CardContent>
           </Card>
         </div>
@@ -358,52 +358,52 @@ export default function ChartDemo() {
         description="Tiny charts for KPI cards and table cells. Two types: line and bar. Use case: trend at a glance."
       >
         {/* In KPI cards */}
-        <p className="text-[11px] font-[500] text-[var(--invin-text-faint)] uppercase mb-3">In KPI Cards</p>
+        <p className="text-[11px] font-[500] text-[var(--muted-foreground-faint)] uppercase mb-3">In KPI Cards</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <Card>
             <CardContent className="pt-4 pb-4">
               <div className="flex items-center justify-between mb-1">
-                <span className="text-[12px] text-[var(--invin-text-dim)]">Incidents</span>
+                <span className="text-[12px] text-[var(--muted-foreground)]">Incidents</span>
                 <Badge variant="destructive" size="sm">+3</Badge>
               </div>
-              <p className="text-[length:var(--invin-text-kpi)] font-[700] mb-2">142</p>
-              <Sparkline data={sparkIncidents} height={28} color="var(--invin-error)" />
+              <p className="text-[var(--foreground)] font-[700] mb-2">142</p>
+              <Sparkline data={sparkIncidents} height={28} color="var(--error)" />
             </CardContent>
           </Card>
           <Card>
             <CardContent className="pt-4 pb-4">
               <div className="flex items-center justify-between mb-1">
-                <span className="text-[12px] text-[var(--invin-text-dim)]">CPU</span>
+                <span className="text-[12px] text-[var(--muted-foreground)]">CPU</span>
                 <Badge variant="warning" size="sm">67%</Badge>
               </div>
-              <p className="text-[length:var(--invin-text-kpi)] font-[700] mb-2">67%</p>
-              <Sparkline data={sparkCpu} height={28} color="var(--invin-warn)" />
+              <p className="text-[var(--foreground)] font-[700] mb-2">67%</p>
+              <Sparkline data={sparkCpu} height={28} color="var(--degraded)" />
             </CardContent>
           </Card>
           <Card>
             <CardContent className="pt-4 pb-4">
               <div className="flex items-center justify-between mb-1">
-                <span className="text-[12px] text-[var(--invin-text-dim)]">Errors</span>
+                <span className="text-[12px] text-[var(--muted-foreground)]">Errors</span>
                 <Badge variant="secondary" size="sm">Low</Badge>
               </div>
-              <p className="text-[length:var(--invin-text-kpi)] font-[700] mb-2">24</p>
-              <Sparkline data={sparkErrors} height={28} color="var(--invin-error)" type="bar" />
+              <p className="text-[var(--foreground)] font-[700] mb-2">24</p>
+              <Sparkline data={sparkErrors} height={28} color="var(--error)" type="bar" />
             </CardContent>
           </Card>
           <Card>
             <CardContent className="pt-4 pb-4">
               <div className="flex items-center justify-between mb-1">
-                <span className="text-[12px] text-[var(--invin-text-dim)]">Revenue</span>
+                <span className="text-[12px] text-[var(--muted-foreground)]">Revenue</span>
                 <Badge variant="success" size="sm">+22%</Badge>
               </div>
-              <p className="text-[length:var(--invin-text-kpi)] font-[700] mb-2">$38K</p>
-              <Sparkline data={sparkRevenue} height={28} color="var(--invin-ok)" />
+              <p className="text-[var(--foreground)] font-[700] mb-2">$38K</p>
+              <Sparkline data={sparkRevenue} height={28} color="var(--ok)" />
             </CardContent>
           </Card>
         </div>
 
         {/* In a table */}
-        <p className="text-[11px] font-[500] text-[var(--invin-text-faint)] uppercase mb-3 mt-6">In Table Cells</p>
+        <p className="text-[11px] font-[500] text-[var(--muted-foreground-faint)] uppercase mb-3 mt-6">In Table Cells</p>
         <Card>
           <CardContent className="p-0">
             <Table>
@@ -432,7 +432,7 @@ export default function ChartDemo() {
                         data={svc.data}
                         height={20}
                         width={80}
-                        color={svc.status === 'Healthy' ? 'var(--invin-ok)' : 'var(--invin-warn)'}
+                        color={svc.status === 'Healthy' ? 'var(--ok)' : 'var(--degraded)'}
                       />
                     </TableCell>
                     <TableCell className="text-right font-mono text-[12px]">{svc.requests}</TableCell>
@@ -448,10 +448,10 @@ export default function ChartDemo() {
 
       {/* ─── Props Reference ──────────────────────────────────── */}
       <div className="space-y-6">
-        <h3 className="text-[length:var(--invin-text-sub-heading)] font-[700]">Props Reference</h3>
+        <h3 className="text-[var(--foreground)] font-[700]">Props Reference</h3>
 
         <div className="space-y-4">
-          <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)]">LineChart / AreaChart</p>
+          <p className="text-[var(--muted-foreground)] font-[600] uppercase tracking-[0.05em] text-[var(--muted-foreground-faint)]">LineChart / AreaChart</p>
           <PropsTable props={[
             { name: 'xKey', type: 'string', default: '—', description: 'Data key for X-axis' },
             { name: 'lines / areas', type: 'array', default: '—', description: '{ key, name?, color?, dashed? }' },
@@ -462,7 +462,7 @@ export default function ChartDemo() {
         </div>
 
         <div className="space-y-4">
-          <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)]">BarChart</p>
+          <p className="text-[var(--muted-foreground)] font-[600] uppercase tracking-[0.05em] text-[var(--muted-foreground-faint)]">BarChart</p>
           <PropsTable props={[
             { name: 'xKey', type: 'string', default: '—', description: 'Category axis key' },
             { name: 'bars', type: 'array', default: '—', description: '{ key, name?, color?, radius? }' },
@@ -472,7 +472,7 @@ export default function ChartDemo() {
         </div>
 
         <div className="space-y-4">
-          <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)]">PieChart / DonutChart</p>
+          <p className="text-[var(--muted-foreground)] font-[600] uppercase tracking-[0.05em] text-[var(--muted-foreground-faint)]">PieChart / DonutChart</p>
           <PropsTable props={[
             { name: 'data', type: '{ name, value, color? }[]', default: '—', description: 'Slice data' },
             { name: 'donut', type: 'boolean', default: 'false', description: 'Hole in center (PieChart only)' },
@@ -482,7 +482,7 @@ export default function ChartDemo() {
         </div>
 
         <div className="space-y-4">
-          <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)]">RadarChart</p>
+          <p className="text-[var(--muted-foreground)] font-[600] uppercase tracking-[0.05em] text-[var(--muted-foreground-faint)]">RadarChart</p>
           <PropsTable props={[
             { name: 'dataKey', type: 'string', default: '—', description: 'Key for axis labels' },
             { name: 'categories', type: 'string[]', default: '—', description: 'Data keys to plot' },
@@ -492,7 +492,7 @@ export default function ChartDemo() {
         </div>
 
         <div className="space-y-4">
-          <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)]">GaugeChart</p>
+          <p className="text-[var(--muted-foreground)] font-[600] uppercase tracking-[0.05em] text-[var(--muted-foreground-faint)]">GaugeChart</p>
           <PropsTable props={[
             { name: 'value', type: 'number', default: '—', description: 'Current value' },
             { name: 'max', type: 'number', default: '100', description: 'Maximum value' },
@@ -503,7 +503,7 @@ export default function ChartDemo() {
         </div>
 
         <div className="space-y-4">
-          <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)]">Sparkline</p>
+          <p className="text-[var(--muted-foreground)] font-[600] uppercase tracking-[0.05em] text-[var(--muted-foreground-faint)]">Sparkline</p>
           <PropsTable props={[
             { name: 'data', type: 'number[]', default: '—', description: 'Array of values' },
             { name: 'color', type: 'string', default: 'accent', description: 'Line/bar color' },

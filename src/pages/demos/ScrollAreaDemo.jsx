@@ -46,14 +46,14 @@ export default function ScrollAreaDemo() {
           <CardContent className="p-0">
             <ScrollArea className="h-[280px] w-full">
               <div className="p-4">
-                <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)] mb-3">Audit Log</p>
+                <p className="text-[var(--muted-foreground)] font-[600] uppercase tracking-[0.05em] text-[var(--muted-foreground-faint)] mb-3">Audit Log</p>
                 <div className="space-y-2">
                   {auditLogs.map((log, i) => (
-                    <div key={i} className="flex items-start gap-3 py-2 border-b border-[var(--invin-border)] last:border-0">
-                      <span className="text-[10px] font-mono text-[var(--invin-text-faint)] shrink-0 mt-0.5">{log.time}</span>
+                    <div key={i} className="flex items-start gap-3 py-2 border-b border-[var(--border)] last:border-0">
+                      <span className="text-[10px] font-mono text-[var(--muted-foreground-faint)] shrink-0 mt-0.5">{log.time}</span>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm">{log.action}</p>
-                        <p className="text-xs text-[var(--invin-text-dim)]">{log.user} · {log.resource}</p>
+                        <p className="text-label">{log.action}</p>
+                        <p className="text-caption text-[var(--muted-foreground)]">{log.user} · {log.resource}</p>
                       </div>
                     </div>
                   ))}
@@ -92,7 +92,7 @@ export default function ScrollAreaDemo() {
           <CardContent className="p-0">
             <ScrollArea className="h-[200px] w-full">
               <div className="p-4 w-[800px]">
-                <pre className="text-xs font-mono text-[var(--invin-text-dim)] leading-relaxed">{`// Example: large code block that overflows both axes
+                <pre className="text-caption font-mono text-[var(--muted-foreground)] leading-relaxed">{`// Example: large code block that overflows both axes
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   resolve: {

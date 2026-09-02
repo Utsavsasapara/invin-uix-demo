@@ -1,11 +1,4 @@
-import invinPreset from 'invin-uix/preset';
-
-export default {
-  presets: [invinPreset],
-  content: [
-    './index.html',
-    './src/**/*.{js,ts,jsx,tsx}',
-    './node_modules/invin-uix/dist/**/*.js',
-  ],
-};
- 
+// v2: no config needed. Tokens + @theme inline utilities are provided by
+// invin-uix/tokens.css (imported in src/index.css). Kept empty so nothing
+// references the removed invin-uix/preset.
+export default {};

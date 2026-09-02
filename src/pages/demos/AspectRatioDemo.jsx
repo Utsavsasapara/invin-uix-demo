@@ -6,14 +6,14 @@ import { Slider } from 'invin-uix/ui/slider';
 import { Badge } from 'invin-uix/ui/badge';
 import { Separator } from 'invin-uix/ui/separator';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from 'invin-uix/ui/tabs';
-import { Image, Video, Monitor, Smartphone, Square } from 'invin-uix/ui/icons';
+import { Image, VideoCamera, Monitor, DeviceMobile, Square } from 'invin-uix/ui/icons';
 
 const RATIOS = [
   { ratio: 1, label: '1:1', desc: 'Square', icon: Square, useCase: 'Avatars, thumbnails, album covers' },
   { ratio: 4/3, label: '4:3', desc: 'Classic', icon: Monitor, useCase: 'Photos, presentations, older displays' },
-  { ratio: 16/9, label: '16:9', desc: 'Widescreen', icon: Video, useCase: 'Videos, hero banners, YouTube embeds' },
+  { ratio: 16/9, label: '16:9', desc: 'Widescreen', icon: VideoCamera, useCase: 'Videos, hero banners, YouTube embeds' },
   { ratio: 21/9, label: '21:9', desc: 'Ultra-wide', icon: Monitor, useCase: 'Cinematic banners, panoramic images' },
-  { ratio: 9/16, label: '9:16', desc: 'Portrait', icon: Smartphone, useCase: 'Mobile stories, reels, portrait videos' },
+  { ratio: 9/16, label: '9:16', desc: 'Portrait', icon: DeviceMobile, useCase: 'Mobile stories, reels, portrait videos' },
   { ratio: 3/2, label: '3:2', desc: 'Photo', icon: Image, useCase: 'DSLR photos, standard print format' },
 ];
 
@@ -55,7 +55,7 @@ export default function AspectRatioDemo() {
               <AspectRatio ratio={ratio}>
                 <div className="w-full h-full rounded-lg bg-gradient-to-br from-primary/15 to-primary/5 border border-primary/20 flex flex-col items-center justify-center gap-1 transition-all hover:from-primary/25 hover:to-primary/10 hover:border-primary/40">
                   <Icon style={{ width: 20, height: 20, opacity: 0.6 }} className="text-primary" />
-                  <span className="text-sm font-semibold text-primary">{label}</span>
+                  <span className="text-label font-semibold text-primary">{label}</span>
                   <span className="text-[10px] text-muted-foreground">{desc}</span>
                 </div>
               </AspectRatio>
@@ -85,8 +85,8 @@ export default function AspectRatioDemo() {
             <AspectRatio ratio={customRatio[0] / 9}>
               <div className="w-full h-full rounded-lg bg-gradient-to-br from-primary/20 to-success/10 border border-border flex items-center justify-center transition-all">
                 <div className="text-center">
-                  <p className="text-lg font-bold text-foreground">{customRatio[0]}:9</p>
-                  <p className="text-xs text-muted-foreground mt-1">
+                  <p className="text-section font-bold text-foreground">{customRatio[0]}:9</p>
+                  <p className="text-caption text-muted-foreground mt-1">
                     {customRatio[0] < 9 ? 'Portrait' : customRatio[0] === 9 ? 'Square-ish' : customRatio[0] <= 16 ? 'Landscape' : 'Ultra-wide'}
                   </p>
                 </div>
@@ -150,12 +150,12 @@ export default function AspectRatioDemo() {
       </PlaygroundSection>
 
       <PlaygroundSection
-        title="Video Embed"
+        title="VideoCamera Embed"
         description="Responsive video container that maintains 16:9 ratio at any viewport width."
         code={`<AspectRatio ratio={16 / 9}>
   <iframe
     src="https://www.youtube.com/embed/..."
-    title="Video"
+    title="VideoCamera"
     className="w-full h-full rounded-lg"
     allow="accelerometer; autoplay; clipboard-write"
     allowFullScreen
@@ -165,8 +165,8 @@ export default function AspectRatioDemo() {
         <div className="w-full">
           <AspectRatio ratio={16 / 9}>
             <div className="w-full h-full rounded-lg bg-surface-elevated border border-border flex flex-col items-center justify-center gap-2">
-              <Video style={{ width: 32, height: 32 }} className="text-muted-foreground" />
-              <span className="text-sm text-muted-foreground">Video embed placeholder</span>
+              <VideoCamera style={{ width: 32, height: 32 }} className="text-muted-foreground" />
+              <span className="text-label text-muted-foreground">VideoCamera embed placeholder</span>
               <span className="text-[10px] text-muted-foreground">iframe would go here — always 16:9</span>
             </div>
           </AspectRatio>
@@ -182,7 +182,7 @@ export default function AspectRatioDemo() {
       <AspectRatio ratio={4 / 3}>
         <img src={product.image} className="object-cover w-full h-full rounded-md" />
       </AspectRatio>
-      <p className="text-sm mt-2">{product.name}</p>
+      <p className="text-label mt-2">{product.name}</p>
     </div>
   ))}
 </div>`}
@@ -200,7 +200,7 @@ export default function AspectRatioDemo() {
                   <Image style={{ width: 20, height: 20 }} className="text-muted-foreground" />
                 </div>
               </AspectRatio>
-              <p className="text-xs font-medium mt-1.5">{item.name}</p>
+              <p className="text-caption font-medium mt-1.5">{item.name}</p>
               <p className="text-[10px] text-muted-foreground">4:3 constrained</p>
             </div>
           ))}

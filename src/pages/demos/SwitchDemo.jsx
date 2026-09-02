@@ -80,7 +80,7 @@ export default function SwitchDemo() {
         <div className="flex items-center gap-3">
           <Switch checked={airplane} onCheckedChange={setAirplane} id="ctrl-sw" />
           <Label htmlFor="ctrl-sw">
-            Airplane mode is <strong className="text-[var(--invin-accent)]">{airplane ? 'ON' : 'OFF'}</strong>
+            Airplane mode is <strong className="text-[var(--accent)]">{airplane ? 'ON' : 'OFF'}</strong>
           </Label>
         </div>
       </PlaygroundSection>
@@ -108,8 +108,8 @@ export default function SwitchDemo() {
 
       {/* ─── Use Cases ──────────────────────────────────────────── */}
       <div className="space-y-3">
-        <h3 className="text-[length:var(--invin-text-sub-heading)] font-[700]">Use cases</h3>
-        <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">Common patterns in real applications.</p>
+        <h3 className="text-[var(--foreground)] font-[700]">Use cases</h3>
+        <p className="text-[var(--foreground)] text-[var(--muted-foreground)]">Common patterns in real applications.</p>
       </div>
 
       <PlaygroundSection
@@ -118,7 +118,7 @@ export default function SwitchDemo() {
         code={`<div className="flex items-center justify-between">
   <div>
     <Label>Email notifications</Label>
-    <p className="text-xs text-dim">Receive updates via email</p>
+    <p className="text-caption text-dim">Receive updates via email</p>
   </div>
   <Switch defaultChecked />
 </div>`}
@@ -134,7 +134,7 @@ export default function SwitchDemo() {
               <div key={s.id} className="flex items-center justify-between">
                 <div>
                   <Label htmlFor={`set-${s.id}`}>{s.label}</Label>
-                  <p className="text-[10px] text-[var(--invin-text-faint)]">{s.desc}</p>
+                  <p className="text-[10px] text-[var(--muted-foreground-faint)]">{s.desc}</p>
                 </div>
                 <Switch id={`set-${s.id}`} size="sm" defaultChecked={s.on} />
               </div>
@@ -151,9 +151,9 @@ export default function SwitchDemo() {
   <span>Dark mode</span>
 </div>`}
       >
-        <div className="flex items-center gap-3 p-3 rounded-[8px] border border-[var(--invin-border)] w-fit">
+        <div className="flex items-center gap-3 p-3 rounded-[8px] border border-[var(--border)] w-fit">
           <Switch size="sm" defaultChecked />
-          <span className="text-[length:var(--invin-text-body)]">Dark mode</span>
+          <span className="text-[var(--foreground)]">Dark mode</span>
         </div>
       </PlaygroundSection>
 

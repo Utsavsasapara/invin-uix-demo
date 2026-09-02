@@ -3,7 +3,7 @@ import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/P
 import { Toggle, ToggleGroup, ToggleGroupItem } from 'invin-uix/ui/toggle';
 import { Separator } from 'invin-uix/ui/separator';
 import { Card, CardContent } from 'invin-uix/ui/card';
-import { Bold, Italic, Underline, AlignLeft, AlignCenter, AlignRight, List, LayoutGrid } from 'invin-uix/ui/icons';
+import { TextB, TextItalic, TextUnderline, TextAlignLeft, TextAlignCenter, TextAlignRight, List, SquaresFour } from 'invin-uix/ui/icons';
 
 export default function ToggleDemo() {
   const [bold, setBold] = useState(true);
@@ -30,14 +30,14 @@ export default function ToggleDemo() {
       <PlaygroundSection
         title="Basic (icon)"
         description="Click or press Space to toggle. Active state shows accent-soft background + accent colour."
-        code={`<Toggle defaultPressed><Bold style={{ width: 16, height: 16 }} /></Toggle>
-<Toggle><Italic style={{ width: 16, height: 16 }} /></Toggle>
-<Toggle><Underline style={{ width: 16, height: 16 }} /></Toggle>`}
+        code={`<Toggle defaultPressed><TextB style={{ width: 16, height: 16 }} /></Toggle>
+<Toggle><TextItalic style={{ width: 16, height: 16 }} /></Toggle>
+<Toggle><TextUnderline style={{ width: 16, height: 16 }} /></Toggle>`}
       >
         <div className="flex items-center gap-2">
-          <Toggle defaultPressed aria-label="Bold"><Bold style={{ width: 16, height: 16 }} /></Toggle>
-          <Toggle aria-label="Italic"><Italic style={{ width: 16, height: 16 }} /></Toggle>
-          <Toggle aria-label="Underline"><Underline style={{ width: 16, height: 16 }} /></Toggle>
+          <Toggle defaultPressed aria-label="TextB"><TextB style={{ width: 16, height: 16 }} /></Toggle>
+          <Toggle aria-label="TextItalic"><TextItalic style={{ width: 16, height: 16 }} /></Toggle>
+          <Toggle aria-label="TextUnderline"><TextUnderline style={{ width: 16, height: 16 }} /></Toggle>
         </div>
       </PlaygroundSection>
 
@@ -77,24 +77,24 @@ export default function ToggleDemo() {
         code={`const [bold, setBold] = useState(true);
 
 <Toggle pressed={bold} onPressedChange={setBold} variant="outline">
-  <Bold /> Bold: {bold ? 'ON' : 'OFF'}
+  <TextB /> TextB: {bold ? 'ON' : 'OFF'}
 </Toggle>`}
       >
         <Toggle pressed={bold} onPressedChange={setBold} variant="outline">
-          <Bold style={{ width: 14, height: 14 }} /> Bold: <strong>{bold ? 'ON' : 'OFF'}</strong>
+          <TextB style={{ width: 14, height: 14 }} /> TextB: <strong>{bold ? 'ON' : 'OFF'}</strong>
         </Toggle>
       </PlaygroundSection>
 
       <PlaygroundSection
         title="Icon + text"
         description="Icons alongside labels."
-        code={`<Toggle variant="outline" defaultPressed><Bold /> Bold</Toggle>
-<Toggle variant="outline"><Italic /> Italic</Toggle>`}
+        code={`<Toggle variant="outline" defaultPressed><TextB /> TextB</Toggle>
+<Toggle variant="outline"><TextItalic /> TextItalic</Toggle>`}
       >
         <div className="flex items-center gap-2">
-          <Toggle variant="outline" defaultPressed><Bold style={{ width: 14, height: 14 }} /> Bold</Toggle>
-          <Toggle variant="outline"><Italic style={{ width: 14, height: 14 }} /> Italic</Toggle>
-          <Toggle variant="outline"><Underline style={{ width: 14, height: 14 }} /> Underline</Toggle>
+          <Toggle variant="outline" defaultPressed><TextB style={{ width: 14, height: 14 }} /> TextB</Toggle>
+          <Toggle variant="outline"><TextItalic style={{ width: 14, height: 14 }} /> TextItalic</Toggle>
+          <Toggle variant="outline"><TextUnderline style={{ width: 14, height: 14 }} /> TextUnderline</Toggle>
         </div>
       </PlaygroundSection>
 
@@ -114,8 +114,8 @@ export default function ToggleDemo() {
 
       {/* ─── ToggleGroup ────────────────────────────────────────── */}
       <div className="space-y-3">
-        <h3 className="text-[length:var(--invin-text-sub-heading)] font-[700]">Toggle Group</h3>
-        <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">Grouped toggles for single (radio) or multiple (checkbox) selection.</p>
+        <h3 className="text-[var(--foreground)] font-[700]">Toggle Group</h3>
+        <p className="text-[var(--foreground)] text-[var(--muted-foreground)]">Grouped toggles for single (radio) or multiple (checkbox) selection.</p>
       </div>
 
       <PropsTable
@@ -134,15 +134,15 @@ export default function ToggleDemo() {
         title="Single selection"
         description="Only one item active at a time. Like radio buttons."
         code={`<ToggleGroup type="single" defaultValue="center" variant="outline">
-  <ToggleGroupItem value="left"><AlignLeft /></ToggleGroupItem>
-  <ToggleGroupItem value="center"><AlignCenter /></ToggleGroupItem>
-  <ToggleGroupItem value="right"><AlignRight /></ToggleGroupItem>
+  <ToggleGroupItem value="left"><TextAlignLeft /></ToggleGroupItem>
+  <ToggleGroupItem value="center"><TextAlignCenter /></ToggleGroupItem>
+  <ToggleGroupItem value="right"><TextAlignRight /></ToggleGroupItem>
 </ToggleGroup>`}
       >
         <ToggleGroup type="single" defaultValue="center" variant="outline" size="sm">
-          <ToggleGroupItem value="left" aria-label="Left"><AlignLeft style={{ width: 14, height: 14 }} /></ToggleGroupItem>
-          <ToggleGroupItem value="center" aria-label="Center"><AlignCenter style={{ width: 14, height: 14 }} /></ToggleGroupItem>
-          <ToggleGroupItem value="right" aria-label="Right"><AlignRight style={{ width: 14, height: 14 }} /></ToggleGroupItem>
+          <ToggleGroupItem value="left" aria-label="Left"><TextAlignLeft style={{ width: 14, height: 14 }} /></ToggleGroupItem>
+          <ToggleGroupItem value="center" aria-label="Center"><TextAlignCenter style={{ width: 14, height: 14 }} /></ToggleGroupItem>
+          <ToggleGroupItem value="right" aria-label="Right"><TextAlignRight style={{ width: 14, height: 14 }} /></ToggleGroupItem>
         </ToggleGroup>
       </PlaygroundSection>
 
@@ -150,51 +150,51 @@ export default function ToggleDemo() {
         title="Multiple selection"
         description="Multiple items active at once. Like checkboxes."
         code={`<ToggleGroup type="multiple" defaultValue={["bold"]} variant="outline">
-  <ToggleGroupItem value="bold"><Bold /></ToggleGroupItem>
-  <ToggleGroupItem value="italic"><Italic /></ToggleGroupItem>
-  <ToggleGroupItem value="underline"><Underline /></ToggleGroupItem>
+  <ToggleGroupItem value="bold"><TextB /></ToggleGroupItem>
+  <ToggleGroupItem value="italic"><TextItalic /></ToggleGroupItem>
+  <ToggleGroupItem value="underline"><TextUnderline /></ToggleGroupItem>
 </ToggleGroup>`}
       >
         <ToggleGroup type="multiple" defaultValue={["bold"]} variant="outline" size="sm">
-          <ToggleGroupItem value="bold" aria-label="Bold"><Bold style={{ width: 14, height: 14 }} /></ToggleGroupItem>
-          <ToggleGroupItem value="italic" aria-label="Italic"><Italic style={{ width: 14, height: 14 }} /></ToggleGroupItem>
-          <ToggleGroupItem value="underline" aria-label="Underline"><Underline style={{ width: 14, height: 14 }} /></ToggleGroupItem>
+          <ToggleGroupItem value="bold" aria-label="TextB"><TextB style={{ width: 14, height: 14 }} /></ToggleGroupItem>
+          <ToggleGroupItem value="italic" aria-label="TextItalic"><TextItalic style={{ width: 14, height: 14 }} /></ToggleGroupItem>
+          <ToggleGroupItem value="underline" aria-label="TextUnderline"><TextUnderline style={{ width: 14, height: 14 }} /></ToggleGroupItem>
         </ToggleGroup>
       </PlaygroundSection>
 
       <Separator variant="bold" />
 
       <div className="space-y-3">
-        <h3 className="text-[length:var(--invin-text-sub-heading)] font-[700]">Use cases</h3>
-        <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">Common patterns.</p>
+        <h3 className="text-[var(--foreground)] font-[700]">Use cases</h3>
+        <p className="text-[var(--foreground)] text-[var(--muted-foreground)]">Common patterns.</p>
       </div>
 
       <PlaygroundSection
         title="Formatting toolbar"
         description="Combines single and multiple groups."
         code={`<ToggleGroup type="multiple" defaultValue={["bold"]} variant="outline" size="sm">
-  <ToggleGroupItem value="bold"><Bold /></ToggleGroupItem>
-  <ToggleGroupItem value="italic"><Italic /></ToggleGroupItem>
-  <ToggleGroupItem value="underline"><Underline /></ToggleGroupItem>
+  <ToggleGroupItem value="bold"><TextB /></ToggleGroupItem>
+  <ToggleGroupItem value="italic"><TextItalic /></ToggleGroupItem>
+  <ToggleGroupItem value="underline"><TextUnderline /></ToggleGroupItem>
 </ToggleGroup>
 <Separator orientation="vertical" />
 <ToggleGroup type="single" defaultValue="left" variant="outline" size="sm">
-  <ToggleGroupItem value="left"><AlignLeft /></ToggleGroupItem>
-  <ToggleGroupItem value="center"><AlignCenter /></ToggleGroupItem>
-  <ToggleGroupItem value="right"><AlignRight /></ToggleGroupItem>
+  <ToggleGroupItem value="left"><TextAlignLeft /></ToggleGroupItem>
+  <ToggleGroupItem value="center"><TextAlignCenter /></ToggleGroupItem>
+  <ToggleGroupItem value="right"><TextAlignRight /></ToggleGroupItem>
 </ToggleGroup>`}
       >
-        <div className="flex items-center gap-1 p-1.5 border border-[var(--invin-border)] rounded-[8px] w-fit">
+        <div className="flex items-center gap-1 p-1.5 border border-[var(--border)] rounded-[8px] w-fit">
           <ToggleGroup type="multiple" defaultValue={["bold"]} size="sm">
-            <ToggleGroupItem value="bold" aria-label="Bold"><Bold style={{ width: 14, height: 14 }} /></ToggleGroupItem>
-            <ToggleGroupItem value="italic" aria-label="Italic"><Italic style={{ width: 14, height: 14 }} /></ToggleGroupItem>
-            <ToggleGroupItem value="underline" aria-label="Underline"><Underline style={{ width: 14, height: 14 }} /></ToggleGroupItem>
+            <ToggleGroupItem value="bold" aria-label="TextB"><TextB style={{ width: 14, height: 14 }} /></ToggleGroupItem>
+            <ToggleGroupItem value="italic" aria-label="TextItalic"><TextItalic style={{ width: 14, height: 14 }} /></ToggleGroupItem>
+            <ToggleGroupItem value="underline" aria-label="TextUnderline"><TextUnderline style={{ width: 14, height: 14 }} /></ToggleGroupItem>
           </ToggleGroup>
           <Separator orientation="vertical" className="mx-1" />
           <ToggleGroup type="single" defaultValue="left" size="sm">
-            <ToggleGroupItem value="left" aria-label="Left"><AlignLeft style={{ width: 14, height: 14 }} /></ToggleGroupItem>
-            <ToggleGroupItem value="center" aria-label="Center"><AlignCenter style={{ width: 14, height: 14 }} /></ToggleGroupItem>
-            <ToggleGroupItem value="right" aria-label="Right"><AlignRight style={{ width: 14, height: 14 }} /></ToggleGroupItem>
+            <ToggleGroupItem value="left" aria-label="Left"><TextAlignLeft style={{ width: 14, height: 14 }} /></ToggleGroupItem>
+            <ToggleGroupItem value="center" aria-label="Center"><TextAlignCenter style={{ width: 14, height: 14 }} /></ToggleGroupItem>
+            <ToggleGroupItem value="right" aria-label="Right"><TextAlignRight style={{ width: 14, height: 14 }} /></ToggleGroupItem>
           </ToggleGroup>
         </div>
       </PlaygroundSection>
@@ -203,12 +203,12 @@ export default function ToggleDemo() {
         title="View mode switcher"
         description="Switch between grid and list views."
         code={`<ToggleGroup type="single" defaultValue="grid" variant="outline" size="sm">
-  <ToggleGroupItem value="grid"><LayoutGrid /> Grid</ToggleGroupItem>
+  <ToggleGroupItem value="grid"><SquaresFour /> Grid</ToggleGroupItem>
   <ToggleGroupItem value="list"><List /> List</ToggleGroupItem>
 </ToggleGroup>`}
       >
         <ToggleGroup type="single" defaultValue="grid" variant="outline" size="sm">
-          <ToggleGroupItem value="grid"><LayoutGrid style={{ width: 14, height: 14 }} /> Grid</ToggleGroupItem>
+          <ToggleGroupItem value="grid"><SquaresFour style={{ width: 14, height: 14 }} /> Grid</ToggleGroupItem>
           <ToggleGroupItem value="list"><List style={{ width: 14, height: 14 }} /> List</ToggleGroupItem>
         </ToggleGroup>
       </PlaygroundSection>

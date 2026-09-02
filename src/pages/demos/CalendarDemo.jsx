@@ -46,7 +46,7 @@ export default function CalendarDemo() {
       >
         <div className="flex flex-col items-start gap-2">
           <Card><CardContent className="p-0"><Calendar selected={date} onSelect={setDate} /></CardContent></Card>
-          <p className="text-[length:var(--invin-text-label)] text-[var(--invin-text-dim)]">Selected: <strong className="text-[var(--invin-text)]">{date?.toLocaleDateString()}</strong></p>
+          <p className="text-[var(--muted-foreground)] text-[var(--muted-foreground)]">Selected: <strong className="text-[var(--foreground)]">{date?.toLocaleDateString()}</strong></p>
         </div>
       </PlaygroundSection>
 
@@ -67,7 +67,7 @@ export default function CalendarDemo() {
           <Card><CardContent className="p-0">
             <Calendar mode="range" selectedRange={range} onRangeSelect={setRange} numberOfMonths={2} />
           </CardContent></Card>
-          <p className="text-[length:var(--invin-text-label)] text-[var(--invin-text-dim)]">
+          <p className="text-[var(--muted-foreground)] text-[var(--muted-foreground)]">
             {range.from && range.to
               ? `${range.from.toLocaleDateString()} – ${range.to.toLocaleDateString()}`
               : range.from
@@ -89,7 +89,7 @@ export default function CalendarDemo() {
           <Card><CardContent className="p-0">
             <Calendar mode="multiple" selectedDates={multi} onMultiSelect={setMulti} />
           </CardContent></Card>
-          <p className="text-[length:var(--invin-text-label)] text-[var(--invin-text-dim)]">Selected: {multi.length} date{multi.length !== 1 ? 's' : ''}</p>
+          <p className="text-[var(--muted-foreground)] text-[var(--muted-foreground)]">Selected: {multi.length} date{multi.length !== 1 ? 's' : ''}</p>
         </div>
       </PlaygroundSection>
 
@@ -140,7 +140,7 @@ export default function CalendarDemo() {
             disabled={(d) => d.getDay() === 0 || d.getDay() === 6}
           />
         </CardContent></Card>
-        <p className="text-[length:var(--invin-text-label)] text-[var(--invin-text-dim)] mt-2">Weekends + past dates disabled</p>
+        <p className="text-[var(--muted-foreground)] text-[var(--muted-foreground)] mt-2">Weekends + past dates disabled</p>
       </PlaygroundSection>
 
     </ComponentPage>

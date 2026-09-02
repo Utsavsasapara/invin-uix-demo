@@ -7,7 +7,7 @@ import { Separator } from 'invin-uix/ui/separator';
 import { Toaster, toast } from 'invin-uix/ui/toast';
 import {
   Folder, FileText, Image, Code, Shield, Users,
-  Settings, Database, Globe, Lock, Eye,
+  Gear, Database, Globe, Lock, Eye,
 } from 'invin-uix/ui/icons';
 
 // ─── Mock Data ───────────────────────────────────────────────────────────────
@@ -16,12 +16,12 @@ const fileTree = [
   {
     id: 'src',
     label: 'src',
-    icon: <Folder style={{ width: 14, height: 14, color: 'var(--invin-accent)' }} />,
+    icon: <Folder style={{ width: 14, height: 14, color: 'var(--accent)' }} />,
     children: [
       {
         id: 'components',
         label: 'components',
-        icon: <Folder style={{ width: 14, height: 14, color: 'var(--invin-accent)' }} />,
+        icon: <Folder style={{ width: 14, height: 14, color: 'var(--accent)' }} />,
         children: [
           { id: 'button.tsx', label: 'button.tsx', icon: <Code style={{ width: 14, height: 14 }} /> },
           { id: 'card.tsx', label: 'card.tsx', icon: <Code style={{ width: 14, height: 14 }} /> },
@@ -31,7 +31,7 @@ const fileTree = [
       {
         id: 'pages',
         label: 'pages',
-        icon: <Folder style={{ width: 14, height: 14, color: 'var(--invin-accent)' }} />,
+        icon: <Folder style={{ width: 14, height: 14, color: 'var(--accent)' }} />,
         children: [
           { id: 'index.tsx', label: 'index.tsx', icon: <Code style={{ width: 14, height: 14 }} /> },
           { id: 'about.tsx', label: 'about.tsx', icon: <Code style={{ width: 14, height: 14 }} /> },
@@ -40,7 +40,7 @@ const fileTree = [
       {
         id: 'assets',
         label: 'assets',
-        icon: <Folder style={{ width: 14, height: 14, color: 'var(--invin-accent)' }} />,
+        icon: <Folder style={{ width: 14, height: 14, color: 'var(--accent)' }} />,
         children: [
           { id: 'logo.svg', label: 'logo.svg', icon: <Image style={{ width: 14, height: 14 }} /> },
           { id: 'hero.png', label: 'hero.png', icon: <Image style={{ width: 14, height: 14 }} /> },
@@ -51,7 +51,7 @@ const fileTree = [
     ],
   },
   { id: 'package.json', label: 'package.json', icon: <FileText style={{ width: 14, height: 14 }} /> },
-  { id: 'tsconfig.json', label: 'tsconfig.json', icon: <Settings style={{ width: 14, height: 14 }} /> },
+  { id: 'tsconfig.json', label: 'tsconfig.json', icon: <Gear style={{ width: 14, height: 14 }} /> },
   { id: 'readme.md', label: 'README.md', icon: <FileText style={{ width: 14, height: 14 }} /> },
 ];
 
@@ -63,7 +63,7 @@ const permissionTree = [
     extra: <Badge variant="destructive" size="sm">Full</Badge>,
     children: [
       { id: 'admin-users', label: 'User Management', icon: <Users style={{ width: 14, height: 14 }} />, extra: <Badge variant="success" size="sm">RW</Badge> },
-      { id: 'admin-settings', label: 'System Settings', icon: <Settings style={{ width: 14, height: 14 }} />, extra: <Badge variant="success" size="sm">RW</Badge> },
+      { id: 'admin-settings', label: 'System Gear', icon: <Gear style={{ width: 14, height: 14 }} />, extra: <Badge variant="success" size="sm">RW</Badge> },
       { id: 'admin-security', label: 'Security Config', icon: <Lock style={{ width: 14, height: 14 }} />, extra: <Badge variant="success" size="sm">RW</Badge> },
     ],
   },
@@ -75,7 +75,7 @@ const permissionTree = [
     children: [
       { id: 'analyst-incidents', label: 'Incidents', icon: <Shield style={{ width: 14, height: 14 }} />, extra: <Badge variant="success" size="sm">RW</Badge> },
       { id: 'analyst-reports', label: 'Reports', icon: <FileText style={{ width: 14, height: 14 }} />, extra: <Badge variant="secondary" size="sm">RO</Badge> },
-      { id: 'analyst-settings', label: 'System Settings', icon: <Settings style={{ width: 14, height: 14 }} />, disabled: true, extra: <Badge variant="outline" size="sm">—</Badge> },
+      { id: 'analyst-settings', label: 'System Gear', icon: <Gear style={{ width: 14, height: 14 }} />, disabled: true, extra: <Badge variant="outline" size="sm">—</Badge> },
     ],
   },
   {
@@ -136,7 +136,7 @@ export default function TreeViewDemo() {
             />
           </CardContent>
         </Card>
-        {selected && <p className="text-xs text-[var(--invin-text-dim)] mt-2">Selected: {selected}</p>}
+        {selected && <p className="text-caption text-[var(--muted-foreground)] mt-2">Selected: {selected}</p>}
       </PlaygroundSection>
 
       {/* ─── Permission tree with extras ──────────────────────── */}
@@ -173,7 +173,7 @@ export default function TreeViewDemo() {
           </CardContent>
         </Card>
         {multiSelected.length > 0 && (
-          <p className="text-xs text-[var(--invin-text-dim)] mt-2">{multiSelected.length} items selected: {multiSelected.join(', ')}</p>
+          <p className="text-caption text-[var(--muted-foreground)] mt-2">{multiSelected.length} items selected: {multiSelected.join(', ')}</p>
         )}
       </PlaygroundSection>
 
@@ -185,7 +185,7 @@ export default function TreeViewDemo() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {(['sm', 'md', 'lg']).map((s) => (
             <div key={s}>
-              <p className="text-[11px] font-[500] text-[var(--invin-text-faint)] uppercase mb-2">{s}</p>
+              <p className="text-[11px] font-[500] text-[var(--muted-foreground-faint)] uppercase mb-2">{s}</p>
               <Card>
                 <CardContent className="py-2 px-1">
                   <TreeView

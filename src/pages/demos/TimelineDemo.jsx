@@ -5,8 +5,8 @@ import { Button } from 'invin-uix/ui/button';
 import { Card, CardContent } from 'invin-uix/ui/card';
 import { Separator } from 'invin-uix/ui/separator';
 import {
-  CheckCircle2, AlertCircle, Mail, Users, TrendingUp, Clock,
-  Shield, Zap, Bell, GitBranch, Upload, Download, Settings
+  CheckCircle, WarningCircle, Envelope, Users, TrendUp, Clock,
+  Shield, Lightning, Bell, GitBranch, UploadSimple, DownloadSimple, Gear
 } from 'invin-uix/ui/icons';
 
 export default function TimelineDemo() {
@@ -19,7 +19,7 @@ export default function TimelineDemo() {
 
       {/* ─── Props ──────────────────────────────────────────── */}
       <div className="space-y-4">
-        <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)]">Timeline</p>
+        <p className="text-[var(--muted-foreground)] font-[600] uppercase tracking-[0.05em] text-[var(--muted-foreground-faint)]">Timeline</p>
         <PropsTable
           props={[
             { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Size of dot indicators' },
@@ -28,7 +28,7 @@ export default function TimelineDemo() {
         />
       </div>
       <div className="space-y-4">
-        <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)]">TimelineItem</p>
+        <p className="text-[var(--muted-foreground)] font-[600] uppercase tracking-[0.05em] text-[var(--muted-foreground-faint)]">TimelineItem</p>
         <PropsTable
           props={[
             { name: 'title', type: 'string', default: '—', description: 'Event title (required)' },
@@ -54,20 +54,20 @@ export default function TimelineDemo() {
             time="2 min ago"
             title="Invoice #INV-001 paid"
             description="Payment of $250.00 received via Stripe"
-            color="var(--invin-ok)"
+            color="var(--ok)"
             active
           />
           <TimelineItem
             time="15 min ago"
             title="New message from Carol"
             description="Regarding the Q3 compliance report"
-            color="var(--invin-accent)"
+            color="var(--accent)"
           />
           <TimelineItem
             time="1 hour ago"
             title="Payment failed for INV-004"
             description="Card ending in 4242 was declined"
-            color="var(--invin-error)"
+            color="var(--error)"
           />
           <TimelineItem
             time="3 hours ago"
@@ -92,8 +92,8 @@ export default function TimelineDemo() {
             time="Just now"
             title="Deployment successful"
             description="v2.4.0 deployed to production"
-            icon={<CheckCircle2 style={{ width: 16, height: 16 }} />}
-            color="var(--invin-ok)"
+            icon={<CheckCircle style={{ width: 16, height: 16 }} />}
+            color="var(--ok)"
             variant="filled"
             active
           />
@@ -101,7 +101,7 @@ export default function TimelineDemo() {
             time="10 min ago"
             title="Build started"
             icon={<GitBranch style={{ width: 16, height: 16 }} />}
-            color="var(--invin-accent)"
+            color="var(--accent)"
             variant="filled"
           />
           <TimelineItem
@@ -109,23 +109,23 @@ export default function TimelineDemo() {
             title="Security scan completed"
             description="No vulnerabilities found"
             icon={<Shield style={{ width: 16, height: 16 }} />}
-            color="var(--invin-ok)"
+            color="var(--ok)"
             variant="filled"
           />
           <TimelineItem
             time="1 hour ago"
             title="Alert triggered"
             description="CPU usage exceeded 90% threshold"
-            icon={<AlertCircle style={{ width: 16, height: 16 }} />}
-            color="var(--invin-error)"
+            icon={<WarningCircle style={{ width: 16, height: 16 }} />}
+            color="var(--error)"
             variant="filled"
           />
           <TimelineItem
             time="2 hours ago"
             title="New integration connected"
             description="Slack webhook configured"
-            icon={<Zap style={{ width: 16, height: 16 }} />}
-            color="var(--invin-warn)"
+            icon={<Lightning style={{ width: 16, height: 16 }} />}
+            color="var(--degraded)"
             variant="filled"
           />
         </Timeline>
@@ -140,22 +140,22 @@ export default function TimelineDemo() {
           <TimelineItem
             title="File uploaded"
             description="report-q3.pdf (2.4 MB)"
-            icon={<Upload style={{ width: 14, height: 14 }} />}
-            color="var(--invin-accent)"
+            icon={<UploadSimple style={{ width: 14, height: 14 }} />}
+            color="var(--accent)"
             variant="outline"
           />
           <TimelineItem
             title="Report downloaded"
             description="audit-log-2024.csv"
-            icon={<Download style={{ width: 14, height: 14 }} />}
-            color="var(--invin-accent)"
+            icon={<DownloadSimple style={{ width: 14, height: 14 }} />}
+            color="var(--accent)"
             variant="outline"
           />
           <TimelineItem
             title="Notification sent"
             description="Email alert to admin@company.com"
             icon={<Bell style={{ width: 14, height: 14 }} />}
-            color="var(--invin-accent)"
+            color="var(--accent)"
             variant="outline"
           />
         </Timeline>
@@ -170,8 +170,8 @@ export default function TimelineDemo() {
           <TimelineItem
             time="Today, 9:00 AM"
             title="Incident #INC-2847 opened"
-            icon={<AlertCircle style={{ width: 18, height: 18 }} />}
-            color="var(--invin-error)"
+            icon={<WarningCircle style={{ width: 18, height: 18 }} />}
+            color="var(--error)"
             variant="filled"
             active
           >
@@ -179,9 +179,9 @@ export default function TimelineDemo() {
               <CardContent className="pt-3 pb-3 space-y-2">
                 <div className="flex items-center gap-2">
                   <Badge variant="destructive" size="sm">Critical</Badge>
-                  <span className="text-xs text-[var(--invin-text-dim)]">Assigned to SOC Team</span>
+                  <span className="text-caption text-[var(--muted-foreground)]">Assigned to SOC Team</span>
                 </div>
-                <p className="text-sm text-[var(--invin-text-dim)]">Unauthorized access attempt detected from IP 192.168.1.45</p>
+                <p className="text-label text-[var(--muted-foreground)]">Unauthorized access attempt detected from IP 192.168.1.45</p>
                 <Button variant="outline" size="sm">View Incident</Button>
               </CardContent>
             </Card>
@@ -190,7 +190,7 @@ export default function TimelineDemo() {
             time="Today, 8:30 AM"
             title="Automated scan completed"
             icon={<Shield style={{ width: 18, height: 18 }} />}
-            color="var(--invin-ok)"
+            color="var(--ok)"
             variant="filled"
           >
             <div className="flex gap-2 mt-1">
@@ -203,8 +203,8 @@ export default function TimelineDemo() {
             time="Yesterday, 5:00 PM"
             title="Policy updated"
             description="Network firewall rules updated by admin"
-            icon={<Settings style={{ width: 18, height: 18 }} />}
-            color="var(--invin-accent)"
+            icon={<Gear style={{ width: 18, height: 18 }} />}
+            color="var(--accent)"
             variant="filled"
           />
         </Timeline>
@@ -216,9 +216,9 @@ export default function TimelineDemo() {
         description="Use lineVariant='dashed' for a subtler connector."
       >
         <Timeline lineVariant="dashed" size="sm">
-          <TimelineItem title="Order placed" time="Mar 1" color="var(--invin-ok)" />
-          <TimelineItem title="Payment confirmed" time="Mar 1" color="var(--invin-ok)" />
-          <TimelineItem title="Shipped" time="Mar 3" color="var(--invin-accent)" active />
+          <TimelineItem title="Order placed" time="Mar 1" color="var(--ok)" />
+          <TimelineItem title="Payment confirmed" time="Mar 1" color="var(--ok)" />
+          <TimelineItem title="Shipped" time="Mar 3" color="var(--accent)" active />
           <TimelineItem title="Delivered" time="Pending" />
         </Timeline>
       </PlaygroundSection>
@@ -231,9 +231,9 @@ export default function TimelineDemo() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {(['sm', 'md', 'lg']).map((size) => (
             <div key={size}>
-              <p className="text-[11px] font-[500] text-[var(--invin-text-faint)] uppercase mb-3">{size}</p>
+              <p className="text-[11px] font-[500] text-[var(--muted-foreground-faint)] uppercase mb-3">{size}</p>
               <Timeline size={size}>
-                <TimelineItem title="First event" color="var(--invin-accent)" active />
+                <TimelineItem title="First event" color="var(--accent)" active />
                 <TimelineItem title="Second event" />
                 <TimelineItem title="Third event" />
               </Timeline>

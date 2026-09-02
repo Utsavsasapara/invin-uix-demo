@@ -1,22 +1,21 @@
 import { useState, lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'invin-uix/ui/button';
-import { Switch } from 'invin-uix/ui/switch';
 import { Badge } from 'invin-uix/ui/badge';
-import { Separator } from 'invin-uix/ui/separator';
 import { Spinner } from 'invin-uix/ui/spinner';
 import { Menu } from 'invin-uix/ui/menu';
 import { Topbar } from 'invin-uix/ui/topbar';
 import { Sidebar } from 'invin-uix/ui/sidebar';
-import { Sun, Moon, Home } from 'invin-uix/ui/icons';
+import { Sun, Moon, House } from 'invin-uix/ui/icons';
 import { Tooltip } from 'invin-uix/ui/tooltip';
 import { useTheme } from '../useTheme.jsx';
+import { AppSwitcher } from '../components/AppSwitcher.jsx';
 
 // ─── Lazy-loaded demo pages ─────────────────────────────────────────────────
 
 // Getting Started
 const GettingStartedDemo = lazy(() => import('./demos/GettingStartedDemo.jsx'));
-const PresetDemo = lazy(() => import('./demos/PresetDemo.jsx'));
+const UIGuideV2 = lazy(() => import('./demos/UIGuideV2.jsx'));
 
 // Tier 1: Display
 const ButtonDemo = lazy(() => import('./demos/ButtonDemo.jsx'));
@@ -100,7 +99,7 @@ const categories = [
     type: 'group',
     children: [
       { key: 'getting-started', label: 'Getting Started', component: GettingStartedDemo },
-      { key: 'preset', label: 'Preset (Tailwind)', component: PresetDemo },
+      { key: 'ui-guide', label: 'UI Guide', component: UIGuideV2 },
       { key: 'typography', label: 'Typography', component: TypographyDemo },
       { key: 'icons', label: 'Icons', component: IconsDemo },
     ],
@@ -263,53 +262,12 @@ export default function DemoLayout() {
         onCollapsedChange={setCollapsed}
         product="Playground"
         footer={
-          <div className="space-y-2">
-            {!collapsed && (
-              <>
-                <div className="flex items-center gap-2 text-[length:var(--invin-text-label)] text-[var(--invin-text-dim)]">
-                  {dark ? <Moon style={{ width: 14, height: 14 }} /> : <Sun style={{ width: 14, height: 14 }} />}
-                  <span>{dark ? 'Dark' : 'Light'}</span>
-                  <Switch size="sm" checked={dark} onCheckedChange={toggleDark} className="ml-auto" />
-                </div>
-                <Separator />
-                <div>
-                  <span className="text-[10px] text-[var(--invin-text-faint)]">Accent</span>
-                  <div className="flex items-center gap-1.5 mt-1">
-                    {[
-                      { name: 'blue', color: '#4a86ec' },
-                      { name: 'crimson', color: '#f0455a' },
-                      { name: 'violet', color: '#9752d9' },
-                      { name: 'pink', color: '#d64d97' },
-                      { name: 'amber', color: '#bd8629' },
-                    ].map(a => (
-                      <button
-                        key={a.name}
-                        onClick={() => document.documentElement.setAttribute('data-accent', a.name)}
-                        className="h-5 w-5 rounded-full border border-[var(--invin-border)] cursor-pointer hover:scale-110 transition-transform"
-                        style={{ background: a.color }}
-                        title={a.name}
-                      />
-                    ))}
-                  </div>
-                </div>
-                <Separator />
-                <div className="flex items-center justify-between">
-                  <span className="text-[10px] text-[var(--invin-text-faint)]">Components</span>
-                  <Badge variant="secondary" size="sm">{allComponents.length}</Badge>
-                </div>
-              </>
-            )}
-            {collapsed && (
-              <div className="flex flex-col items-center gap-2">
-                <button
-                  onClick={() => toggleDark(!dark)}
-                  className="h-7 w-7 rounded-md flex items-center justify-center cursor-pointer hover:bg-[var(--invin-surface-hover)] text-[var(--invin-text-dim)]"
-                >
-                  {dark ? <Moon style={{ width: 14, height: 14 }} /> : <Sun style={{ width: 14, height: 14 }} />}
-                </button>
-              </div>
-            )}
-          </div>
+          !collapsed ? (
+            <div className="flex items-center justify-between">
+              <span className="text-[10px] text-[var(--muted-foreground-faint)]">Components</span>
+              <Badge variant="secondary" size="sm">{allComponents.length}</Badge>
+            </div>
+          ) : null
         }
       >
         <Menu
@@ -326,14 +284,15 @@ export default function DemoLayout() {
       {/* ─── Main Content ────────────────────────────────────── */}
       <main
         className="transition-[margin-left] duration-200 ease-out"
-        style={{ marginLeft: collapsed ? 'var(--invin-sidebar-collapsed-w)' : 'var(--invin-sidebar-w)' }}
+        style={{ marginLeft: collapsed ? 'var(--sidebar-collapsed-width)' : 'var(--sidebar-width)' }}
       >
         <Topbar
           left={
-            <h1 className="text-[length:var(--invin-text-card-title)] font-[700] tracking-[-0.02em]">{activeEntry?.label || 'Component'}</h1>
+            <h1 className="text-[var(--foreground)] font-[700] tracking-[-0.02em]">{activeEntry?.label || 'Component'}</h1>
           }
           right={
             <div className="flex items-center gap-1">
+              <AppSwitcher />
               <Tooltip title={dark ? "Switch to light mode" : "Switch to dark mode"}>
                 <Button variant="ghost" size="icon-sm" onClick={() => toggleDark(!dark)}>
                   {dark ? <Sun style={{ width: 16, height: 16 }} /> : <Moon style={{ width: 16, height: 16 }} />}
@@ -341,7 +300,7 @@ export default function DemoLayout() {
               </Tooltip>
               <Link to="/">
                 <Button variant="ghost" size="sm">
-                  <Home style={{ width: 14, height: 14 }} /> Home
+                  <House style={{ width: 14, height: 14 }} /> House
                 </Button>
               </Link>
             </div>

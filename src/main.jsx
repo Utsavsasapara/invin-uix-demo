@@ -2,10 +2,8 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 
-// Fonts (self-hosted via @fontsource)
-import '@fontsource-variable/inter';
-import '@fontsource/jetbrains-mono';
-
+// Fonts (Geist + Geist Mono) are self-hosted by invin-uix via tokens.css —
+// no @fontsource import needed.
 import './index.css';
 import App from './App.routes.jsx';
 import 'invin-uix/tokens.css';

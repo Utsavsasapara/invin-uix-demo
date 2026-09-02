@@ -1,7 +1,7 @@
 import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from 'invin-uix/ui/breadcrumb';
 import { Separator } from 'invin-uix/ui/separator';
-import { Home, Settings } from 'invin-uix/ui/icons';
+import { House, Gear } from 'invin-uix/ui/icons';
 
 export default function BreadcrumbDemo() {
   return (
@@ -26,7 +26,7 @@ export default function BreadcrumbDemo() {
         description="Pass an items array for quick breadcrumb setup."
         code={`<Breadcrumb
   items={[
-    { title: 'Home', href: '#' },
+    { title: 'House', href: '#' },
     { title: 'Components', href: '#' },
     { title: 'Breadcrumb' },
   ]}
@@ -34,7 +34,7 @@ export default function BreadcrumbDemo() {
       >
         <Breadcrumb
           items={[
-            { title: 'Home', href: '#' },
+            { title: 'House', href: '#' },
             { title: 'Components', href: '#' },
             { title: 'Breadcrumb' },
           ]}
@@ -44,20 +44,20 @@ export default function BreadcrumbDemo() {
       <PlaygroundSection
         title="With Icons"
         description="Add icons to breadcrumb items for visual context."
-        code={`import { Home, Settings } from 'invin-uix/ui/icons';
+        code={`import { House, Gear } from 'invin-uix/ui/icons';
 
 <Breadcrumb
   items={[
-    { title: 'Home', href: '#', icon: <Home style={{ width: 14, height: 14, marginRight: 4, display: 'inline' }} /> },
-    { title: 'Settings', href: '#', icon: <Settings style={{ width: 14, height: 14, marginRight: 4, display: 'inline' }} /> },
+    { title: 'House', href: '#', icon: <House style={{ width: 14, height: 14, marginRight: 4, display: 'inline' }} /> },
+    { title: 'Gear', href: '#', icon: <Gear style={{ width: 14, height: 14, marginRight: 4, display: 'inline' }} /> },
     { title: 'Profile' },
   ]}
 />`}
       >
         <Breadcrumb
           items={[
-            { title: 'Home', href: '#', icon: <Home style={{ width: 14, height: 14, marginRight: 4, display: 'inline' }} /> },
-            { title: 'Settings', href: '#', icon: <Settings style={{ width: 14, height: 14, marginRight: 4, display: 'inline' }} /> },
+            { title: 'House', href: '#', icon: <House style={{ width: 14, height: 14, marginRight: 4, display: 'inline' }} /> },
+            { title: 'Gear', href: '#', icon: <Gear style={{ width: 14, height: 14, marginRight: 4, display: 'inline' }} /> },
             { title: 'Profile' },
           ]}
         />
@@ -67,7 +67,7 @@ export default function BreadcrumbDemo() {
         title="Custom Separator ( > )"
         description="Override the default separator character."
         code={`<Breadcrumb
-  separator={<span style={{ margin: '0 8px', color: 'var(--invin-color-text-disabled)' }}>&gt;</span>}
+  separator={<span style={{ margin: '0 8px', color: 'var(--muted-foreground-faint)' }}>&gt;</span>}
   items={[
     { title: 'Dashboard', href: '#' },
     { title: 'Users', href: '#' },
@@ -76,7 +76,7 @@ export default function BreadcrumbDemo() {
 />`}
       >
         <Breadcrumb
-          separator={<span style={{ margin: '0 8px', color: 'var(--invin-text-faint)' }}>&gt;</span>}
+          separator={<span style={{ margin: '0 8px', color: 'var(--muted-foreground-faint)' }}>&gt;</span>}
           items={[
             { title: 'Dashboard', href: '#' },
             { title: 'Users', href: '#' },
@@ -99,7 +99,7 @@ export default function BreadcrumbDemo() {
 />`}
       >
         <Breadcrumb
-          separator={<span style={{ margin: '0 6px', color: 'var(--invin-text-faint)' }}>→</span>}
+          separator={<span style={{ margin: '0 6px', color: 'var(--muted-foreground-faint)' }}>→</span>}
           items={[
             { title: 'Products', href: '#' },
             { title: 'Electronics', href: '#' },
@@ -114,7 +114,7 @@ export default function BreadcrumbDemo() {
         description="Use sub-components for full control over rendering."
         code={`<Breadcrumb>
   <BreadcrumbList>
-    <BreadcrumbItem><BreadcrumbLink href="#">Home</BreadcrumbLink></BreadcrumbItem>
+    <BreadcrumbItem><BreadcrumbLink href="#">House</BreadcrumbLink></BreadcrumbItem>
     <BreadcrumbSeparator />
     <BreadcrumbItem><BreadcrumbLink href="#">Library</BreadcrumbLink></BreadcrumbItem>
     <BreadcrumbSeparator />
@@ -124,7 +124,7 @@ export default function BreadcrumbDemo() {
       >
         <Breadcrumb>
           <BreadcrumbList>
-            <BreadcrumbItem><BreadcrumbLink href="#">Home</BreadcrumbLink></BreadcrumbItem>
+            <BreadcrumbItem><BreadcrumbLink href="#">House</BreadcrumbLink></BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem><BreadcrumbLink href="#">Library</BreadcrumbLink></BreadcrumbItem>
             <BreadcrumbSeparator />
@@ -138,7 +138,7 @@ export default function BreadcrumbDemo() {
         description="Breadcrumb with multiple levels of navigation."
         code={`<Breadcrumb
   items={[
-    { title: 'Home', href: '#' },
+    { title: 'House', href: '#' },
     { title: 'Projects', href: '#' },
     { title: 'invin-ui', href: '#' },
     { title: 'Components', href: '#' },
@@ -148,7 +148,7 @@ export default function BreadcrumbDemo() {
       >
         <Breadcrumb
           items={[
-            { title: 'Home', href: '#' },
+            { title: 'House', href: '#' },
             { title: 'Projects', href: '#' },
             { title: 'invin-ui', href: '#' },
             { title: 'Components', href: '#' },

@@ -49,9 +49,9 @@ export default function AreaChartDemo() {
   data={data}
   xKey="hour"
   areas={[
-    { key: 'inbound', name: 'Inbound', color: 'var(--invin-accent)' },
-    { key: 'outbound', name: 'Outbound', color: 'var(--invin-ok)' },
-    { key: 'blocked', name: 'Blocked', color: 'var(--invin-error)' },
+    { key: 'inbound', name: 'Inbound', color: 'var(--accent)' },
+    { key: 'outbound', name: 'Outbound', color: 'var(--ok)' },
+    { key: 'blocked', name: 'Blocked', color: 'var(--error)' },
   ]}
   stacked
   height={280}
@@ -61,9 +61,9 @@ export default function AreaChartDemo() {
           data={trafficData}
           xKey="hour"
           areas={[
-            { key: 'inbound', name: 'Inbound', color: 'var(--invin-accent)' },
-            { key: 'outbound', name: 'Outbound', color: 'var(--invin-ok)' },
-            { key: 'blocked', name: 'Blocked', color: 'var(--invin-error)' },
+            { key: 'inbound', name: 'Inbound', color: 'var(--accent)' },
+            { key: 'outbound', name: 'Outbound', color: 'var(--ok)' },
+            { key: 'blocked', name: 'Blocked', color: 'var(--error)' },
           ]}
           stacked
           height={280}
@@ -80,7 +80,7 @@ export default function AreaChartDemo() {
   xKey="hour"
   areas={[
     { key: 'inbound', name: 'Inbound' },
-    { key: 'outbound', name: 'Outbound', color: 'var(--invin-ok)' },
+    { key: 'outbound', name: 'Outbound', color: 'var(--ok)' },
   ]}
   height={220}
 />`}
@@ -90,7 +90,7 @@ export default function AreaChartDemo() {
           xKey="hour"
           areas={[
             { key: 'inbound', name: 'Inbound' },
-            { key: 'outbound', name: 'Outbound', color: 'var(--invin-ok)' },
+            { key: 'outbound', name: 'Outbound', color: 'var(--ok)' },
           ]}
           height={220}
         />

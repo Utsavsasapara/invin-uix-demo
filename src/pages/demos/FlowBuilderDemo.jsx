@@ -6,8 +6,8 @@ import { Progress } from 'invin-uix/ui/progress';
 import { Separator } from 'invin-uix/ui/separator';
 import { Card, CardContent } from 'invin-uix/ui/card';
 import {
-  ArrowRight, CheckCircle2, Clock, AlertCircle, TrendingUp,
-  MessageSquare, Star, Play, Shield,
+  ArrowRight, CheckCircle, Clock, WarningCircle, TrendUp,
+  ChatCircle, Star, Play, Shield,
 } from 'invin-uix/ui/icons';
 
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -18,14 +18,14 @@ import {
 function ProcessNode({ data, selected }) {
   return (
     <div
-      className="rounded-lg border bg-[var(--invin-pop-bg)] px-4 py-3 min-w-[200px] max-w-[280px] shadow-sm"
-      style={{ borderLeft: `3px solid ${data.color || 'var(--invin-accent)'}`, borderColor: selected ? 'var(--invin-accent)' : 'var(--invin-border)', borderLeftColor: data.color || 'var(--invin-accent)' }}
+      className="rounded-lg border bg-[var(--popover)] px-4 py-3 min-w-[200px] max-w-[280px] shadow-sm"
+      style={{ borderLeft: `3px solid ${data.color || 'var(--accent)'}`, borderColor: selected ? 'var(--accent)' : 'var(--border)', borderLeftColor: data.color || 'var(--accent)' }}
     >
-      <Handle type="target" position={Position.Left} className="!w-2 !h-2 !bg-[var(--invin-text-dim)] !border-0" />
-      <p className="text-[13px] font-[500] text-[var(--invin-text)]">{data.title}</p>
-      {data.subtitle && <p className="text-[11px] text-[var(--invin-text-dim)] mt-0.5">{data.subtitle}</p>}
+      <Handle type="target" position={Position.Left} className="!w-2 !h-2 !bg-[var(--muted-foreground)] !border-0" />
+      <p className="text-[13px] font-[500] text-[var(--foreground)]">{data.title}</p>
+      {data.subtitle && <p className="text-[11px] text-[var(--muted-foreground)] mt-0.5">{data.subtitle}</p>}
       {data.icon && <div className="mt-2">{data.icon}</div>}
-      <Handle type="source" position={Position.Right} className="!w-2 !h-2 !bg-[var(--invin-text-dim)] !border-0" />
+      <Handle type="source" position={Position.Right} className="!w-2 !h-2 !bg-[var(--muted-foreground)] !border-0" />
     </div>
   );
 }
@@ -33,11 +33,11 @@ function ProcessNode({ data, selected }) {
 const processNodeTypes = { processNode: ProcessNode };
 
 const processNodes = [
-  { id: '1', type: 'processNode', position: { x: 50, y: 40 }, data: { title: 'Customer initiates checkout', subtitle: 'POST /create-checkout-session', color: 'var(--invin-ok)' } },
-  { id: '2', type: 'processNode', position: { x: 50, y: 140 }, data: { title: 'Return Checkout Session', subtitle: 'session_id + url', color: 'var(--invin-accent)', icon: <Shield style={{ width: 14, height: 14, color: 'var(--invin-accent)' }} /> } },
-  { id: '3', type: 'processNode', position: { x: 350, y: 90 }, data: { title: 'Redirect customer to url from Checkout Session', color: 'var(--invin-warn)' } },
+  { id: '1', type: 'processNode', position: { x: 50, y: 40 }, data: { title: 'Customer initiates checkout', subtitle: 'POST /create-checkout-session', color: 'var(--ok)' } },
+  { id: '2', type: 'processNode', position: { x: 50, y: 140 }, data: { title: 'Return Checkout Session', subtitle: 'session_id + url', color: 'var(--accent)', icon: <Shield style={{ width: 14, height: 14, color: 'var(--accent)' }} /> } },
+  { id: '3', type: 'processNode', position: { x: 350, y: 90 }, data: { title: 'Redirect customer to url from Checkout Session', color: 'var(--degraded)' } },
   { id: '4', type: 'processNode', position: { x: 650, y: 90 }, data: { title: 'Customer completes payment', subtitle: 'Stripe handles PCI compliance', color: 'var(--chart-5, #8b5cf6)' } },
-  { id: '5', type: 'processNode', position: { x: 350, y: 200 }, data: { title: 'Customer returns to your application', subtitle: 'success_url redirect', color: 'var(--invin-ok)' } },
+  { id: '5', type: 'processNode', position: { x: 350, y: 200 }, data: { title: 'Customer returns to your application', subtitle: 'success_url redirect', color: 'var(--ok)' } },
 ];
 
 const processEdges = [
@@ -55,12 +55,12 @@ const processEdges = [
 
 function MetricNode({ data }) {
   return (
-    <div className="rounded-xl border border-[var(--invin-border)] bg-[var(--invin-pop-bg)] p-4 min-w-[200px] max-w-[240px] shadow-md">
-      <Handle type="target" position={Position.Left} className="!w-2.5 !h-2.5 !rounded-full !bg-[var(--invin-accent)] !border-2 !border-[var(--invin-bg)]" />
+    <div className="rounded-xl border border-[var(--border)] bg-[var(--popover)] p-4 min-w-[200px] max-w-[240px] shadow-md">
+      <Handle type="target" position={Position.Left} className="!w-2.5 !h-2.5 !rounded-full !bg-[var(--accent)] !border-2 !border-[var(--background)]" />
 
       {/* Header */}
       <div className="flex items-start justify-between mb-2">
-        <p className="text-[11px] text-[var(--invin-text-dim)] font-[500]">{data.category}</p>
+        <p className="text-[11px] text-[var(--muted-foreground)] font-[500]">{data.category}</p>
         {data.score && (
           <Badge variant={data.score > 0.9 ? 'success' : data.score > 0.5 ? 'warning' : 'destructive'} size="sm">
             {data.score.toFixed(3)}
@@ -69,19 +69,19 @@ function MetricNode({ data }) {
       </div>
 
       {/* Title + value */}
-      <p className="text-[13px] font-[600] text-[var(--invin-text)]">{data.title}</p>
+      <p className="text-[13px] font-[600] text-[var(--foreground)]">{data.title}</p>
       {data.value && (
-        <p className="text-[length:var(--invin-text-kpi)] font-[700] mt-1">{data.value}</p>
+        <p className="text-[var(--foreground)] font-[700] mt-1">{data.value}</p>
       )}
 
       {/* Subtitle / meta */}
-      {data.meta && <p className="text-[10px] text-[var(--invin-text-faint)] mt-1">{data.meta}</p>}
+      {data.meta && <p className="text-[10px] text-[var(--muted-foreground-faint)] mt-1">{data.meta}</p>}
 
       {/* Progress */}
       {data.progress !== undefined && (
         <div className="mt-2">
           <Progress value={data.progress} size="sm" />
-          <p className="text-[10px] text-[var(--invin-text-dim)] mt-0.5">{data.progressLabel}</p>
+          <p className="text-[10px] text-[var(--muted-foreground)] mt-0.5">{data.progressLabel}</p>
         </div>
       )}
 
@@ -94,7 +94,7 @@ function MetricNode({ data }) {
         </div>
       )}
 
-      <Handle type="source" position={Position.Right} className="!w-2.5 !h-2.5 !rounded-full !bg-[var(--invin-accent)] !border-2 !border-[var(--invin-bg)]" />
+      <Handle type="source" position={Position.Right} className="!w-2.5 !h-2.5 !rounded-full !bg-[var(--accent)] !border-2 !border-[var(--background)]" />
     </div>
   );
 }
@@ -127,31 +127,31 @@ const metricEdges = [
 
 function SurveyNode({ data }) {
   return (
-    <div className="flex items-center gap-2 rounded-full border border-[var(--invin-border)] bg-[var(--invin-pop-bg)] pl-2 pr-4 py-2 shadow-sm min-w-[120px]">
-      <Handle type="target" position={Position.Left} className="!w-2 !h-2 !bg-[var(--invin-border-strong)] !border-0 !-left-1" />
+    <div className="flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--popover)] pl-2 pr-4 py-2 shadow-sm min-w-[120px]">
+      <Handle type="target" position={Position.Left} className="!w-2 !h-2 !bg-[var(--input)] !border-0 !-left-1" />
 
       {/* Icon circle */}
       <div
         className="h-8 w-8 rounded-full flex items-center justify-center shrink-0"
-        style={{ backgroundColor: data.iconBg || 'var(--invin-surface-hover)' }}
+        style={{ backgroundColor: data.iconBg || 'var(--secondary)' }}
       >
-        {data.icon || <MessageSquare style={{ width: 14, height: 14, color: data.iconColor || 'var(--invin-text)' }} />}
+        {data.icon || <ChatCircle style={{ width: 14, height: 14, color: data.iconColor || 'var(--foreground)' }} />}
       </div>
 
       {/* Label */}
       <div>
-        <p className="text-[12px] font-[600] text-[var(--invin-text)] leading-tight">{data.title}</p>
-        {data.subtitle && <p className="text-[10px] text-[var(--invin-text-dim)]">{data.subtitle}</p>}
+        <p className="text-[12px] font-[600] text-[var(--foreground)] leading-tight">{data.title}</p>
+        {data.subtitle && <p className="text-[10px] text-[var(--muted-foreground)]">{data.subtitle}</p>}
       </div>
 
       {/* Add button (visual only) */}
       {data.showAdd && (
-        <div className="h-5 w-5 rounded-full border border-[var(--invin-border)] flex items-center justify-center ml-1 text-[var(--invin-text-dim)]">
+        <div className="h-5 w-5 rounded-full border border-[var(--border)] flex items-center justify-center ml-1 text-[var(--muted-foreground)]">
           <span className="text-[11px]">+</span>
         </div>
       )}
 
-      <Handle type="source" position={Position.Right} className="!w-2 !h-2 !bg-[var(--invin-border-strong)] !border-0 !-right-1" />
+      <Handle type="source" position={Position.Right} className="!w-2 !h-2 !bg-[var(--input)] !border-0 !-right-1" />
     </div>
   );
 }
@@ -161,9 +161,9 @@ const surveyNodeTypes = { surveyNode: SurveyNode };
 const surveyNodes = [
   { id: 's1', type: 'surveyNode', position: { x: 30, y: 100 }, data: { title: 'Starting logic', subtitle: 'based on...', iconBg: '#1f1f1f', icon: <Play style={{ width: 14, height: 14, color: '#fff' }} />, showAdd: true } },
   { id: 's2', type: 'surveyNode', position: { x: 230, y: 100 }, data: { title: 'WS. Welcome!', iconBg: '#333', icon: <Play style={{ width: 12, height: 12, color: '#fff' }} /> } },
-  { id: 's3', type: 'surveyNode', position: { x: 420, y: 50 }, data: { title: 'S1. Hello', subtitle: 'good to...', iconBg: 'var(--invin-ok)', icon: <MessageSquare style={{ width: 12, height: 12, color: '#fff' }} />, showAdd: true } },
-  { id: 's4', type: 'surveyNode', position: { x: 420, y: 150 }, data: { title: '1. Hello stranger!', subtitle: "What's ...", iconBg: 'var(--invin-accent)', icon: <MessageSquare style={{ width: 12, height: 12, color: '#fff' }} /> } },
-  { id: 's5', type: 'surveyNode', position: { x: 640, y: 100 }, data: { title: '2. How would you', subtitle: 'rate this ...', iconBg: 'var(--invin-warn)', icon: <Star style={{ width: 12, height: 12, color: '#fff' }} />, showAdd: true } },
+  { id: 's3', type: 'surveyNode', position: { x: 420, y: 50 }, data: { title: 'S1. Hello', subtitle: 'good to...', iconBg: 'var(--ok)', icon: <ChatCircle style={{ width: 12, height: 12, color: '#fff' }} />, showAdd: true } },
+  { id: 's4', type: 'surveyNode', position: { x: 420, y: 150 }, data: { title: '1. Hello stranger!', subtitle: "What's ...", iconBg: 'var(--accent)', icon: <ChatCircle style={{ width: 12, height: 12, color: '#fff' }} /> } },
+  { id: 's5', type: 'surveyNode', position: { x: 640, y: 100 }, data: { title: '2. How would you', subtitle: 'rate this ...', iconBg: 'var(--degraded)', icon: <Star style={{ width: 12, height: 12, color: '#fff' }} />, showAdd: true } },
   { id: 's6', type: 'surveyNode', position: { x: 860, y: 100 }, data: { title: 'A. All done!', subtitle: 'Thanks ...', iconBg: '#333', icon: <Play style={{ width: 12, height: 12, color: '#fff' }} /> } },
 ];
 
@@ -237,7 +237,7 @@ function ProcessNode({ data }) {
             showMinimap={false}
           />
         </Card>
-        <p className="text-center text-[12px] text-[var(--invin-text-dim)] mt-3 font-[500]">
+        <p className="text-center text-[12px] text-[var(--muted-foreground)] mt-3 font-[500]">
           Stripe Docs — Diagrams for process documentation with interactive nodes
         </p>
       </PlaygroundSection>
@@ -278,7 +278,7 @@ function MetricNode({ data }) {
             showMinimap
           />
         </Card>
-        <p className="text-center text-[12px] text-[var(--invin-text-dim)] mt-3 font-[500]">
+        <p className="text-center text-[12px] text-[var(--muted-foreground)] mt-3 font-[500]">
           DoubleLoop — Node-based dashboard builder to monitor business metrics
         </p>
       </PlaygroundSection>
@@ -320,7 +320,7 @@ function SurveyNode({ data }) {
             backgroundVariant="dots"
           />
         </Card>
-        <p className="text-center text-[12px] text-[var(--invin-text-dim)] mt-3 font-[500]">
+        <p className="text-center text-[12px] text-[var(--muted-foreground)] mt-3 font-[500]">
           TypeForm — Interactive tool to build and visualize complex survey logic
         </p>
       </PlaygroundSection>
@@ -329,10 +329,10 @@ function SurveyNode({ data }) {
 
       {/* ─── How to create custom nodes ───────────────────────── */}
       <div className="space-y-4">
-        <h3 className="text-[length:var(--invin-text-sub-heading)] font-[700]">Creating Custom Nodes</h3>
+        <h3 className="text-[var(--foreground)] font-[700]">Creating Custom Nodes</h3>
         <Card>
           <CardContent className="pt-4">
-            <pre className="text-[12px] font-mono text-[var(--invin-text)] overflow-x-auto leading-relaxed">{`import { FlowBuilder, Handle, Position } from 'invin-uix/ui/flow-builder';
+            <pre className="text-[12px] font-mono text-[var(--foreground)] overflow-x-auto leading-relaxed">{`import { FlowBuilder, Handle, Position } from 'invin-uix/ui/flow-builder';
 
 // 1. Define your custom node component
 function MyCustomNode({ data, selected }) {

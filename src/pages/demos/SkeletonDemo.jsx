@@ -40,15 +40,15 @@ export default function SkeletonDemo() {
       >
         <div className="flex flex-wrap items-start gap-6">
           <div className="space-y-1">
-            <p className="text-[10px] text-[var(--invin-text-faint)] uppercase tracking-[0.05em]">Default</p>
+            <p className="text-[10px] text-[var(--muted-foreground-faint)] uppercase tracking-[0.05em]">Default</p>
             <Skeleton className="h-20 w-40" />
           </div>
           <div className="space-y-1">
-            <p className="text-[10px] text-[var(--invin-text-faint)] uppercase tracking-[0.05em]">Circle</p>
+            <p className="text-[10px] text-[var(--muted-foreground-faint)] uppercase tracking-[0.05em]">Circle</p>
             <Skeleton variant="circle" className="h-12 w-12" />
           </div>
           <div className="space-y-1 flex-1 min-w-[150px]">
-            <p className="text-[10px] text-[var(--invin-text-faint)] uppercase tracking-[0.05em]">Text paragraph (lines)</p>
+            <p className="text-[10px] text-[var(--muted-foreground-faint)] uppercase tracking-[0.05em]">Text paragraph (lines)</p>
             <Skeleton lines={3} />
           </div>
         </div>
@@ -64,11 +64,11 @@ export default function SkeletonDemo() {
       >
         <div className="w-full max-w-md space-y-6">
           <div className="space-y-1">
-            <p className="text-[10px] text-[var(--invin-text-faint)] uppercase tracking-[0.05em]">lines=2</p>
+            <p className="text-[10px] text-[var(--muted-foreground-faint)] uppercase tracking-[0.05em]">lines=2</p>
             <Skeleton lines={2} />
           </div>
           <div className="space-y-1">
-            <p className="text-[10px] text-[var(--invin-text-faint)] uppercase tracking-[0.05em]">lines=4</p>
+            <p className="text-[10px] text-[var(--muted-foreground-faint)] uppercase tracking-[0.05em]">lines=4</p>
             <Skeleton lines={4} />
           </div>
         </div>
@@ -98,8 +98,8 @@ export default function SkeletonDemo() {
 
       {/* ─── Use Cases ──────────────────────────────────────────── */}
       <div className="space-y-3">
-        <h3 className="text-[length:var(--invin-text-sub-heading)] font-[700]">Use cases</h3>
-        <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">Compose skeletons to match the content they replace.</p>
+        <h3 className="text-[var(--foreground)] font-[700]">Use cases</h3>
+        <p className="text-[var(--foreground)] text-[var(--muted-foreground)]">Compose skeletons to match the content they replace.</p>
       </div>
 
       <PlaygroundSection
@@ -201,7 +201,7 @@ export default function SkeletonDemo() {
   ))}
 </div>`}
       >
-        <div className="w-52 p-3 rounded-[8px] border border-[var(--invin-border)]">
+        <div className="w-52 p-3 rounded-[8px] border border-[var(--border)]">
           <Skeleton variant="text" className="w-1/3 h-3 mb-3" />
           {[1,2,3,4,5].map(i => (
             <div key={i} className="flex items-center gap-2 px-2 py-1.5">

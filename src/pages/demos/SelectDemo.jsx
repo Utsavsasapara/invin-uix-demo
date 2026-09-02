@@ -17,7 +17,7 @@ export default function SelectDemo() {
 
       {/* ─── Props Table ────────────────────────────────────────── */}
       <div className="space-y-4">
-        <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)]">SelectTrigger</p>
+        <p className="text-[var(--muted-foreground)] font-[600] uppercase tracking-[0.05em] text-[var(--muted-foreground-faint)]">SelectTrigger</p>
         <PropsTable
           props={[
             { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Height — sm (28px), md (38px), lg (44px). Matches Input/Button.' },
@@ -28,7 +28,7 @@ export default function SelectDemo() {
         />
       </div>
       <div className="space-y-4">
-        <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)]">Select (Root)</p>
+        <p className="text-[var(--muted-foreground)] font-[600] uppercase tracking-[0.05em] text-[var(--muted-foreground-faint)]">Select (Root)</p>
         <PropsTable
           props={[
             { name: 'value', type: 'string', default: '—', description: 'Controlled value' },
@@ -213,8 +213,8 @@ export default function SelectDemo() {
 
       {/* ─── Use Cases ──────────────────────────────────────────── */}
       <div className="space-y-3">
-        <h3 className="text-[length:var(--invin-text-sub-heading)] font-[700]">Use cases</h3>
-        <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">Common patterns in real forms.</p>
+        <h3 className="text-[var(--foreground)] font-[700]">Use cases</h3>
+        <p className="text-[var(--foreground)] text-[var(--muted-foreground)]">Common patterns in real forms.</p>
       </div>
 
       <PlaygroundSection

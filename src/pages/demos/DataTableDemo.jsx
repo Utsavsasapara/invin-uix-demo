@@ -6,7 +6,7 @@ import { Button } from 'invin-uix/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from 'invin-uix/ui/avatar';
 import { Separator } from 'invin-uix/ui/separator';
 import { Toaster, toast } from 'invin-uix/ui/toast';
-import { Trash2, Download, Eye } from 'invin-uix/ui/icons';
+import { Trash, DownloadSimple, Eye } from 'invin-uix/ui/icons';
 
 // ─── Mock Data ───────────────────────────────────────────────────────────────
 
@@ -46,8 +46,8 @@ const userColumns = [
       <div className="flex items-center gap-2.5">
         <Avatar size="xs"><AvatarImage src={row.avatar} /><AvatarFallback>{row.name[0]}</AvatarFallback></Avatar>
         <div>
-          <p className="text-sm font-[500]">{row.name}</p>
-          <p className="text-[11px] text-[var(--invin-text-dim)]">{row.email}</p>
+          <p className="text-label font-[500]">{row.name}</p>
+          <p className="text-[11px] text-[var(--muted-foreground)]">{row.email}</p>
         </div>
       </div>
     ),
@@ -176,10 +176,10 @@ export default function DataTableDemo() {
         {selected.length > 0 && (
           <div className="flex items-center gap-2 mt-3">
             <Button variant="destructive" size="sm" onClick={() => { toast({ title: `Deleted ${selected.length} user(s)`, variant: 'success' }); setSelected([]); }}>
-              <Trash2 style={{ width: 13, height: 13 }} /> Delete ({selected.length})
+              <Trash style={{ width: 13, height: 13 }} /> Delete ({selected.length})
             </Button>
             <Button variant="outline" size="sm" onClick={() => toast({ title: 'Exported!' })}>
-              <Download style={{ width: 13, height: 13 }} /> Export
+              <DownloadSimple style={{ width: 13, height: 13 }} /> Export
             </Button>
           </div>
         )}
@@ -246,8 +246,8 @@ export default function DataTableDemo() {
           pageSize={5}
           emptyState={
             <div className="flex flex-col items-center gap-2 py-4">
-              <p className="text-sm font-[500]">No users found</p>
-              <p className="text-xs text-[var(--invin-text-dim)]">Try adjusting your search or add a new user.</p>
+              <p className="text-label font-[500]">No users found</p>
+              <p className="text-caption text-[var(--muted-foreground)]">Try adjusting your search or add a new user.</p>
               <Button size="sm" className="mt-2">Add User</Button>
             </div>
           }

@@ -4,7 +4,7 @@ import { Button } from 'invin-uix/ui/button';
 import { Badge } from 'invin-uix/ui/badge';
 import { Separator } from 'invin-uix/ui/separator';
 import { Avatar, AvatarImage, AvatarFallback } from 'invin-uix/ui/avatar';
-import { ArrowUp, ArrowDown, CreditCard, Users, Activity } from 'invin-uix/ui/icons';
+import { ArrowUp, ArrowDown, CreditCard, Users, Pulse } from 'invin-uix/ui/icons';
 
 export default function CardDemo() {
   return (
@@ -49,7 +49,7 @@ export default function CardDemo() {
             <CardDescription>Manage your project configuration.</CardDescription>
           </CardHeader>
           <CardContent>
-            <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">
+            <p className="text-[var(--foreground)] text-[var(--muted-foreground)]">
               Update your project name, description, and visibility settings here.
             </p>
           </CardContent>
@@ -79,20 +79,20 @@ export default function CardDemo() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full">
           <Card hover>
             <CardContent>
-              <p className="text-[length:var(--invin-text-card-title)] font-[600]">Hover me</p>
-              <p className="text-[length:var(--invin-text-label)] text-[var(--invin-text-dim)] mt-1">Border transitions on hover</p>
+              <p className="text-[var(--foreground)] font-[600]">Hover me</p>
+              <p className="text-[var(--muted-foreground)] text-[var(--muted-foreground)] mt-1">Border transitions on hover</p>
             </CardContent>
           </Card>
           <Card selected>
             <CardContent>
-              <p className="text-[length:var(--invin-text-card-title)] font-[600]">Selected</p>
-              <p className="text-[length:var(--invin-text-label)] text-[var(--invin-text-dim)] mt-1">Accent border + glow ring</p>
+              <p className="text-[var(--foreground)] font-[600]">Selected</p>
+              <p className="text-[var(--muted-foreground)] text-[var(--muted-foreground)] mt-1">Accent border + glow ring</p>
             </CardContent>
           </Card>
           <Card hover selected>
             <CardContent>
-              <p className="text-[length:var(--invin-text-card-title)] font-[600]">Both</p>
-              <p className="text-[length:var(--invin-text-label)] text-[var(--invin-text-dim)] mt-1">Hover lifts, selected stays</p>
+              <p className="text-[var(--foreground)] font-[600]">Both</p>
+              <p className="text-[var(--muted-foreground)] text-[var(--muted-foreground)] mt-1">Hover lifts, selected stays</p>
             </CardContent>
           </Card>
         </div>
@@ -110,7 +110,7 @@ export default function CardDemo() {
       >
         <Card className="w-full max-w-sm">
           <CardContent>
-            <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">
+            <p className="text-[var(--foreground)] text-[var(--muted-foreground)]">
               This is a minimal card. No header, no footer — just wrapping content with card styling.
             </p>
           </CardContent>
@@ -121,8 +121,8 @@ export default function CardDemo() {
 
       {/* ─── Use Cases ──────────────────────────────────────────── */}
       <div className="space-y-3">
-        <h3 className="text-[length:var(--invin-text-sub-heading)] font-[700]">Use cases</h3>
-        <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">Common patterns in real applications.</p>
+        <h3 className="text-[var(--foreground)] font-[700]">Use cases</h3>
+        <p className="text-[var(--foreground)] text-[var(--muted-foreground)]">Common patterns in real applications.</p>
       </div>
 
       <PlaygroundSection
@@ -131,11 +131,11 @@ export default function CardDemo() {
         code={`<Card>
   <CardContent>
     <div className="flex items-center justify-between">
-      <p className="text-xs text-[var(--invin-text-dim)]">Revenue</p>
+      <p className="text-caption text-[var(--muted-foreground)]">Revenue</p>
       <CreditCard style={{ width: 14, height: 14 }} />
     </div>
-    <p className="text-[length:var(--invin-text-kpi)] font-[700] mt-1">$45,231</p>
-    <p className="text-xs text-[var(--invin-ok)]">+20.1% from last month</p>
+    <p className="text-[var(--foreground)] font-[700] mt-1">$45,231</p>
+    <p className="text-caption text-[var(--ok)]">+20.1% from last month</p>
   </CardContent>
 </Card>`}
       >
@@ -143,19 +143,19 @@ export default function CardDemo() {
           {[
             { label: 'Revenue', value: '$45,231', change: '+20.1%', up: true, icon: CreditCard },
             { label: 'Users', value: '+2,350', change: '+12.5%', up: true, icon: Users },
-            { label: 'Active Now', value: '573', change: '-2.3%', up: false, icon: Activity },
+            { label: 'Active Now', value: '573', change: '-2.3%', up: false, icon: Pulse },
           ].map(s => (
             <Card key={s.label} hover>
               <CardContent>
                 <div className="flex items-center justify-between">
-                  <p className="text-[length:var(--invin-text-label)] text-[var(--invin-text-dim)]">{s.label}</p>
-                  <s.icon style={{ width: 14, height: 14, color: 'var(--invin-text-dim)' }} />
+                  <p className="text-[var(--muted-foreground)] text-[var(--muted-foreground)]">{s.label}</p>
+                  <s.icon style={{ width: 14, height: 14, color: 'var(--muted-foreground)' }} />
                 </div>
-                <p className="text-[length:var(--invin-text-sub-heading)] font-[700] mt-1">{s.value}</p>
+                <p className="text-[var(--foreground)] font-[700] mt-1">{s.value}</p>
                 <div className="flex items-center gap-1 mt-1">
-                  {s.up ? <ArrowUp style={{ width: 12, height: 12, color: 'var(--invin-ok)' }} /> : <ArrowDown style={{ width: 12, height: 12, color: 'var(--invin-error)' }} />}
-                  <span className={`text-[10px] ${s.up ? 'text-[var(--invin-ok)]' : 'text-[var(--invin-error)]'}`}>{s.change}</span>
-                  <span className="text-[10px] text-[var(--invin-text-faint)]">from last month</span>
+                  {s.up ? <ArrowUp style={{ width: 12, height: 12, color: 'var(--ok)' }} /> : <ArrowDown style={{ width: 12, height: 12, color: 'var(--error)' }} />}
+                  <span className={`text-[10px] ${s.up ? 'text-[var(--ok)]' : 'text-[var(--error)]'}`}>{s.change}</span>
+                  <span className="text-[10px] text-[var(--muted-foreground-faint)]">from last month</span>
                 </div>
               </CardContent>
             </Card>
@@ -197,8 +197,8 @@ export default function CardDemo() {
                   <div className="flex items-center gap-3">
                     <Avatar size="sm"><AvatarImage src={`https://i.pravatar.cc/100?u=card${i}`} alt={m.name} /><AvatarFallback>{m.name[0]}</AvatarFallback></Avatar>
                     <div>
-                      <p className="text-[length:var(--invin-text-body)] font-[500]">{m.name}</p>
-                      <p className="text-[10px] text-[var(--invin-text-dim)]">{m.email}</p>
+                      <p className="text-[var(--foreground)] font-[500]">{m.name}</p>
+                      <p className="text-[10px] text-[var(--muted-foreground)]">{m.email}</p>
                     </div>
                   </div>
                   <Badge variant="secondary" size="sm">{m.role}</Badge>
@@ -219,26 +219,26 @@ export default function CardDemo() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full">
           <Card hover>
             <CardContent>
-              <p className="text-[length:var(--invin-text-card-title)] font-[600]">Free</p>
-              <p className="text-[length:var(--invin-text-label)] text-[var(--invin-text-dim)] mt-1">5 projects, 1GB storage</p>
-              <p className="text-[length:var(--invin-text-body)] font-[700] mt-2">$0/mo</p>
+              <p className="text-[var(--foreground)] font-[600]">Free</p>
+              <p className="text-[var(--muted-foreground)] text-[var(--muted-foreground)] mt-1">5 projects, 1GB storage</p>
+              <p className="text-[var(--foreground)] font-[700] mt-2">$0/mo</p>
             </CardContent>
           </Card>
           <Card hover selected>
             <CardContent>
               <div className="flex items-center justify-between">
-                <p className="text-[length:var(--invin-text-card-title)] font-[600]">Pro</p>
+                <p className="text-[var(--foreground)] font-[600]">Pro</p>
                 <Badge variant="default" size="sm">Popular</Badge>
               </div>
-              <p className="text-[length:var(--invin-text-label)] text-[var(--invin-text-dim)] mt-1">Unlimited projects, 100GB</p>
-              <p className="text-[length:var(--invin-text-body)] font-[700] mt-2">$29/mo</p>
+              <p className="text-[var(--muted-foreground)] text-[var(--muted-foreground)] mt-1">Unlimited projects, 100GB</p>
+              <p className="text-[var(--foreground)] font-[700] mt-2">$29/mo</p>
             </CardContent>
           </Card>
           <Card hover>
             <CardContent>
-              <p className="text-[length:var(--invin-text-card-title)] font-[600]">Enterprise</p>
-              <p className="text-[length:var(--invin-text-label)] text-[var(--invin-text-dim)] mt-1">Custom limits, SSO, SLA</p>
-              <p className="text-[length:var(--invin-text-body)] font-[700] mt-2">Custom</p>
+              <p className="text-[var(--foreground)] font-[600]">Enterprise</p>
+              <p className="text-[var(--muted-foreground)] text-[var(--muted-foreground)] mt-1">Custom limits, SSO, SLA</p>
+              <p className="text-[var(--foreground)] font-[700] mt-2">Custom</p>
             </CardContent>
           </Card>
         </div>

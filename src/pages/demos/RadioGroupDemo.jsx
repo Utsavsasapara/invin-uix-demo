@@ -19,7 +19,7 @@ export default function RadioGroupDemo() {
 
       {/* ─── Props Table ────────────────────────────────────────── */}
       <div className="space-y-4">
-        <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)]">RadioGroup (Root)</p>
+        <p className="text-[var(--muted-foreground)] font-[600] uppercase tracking-[0.05em] text-[var(--muted-foreground-faint)]">RadioGroup (Root)</p>
         <PropsTable
           props={[
             { name: 'value', type: 'string', default: '—', description: 'Controlled selected value' },
@@ -31,7 +31,7 @@ export default function RadioGroupDemo() {
         />
       </div>
       <div className="space-y-4">
-        <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)]">RadioGroupItem</p>
+        <p className="text-[var(--muted-foreground)] font-[600] uppercase tracking-[0.05em] text-[var(--muted-foreground-faint)]">RadioGroupItem</p>
         <PropsTable
           props={[
             { name: 'value', type: 'string (required)', default: '—', description: 'Option value' },
@@ -154,7 +154,7 @@ export default function RadioGroupDemo() {
             <div className="flex items-center gap-2"><RadioGroupItem value="comfortable" id="ctrl-2" /><Label htmlFor="ctrl-2">Comfortable</Label></div>
             <div className="flex items-center gap-2"><RadioGroupItem value="compact" id="ctrl-3" /><Label htmlFor="ctrl-3">Compact</Label></div>
           </RadioGroup>
-          <p className="text-[length:var(--invin-text-label)] text-[var(--invin-text-dim)]">Selected: <strong className="text-[var(--invin-accent)]">{value}</strong></p>
+          <p className="text-[var(--muted-foreground)] text-[var(--muted-foreground)]">Selected: <strong className="text-[var(--accent)]">{value}</strong></p>
         </div>
       </PlaygroundSection>
 
@@ -177,8 +177,8 @@ export default function RadioGroupDemo() {
 
       {/* ─── Use Cases ──────────────────────────────────────────── */}
       <div className="space-y-3">
-        <h3 className="text-[length:var(--invin-text-sub-heading)] font-[700]">Use cases</h3>
-        <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">Common patterns in real applications.</p>
+        <h3 className="text-[var(--foreground)] font-[700]">Use cases</h3>
+        <p className="text-[var(--foreground)] text-[var(--muted-foreground)]">Common patterns in real applications.</p>
       </div>
 
       <PlaygroundSection
@@ -199,16 +199,16 @@ export default function RadioGroupDemo() {
             { value: 'pro', name: 'Pro', price: '$29/mo', desc: 'Unlimited, 100GB' },
             { value: 'enterprise', name: 'Enterprise', price: 'Custom', desc: 'SSO, SLA, dedicated' },
           ].map(p => (
-            <label key={p.value} className={`flex items-center gap-3 p-3 rounded-[var(--invin-radius-btn-sm,9px)] border cursor-pointer transition-colors ${plan === p.value ? 'border-[var(--invin-accent)] bg-[var(--invin-accent-soft)]' : 'border-[var(--invin-border)] hover:bg-[var(--invin-surface-hover)]'}`}>
+            <label key={p.value} className={`flex items-center gap-3 p-3 rounded-[var(--radius-sm,9px)] border cursor-pointer transition-colors ${plan === p.value ? 'border-[var(--accent)] bg-[var(--accent-soft)]' : 'border-[var(--border)] hover:bg-[var(--secondary)]'}`}>
               <RadioGroupItem value={p.value} />
               <div className="flex-1">
                 <div className="flex items-center gap-2">
-                  <span className="text-[length:var(--invin-text-body)] font-[600]">{p.name}</span>
+                  <span className="text-[var(--foreground)] font-[600]">{p.name}</span>
                   {p.value === 'pro' && <Badge variant="default" size="sm">Popular</Badge>}
                 </div>
-                <p className="text-[10px] text-[var(--invin-text-dim)]">{p.desc}</p>
+                <p className="text-[10px] text-[var(--muted-foreground)]">{p.desc}</p>
               </div>
-              <span className="text-[length:var(--invin-text-body)] font-[600]">{p.price}</span>
+              <span className="text-[var(--foreground)] font-[600]">{p.price}</span>
             </label>
           ))}
         </RadioGroup>
@@ -228,7 +228,7 @@ export default function RadioGroupDemo() {
       >
         <Card className="w-full max-w-sm">
           <CardContent className="py-4">
-            <p className="text-[length:var(--invin-text-card-title)] font-[600] mb-3">Display density</p>
+            <p className="text-[var(--foreground)] font-[600] mb-3">Display density</p>
             <RadioGroup defaultValue="comfortable" className="space-y-2">
               <div className="flex items-center gap-2"><RadioGroupItem value="compact" id="pref-compact" /><Label htmlFor="pref-compact">Compact — smaller text and spacing</Label></div>
               <div className="flex items-center gap-2"><RadioGroupItem value="comfortable" id="pref-comfortable" /><Label htmlFor="pref-comfortable">Comfortable — balanced</Label></div>

@@ -6,7 +6,7 @@ import { Input } from 'invin-uix/ui/input';
 import { Label } from 'invin-uix/ui/label';
 import { Card, CardContent } from 'invin-uix/ui/card';
 import { Separator } from 'invin-uix/ui/separator';
-import { User, Mail, Check, Settings, CreditCard, Package } from 'invin-uix/ui/icons';
+import { User, Envelope, Check, Gear, CreditCard, Package } from 'invin-uix/ui/icons';
 
 export default function StepperDemo() {
   const [activeH, setActiveH] = useState(1);
@@ -118,7 +118,7 @@ export default function StepperDemo() {
             <Step title="Preferences" description="Configure your workspace">
               <Card>
                 <CardContent className="space-y-3 pt-4">
-                  <p className="text-sm text-[var(--invin-text-dim)]">Choose your theme and notification settings.</p>
+                  <p className="text-label text-[var(--muted-foreground)]">Choose your theme and notification settings.</p>
                   <div className="flex gap-2">
                     <Button variant="outline" size="sm" onClick={() => setActiveV(1)}>Back</Button>
                     <Button size="sm" onClick={() => setActiveV(3)}>Finish</Button>
@@ -151,7 +151,7 @@ export default function StepperDemo() {
         <div className="space-y-6">
           {(['sm', 'md', 'lg']).map((size) => (
             <div key={size}>
-              <p className="text-[11px] font-[500] text-[var(--invin-text-faint)] uppercase mb-2">{size}</p>
+              <p className="text-[11px] font-[500] text-[var(--muted-foreground-faint)] uppercase mb-2">{size}</p>
               <Stepper activeStep={1} size={size}>
                 <Step title="First" />
                 <Step title="Second" />

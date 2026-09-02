@@ -14,7 +14,7 @@ export default function TabsDemo() {
       importCode={`import { Tabs, TabsList, TabsTrigger, TabsContent } from 'invin-uix/ui/tabs';`}
     >
       <div className="space-y-4">
-        <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)]">TabsList</p>
+        <p className="text-[var(--muted-foreground)] font-[600] uppercase tracking-[0.05em] text-[var(--muted-foreground-faint)]">TabsList</p>
         <PropsTable
           props={[
             { name: 'variant', type: "'default' | 'pill' | 'enclosed'", default: "'default'", description: 'default = underline, pill = rounded capsule bg, enclosed = bordered container' },
@@ -23,7 +23,7 @@ export default function TabsDemo() {
         />
       </div>
       <div className="space-y-4">
-        <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)]">TabsTrigger</p>
+        <p className="text-[var(--muted-foreground)] font-[600] uppercase tracking-[0.05em] text-[var(--muted-foreground-faint)]">TabsTrigger</p>
         <PropsTable
           props={[
             { name: 'value', type: 'string (required)', default: '—', description: 'Unique tab identifier' },
@@ -56,13 +56,13 @@ export default function TabsDemo() {
               <TabsTrigger value="templates">Templates</TabsTrigger>
             </TabsList>
             <TabsContent value="workflows">
-              <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)] py-4">Active workflows and automation pipelines.</p>
+              <p className="text-[var(--foreground)] text-[var(--muted-foreground)] py-4">Active workflows and automation pipelines.</p>
             </TabsContent>
             <TabsContent value="history">
-              <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)] py-4">Past execution logs and results.</p>
+              <p className="text-[var(--foreground)] text-[var(--muted-foreground)] py-4">Past execution logs and results.</p>
             </TabsContent>
             <TabsContent value="templates">
-              <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)] py-4">Pre-built workflow templates.</p>
+              <p className="text-[var(--foreground)] text-[var(--muted-foreground)] py-4">Pre-built workflow templates.</p>
             </TabsContent>
           </Tabs>
         </div>
@@ -87,10 +87,10 @@ export default function TabsDemo() {
               <TabsTrigger variant="pill" value="history">Execution History</TabsTrigger>
             </TabsList>
             <TabsContent value="workflows">
-              <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)] py-4">Active workflows listed here.</p>
+              <p className="text-[var(--foreground)] text-[var(--muted-foreground)] py-4">Active workflows listed here.</p>
             </TabsContent>
             <TabsContent value="history">
-              <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)] py-4">Execution history logs.</p>
+              <p className="text-[var(--foreground)] text-[var(--muted-foreground)] py-4">Execution history logs.</p>
             </TabsContent>
           </Tabs>
         </div>
@@ -117,13 +117,13 @@ export default function TabsDemo() {
               <TabsTrigger variant="enclosed" value="team">Team</TabsTrigger>
             </TabsList>
             <TabsContent value="account">
-              <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)] py-4">Account settings content.</p>
+              <p className="text-[var(--foreground)] text-[var(--muted-foreground)] py-4">Account settings content.</p>
             </TabsContent>
             <TabsContent value="password">
-              <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)] py-4">Password change form.</p>
+              <p className="text-[var(--foreground)] text-[var(--muted-foreground)] py-4">Password change form.</p>
             </TabsContent>
             <TabsContent value="team">
-              <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)] py-4">Team members list.</p>
+              <p className="text-[var(--foreground)] text-[var(--muted-foreground)] py-4">Team members list.</p>
             </TabsContent>
           </Tabs>
         </div>
@@ -183,8 +183,8 @@ export default function TabsDemo() {
 
       {/* ─── Use Cases ──────────────────────────────────────────── */}
       <div className="space-y-3">
-        <h3 className="text-[length:var(--invin-text-sub-heading)] font-[700]">Use cases</h3>
-        <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">Common patterns.</p>
+        <h3 className="text-[var(--foreground)] font-[700]">Use cases</h3>
+        <p className="text-[var(--foreground)] text-[var(--muted-foreground)]">Common patterns.</p>
       </div>
 
       <PlaygroundSection
@@ -227,14 +227,14 @@ export default function TabsDemo() {
             <TabsContent value="notifications">
               <Card>
                 <CardContent className="py-4">
-                  <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">Configure notification preferences.</p>
+                  <p className="text-[var(--foreground)] text-[var(--muted-foreground)]">Configure notification preferences.</p>
                 </CardContent>
               </Card>
             </TabsContent>
             <TabsContent value="security">
               <Card>
                 <CardContent className="py-4">
-                  <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">Two-factor authentication settings.</p>
+                  <p className="text-[var(--foreground)] text-[var(--muted-foreground)]">Two-factor authentication settings.</p>
                 </CardContent>
               </Card>
             </TabsContent>
@@ -266,13 +266,13 @@ export default function TabsDemo() {
                 <TabsTrigger variant="enclosed" value="logs">Logs</TabsTrigger>
               </TabsList>
               <TabsContent value="overview">
-                <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)] py-3">Dashboard overview with KPIs and charts.</p>
+                <p className="text-[var(--foreground)] text-[var(--muted-foreground)] py-3">Dashboard overview with KPIs and charts.</p>
               </TabsContent>
               <TabsContent value="metrics">
-                <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)] py-3">Performance metrics and trends.</p>
+                <p className="text-[var(--foreground)] text-[var(--muted-foreground)] py-3">Performance metrics and trends.</p>
               </TabsContent>
               <TabsContent value="logs">
-                <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)] py-3">Activity logs and audit trail.</p>
+                <p className="text-[var(--foreground)] text-[var(--muted-foreground)] py-3">Activity logs and audit trail.</p>
               </TabsContent>
             </Tabs>
           </CardContent>

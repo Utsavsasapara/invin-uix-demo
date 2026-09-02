@@ -103,7 +103,7 @@ export default function LabelDemo() {
             <Input id="fullname" required placeholder="John Doe" />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="company">Company <span className="text-[var(--invin-text-faint)]">(optional)</span></Label>
+            <Label htmlFor="company">Company <span className="text-[var(--muted-foreground-faint)]">(optional)</span></Label>
             <Input id="company" placeholder="Acme Inc." />
           </div>
         </div>
@@ -136,8 +136,8 @@ export default function LabelDemo() {
 
       {/* ─── Use Cases ──────────────────────────────────────────── */}
       <div className="space-y-3">
-        <h3 className="text-[length:var(--invin-text-sub-heading)] font-[700]">Use cases</h3>
-        <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">Common patterns in real forms.</p>
+        <h3 className="text-[var(--foreground)] font-[700]">Use cases</h3>
+        <p className="text-[var(--foreground)] text-[var(--muted-foreground)]">Common patterns in real forms.</p>
       </div>
 
       <PlaygroundSection

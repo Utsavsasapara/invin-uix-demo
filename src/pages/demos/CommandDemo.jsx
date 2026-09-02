@@ -9,8 +9,8 @@ import { Card, CardContent } from 'invin-uix/ui/card';
 import { Separator } from 'invin-uix/ui/separator';
 import { Toaster, toast } from 'invin-uix/ui/toast';
 import {
-  LayoutDashboard, Users, Settings, FileText, Search, Shield,
-  Mail, Calendar, CreditCard, Plus, Moon, LogOut,
+  SquaresFour, Users, Gear, FileText, MagnifyingGlass, Shield,
+  Envelope, Calendar, CreditCard, Plus, Moon, SignOut,
 } from 'invin-uix/ui/icons';
 
 export default function CommandDemo() {
@@ -29,7 +29,7 @@ export default function CommandDemo() {
       <Toaster position="top-right" />
 
       <div className="space-y-4">
-        <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)]">Command</p>
+        <p className="text-[var(--muted-foreground)] font-[600] uppercase tracking-[0.05em] text-[var(--muted-foreground-faint)]">Command</p>
         <PropsTable
           props={[
             { name: 'filter', type: '(value, search) => boolean', default: 'includes', description: 'Custom filter function' },
@@ -38,7 +38,7 @@ export default function CommandDemo() {
         />
       </div>
       <div className="space-y-4">
-        <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)]">CommandDialog</p>
+        <p className="text-[var(--muted-foreground)] font-[600] uppercase tracking-[0.05em] text-[var(--muted-foreground-faint)]">CommandDialog</p>
         <PropsTable
           props={[
             { name: 'open', type: 'boolean', default: '—', description: 'Controlled open state' },
@@ -48,7 +48,7 @@ export default function CommandDemo() {
         />
       </div>
       <div className="space-y-4">
-        <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)]">CommandItem</p>
+        <p className="text-[var(--muted-foreground)] font-[600] uppercase tracking-[0.05em] text-[var(--muted-foreground-faint)]">CommandItem</p>
         <PropsTable
           props={[
             { name: 'value', type: 'string', default: '—', description: 'Item value (used for filtering)' },
@@ -67,8 +67,8 @@ export default function CommandDemo() {
         description="Press ⌘K (or Ctrl+K) anywhere on this page, or click the button below."
       >
         <Button variant="outline" onClick={() => setDialogOpen(true)}>
-          <Search style={{ width: 14, height: 14 }} />
-          Search commands...
+          <MagnifyingGlass style={{ width: 14, height: 14 }} />
+          MagnifyingGlass commands...
           <CommandShortcut>⌘K</CommandShortcut>
         </Button>
 
@@ -78,15 +78,15 @@ export default function CommandDemo() {
             <CommandEmpty>No results found.</CommandEmpty>
             <CommandGroup heading="Navigation">
               <CommandItem value="dashboard" onSelect={() => { toast({ title: 'Go to Dashboard' }); setDialogOpen(false); }}>
-                <LayoutDashboard style={{ width: 14, height: 14 }} /> Dashboard
+                <SquaresFour style={{ width: 14, height: 14 }} /> Dashboard
                 <CommandShortcut>⌘D</CommandShortcut>
               </CommandItem>
               <CommandItem value="users" onSelect={() => { toast({ title: 'Go to Users' }); setDialogOpen(false); }}>
                 <Users style={{ width: 14, height: 14 }} /> Users
                 <CommandShortcut>⌘U</CommandShortcut>
               </CommandItem>
-              <CommandItem value="settings" onSelect={() => { toast({ title: 'Go to Settings' }); setDialogOpen(false); }}>
-                <Settings style={{ width: 14, height: 14 }} /> Settings
+              <CommandItem value="settings" onSelect={() => { toast({ title: 'Go to Gear' }); setDialogOpen(false); }}>
+                <Gear style={{ width: 14, height: 14 }} /> Gear
                 <CommandShortcut>⌘,</CommandShortcut>
               </CommandItem>
             </CommandGroup>
@@ -97,7 +97,7 @@ export default function CommandDemo() {
                 <CommandShortcut>⌘N</CommandShortcut>
               </CommandItem>
               <CommandItem value="send-email" onSelect={() => { toast({ title: 'Email composer opened' }); setDialogOpen(false); }}>
-                <Mail style={{ width: 14, height: 14 }} /> Send Email
+                <Envelope style={{ width: 14, height: 14 }} /> Send Email
               </CommandItem>
               <CommandItem value="toggle-theme" onSelect={() => { toast({ title: 'Theme toggled' }); setDialogOpen(false); }}>
                 <Moon style={{ width: 14, height: 14 }} /> Toggle Dark Mode
@@ -110,7 +110,7 @@ export default function CommandDemo() {
                 <CreditCard style={{ width: 14, height: 14 }} /> Billing
               </CommandItem>
               <CommandItem value="logout" onSelect={() => { toast({ title: 'Logged out' }); setDialogOpen(false); }}>
-                <LogOut style={{ width: 14, height: 14 }} /> Sign Out
+                <SignOut style={{ width: 14, height: 14 }} /> Sign Out
               </CommandItem>
             </CommandGroup>
           </CommandList>
@@ -125,12 +125,12 @@ export default function CommandDemo() {
         <Card className="max-w-sm">
           <CardContent className="p-0">
             <Command onValueChange={(v) => toast({ title: `Selected: ${v}` })}>
-              <CommandInput placeholder="Search pages..." />
+              <CommandInput placeholder="MagnifyingGlass pages..." />
               <CommandList>
                 <CommandEmpty>Nothing found.</CommandEmpty>
                 <CommandGroup heading="Pages">
                   <CommandItem value="dashboard">
-                    <LayoutDashboard style={{ width: 14, height: 14 }} /> Dashboard
+                    <SquaresFour style={{ width: 14, height: 14 }} /> Dashboard
                   </CommandItem>
                   <CommandItem value="incidents">
                     <Shield style={{ width: 14, height: 14 }} /> Incidents
@@ -153,7 +153,7 @@ export default function CommandDemo() {
 
       {/* ─── With keywords ────────────────────────────────────── */}
       <PlaygroundSection
-        title="Search with keywords"
+        title="MagnifyingGlass with keywords"
         description="Items have hidden keywords — try searching 'security' or 'money'."
       >
         <Card className="max-w-sm">

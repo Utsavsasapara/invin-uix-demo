@@ -14,8 +14,8 @@ export function PlaygroundSection({ title, description, code, children }) {
   return (
     <div className="space-y-3">
       <div>
-        <h3 className="text-sm font-semibold text-[var(--invin-text)]">{title}</h3>
-        {description && <p className="text-xs text-muted-foreground mt-0.5">{description}</p>}
+        <h3 className="text-label font-semibold text-[var(--foreground)]">{title}</h3>
+        {description && <p className="text-caption text-muted-foreground mt-0.5">{description}</p>}
       </div>
 
       <Card>
@@ -29,7 +29,7 @@ export function PlaygroundSection({ title, description, code, children }) {
         {/* Code Toggle */}
         {code && (
           <>
-            <div className="border-t border-[var(--invin-border)] px-4 py-2 flex items-center justify-between">
+            <div className="border-t border-[var(--border)] px-4 py-2 flex items-center justify-between">
               <span className="text-[11px] text-muted-foreground font-medium uppercase tracking-wide">
                 {showCode ? 'Code' : 'Preview'}
               </span>
@@ -44,8 +44,8 @@ export function PlaygroundSection({ title, description, code, children }) {
             </div>
 
             {showCode && (
-              <div className="border-t border-[var(--invin-border)] bg-[var(--invin-bg-elev)]/30">
-                <pre className="p-4 text-xs overflow-x-auto font-mono text-[var(--invin-text)] leading-relaxed">
+              <div className="border-t border-[var(--border)] bg-[var(--card)]/30">
+                <pre className="p-4 text-caption overflow-x-auto font-mono text-[var(--foreground)] leading-relaxed">
                   <code>{code.trim()}</code>
                 </pre>
               </div>
@@ -65,22 +65,22 @@ export function PropsTable({ props: propsList }) {
 
   return (
     <div className="overflow-x-auto">
-      <table className="w-full text-xs border-collapse">
+      <table className="w-full text-caption border-collapse">
         <thead>
-          <tr className="border-b border-[var(--invin-border)]">
-            <th className="text-left py-2 px-3 font-medium text-[var(--invin-text-dim)]">Prop</th>
-            <th className="text-left py-2 px-3 font-medium text-[var(--invin-text-dim)]">Type</th>
-            <th className="text-left py-2 px-3 font-medium text-[var(--invin-text-dim)]">Default</th>
-            <th className="text-left py-2 px-3 font-medium text-[var(--invin-text-dim)]">Description</th>
+          <tr className="border-b border-[var(--border)]">
+            <th className="text-left py-2 px-3 font-medium text-[var(--muted-foreground)]">Prop</th>
+            <th className="text-left py-2 px-3 font-medium text-[var(--muted-foreground)]">Type</th>
+            <th className="text-left py-2 px-3 font-medium text-[var(--muted-foreground)]">Default</th>
+            <th className="text-left py-2 px-3 font-medium text-[var(--muted-foreground)]">Description</th>
           </tr>
         </thead>
         <tbody>
           {propsList.map((p, i) => (
-            <tr key={i} className="border-b border-[var(--invin-border)] last:border-0">
-              <td className="py-2 px-3 font-mono text-[var(--invin-accent)]">{p.name}</td>
-              <td className="py-2 px-3 font-mono text-[var(--invin-text-dim)]">{p.type}</td>
+            <tr key={i} className="border-b border-[var(--border)] last:border-0">
+              <td className="py-2 px-3 font-mono text-[var(--accent)]">{p.name}</td>
+              <td className="py-2 px-3 font-mono text-[var(--muted-foreground)]">{p.type}</td>
               <td className="py-2 px-3 font-mono">{p.default || '—'}</td>
-              <td className="py-2 px-3 text-[var(--invin-text-dim)]">{p.description}</td>
+              <td className="py-2 px-3 text-[var(--muted-foreground)]">{p.description}</td>
             </tr>
           ))}
         </tbody>
@@ -98,15 +98,15 @@ export function ComponentPage({ name, description, importCode, children }) {
     <div className="space-y-8">
       {/* Header */}
       <div>
-        <h2 className="text-[length:var(--invin-text-page-title)] font-[700] tracking-[-0.02em]">{name}</h2>
-        {description && <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)] mt-1">{description}</p>}
+        <h2 className="text-[var(--foreground)] font-[700] tracking-[-0.02em]">{name}</h2>
+        {description && <p className="text-[var(--foreground)] text-[var(--muted-foreground)] mt-1">{description}</p>}
       </div>
 
       {/* Import */}
       {importCode && (
         <Card>
           <CardContent className="py-3">
-            <pre className="text-xs font-mono text-[var(--invin-text)] overflow-x-auto">
+            <pre className="text-caption font-mono text-[var(--foreground)] overflow-x-auto">
               <code>{importCode}</code>
             </pre>
           </CardContent>

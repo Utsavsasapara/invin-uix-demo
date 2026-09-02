@@ -53,7 +53,7 @@ export default function SliderDemo() {
         <div className="space-y-3 w-full max-w-sm">
           <div className="flex items-center justify-between">
             <Label>Volume</Label>
-            <span className="text-[length:var(--invin-text-body)] font-[600] text-[var(--invin-accent)]">{volume[0]}%</span>
+            <span className="text-[var(--foreground)] font-[600] text-[var(--accent)]">{volume[0]}%</span>
           </div>
           <Slider value={volume} onValueChange={setVolume} max={100} step={1} />
         </div>
@@ -70,7 +70,7 @@ export default function SliderDemo() {
         <div className="space-y-3 w-full max-w-sm">
           <div className="flex items-center justify-between">
             <Label>Price range</Label>
-            <span className="text-[length:var(--invin-text-body)] font-[600]">${range[0]} – ${range[1]}</span>
+            <span className="text-[var(--foreground)] font-[600]">${range[0]} – ${range[1]}</span>
           </div>
           <Slider value={range} onValueChange={setRange} min={0} max={100} step={5} />
         </div>
@@ -92,7 +92,7 @@ export default function SliderDemo() {
               step={1}
               showSteps
             />
-            <p className="text-[length:var(--invin-text-label)] text-[var(--invin-text-dim)] mt-2">Selected: <strong className="text-[var(--invin-accent)]">{rating[0]}</strong></p>
+            <p className="text-[var(--muted-foreground)] text-[var(--muted-foreground)] mt-2">Selected: <strong className="text-[var(--accent)]">{rating[0]}</strong></p>
           </div>
         </div>
       </PlaygroundSection>
@@ -148,8 +148,8 @@ export default function SliderDemo() {
       <Separator variant="bold" />
 
       <div className="space-y-3">
-        <h3 className="text-[length:var(--invin-text-sub-heading)] font-[700]">Use cases</h3>
-        <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">Common patterns.</p>
+        <h3 className="text-[var(--foreground)] font-[700]">Use cases</h3>
+        <p className="text-[var(--foreground)] text-[var(--muted-foreground)]">Common patterns.</p>
       </div>
 
       <PlaygroundSection
@@ -162,20 +162,20 @@ export default function SliderDemo() {
         <Card className="w-full max-w-sm">
           <CardContent className="py-4 space-y-5">
             <div className="space-y-2">
-              <div className="flex justify-between text-[length:var(--invin-text-label)]">
-                <span>Brightness</span><span className="text-[var(--invin-text-faint)]">70%</span>
+              <div className="flex justify-between text-[var(--muted-foreground)]">
+                <span>Brightness</span><span className="text-[var(--muted-foreground-faint)]">70%</span>
               </div>
               <Slider defaultValue={[70]} max={100} />
             </div>
             <div className="space-y-2">
-              <div className="flex justify-between text-[length:var(--invin-text-label)]">
-                <span>Contrast</span><span className="text-[var(--invin-text-faint)]">50%</span>
+              <div className="flex justify-between text-[var(--muted-foreground)]">
+                <span>Contrast</span><span className="text-[var(--muted-foreground-faint)]">50%</span>
               </div>
               <Slider defaultValue={[50]} max={100} />
             </div>
             <div className="space-y-2">
-              <div className="flex justify-between text-[length:var(--invin-text-label)]">
-                <span>Saturation</span><span className="text-[var(--invin-text-faint)]">60%</span>
+              <div className="flex justify-between text-[var(--muted-foreground)]">
+                <span>Saturation</span><span className="text-[var(--muted-foreground-faint)]">60%</span>
               </div>
               <Slider defaultValue={[60]} max={100} />
             </div>
@@ -192,7 +192,7 @@ export default function SliderDemo() {
       >
         <Card className="w-full max-w-sm">
           <CardContent className="py-4">
-            <div className="flex justify-between text-[length:var(--invin-text-label)] mb-3">
+            <div className="flex justify-between text-[var(--muted-foreground)] mb-3">
               <span>Price filter</span>
               <span className="font-[600]">$20 – $180</span>
             </div>

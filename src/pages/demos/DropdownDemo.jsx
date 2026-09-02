@@ -9,9 +9,9 @@ import {
   DropdownMenuSubContent, DropdownMenuRadioGroup,
 } from 'invin-uix/ui/dropdown-menu';
 import {
-  User, Settings, LogOut, Mail, Plus, CreditCard,
-  Cloud, Users, Keyboard, Smile, Copy, Scissors,
-  Clipboard, Edit, Trash2, Archive, Share2
+  User, Gear, SignOut, Envelope, Plus, CreditCard,
+  Cloud, Users, Keyboard, Smiley, Copy, Scissors,
+  Clipboard, PencilSimple, Trash, Archive, ShareNetwork
 } from 'invin-uix/ui/icons';
 
 export default function DropdownDemo() {
@@ -52,7 +52,7 @@ export default function DropdownDemo() {
   </DropdownMenuTrigger>
   <DropdownMenuContent>
     <DropdownMenuItem>Profile</DropdownMenuItem>
-    <DropdownMenuItem>Settings</DropdownMenuItem>
+    <DropdownMenuItem>Gear</DropdownMenuItem>
     <DropdownMenuItem>Help</DropdownMenuItem>
   </DropdownMenuContent>
 </DropdownMenu>`}
@@ -63,7 +63,7 @@ export default function DropdownDemo() {
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuItem>Profile</DropdownMenuItem>
-            <DropdownMenuItem>Settings</DropdownMenuItem>
+            <DropdownMenuItem>Gear</DropdownMenuItem>
             <DropdownMenuItem>Help</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -81,10 +81,10 @@ export default function DropdownDemo() {
     <DropdownMenuGroup>
       <DropdownMenuItem shortcut="⌘P"><User /> Profile</DropdownMenuItem>
       <DropdownMenuItem shortcut="⌘B"><CreditCard /> Billing</DropdownMenuItem>
-      <DropdownMenuItem shortcut="⌘S"><Settings /> Settings</DropdownMenuItem>
+      <DropdownMenuItem shortcut="⌘S"><Gear /> Gear</DropdownMenuItem>
     </DropdownMenuGroup>
     <DropdownMenuSeparator />
-    <DropdownMenuItem danger><LogOut /> Log out</DropdownMenuItem>
+    <DropdownMenuItem danger><SignOut /> Log out</DropdownMenuItem>
   </DropdownMenuContent>
 </DropdownMenu>`}
       >
@@ -97,7 +97,7 @@ export default function DropdownDemo() {
             <DropdownMenuGroup>
               <DropdownMenuItem shortcut="⌘P"><User style={{ width: 14, height: 14 }} />Profile</DropdownMenuItem>
               <DropdownMenuItem shortcut="⌘B"><CreditCard style={{ width: 14, height: 14 }} />Billing</DropdownMenuItem>
-              <DropdownMenuItem shortcut="⌘S"><Settings style={{ width: 14, height: 14 }} />Settings</DropdownMenuItem>
+              <DropdownMenuItem shortcut="⌘S"><Gear style={{ width: 14, height: 14 }} />Gear</DropdownMenuItem>
               <DropdownMenuItem shortcut="⌘K"><Keyboard style={{ width: 14, height: 14 }} />Shortcuts</DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
@@ -108,7 +108,7 @@ export default function DropdownDemo() {
             <DropdownMenuSeparator />
             <DropdownMenuItem><Cloud style={{ width: 14, height: 14 }} />API</DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem danger><LogOut style={{ width: 14, height: 14 }} />Log out</DropdownMenuItem>
+            <DropdownMenuItem danger><SignOut style={{ width: 14, height: 14 }} />Log out</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </PlaygroundSection>
@@ -120,7 +120,7 @@ export default function DropdownDemo() {
   <Copy /> Duplicate
 </DropdownMenuItem>
 <DropdownMenuItem danger description="This action cannot be undone">
-  <Trash2 /> Delete
+  <Trash /> Delete
 </DropdownMenuItem>`}
       >
         <DropdownMenu>
@@ -129,10 +129,10 @@ export default function DropdownDemo() {
           </DropdownMenuTrigger>
           <DropdownMenuContent style={{ minWidth: '240px' }}>
             <DropdownMenuItem description="Create a copy of this item"><Copy style={{ width: 14, height: 14 }} />Duplicate</DropdownMenuItem>
-            <DropdownMenuItem description="Share with team members"><Share2 style={{ width: 14, height: 14 }} />Share</DropdownMenuItem>
+            <DropdownMenuItem description="Share with team members"><ShareNetwork style={{ width: 14, height: 14 }} />Share</DropdownMenuItem>
             <DropdownMenuItem description="Move to archive folder"><Archive style={{ width: 14, height: 14 }} />Archive</DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem danger description="This action cannot be undone"><Trash2 style={{ width: 14, height: 14 }} />Delete</DropdownMenuItem>
+            <DropdownMenuItem danger description="This action cannot be undone"><Trash style={{ width: 14, height: 14 }} />Delete</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </PlaygroundSection>
@@ -143,8 +143,8 @@ export default function DropdownDemo() {
         code={`<DropdownMenuSub>
   <DropdownMenuSubTrigger><Plus /> Invite users</DropdownMenuSubTrigger>
   <DropdownMenuSubContent>
-    <DropdownMenuItem><Mail /> Email</DropdownMenuItem>
-    <DropdownMenuItem><Smile /> Slack</DropdownMenuItem>
+    <DropdownMenuItem><Envelope /> Email</DropdownMenuItem>
+    <DropdownMenuItem><Smiley /> Slack</DropdownMenuItem>
   </DropdownMenuSubContent>
 </DropdownMenuSub>`}
       >
@@ -153,18 +153,18 @@ export default function DropdownDemo() {
             <Button variant="outline">Options</Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-            <DropdownMenuItem><Edit style={{ width: 14, height: 14 }} />Edit</DropdownMenuItem>
+            <DropdownMenuItem><PencilSimple style={{ width: 14, height: 14 }} />PencilSimple</DropdownMenuItem>
             <DropdownMenuSub>
               <DropdownMenuSubTrigger><Plus style={{ width: 14, height: 14 }} />Invite users</DropdownMenuSubTrigger>
               <DropdownMenuSubContent>
-                <DropdownMenuItem><Mail style={{ width: 14, height: 14 }} />Email</DropdownMenuItem>
-                <DropdownMenuItem><Smile style={{ width: 14, height: 14 }} />Slack</DropdownMenuItem>
+                <DropdownMenuItem><Envelope style={{ width: 14, height: 14 }} />Email</DropdownMenuItem>
+                <DropdownMenuItem><Smiley style={{ width: 14, height: 14 }} />Slack</DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem><Plus style={{ width: 14, height: 14 }} />More...</DropdownMenuItem>
               </DropdownMenuSubContent>
             </DropdownMenuSub>
             <DropdownMenuSub>
-              <DropdownMenuSubTrigger><Share2 style={{ width: 14, height: 14 }} />Share</DropdownMenuSubTrigger>
+              <DropdownMenuSubTrigger><ShareNetwork style={{ width: 14, height: 14 }} />Share</DropdownMenuSubTrigger>
               <DropdownMenuSubContent>
                 <DropdownMenuItem>Copy link</DropdownMenuItem>
                 <DropdownMenuItem>Twitter</DropdownMenuItem>
@@ -172,7 +172,7 @@ export default function DropdownDemo() {
               </DropdownMenuSubContent>
             </DropdownMenuSub>
             <DropdownMenuSeparator />
-            <DropdownMenuItem danger><Trash2 style={{ width: 14, height: 14 }} />Delete</DropdownMenuItem>
+            <DropdownMenuItem danger><Trash style={{ width: 14, height: 14 }} />Delete</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </PlaygroundSection>
@@ -199,7 +199,7 @@ export default function DropdownDemo() {
             <DropdownMenuItem>Reload</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-        <span className="text-xs text-muted-foreground">Bookmarks: {bookmarks ? 'on' : 'off'}, URLs: {urls ? 'on' : 'off'}</span>
+        <span className="text-caption text-muted-foreground">Bookmarks: {bookmarks ? 'on' : 'off'}, URLs: {urls ? 'on' : 'off'}</span>
       </PlaygroundSection>
 
       <PlaygroundSection
@@ -224,7 +224,7 @@ export default function DropdownDemo() {
             </DropdownMenuRadioGroup>
           </DropdownMenuContent>
         </DropdownMenu>
-        <span className="text-xs text-muted-foreground">Current: {sorting}</span>
+        <span className="text-caption text-muted-foreground">Current: {sorting}</span>
       </PlaygroundSection>
 
       <PlaygroundSection
@@ -236,7 +236,7 @@ export default function DropdownDemo() {
       >
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline">Edit</Button>
+            <Button variant="outline">PencilSimple</Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuItem shortcut="⌘X"><Scissors style={{ width: 14, height: 14 }} />Cut</DropdownMenuItem>

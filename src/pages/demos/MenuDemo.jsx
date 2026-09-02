@@ -4,9 +4,9 @@ import { Menu } from 'invin-uix/ui/menu';
 import { Badge } from 'invin-uix/ui/badge';
 import { Switch } from 'invin-uix/ui/switch';
 import {
-  Home, Users, Settings, Mail, Calendar,
-  FileText, BarChart2 as BarChart, Shield, Inbox,
-  LogOut, Bell, Bookmark, Zap
+  House, Users, Gear, Envelope, Calendar,
+  FileText, ChartBar as BarChart, Shield, Tray,
+  SignOut, Bell, BookmarkSimple, Lightning
 } from 'invin-uix/ui/icons';
 
 const icon = (Icon) => <Icon style={{ width: 16, height: 16 }} />;
@@ -36,7 +36,7 @@ export default function MenuDemo() {
   selectedKeys={['home']}
   onClick={({ key }) => setSelected([key])}
   items={[
-    { key: 'home', label: 'Home', icon: <Home /> },
+    { key: 'home', label: 'House', icon: <House /> },
     { key: 'products', label: 'Products' },
     { key: 'about', label: 'About' },
     { key: 'contact', label: 'Contact' },
@@ -49,7 +49,7 @@ export default function MenuDemo() {
             selectedKeys={hSelected}
             onClick={({ key }) => setHSelected([key])}
             items={[
-              { key: 'home', label: 'Home', icon: icon(Home) },
+              { key: 'home', label: 'House', icon: icon(House) },
               { key: 'products', label: 'Products' },
               { key: 'about', label: 'About' },
               { key: 'contact', label: 'Contact' },
@@ -65,7 +65,7 @@ export default function MenuDemo() {
   mode="horizontal"
   selectedKeys={['home']}
   items={[
-    { key: 'home', label: 'Home', icon: <Home /> },
+    { key: 'home', label: 'House', icon: <House /> },
     {
       key: 'docs', label: 'Documentation',
       children: [
@@ -84,7 +84,7 @@ export default function MenuDemo() {
             selectedKeys={hSelected}
             onClick={({ key }) => setHSelected([key])}
             items={[
-              { key: 'home', label: 'Home', icon: icon(Home) },
+              { key: 'home', label: 'House', icon: icon(House) },
               {
                 key: 'docs', label: 'Documentation',
                 children: [
@@ -108,7 +108,7 @@ export default function MenuDemo() {
       >
         <div style={{ display: 'flex', gap: '32px', flexWrap: 'wrap' }}>
           <div>
-            <p className="text-xs text-muted-foreground mb-2">background (default)</p>
+            <p className="text-caption text-muted-foreground mb-2">background (default)</p>
             <div style={{ maxWidth: '220px' }}>
               <Menu
                 mode="vertical"
@@ -116,16 +116,16 @@ export default function MenuDemo() {
                 selectedKeys={bgSelected}
                 onClick={({ key }) => setBgSelected([key])}
                 items={[
-                  { key: 'dashboard', label: 'Dashboard', icon: icon(Home) },
-                  { key: 'inbox', label: 'Inbox', icon: icon(Inbox) },
+                  { key: 'dashboard', label: 'Dashboard', icon: icon(House) },
+                  { key: 'inbox', label: 'Tray', icon: icon(Tray) },
                   { key: 'calendar', label: 'Calendar', icon: icon(Calendar) },
-                  { key: 'settings', label: 'Settings', icon: icon(Settings) },
+                  { key: 'settings', label: 'Gear', icon: icon(Gear) },
                 ]}
               />
             </div>
           </div>
           <div>
-            <p className="text-xs text-muted-foreground mb-2">border</p>
+            <p className="text-caption text-muted-foreground mb-2">border</p>
             <div style={{ maxWidth: '220px' }}>
               <Menu
                 mode="vertical"
@@ -133,16 +133,16 @@ export default function MenuDemo() {
                 selectedKeys={borderSelected}
                 onClick={({ key }) => setBorderSelected([key])}
                 items={[
-                  { key: 'dashboard', label: 'Dashboard', icon: icon(Home) },
-                  { key: 'inbox', label: 'Inbox', icon: icon(Inbox) },
+                  { key: 'dashboard', label: 'Dashboard', icon: icon(House) },
+                  { key: 'inbox', label: 'Tray', icon: icon(Tray) },
                   { key: 'calendar', label: 'Calendar', icon: icon(Calendar) },
-                  { key: 'settings', label: 'Settings', icon: icon(Settings) },
+                  { key: 'settings', label: 'Gear', icon: icon(Gear) },
                 ]}
               />
             </div>
           </div>
           <div>
-            <p className="text-xs text-muted-foreground mb-2">filled</p>
+            <p className="text-caption text-muted-foreground mb-2">filled</p>
             <div style={{ maxWidth: '220px' }}>
               <Menu
                 mode="vertical"
@@ -150,10 +150,10 @@ export default function MenuDemo() {
                 selectedKeys={filledSelected}
                 onClick={({ key }) => setFilledSelected([key])}
                 items={[
-                  { key: 'dashboard', label: 'Dashboard', icon: icon(Home) },
-                  { key: 'inbox', label: 'Inbox', icon: icon(Inbox) },
+                  { key: 'dashboard', label: 'Dashboard', icon: icon(House) },
+                  { key: 'inbox', label: 'Tray', icon: icon(Tray) },
                   { key: 'calendar', label: 'Calendar', icon: icon(Calendar) },
-                  { key: 'settings', label: 'Settings', icon: icon(Settings) },
+                  { key: 'settings', label: 'Gear', icon: icon(Gear) },
                 ]}
               />
             </div>
@@ -168,11 +168,11 @@ export default function MenuDemo() {
   mode="vertical"
   selectedKeys={['dashboard']}
   items={[
-    { key: 'dashboard', label: 'Dashboard', icon: <Home />, description: 'Overview & metrics' },
-    { key: 'inbox', label: 'Inbox', icon: <Inbox />, extra: <Badge>5</Badge> },
+    { key: 'dashboard', label: 'Dashboard', icon: <House />, description: 'Overview & metrics' },
+    { key: 'inbox', label: 'Tray', icon: <Tray />, extra: <Badge>5</Badge> },
     { key: 'reports', label: 'Reports', icon: <BarChart />, extra: <Badge variant="success" size="sm">New</Badge> },
     { key: 'divider1', type: 'divider', label: '' },
-    { key: 'logout', label: 'Logout', icon: <LogOut />, danger: true },
+    { key: 'logout', label: 'Logout', icon: <SignOut />, danger: true },
   ]}
 />`}
       >
@@ -182,13 +182,13 @@ export default function MenuDemo() {
             selectedKeys={vSelected}
             onClick={({ key }) => setVSelected([key])}
             items={[
-              { key: 'dashboard', label: 'Dashboard', icon: icon(Home), description: 'Overview & metrics' },
-              { key: 'inbox', label: 'Inbox', icon: icon(Inbox), extra: <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', minWidth: '18px', height: '18px', padding: '0 5px', borderRadius: '9px', backgroundColor: 'var(--invin-color-danger, #dc2626)', color: '#fff', fontSize: '11px', fontWeight: 600, lineHeight: 1 }}>5</span> },
+              { key: 'dashboard', label: 'Dashboard', icon: icon(House), description: 'Overview & metrics' },
+              { key: 'inbox', label: 'Tray', icon: icon(Tray), extra: <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', minWidth: '18px', height: '18px', padding: '0 5px', borderRadius: '9px', backgroundColor: 'var(--error, #dc2626)', color: '#fff', fontSize: '11px', fontWeight: 600, lineHeight: 1 }}>5</span> },
               { key: 'calendar', label: 'Calendar', icon: icon(Calendar) },
               { key: 'reports', label: 'Reports', icon: icon(BarChart), extra: <Badge variant="success" size="sm">New</Badge> },
               { key: 'divider1', type: 'divider', label: '' },
-              { key: 'settings', label: 'Settings', icon: icon(Settings) },
-              { key: 'logout', label: 'Logout', icon: icon(LogOut), danger: true },
+              { key: 'settings', label: 'Gear', icon: icon(Gear) },
+              { key: 'logout', label: 'Logout', icon: icon(SignOut), danger: true },
             ]}
           />
         </div>
@@ -202,9 +202,9 @@ export default function MenuDemo() {
   selectedKeys={['opt1']}
   defaultOpenKeys={['navigation']}
   items={[
-    { key: 'home', label: 'Home', icon: <Home /> },
+    { key: 'home', label: 'House', icon: <House /> },
     {
-      key: 'navigation', label: 'Navigation', icon: <Mail />,
+      key: 'navigation', label: 'Navigation', icon: <Envelope />,
       children: [
         { key: 'opt1', label: 'Option 1' },
         { key: 'opt2', label: 'Option 2' },
@@ -213,7 +213,7 @@ export default function MenuDemo() {
     { key: 'admin', type: 'group', label: 'Admin',
       children: [
         { key: 'users', label: 'Users', icon: <Users /> },
-        { key: 'settings', label: 'Settings', icon: <Settings /> },
+        { key: 'settings', label: 'Gear', icon: <Gear /> },
       ]
     },
   ]}
@@ -226,9 +226,9 @@ export default function MenuDemo() {
             defaultOpenKeys={['navigation']}
             onClick={({ key }) => setISelected([key])}
             items={[
-              { key: 'home', label: 'Home', icon: icon(Home) },
+              { key: 'home', label: 'House', icon: icon(House) },
               {
-                key: 'navigation', label: 'Navigation', icon: icon(Mail),
+                key: 'navigation', label: 'Navigation', icon: icon(Envelope),
                 children: [
                   { key: 'opt1', label: 'Option 1' },
                   { key: 'opt2', label: 'Option 2' },
@@ -236,10 +236,10 @@ export default function MenuDemo() {
                 ]
               },
               {
-                key: 'features', label: 'Features', icon: icon(Zap),
+                key: 'features', label: 'Features', icon: icon(Lightning),
                 children: [
                   { key: 'feature1', label: 'Analytics' },
-                  { key: 'feature2', label: 'Notifications', extra: <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', minWidth: '18px', height: '18px', padding: '0 5px', borderRadius: '9px', backgroundColor: 'var(--invin-color-danger, #dc2626)', color: '#fff', fontSize: '11px', fontWeight: 600, lineHeight: 1 }}>3</span> },
+                  { key: 'feature2', label: 'Notifications', extra: <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', minWidth: '18px', height: '18px', padding: '0 5px', borderRadius: '9px', backgroundColor: 'var(--error, #dc2626)', color: '#fff', fontSize: '11px', fontWeight: 600, lineHeight: 1 }}>3</span> },
                   { key: 'feature3', label: 'Integrations' },
                 ]
               },
@@ -248,7 +248,7 @@ export default function MenuDemo() {
                 key: 'admin', type: 'group', label: 'Admin',
                 children: [
                   { key: 'users', label: 'Users', icon: icon(Users) },
-                  { key: 'settings', label: 'Settings', icon: icon(Settings) },
+                  { key: 'settings', label: 'Gear', icon: icon(Gear) },
                 ]
               },
             ]}
@@ -313,7 +313,7 @@ export default function MenuDemo() {
                 ]
               },
               { key: 'divider2', type: 'divider', label: '' },
-              { key: 'account-settings', label: 'Account Settings' },
+              { key: 'account-settings', label: 'Account Gear' },
             ]}
           />
         </div>
@@ -328,20 +328,20 @@ export default function MenuDemo() {
   collapsedTooltip={true}
   selectedKeys={['dashboard']}
   items={[
-    { key: 'dashboard', label: 'Dashboard', icon: <Home /> },
-    { key: 'inbox', label: 'Inbox', icon: <Inbox /> },
-    { key: 'settings', label: 'Settings', icon: <Settings /> },
+    { key: 'dashboard', label: 'Dashboard', icon: <House /> },
+    { key: 'inbox', label: 'Tray', icon: <Tray /> },
+    { key: 'settings', label: 'Gear', icon: <Gear /> },
   ]}
 />`}
       >
         <div className="w-full">
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
-            <span className="text-sm">Collapsed:</span>
+            <span className="text-label">Collapsed:</span>
             <Switch size="sm" checked={collapsed} onCheckedChange={setCollapsed} />
           </div>
           <div style={{ display: 'flex', gap: '40px' }}>
             <div>
-              <p className="text-xs text-muted-foreground mb-2">With tooltip (default)</p>
+              <p className="text-caption text-muted-foreground mb-2">With tooltip (default)</p>
               <div style={{ width: collapsed ? '48px' : '220px', transition: 'width 200ms ease' }}>
                 <Menu
                   mode="sidebar"
@@ -350,16 +350,16 @@ export default function MenuDemo() {
                   selectedKeys={collapsedSelected}
                   onClick={({ key }) => setCollapsedSelected([key])}
                   items={[
-                    { key: 'dashboard', label: 'Dashboard', icon: icon(Home) },
-                    { key: 'inbox', label: 'Inbox', icon: icon(Inbox) },
+                    { key: 'dashboard', label: 'Dashboard', icon: icon(House) },
+                    { key: 'inbox', label: 'Tray', icon: icon(Tray) },
                     { key: 'calendar', label: 'Calendar', icon: icon(Calendar) },
-                    { key: 'settings', label: 'Settings', icon: icon(Settings) },
+                    { key: 'settings', label: 'Gear', icon: icon(Gear) },
                   ]}
                 />
               </div>
             </div>
             <div>
-              <p className="text-xs text-muted-foreground mb-2">Without tooltip</p>
+              <p className="text-caption text-muted-foreground mb-2">Without tooltip</p>
               <div style={{ width: collapsed ? '48px' : '220px', transition: 'width 200ms ease' }}>
                 <Menu
                   mode="sidebar"
@@ -368,10 +368,10 @@ export default function MenuDemo() {
                   selectedKeys={collapsedSelected}
                   onClick={({ key }) => setCollapsedSelected([key])}
                   items={[
-                    { key: 'dashboard', label: 'Dashboard', icon: icon(Home) },
-                    { key: 'inbox', label: 'Inbox', icon: icon(Inbox) },
+                    { key: 'dashboard', label: 'Dashboard', icon: icon(House) },
+                    { key: 'inbox', label: 'Tray', icon: icon(Tray) },
                     { key: 'calendar', label: 'Calendar', icon: icon(Calendar) },
-                    { key: 'settings', label: 'Settings', icon: icon(Settings) },
+                    { key: 'settings', label: 'Gear', icon: icon(Gear) },
                   ]}
                 />
               </div>
@@ -387,7 +387,7 @@ export default function MenuDemo() {
   mode="vertical"
   items={[
     { key: 'active', label: 'Active Item', icon: <Bell /> },
-    { key: 'disabled', label: 'Disabled Item', icon: <Bookmark />, disabled: true },
+    { key: 'disabled', label: 'Disabled Item', icon: <BookmarkSimple />, disabled: true },
     { key: 'normal', label: 'Normal Item', icon: <FileText /> },
   ]}
 />`}
@@ -399,7 +399,7 @@ export default function MenuDemo() {
             onClick={({ key }) => setDisabledSelected([key])}
             items={[
               { key: 'active', label: 'Active Item', icon: icon(Bell) },
-              { key: 'disabled', label: 'Disabled Item', icon: icon(Bookmark), disabled: true },
+              { key: 'disabled', label: 'Disabled Item', icon: icon(BookmarkSimple), disabled: true },
               { key: 'normal', label: 'Normal Item', icon: icon(FileText) },
             ]}
           />

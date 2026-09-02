@@ -6,7 +6,7 @@ import { Label } from 'invin-uix/ui/label';
 import { Separator } from 'invin-uix/ui/separator';
 import { Card, CardContent } from 'invin-uix/ui/card';
 import { Switch } from 'invin-uix/ui/switch';
-import { Settings, Filter, Share2, Bell } from 'invin-uix/ui/icons';
+import { Gear, Funnel, ShareNetwork, Bell } from 'invin-uix/ui/icons';
 
 export default function PopoverDemo() {
   return (
@@ -46,8 +46,8 @@ export default function PopoverDemo() {
           </PopoverTrigger>
           <PopoverContent>
             <div className="space-y-2">
-              <p className="text-[length:var(--invin-text-card-title)] font-[600]">Popover Title</p>
-              <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">Any content here — forms, lists, settings panels. Click outside or press Escape to close.</p>
+              <p className="text-[var(--foreground)] font-[600]">Popover Title</p>
+              <p className="text-[var(--foreground)] text-[var(--muted-foreground)]">Any content here — forms, lists, settings panels. Click outside or press Escape to close.</p>
             </div>
           </PopoverContent>
         </Popover>
@@ -68,7 +68,7 @@ export default function PopoverDemo() {
                 <Button variant="outline" size="sm">{align}</Button>
               </PopoverTrigger>
               <PopoverContent align={align}>
-                <p className="text-[length:var(--invin-text-body)]">Aligned to <strong className="text-[var(--invin-accent)]">{align}</strong></p>
+                <p className="text-[var(--foreground)]">Aligned to <strong className="text-[var(--accent)]">{align}</strong></p>
               </PopoverContent>
             </Popover>
           ))}
@@ -91,7 +91,7 @@ export default function PopoverDemo() {
                 <Button variant="outline" size="sm">{side}</Button>
               </PopoverTrigger>
               <PopoverContent side={side} align="center">
-                <p className="text-[length:var(--invin-text-body)]">Side: <strong className="text-[var(--invin-accent)]">{side}</strong></p>
+                <p className="text-[var(--foreground)]">Side: <strong className="text-[var(--accent)]">{side}</strong></p>
               </PopoverContent>
             </Popover>
           ))}
@@ -102,8 +102,8 @@ export default function PopoverDemo() {
 
       {/* ─── Use Cases ──────────────────────────────────────────── */}
       <div className="space-y-3">
-        <h3 className="text-[length:var(--invin-text-sub-heading)] font-[700]">Use cases</h3>
-        <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">Common patterns.</p>
+        <h3 className="text-[var(--foreground)] font-[700]">Use cases</h3>
+        <p className="text-[var(--foreground)] text-[var(--muted-foreground)]">Common patterns.</p>
       </div>
 
       <PlaygroundSection
@@ -111,7 +111,7 @@ export default function PopoverDemo() {
         description="Compact settings form in a popover — no need for a full dialog."
         code={`<Popover>
   <PopoverTrigger asChild>
-    <Button variant="ghost" size="icon-sm"><Settings /></Button>
+    <Button variant="ghost" size="icon-sm"><Gear /></Button>
   </PopoverTrigger>
   <PopoverContent align="end">
     <Label>Font size</Label>
@@ -121,11 +121,11 @@ export default function PopoverDemo() {
       >
         <Popover>
           <PopoverTrigger asChild>
-            <Button variant="ghost" size="icon-sm"><Settings style={{ width: 14, height: 14 }} /></Button>
+            <Button variant="ghost" size="icon-sm"><Gear style={{ width: 14, height: 14 }} /></Button>
           </PopoverTrigger>
           <PopoverContent align="start">
             <div className="space-y-3">
-              <p className="text-[length:var(--invin-text-card-title)] font-[600]">Display</p>
+              <p className="text-[var(--foreground)] font-[600]">Display</p>
               <div className="space-y-1.5">
                 <Label>Font size</Label>
                 <Input defaultValue="13.5px" size="sm" />
@@ -163,7 +163,7 @@ export default function PopoverDemo() {
           <PopoverContent align="end" className="w-80">
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <p className="text-[length:var(--invin-text-card-title)] font-[600]">Notifications</p>
+                <p className="text-[var(--foreground)] font-[600]">Notifications</p>
                 <Button variant="ghost" size="sm">Mark all read</Button>
               </div>
               <Separator className="my-0" />
@@ -172,9 +172,9 @@ export default function PopoverDemo() {
                 { text: 'Alice commented on PR #42', time: '15m ago' },
                 { text: 'Security scan passed', time: '1h ago' },
               ].map((n, i) => (
-                <div key={i} className="py-1.5 cursor-pointer hover:bg-[var(--invin-surface-hover)] -mx-2 px-2 rounded-md">
-                  <p className="text-[length:var(--invin-text-body)]">{n.text}</p>
-                  <p className="text-[10px] text-[var(--invin-text-faint)]">{n.time}</p>
+                <div key={i} className="py-1.5 cursor-pointer hover:bg-[var(--secondary)] -mx-2 px-2 rounded-md">
+                  <p className="text-[var(--foreground)]">{n.text}</p>
+                  <p className="text-[10px] text-[var(--muted-foreground-faint)]">{n.time}</p>
                 </div>
               ))}
             </div>
@@ -187,7 +187,7 @@ export default function PopoverDemo() {
         description="Copy-link pattern with a share popover."
         code={`<Popover>
   <PopoverTrigger asChild>
-    <Button variant="outline" size="sm"><Share2 /> Share</Button>
+    <Button variant="outline" size="sm"><ShareNetwork /> Share</Button>
   </PopoverTrigger>
   <PopoverContent>
     <Input defaultValue="https://app.invin.io/..." readOnly />
@@ -197,12 +197,12 @@ export default function PopoverDemo() {
       >
         <Popover>
           <PopoverTrigger asChild>
-            <Button variant="outline" size="sm"><Share2 style={{ width: 14, height: 14 }} /> Share</Button>
+            <Button variant="outline" size="sm"><ShareNetwork style={{ width: 14, height: 14 }} /> Share</Button>
           </PopoverTrigger>
           <PopoverContent>
             <div className="space-y-3">
-              <p className="text-[length:var(--invin-text-card-title)] font-[600]">Share link</p>
-              <p className="text-[length:var(--invin-text-label)] text-[var(--invin-text-dim)]">Anyone with this link can view.</p>
+              <p className="text-[var(--foreground)] font-[600]">Share link</p>
+              <p className="text-[var(--muted-foreground)] text-[var(--muted-foreground)]">Anyone with this link can view.</p>
               <div className="flex gap-2">
                 <Input defaultValue="https://app.invin.io/project/abc" readOnly size="sm" className="flex-1" />
                 <Button size="sm">Copy</Button>
@@ -213,11 +213,11 @@ export default function PopoverDemo() {
       </PlaygroundSection>
 
       <PlaygroundSection
-        title="Filter popover"
+        title="Funnel popover"
         description="Compact filter form that doesn't need a full sheet."
         code={`<Popover>
   <PopoverTrigger asChild>
-    <Button variant="outline" size="sm"><Filter /> Filter</Button>
+    <Button variant="outline" size="sm"><Funnel /> Funnel</Button>
   </PopoverTrigger>
   <PopoverContent align="start">
     {/* filter inputs */}
@@ -226,11 +226,11 @@ export default function PopoverDemo() {
       >
         <Popover>
           <PopoverTrigger asChild>
-            <Button variant="outline" size="sm"><Filter style={{ width: 14, height: 14 }} /> Filter</Button>
+            <Button variant="outline" size="sm"><Funnel style={{ width: 14, height: 14 }} /> Funnel</Button>
           </PopoverTrigger>
           <PopoverContent align="start">
             <div className="space-y-3">
-              <p className="text-[length:var(--invin-text-card-title)] font-[600]">Filters</p>
+              <p className="text-[var(--foreground)] font-[600]">Filters</p>
               <div className="space-y-1.5">
                 <Label>Status</Label>
                 <Input placeholder="All" size="sm" />

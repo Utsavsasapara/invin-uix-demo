@@ -14,7 +14,7 @@ export default function AvatarDemo() {
 
       {/* ─── Props Table ────────────────────────────────────────── */}
       <div className="space-y-4">
-        <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)]">Avatar</p>
+        <p className="text-[var(--muted-foreground)] font-[600] uppercase tracking-[0.05em] text-[var(--muted-foreground-faint)]">Avatar</p>
         <PropsTable
           props={[
             { name: 'size', type: "'xs' | 'sm' | 'md' | 'lg' | 'xl'", default: "'md'", description: 'Preset size (24px to 64px)' },
@@ -23,7 +23,7 @@ export default function AvatarDemo() {
         />
       </div>
       <div className="space-y-4">
-        <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)]">AvatarImage</p>
+        <p className="text-[var(--muted-foreground)] font-[600] uppercase tracking-[0.05em] text-[var(--muted-foreground-faint)]">AvatarImage</p>
         <PropsTable
           props={[
             { name: 'src', type: 'string', default: '—', description: 'Image URL' },
@@ -33,7 +33,7 @@ export default function AvatarDemo() {
         />
       </div>
       <div className="space-y-4">
-        <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)]">AvatarFallback</p>
+        <p className="text-[var(--muted-foreground)] font-[600] uppercase tracking-[0.05em] text-[var(--muted-foreground-faint)]">AvatarFallback</p>
         <PropsTable
           props={[
             { name: 'delayMs', type: 'number', default: '0', description: 'Delay before showing fallback (prevents flash if image loads fast)' },
@@ -42,7 +42,7 @@ export default function AvatarDemo() {
         />
       </div>
       <div className="space-y-4">
-        <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)]">AvatarGroup</p>
+        <p className="text-[var(--muted-foreground)] font-[600] uppercase tracking-[0.05em] text-[var(--muted-foreground-faint)]">AvatarGroup</p>
         <PropsTable
           props={[
             { name: 'size', type: "'xs' | 'sm' | 'md' | 'lg' | 'xl'", default: "'md'", description: 'Applied to all avatars and the +N chip' },
@@ -134,25 +134,25 @@ export default function AvatarDemo() {
         description="Wrap an Avatar in NotificationBadge dot mode to show online/offline status."
         code={`import { NotificationBadge } from 'invin-uix/ui/badge';
 
-<NotificationBadge dot color="var(--invin-ok)">
+<NotificationBadge dot color="var(--ok)">
   <Avatar size="sm"><AvatarImage src="..." /><AvatarFallback>SC</AvatarFallback></Avatar>
 </NotificationBadge>
 
-<NotificationBadge dot color="var(--invin-warn)">
+<NotificationBadge dot color="var(--degraded)">
   <Avatar size="sm"><AvatarFallback>LP</AvatarFallback></Avatar>
 </NotificationBadge>`}
       >
         <div className="flex items-center gap-4">
-          <NotificationBadge dot color="var(--invin-ok)">
+          <NotificationBadge dot color="var(--ok)">
             <Avatar size="sm"><AvatarImage src="https://i.pravatar.cc/100?u=st1" alt="Sarah" /><AvatarFallback>SC</AvatarFallback></Avatar>
           </NotificationBadge>
-          <NotificationBadge dot color="var(--invin-ok)">
+          <NotificationBadge dot color="var(--ok)">
             <Avatar><AvatarImage src="https://i.pravatar.cc/100?u=st2" alt="John" /><AvatarFallback>JR</AvatarFallback></Avatar>
           </NotificationBadge>
-          <NotificationBadge dot color="var(--invin-warn)">
+          <NotificationBadge dot color="var(--degraded)">
             <Avatar size="sm"><AvatarFallback>LP</AvatarFallback></Avatar>
           </NotificationBadge>
-          <NotificationBadge dot color="var(--invin-text-faint)">
+          <NotificationBadge dot color="var(--muted-foreground-faint)">
             <Avatar size="sm"><AvatarFallback>MC</AvatarFallback></Avatar>
           </NotificationBadge>
         </div>
@@ -162,8 +162,8 @@ export default function AvatarDemo() {
 
       {/* ─── Use Cases ──────────────────────────────────────────── */}
       <div className="space-y-3">
-        <h3 className="text-[length:var(--invin-text-sub-heading)] font-[700]">Use cases</h3>
-        <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">Common patterns in real applications.</p>
+        <h3 className="text-[var(--foreground)] font-[700]">Use cases</h3>
+        <p className="text-[var(--foreground)] text-[var(--muted-foreground)]">Common patterns in real applications.</p>
       </div>
 
       <PlaygroundSection
@@ -175,8 +175,8 @@ export default function AvatarDemo() {
     <AvatarFallback>SC</AvatarFallback>
   </Avatar>
   <div>
-    <p className="text-sm font-medium">Sarah Connor</p>
-    <p className="text-xs text-[var(--invin-text-dim)]">Engineer</p>
+    <p className="text-label font-medium">Sarah Connor</p>
+    <p className="text-caption text-[var(--muted-foreground)]">Engineer</p>
   </div>
 </div>`}
       >
@@ -192,8 +192,8 @@ export default function AvatarDemo() {
                 <div key={m.name} className="flex items-center gap-3">
                   <Avatar size="sm"><AvatarImage src={`https://i.pravatar.cc/100?${m.img}`} alt={m.name} /><AvatarFallback>{m.name[0]}{m.name.split(' ')[1][0]}</AvatarFallback></Avatar>
                   <div>
-                    <p className="text-[length:var(--invin-text-body)] font-[500]">{m.name}</p>
-                    <p className="text-[10px] text-[var(--invin-text-dim)]">{m.role}</p>
+                    <p className="text-[var(--foreground)] font-[500]">{m.name}</p>
+                    <p className="text-[10px] text-[var(--muted-foreground)]">{m.role}</p>
                   </div>
                 </div>
               ))}
@@ -212,10 +212,10 @@ export default function AvatarDemo() {
   </Avatar>
   <div>
     <div className="flex items-center gap-2">
-      <span className="font-medium text-sm">Alice</span>
-      <span className="text-xs text-[var(--invin-text-faint)]">2 min ago</span>
+      <span className="font-medium text-label">Alice</span>
+      <span className="text-caption text-[var(--muted-foreground-faint)]">2 min ago</span>
     </div>
-    <p className="text-sm text-[var(--invin-text-dim)] mt-0.5">Looks great! Ship it.</p>
+    <p className="text-label text-[var(--muted-foreground)] mt-0.5">Looks great! Ship it.</p>
   </div>
 </div>`}
       >
@@ -231,10 +231,10 @@ export default function AvatarDemo() {
                   <Avatar size="sm"><AvatarImage src={`https://i.pravatar.cc/100?${c.img}`} alt={c.name} /><AvatarFallback>{c.name[0]}</AvatarFallback></Avatar>
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="text-[length:var(--invin-text-body)] font-[500]">{c.name}</span>
-                      <span className="text-[10px] text-[var(--invin-text-faint)]">{c.time}</span>
+                      <span className="text-[var(--foreground)] font-[500]">{c.name}</span>
+                      <span className="text-[10px] text-[var(--muted-foreground-faint)]">{c.time}</span>
                     </div>
-                    <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)] mt-0.5">{c.msg}</p>
+                    <p className="text-[var(--foreground)] text-[var(--muted-foreground)] mt-0.5">{c.msg}</p>
                   </div>
                 </div>
               ))}
@@ -246,21 +246,21 @@ export default function AvatarDemo() {
       <PlaygroundSection
         title="Account dropdown trigger"
         description="Small avatar as a clickable trigger for a user menu."
-        code={`<Avatar size="sm" className="cursor-pointer ring-2 ring-transparent hover:ring-[var(--invin-accent)]/50 transition-all">
+        code={`<Avatar size="sm" className="cursor-pointer ring-2 ring-transparent hover:ring-[var(--accent)]/50 transition-all">
   <AvatarImage src="..." alt="You" />
   <AvatarFallback>ME</AvatarFallback>
 </Avatar>`}
       >
         <div className="flex items-center gap-4">
-          <Avatar size="sm" className="cursor-pointer ring-2 ring-transparent hover:ring-[var(--invin-accent)]/50 transition-all">
+          <Avatar size="sm" className="cursor-pointer ring-2 ring-transparent hover:ring-[var(--accent)]/50 transition-all">
             <AvatarImage src="https://i.pravatar.cc/100?u=me" alt="You" />
             <AvatarFallback>ME</AvatarFallback>
           </Avatar>
-          <Avatar className="cursor-pointer ring-2 ring-transparent hover:ring-[var(--invin-accent)]/50 transition-all">
+          <Avatar className="cursor-pointer ring-2 ring-transparent hover:ring-[var(--accent)]/50 transition-all">
             <AvatarImage src="https://i.pravatar.cc/100?u=me2" alt="You" />
             <AvatarFallback>YO</AvatarFallback>
           </Avatar>
-          <span className="text-[length:var(--invin-text-label)] text-[var(--invin-text-faint)]">← hover these</span>
+          <span className="text-[var(--muted-foreground)] text-[var(--muted-foreground-faint)]">← hover these</span>
         </div>
       </PlaygroundSection>
 

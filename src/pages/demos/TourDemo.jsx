@@ -6,7 +6,7 @@ import { Card, CardContent } from 'invin-uix/ui/card';
 import { Badge } from 'invin-uix/ui/badge';
 import { Separator } from 'invin-uix/ui/separator';
 import { KpiCard } from 'invin-uix/ui/kpi-card';
-import { Users, Activity, CreditCard } from 'invin-uix/ui/icons';
+import { Users, Pulse, CreditCard } from 'invin-uix/ui/icons';
 
 export default function TourDemo() {
   const [singleTour, setSingleTour] = useState(false);
@@ -23,7 +23,7 @@ export default function TourDemo() {
     },
     {
       target: '#tour-demo-table',
-      title: 'Recent Activity',
+      title: 'Recent Pulse',
       description: <span>Track recent events and actions. Use the <strong>badge colours</strong> to quickly identify status — green for success, amber for pending.</span>,
       section: 'DASHBOARD',
       placement: 'top',
@@ -48,7 +48,7 @@ export default function TourDemo() {
     },
     {
       target: '#tour-demo-table',
-      title: 'Step 2: Activity Feed',
+      title: 'Step 2: Pulse Feed',
       description: 'Next, check recent activity. In a real cross-page tour, this step could navigate to a different route.',
       section: 'ACTIVITY',
       page: '/components',
@@ -70,7 +70,7 @@ export default function TourDemo() {
     >
       {/* ─── Props Tables ───────────────────────────────────────── */}
       <div className="space-y-4">
-        <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)]">Tour</p>
+        <p className="text-[var(--muted-foreground)] font-[600] uppercase tracking-[0.05em] text-[var(--muted-foreground-faint)]">Tour</p>
         <PropsTable
           props={[
             { name: 'steps', type: 'TourStep[]', default: '—', description: 'Array of tour steps with target, title, description' },
@@ -87,7 +87,7 @@ export default function TourDemo() {
         />
       </div>
       <div className="space-y-4">
-        <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)]">TourStep</p>
+        <p className="text-[var(--muted-foreground)] font-[600] uppercase tracking-[0.05em] text-[var(--muted-foreground-faint)]">TourStep</p>
         <PropsTable
           props={[
             { name: 'target', type: 'string', default: '—', description: 'CSS selector for the element to highlight' },
@@ -100,7 +100,7 @@ export default function TourDemo() {
         />
       </div>
       <div className="space-y-4">
-        <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)]">TourFAB</p>
+        <p className="text-[var(--muted-foreground)] font-[600] uppercase tracking-[0.05em] text-[var(--muted-foreground-faint)]">TourFAB</p>
         <PropsTable
           props={[
             { name: 'label', type: 'string', default: "'Take the tour'", description: 'Button text' },
@@ -114,8 +114,8 @@ export default function TourDemo() {
 
       {/* ─── Demo Content (targets for tour) ────────────────────── */}
       <div className="space-y-4">
-        <h3 className="text-[length:var(--invin-text-sub-heading)] font-[700]">Live Demo</h3>
-        <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">Click the buttons below to start a tour. The tour will highlight each section below.</p>
+        <h3 className="text-[var(--foreground)] font-[700]">Live Demo</h3>
+        <p className="text-[var(--foreground)] text-[var(--muted-foreground)]">Click the buttons below to start a tour. The tour will highlight each section below.</p>
       </div>
 
       <div className="flex gap-3">
@@ -130,14 +130,14 @@ export default function TourDemo() {
       {/* Target: KPI Stats */}
       <div id="tour-demo-stats" className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <KpiCard label="Total Users" value="2,350" change="+12.5%" up icon={<Users style={{ width: 14, height: 14 }} />} />
-        <KpiCard label="Active Now" value="573" change="+8%" up icon={<Activity style={{ width: 14, height: 14 }} />} />
+        <KpiCard label="Active Now" value="573" change="+8%" up icon={<Pulse style={{ width: 14, height: 14 }} />} />
         <KpiCard label="Revenue" value="$45,231" change="+20.1%" up icon={<CreditCard style={{ width: 14, height: 14 }} />} />
       </div>
 
-      {/* Target: Activity Table */}
+      {/* Target: Pulse Table */}
       <Card id="tour-demo-table">
         <CardContent className="py-4">
-          <p className="text-[length:var(--invin-text-card-title)] font-[600] mb-3">Recent Activity</p>
+          <p className="text-[var(--foreground)] font-[600] mb-3">Recent Pulse</p>
           <div className="space-y-2">
             {[
               { action: 'User signed up', time: '2 min ago', status: 'success' },
@@ -145,10 +145,10 @@ export default function TourDemo() {
               { action: 'Export queued', time: '12 min ago', status: 'warning' },
               { action: 'Report generated', time: '1 hour ago', status: 'success' },
             ].map((item, i) => (
-              <div key={i} className="flex items-center justify-between py-1.5 border-b border-[var(--invin-border)] last:border-0">
-                <span className="text-[length:var(--invin-text-body)]">{item.action}</span>
+              <div key={i} className="flex items-center justify-between py-1.5 border-b border-[var(--border)] last:border-0">
+                <span className="text-[var(--foreground)]">{item.action}</span>
                 <div className="flex items-center gap-2">
-                  <span className="text-[10px] text-[var(--invin-text-faint)]">{item.time}</span>
+                  <span className="text-[10px] text-[var(--muted-foreground-faint)]">{item.time}</span>
                   <Badge variant={item.status === 'success' ? 'success' : 'warning'} size="sm">{item.status}</Badge>
                 </div>
               </div>
@@ -183,7 +183,7 @@ export default function TourDemo() {
 
       {/* ─── Usage Examples ─────────────────────────────────────── */}
       <div className="space-y-3">
-        <h3 className="text-[length:var(--invin-text-sub-heading)] font-[700]">Usage</h3>
+        <h3 className="text-[var(--foreground)] font-[700]">Usage</h3>
       </div>
 
       <PlaygroundSection
@@ -210,7 +210,7 @@ const steps = [
 <Tour steps={steps} open={showTour} onClose={() => setShowTour(false)} />
 <TourFAB onClick={() => setShowTour(true)} />`}
       >
-        <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">Click "Start Single-Page Tour" above to see this in action.</p>
+        <p className="text-[var(--foreground)] text-[var(--muted-foreground)]">Click "Start Single-Page Tour" above to see this in action.</p>
       </PlaygroundSection>
 
       <PlaygroundSection
@@ -235,7 +235,7 @@ const steps = [
   onNavigate={(path) => navigate(path)}
 />`}
       >
-        <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">Click "Start Help Tour" above. In production, each step would navigate to its page before highlighting.</p>
+        <p className="text-[var(--foreground)] text-[var(--muted-foreground)]">Click "Start Help Tour" above. In production, each step would navigate to its page before highlighting.</p>
       </PlaygroundSection>
 
       <PlaygroundSection
@@ -249,7 +249,7 @@ const steps = [
 <Tour steps={helpSteps} open={showHelp} onClose={() => setShowHelp(false)} />
 <Button onClick={() => setShowHelp(true)}>?</Button>`}
       >
-        <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">Only one tour can be open at a time (they share the same overlay z-index).</p>
+        <p className="text-[var(--foreground)] text-[var(--muted-foreground)]">Only one tour can be open at a time (they share the same overlay z-index).</p>
       </PlaygroundSection>
 
       <PlaygroundSection

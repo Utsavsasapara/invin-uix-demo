@@ -6,7 +6,7 @@ import { Input } from 'invin-uix/ui/input';
 import { Label } from 'invin-uix/ui/label';
 import { Separator } from 'invin-uix/ui/separator';
 import { Card, CardContent } from 'invin-uix/ui/card';
-import { Settings, Filter, Share2, Menu } from 'invin-uix/ui/icons';
+import { Gear, Funnel, ShareNetwork, List } from 'invin-uix/ui/icons';
 
 export default function SheetDemo() {
   return (
@@ -22,7 +22,7 @@ import { Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerTitle, Drawer
 
       {/* ─── Sheet Props ────────────────────────────────────────── */}
       <div className="space-y-4">
-        <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)]">SheetContent</p>
+        <p className="text-[var(--muted-foreground)] font-[600] uppercase tracking-[0.05em] text-[var(--muted-foreground-faint)]">SheetContent</p>
         <PropsTable
           props={[
             { name: 'side', type: "'left' | 'right' | 'top' | 'bottom'", default: "'right'", description: 'Slide-in direction' },
@@ -31,7 +31,7 @@ import { Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerTitle, Drawer
         />
       </div>
       <div className="space-y-4">
-        <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)]">DrawerContent</p>
+        <p className="text-[var(--muted-foreground)] font-[600] uppercase tracking-[0.05em] text-[var(--muted-foreground-faint)]">DrawerContent</p>
         <PropsTable
           props={[
             { name: 'showHandle', type: 'boolean', default: 'true', description: 'Show drag handle bar' },
@@ -51,11 +51,11 @@ import { Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerTitle, Drawer
         description="Slides in from the right. Good for settings, details, and forms."
         code={`<Sheet>
   <SheetTrigger asChild>
-    <Button variant="outline">Open Settings</Button>
+    <Button variant="outline">Open Gear</Button>
   </SheetTrigger>
   <SheetContent>
     <SheetHeader>
-      <SheetTitle>Settings</SheetTitle>
+      <SheetTitle>Gear</SheetTitle>
       <SheetDescription>Adjust preferences.</SheetDescription>
     </SheetHeader>
     {/* content */}
@@ -64,11 +64,11 @@ import { Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerTitle, Drawer
       >
         <Sheet>
           <SheetTrigger asChild>
-            <Button variant="outline"><Settings style={{ width: 14, height: 14 }} /> Settings Panel</Button>
+            <Button variant="outline"><Gear style={{ width: 14, height: 14 }} /> Gear Panel</Button>
           </SheetTrigger>
           <SheetContent>
             <SheetHeader>
-              <SheetTitle>Settings</SheetTitle>
+              <SheetTitle>Gear</SheetTitle>
               <SheetDescription>Adjust your preferences below.</SheetDescription>
             </SheetHeader>
             <div className="space-y-4 mt-4">
@@ -95,7 +95,7 @@ import { Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerTitle, Drawer
         description="Slides from left. Common for mobile navigation and sidebars."
         code={`<Sheet>
   <SheetTrigger asChild>
-    <Button variant="ghost" size="icon"><Menu /></Button>
+    <Button variant="ghost" size="icon"><List /></Button>
   </SheetTrigger>
   <SheetContent side="left">
     <SheetHeader>
@@ -107,15 +107,15 @@ import { Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerTitle, Drawer
       >
         <Sheet>
           <SheetTrigger asChild>
-            <Button variant="ghost" size="icon-sm"><Menu style={{ width: 16, height: 16 }} /></Button>
+            <Button variant="ghost" size="icon-sm"><List style={{ width: 16, height: 16 }} /></Button>
           </SheetTrigger>
           <SheetContent side="left">
             <SheetHeader>
               <SheetTitle>Navigation</SheetTitle>
             </SheetHeader>
             <div className="space-y-1 mt-4">
-              {['Dashboard', 'Projects', 'Team', 'Settings', 'Help'].map(item => (
-                <div key={item} className="px-3 py-2 rounded-md hover:bg-[var(--invin-surface-hover)] cursor-pointer text-[length:var(--invin-text-body)]">
+              {['Dashboard', 'Projects', 'Team', 'Gear', 'Help'].map(item => (
+                <div key={item} className="px-3 py-2 rounded-md hover:bg-[var(--secondary)] cursor-pointer text-[var(--foreground)]">
                   {item}
                 </div>
               ))}
@@ -142,7 +142,7 @@ import { Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerTitle, Drawer
       >
         <Sheet>
           <SheetTrigger asChild>
-            <Button variant="outline"><Share2 style={{ width: 14, height: 14 }} /> Share</Button>
+            <Button variant="outline"><ShareNetwork style={{ width: 14, height: 14 }} /> Share</Button>
           </SheetTrigger>
           <SheetContent side="bottom">
             <SheetHeader>
@@ -161,8 +161,8 @@ import { Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerTitle, Drawer
 
       {/* ─── Drawer ─────────────────────────────────────────────── */}
       <div className="space-y-3">
-        <h3 className="text-[length:var(--invin-text-sub-heading)] font-[700]">Drawer (bottom sheet with drag)</h3>
-        <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">Resizable bottom panel with drag handle and snap points. Drag the handle to resize, release to snap.</p>
+        <h3 className="text-[var(--foreground)] font-[700]">Drawer (bottom sheet with drag)</h3>
+        <p className="text-[var(--foreground)] text-[var(--muted-foreground)]">Resizable bottom panel with drag handle and snap points. Drag the handle to resize, release to snap.</p>
       </div>
 
       <PlaygroundSection
@@ -192,7 +192,7 @@ import { Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerTitle, Drawer
             </DrawerHeader>
             <div className="space-y-2">
               {['Create new project', 'Import data', 'Invite team member', 'Export report', 'View documentation'].map(action => (
-                <div key={action} className="px-4 py-3 rounded-[8px] border border-[var(--invin-border)] hover:bg-[var(--invin-surface-hover)] cursor-pointer text-[length:var(--invin-text-body)]">
+                <div key={action} className="px-4 py-3 rounded-[8px] border border-[var(--border)] hover:bg-[var(--secondary)] cursor-pointer text-[var(--foreground)]">
                   {action}
                 </div>
               ))}
@@ -217,7 +217,7 @@ import { Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerTitle, Drawer
               <DrawerTitle>Details</DrawerTitle>
               <DrawerDescription>Snaps between 30% and 70%.</DrawerDescription>
             </DrawerHeader>
-            <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">
+            <p className="text-[var(--foreground)] text-[var(--muted-foreground)]">
               Drag up to expand, down to collapse. This drawer has limited height range.
             </p>
           </DrawerContent>
@@ -228,30 +228,30 @@ import { Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerTitle, Drawer
 
       {/* ─── Use Cases ──────────────────────────────────────────── */}
       <div className="space-y-3">
-        <h3 className="text-[length:var(--invin-text-sub-heading)] font-[700]">When to use which</h3>
+        <h3 className="text-[var(--foreground)] font-[700]">When to use which</h3>
       </div>
 
       <Card>
         <CardContent className="py-4">
-          <div className="space-y-3 text-[length:var(--invin-text-body)]">
+          <div className="space-y-3 text-[var(--foreground)]">
             <div className="flex gap-3">
-              <span className="text-[var(--invin-accent)] font-[600] shrink-0 w-16">Sheet</span>
-              <span className="text-[var(--invin-text-dim)]">Side panels for navigation, filters, settings forms, detail views. Fixed size, any direction.</span>
+              <span className="text-[var(--accent)] font-[600] shrink-0 w-16">Sheet</span>
+              <span className="text-[var(--muted-foreground)]">Side panels for navigation, filters, settings forms, detail views. Fixed size, any direction.</span>
             </div>
             <div className="flex gap-3">
-              <span className="text-[var(--invin-accent)] font-[600] shrink-0 w-16">Drawer</span>
-              <span className="text-[var(--invin-text-dim)]">Mobile-first bottom sheets for quick actions, share menus, detail panels. Resizable via drag, snap points.</span>
+              <span className="text-[var(--accent)] font-[600] shrink-0 w-16">Drawer</span>
+              <span className="text-[var(--muted-foreground)]">Mobile-first bottom sheets for quick actions, share menus, detail panels. Resizable via drag, snap points.</span>
             </div>
           </div>
         </CardContent>
       </Card>
 
       <PlaygroundSection
-        title="Filter panel (Sheet)"
+        title="Funnel panel (Sheet)"
         description="Right-side filter panel for data tables."
         code={`<Sheet>
   <SheetTrigger asChild>
-    <Button variant="outline" size="sm"><Filter /> Filters</Button>
+    <Button variant="outline" size="sm"><Funnel /> Filters</Button>
   </SheetTrigger>
   <SheetContent>
     <SheetHeader><SheetTitle>Filters</SheetTitle></SheetHeader>
@@ -261,7 +261,7 @@ import { Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerTitle, Drawer
       >
         <Sheet>
           <SheetTrigger asChild>
-            <Button variant="outline" size="sm"><Filter style={{ width: 14, height: 14 }} /> Filters</Button>
+            <Button variant="outline" size="sm"><Funnel style={{ width: 14, height: 14 }} /> Filters</Button>
           </SheetTrigger>
           <SheetContent>
             <SheetHeader>

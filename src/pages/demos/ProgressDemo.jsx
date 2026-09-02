@@ -39,7 +39,7 @@ export default function ProgressDemo() {
 <Progress value={progress} />`}
       >
         <div className="w-full max-w-md space-y-2">
-          <div className="flex justify-between text-[length:var(--invin-text-label)] text-[var(--invin-text-dim)]">
+          <div className="flex justify-between text-[var(--muted-foreground)] text-[var(--muted-foreground)]">
             <span>Loading...</span>
             <span>{progress}%</span>
           </div>
@@ -101,8 +101,8 @@ export default function ProgressDemo() {
       <Separator variant="bold" />
 
       <div className="space-y-3">
-        <h3 className="text-[length:var(--invin-text-sub-heading)] font-[700]">Use cases</h3>
-        <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">Common patterns.</p>
+        <h3 className="text-[var(--foreground)] font-[700]">Use cases</h3>
+        <p className="text-[var(--foreground)] text-[var(--muted-foreground)]">Common patterns.</p>
       </div>
 
       <PlaygroundSection
@@ -121,9 +121,9 @@ export default function ProgressDemo() {
               { label: 'Bug fixes', value: 10, variant: 'destructive' },
             ].map(t => (
               <div key={t.label} className="space-y-1">
-                <div className="flex justify-between text-[length:var(--invin-text-label)]">
+                <div className="flex justify-between text-[var(--muted-foreground)]">
                   <span>{t.label}</span>
-                  <span className="text-[var(--invin-text-faint)]">{t.value}%</span>
+                  <span className="text-[var(--muted-foreground-faint)]">{t.value}%</span>
                 </div>
                 <Progress value={t.value} variant={t.variant} size="sm" />
               </div>
@@ -142,9 +142,9 @@ export default function ProgressDemo() {
       >
         <Card className="w-full max-w-sm">
           <CardContent className="py-3 space-y-2">
-            <div className="flex justify-between text-[length:var(--invin-text-body)]">
+            <div className="flex justify-between text-[var(--foreground)]">
               <span>Storage used</span>
-              <span className="text-[var(--invin-text-dim)]">7.2 GB / 10 GB</span>
+              <span className="text-[var(--muted-foreground)]">7.2 GB / 10 GB</span>
             </div>
             <Progress value={72} size="md" />
           </CardContent>

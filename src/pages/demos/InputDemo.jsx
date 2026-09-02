@@ -5,7 +5,7 @@ import { Label } from 'invin-uix/ui/label';
 import { Button } from 'invin-uix/ui/button';
 import { Card, CardContent } from 'invin-uix/ui/card';
 import { Separator } from 'invin-uix/ui/separator';
-import { Search, Mail, Lock, Eye, EyeOff, User, Check } from 'invin-uix/ui/icons';
+import { MagnifyingGlass, Envelope, Lock, Eye, EyeSlash, User, Check } from 'invin-uix/ui/icons';
 
 export default function InputDemo() {
   const [showPw, setShowPw] = useState(false);
@@ -117,22 +117,22 @@ export default function InputDemo() {
 
       {/* ─── Use Cases ──────────────────────────────────────────── */}
       <div className="space-y-3">
-        <h3 className="text-[length:var(--invin-text-sub-heading)] font-[700]">Use cases</h3>
-        <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">Common patterns in real forms.</p>
+        <h3 className="text-[var(--foreground)] font-[700]">Use cases</h3>
+        <p className="text-[var(--foreground)] text-[var(--muted-foreground)]">Common patterns in real forms.</p>
       </div>
 
       <PlaygroundSection
         title="With icons"
         description="Pass leftIcon / rightIcon and the input adds the icon plus the right padding for you — no manual positioning."
-        code={`<Input leftIcon={<Search style={{ width: 16, height: 16 }} />} placeholder="Search..." />
-<Input leftIcon={<Mail style={{ width: 16, height: 16 }} />} type="email" placeholder="Email address" />
+        code={`<Input leftIcon={<MagnifyingGlass style={{ width: 16, height: 16 }} />} placeholder="MagnifyingGlass..." />
+<Input leftIcon={<Envelope style={{ width: 16, height: 16 }} />} type="email" placeholder="Email address" />
 <Input rightIcon={<Check style={{ width: 16, height: 16 }} />} defaultValue="Available" />`}
       >
         <div className="space-y-3 w-full max-w-sm">
-          <Input leftIcon={<Search style={{ width: 16, height: 16 }} />} placeholder="Search..." />
-          <Input leftIcon={<Mail style={{ width: 16, height: 16 }} />} type="email" placeholder="Email address" />
+          <Input leftIcon={<MagnifyingGlass style={{ width: 16, height: 16 }} />} placeholder="MagnifyingGlass..." />
+          <Input leftIcon={<Envelope style={{ width: 16, height: 16 }} />} type="email" placeholder="Email address" />
           <Input leftIcon={<User style={{ width: 16, height: 16 }} />} placeholder="Username" />
-          <Input rightIcon={<Check style={{ width: 16, height: 16, color: 'var(--invin-ok)' }} />} defaultValue="username-available" />
+          <Input rightIcon={<Check style={{ width: 16, height: 16, color: 'var(--ok)' }} />} defaultValue="username-available" />
         </div>
       </PlaygroundSection>
 
@@ -154,7 +154,7 @@ export default function InputDemo() {
     onClick={() => setShowPw(!showPw)}
     aria-label={showPw ? 'Hide password' : 'Show password'}
   >
-    {showPw ? <EyeOff /> : <Eye />}
+    {showPw ? <EyeSlash /> : <Eye />}
   </Button>
 </div>`}
       >
@@ -175,7 +175,7 @@ export default function InputDemo() {
               onClick={() => setShowPw(!showPw)}
               aria-label={showPw ? 'Hide password' : 'Show password'}
             >
-              {showPw ? <EyeOff style={{ width: 14, height: 14 }} /> : <Eye style={{ width: 14, height: 14 }} />}
+              {showPw ? <EyeSlash style={{ width: 14, height: 14 }} /> : <Eye style={{ width: 14, height: 14 }} />}
             </Button>
           </div>
         </div>
@@ -183,7 +183,7 @@ export default function InputDemo() {
 
       <PlaygroundSection
         title="Input with button"
-        description="Search bar or email subscribe pattern with inline button."
+        description="MagnifyingGlass bar or email subscribe pattern with inline button."
         code={`<div className="flex gap-2">
   <div className="flex-1">
     <Input placeholder="Enter email..." />
@@ -200,9 +200,9 @@ export default function InputDemo() {
           </div>
           <div className="flex gap-2">
             <div className="flex-1">
-              <Input leftIcon={<Search style={{ width: 16, height: 16 }} />} placeholder="Search documentation..." />
+              <Input leftIcon={<MagnifyingGlass style={{ width: 16, height: 16 }} />} placeholder="MagnifyingGlass documentation..." />
             </div>
-            <Button variant="outline">Search</Button>
+            <Button variant="outline">MagnifyingGlass</Button>
           </div>
         </div>
       </PlaygroundSection>

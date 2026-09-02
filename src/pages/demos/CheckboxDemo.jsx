@@ -97,7 +97,7 @@ export default function CheckboxDemo() {
         <div className="flex items-center gap-3">
           <Checkbox checked={checked} onCheckedChange={setChecked} id="controlled" />
           <Label htmlFor="controlled">
-            State: <strong className="text-[var(--invin-accent)]">{checked ? 'Checked' : 'Unchecked'}</strong>
+            State: <strong className="text-[var(--accent)]">{checked ? 'Checked' : 'Unchecked'}</strong>
           </Label>
         </div>
       </PlaygroundSection>
@@ -125,8 +125,8 @@ export default function CheckboxDemo() {
 
       {/* ─── Use Cases ──────────────────────────────────────────── */}
       <div className="space-y-3">
-        <h3 className="text-[length:var(--invin-text-sub-heading)] font-[700]">Use cases</h3>
-        <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">Common patterns in real forms.</p>
+        <h3 className="text-[var(--foreground)] font-[700]">Use cases</h3>
+        <p className="text-[var(--foreground)] text-[var(--muted-foreground)]">Common patterns in real forms.</p>
       </div>
 
       <PlaygroundSection
@@ -143,14 +143,14 @@ export default function CheckboxDemo() {
       >
         <Card className="w-full max-w-sm">
           <CardContent className="py-3 space-y-3">
-            <div className="flex items-center gap-2 pb-2 border-b border-[var(--invin-border)]">
+            <div className="flex items-center gap-2 pb-2 border-b border-[var(--border)]">
               <Checkbox
                 id="select-all"
                 checked={allChecked ? true : someChecked ? 'indeterminate' : false}
                 onCheckedChange={(v) => setItems(items.map(i => ({ ...i, checked: !!v })))}
               />
               <Label htmlFor="select-all" className="font-[600]">Select all</Label>
-              <span className="text-[10px] text-[var(--invin-text-faint)] ml-auto">{items.filter(i => i.checked).length}/{items.length}</span>
+              <span className="text-[10px] text-[var(--muted-foreground-faint)] ml-auto">{items.filter(i => i.checked).length}/{items.length}</span>
             </div>
             {items.map(item => (
               <div key={item.id} className="flex items-center gap-2">
@@ -181,7 +181,7 @@ export default function CheckboxDemo() {
             <div className="flex items-start gap-2">
               <Checkbox id="agree-terms" className="mt-0.5" />
               <Label htmlFor="agree-terms" className="leading-relaxed">
-                I agree to the <span className="text-[var(--invin-accent)] cursor-pointer">Terms of Service</span> and <span className="text-[var(--invin-accent)] cursor-pointer">Privacy Policy</span>
+                I agree to the <span className="text-[var(--accent)] cursor-pointer">Terms of Service</span> and <span className="text-[var(--accent)] cursor-pointer">Privacy Policy</span>
               </Label>
             </div>
             <Button fullWidth disabled>Create Account</Button>

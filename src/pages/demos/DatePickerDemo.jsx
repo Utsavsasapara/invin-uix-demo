@@ -17,7 +17,7 @@ export default function DatePickerDemo() {
       importCode={`import { DatePicker, DateRangePicker } from 'invin-uix/ui/date-picker';`}
     >
       <div className="space-y-4">
-        <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)]">DatePicker</p>
+        <p className="text-[var(--muted-foreground)] font-[600] uppercase tracking-[0.05em] text-[var(--muted-foreground-faint)]">DatePicker</p>
         <PropsTable
           props={[
             { name: 'value', type: 'Date | null', default: '—', description: 'Selected date' },
@@ -32,7 +32,7 @@ export default function DatePickerDemo() {
         />
       </div>
       <div className="space-y-4">
-        <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)]">DateRangePicker</p>
+        <p className="text-[var(--muted-foreground)] font-[600] uppercase tracking-[0.05em] text-[var(--muted-foreground-faint)]">DateRangePicker</p>
         <PropsTable
           props={[
             { name: 'value', type: '{ from, to }', default: '—', description: 'Selected range' },
@@ -56,7 +56,7 @@ export default function DatePickerDemo() {
         <div className="space-y-2 w-full max-w-xs">
           <Label>Event date</Label>
           <DatePicker value={date} onChange={setDate} />
-          {date && <p className="text-[length:var(--invin-text-label)] text-[var(--invin-text-dim)]">Selected: {date.toLocaleDateString()}</p>}
+          {date && <p className="text-[var(--muted-foreground)] text-[var(--muted-foreground)]">Selected: {date.toLocaleDateString()}</p>}
         </div>
       </PlaygroundSection>
 
@@ -128,8 +128,8 @@ export default function DatePickerDemo() {
 
       {/* ─── DateRangePicker ────────────────────────────────────── */}
       <div className="space-y-3">
-        <h3 className="text-[length:var(--invin-text-sub-heading)] font-[700]">Date Range Picker</h3>
-        <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">Two months side-by-side for selecting a start and end date.</p>
+        <h3 className="text-[var(--foreground)] font-[700]">Date Range Picker</h3>
+        <p className="text-[var(--foreground)] text-[var(--muted-foreground)]">Two months side-by-side for selecting a start and end date.</p>
       </div>
 
       <PlaygroundSection
@@ -143,7 +143,7 @@ export default function DatePickerDemo() {
           <Label>Trip dates</Label>
           <DateRangePicker value={range} onChange={setRange} placeholder="Check-in – Check-out" />
           {range.from && range.to && (
-            <p className="text-[length:var(--invin-text-label)] text-[var(--invin-text-dim)]">
+            <p className="text-[var(--muted-foreground)] text-[var(--muted-foreground)]">
               {range.from.toLocaleDateString()} – {range.to.toLocaleDateString()} ({Math.ceil((range.to - range.from) / 86400000)} nights)
             </p>
           )}
@@ -154,8 +154,8 @@ export default function DatePickerDemo() {
 
       {/* ─── Use Cases ──────────────────────────────────────────── */}
       <div className="space-y-3">
-        <h3 className="text-[length:var(--invin-text-sub-heading)] font-[700]">Use cases</h3>
-        <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">Common patterns.</p>
+        <h3 className="text-[var(--foreground)] font-[700]">Use cases</h3>
+        <p className="text-[var(--foreground)] text-[var(--muted-foreground)]">Common patterns.</p>
       </div>
 
       <PlaygroundSection

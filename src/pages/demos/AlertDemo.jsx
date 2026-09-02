@@ -3,7 +3,7 @@ import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/P
 import { Alert, AlertTitle, AlertDescription } from 'invin-uix/ui/alert';
 import { Separator } from 'invin-uix/ui/separator';
 import { Button } from 'invin-uix/ui/button';
-import { AlertCircle, CheckCircle2, Info, AlertTriangle, Terminal } from 'invin-uix/ui/icons';
+import { WarningCircle, CheckCircle, Info, Warning, Terminal } from 'invin-uix/ui/icons';
 
 export default function AlertDemo() {
   const [showDismissible, setShowDismissible] = useState(true);
@@ -43,13 +43,13 @@ export default function AlertDemo() {
   <AlertDescription>Your session expires in 5 minutes.</AlertDescription>
 </Alert>
 
-<Alert variant="success" icon={<CheckCircle2 />}>
+<Alert variant="success" icon={<CheckCircle />}>
   <AlertTitle>Success</AlertTitle>
   <AlertDescription>Profile updated successfully.</AlertDescription>
 </Alert>
 
-<Alert variant="warning" icon={<AlertTriangle />}>...</Alert>
-<Alert variant="destructive" icon={<AlertCircle />}>...</Alert>`}
+<Alert variant="warning" icon={<Warning />}>...</Alert>
+<Alert variant="destructive" icon={<WarningCircle />}>...</Alert>`}
       >
         <div className="space-y-3 w-full">
           <Alert icon={<Terminal style={{ width: 16, height: 16 }} />}>
@@ -60,15 +60,15 @@ export default function AlertDemo() {
             <AlertTitle>Info</AlertTitle>
             <AlertDescription>Your session will expire in 5 minutes.</AlertDescription>
           </Alert>
-          <Alert variant="success" icon={<CheckCircle2 style={{ width: 16, height: 16 }} />}>
+          <Alert variant="success" icon={<CheckCircle style={{ width: 16, height: 16 }} />}>
             <AlertTitle>Success</AlertTitle>
             <AlertDescription>Profile updated successfully.</AlertDescription>
           </Alert>
-          <Alert variant="warning" icon={<AlertTriangle style={{ width: 16, height: 16 }} />}>
+          <Alert variant="warning" icon={<Warning style={{ width: 16, height: 16 }} />}>
             <AlertTitle>Warning</AlertTitle>
             <AlertDescription>Storage is 90% full. Consider cleaning up old files.</AlertDescription>
           </Alert>
-          <Alert variant="destructive" icon={<AlertCircle style={{ width: 16, height: 16 }} />}>
+          <Alert variant="destructive" icon={<WarningCircle style={{ width: 16, height: 16 }} />}>
             <AlertTitle>Error</AlertTitle>
             <AlertDescription>Failed to save changes. Please try again.</AlertDescription>
           </Alert>
@@ -118,7 +118,7 @@ export default function AlertDemo() {
           ) : (
             <Button variant="outline" size="sm" onClick={() => setShowDismissible(true)}>Show alert again</Button>
           )}
-          <Alert variant="success" closable onClose={() => {}} icon={<CheckCircle2 style={{ width: 16, height: 16 }} />}>
+          <Alert variant="success" closable onClose={() => {}} icon={<CheckCircle style={{ width: 16, height: 16 }} />}>
             <AlertTitle>Deployment complete</AlertTitle>
             <AlertDescription>Your changes are now live.</AlertDescription>
           </Alert>
@@ -129,15 +129,15 @@ export default function AlertDemo() {
       <PlaygroundSection
         title="Description only (no title)"
         description="Title is optional — use just AlertDescription for compact messages."
-        code={`<Alert variant="success" icon={<CheckCircle2 />}>
+        code={`<Alert variant="success" icon={<CheckCircle />}>
   <AlertDescription>Settings saved.</AlertDescription>
 </Alert>`}
       >
         <div className="space-y-3 w-full">
-          <Alert variant="success" icon={<CheckCircle2 style={{ width: 16, height: 16 }} />}>
+          <Alert variant="success" icon={<CheckCircle style={{ width: 16, height: 16 }} />}>
             <AlertDescription>Settings saved.</AlertDescription>
           </Alert>
-          <Alert variant="destructive" icon={<AlertCircle style={{ width: 16, height: 16 }} />}>
+          <Alert variant="destructive" icon={<WarningCircle style={{ width: 16, height: 16 }} />}>
             <AlertDescription>Network connection lost.</AlertDescription>
           </Alert>
         </div>
@@ -147,14 +147,14 @@ export default function AlertDemo() {
 
       {/* ─── Use Cases ──────────────────────────────────────────── */}
       <div className="space-y-3">
-        <h3 className="text-[length:var(--invin-text-sub-heading)] font-[700]">Use cases</h3>
-        <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">Common patterns in real applications.</p>
+        <h3 className="text-[var(--foreground)] font-[700]">Use cases</h3>
+        <p className="text-[var(--foreground)] text-[var(--muted-foreground)]">Common patterns in real applications.</p>
       </div>
 
       <PlaygroundSection
         title="Form validation errors"
         description="Show validation feedback after form submission."
-        code={`<Alert variant="destructive" icon={<AlertCircle />}>
+        code={`<Alert variant="destructive" icon={<WarningCircle />}>
   <AlertTitle>Validation failed</AlertTitle>
   <AlertDescription>
     <ul className="list-disc pl-4 mt-1 space-y-0.5">
@@ -164,7 +164,7 @@ export default function AlertDemo() {
   </AlertDescription>
 </Alert>`}
       >
-        <Alert variant="destructive" icon={<AlertCircle style={{ width: 16, height: 16 }} />}>
+        <Alert variant="destructive" icon={<WarningCircle style={{ width: 16, height: 16 }} />}>
           <AlertTitle>Validation failed</AlertTitle>
           <AlertDescription>
             <ul className="list-disc pl-4 mt-1 space-y-0.5">
@@ -179,14 +179,14 @@ export default function AlertDemo() {
       <PlaygroundSection
         title="System maintenance banner"
         description="Warning at the top of a page about upcoming downtime."
-        code={`<Alert variant="warning" closable onClose={() => {}} icon={<AlertTriangle />}>
+        code={`<Alert variant="warning" closable onClose={() => {}} icon={<Warning />}>
   <AlertTitle>Scheduled maintenance</AlertTitle>
   <AlertDescription>
     The system will be unavailable on Sunday, 2am–4am UTC for database migration.
   </AlertDescription>
 </Alert>`}
       >
-        <Alert variant="warning" closable onClose={() => {}} icon={<AlertTriangle style={{ width: 16, height: 16 }} />}>
+        <Alert variant="warning" closable onClose={() => {}} icon={<Warning style={{ width: 16, height: 16 }} />}>
           <AlertTitle>Scheduled maintenance</AlertTitle>
           <AlertDescription>
             The system will be unavailable on Sunday, 2am–4am UTC for database migration.

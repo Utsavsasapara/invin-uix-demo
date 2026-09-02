@@ -5,7 +5,8 @@ import AppLayout from './layouts/AppLayout.jsx';
 
 // Lazy-loaded pages
 const HomePage = lazy(() => import('./pages/HomePage.jsx'));
-const UIGuidePage = lazy(() => import('./pages/UIGuidePage.jsx'));
+const UIGuidePage = lazy(() => import('./pages/demos/UIGuideV2.jsx'));
+const ValidateButton = lazy(() => import('./pages/ValidateButton.jsx'));
 const DemoLayout = lazy(() => import('./pages/DemoLayout.jsx'));
 const SoarApp = lazy(() => import('./pages/apps/SoarApp.jsx'));
 const SoarWorkflows = lazy(() => import('./pages/apps/SoarWorkflows.jsx'));
@@ -30,6 +31,9 @@ export default function AppRoutes() {
 
         {/* Components page has its own full layout (sidebar + component nav) */}
         <Route path="components" element={<DemoLayout />} />
+
+        {/* Isolated component validation — no app layout / no unmigrated components */}
+        <Route path="validate" element={<ValidateButton />} />
 
         {/* Demo apps — each has its own full-page layout */}
         <Route path="apps/soar-dashboard/*" element={<SoarApp />} />

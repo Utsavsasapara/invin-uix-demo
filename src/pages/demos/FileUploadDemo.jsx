@@ -3,19 +3,19 @@ import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/P
 import { FileUpload } from 'invin-uix/ui/file-upload';
 import { Button } from 'invin-uix/ui/button';
 import { Separator } from 'invin-uix/ui/separator';
-import { Upload, Image, FileText } from 'invin-uix/ui/icons';
+import { UploadSimple, Image, FileText } from 'invin-uix/ui/icons';
 
 export default function FileUploadDemo() {
   const [files1, setFiles1] = useState([]);
   const [files2, setFiles2] = useState([
     { id: '1', name: 'quarterly-report.pdf', size: 2456000, type: 'application/pdf', status: 'complete', progress: 100 },
     { id: '2', name: 'dashboard-screenshot.png', size: 845000, type: 'image/png', status: 'uploading', progress: 65 },
-    { id: '3', name: 'error-log.csv', size: 12400, type: 'text/csv', status: 'error', error: 'Upload failed — retry' },
+    { id: '3', name: 'error-log.csv', size: 12400, type: 'text/csv', status: 'error', error: 'UploadSimple failed — retry' },
   ]);
 
   return (
     <ComponentPage
-      name="File Upload"
+      name="File UploadSimple"
       description="Drag & drop file upload zone with file list, progress indicators, and validation. Supports accept filters, size limits, and multiple files."
       importCode={`import { FileUpload } from 'invin-uix/ui/file-upload';`}
     >
@@ -93,12 +93,12 @@ export default function FileUploadDemo() {
       >
         <FileUpload accept="image/*">
           <div className="flex flex-col items-center gap-3 py-4">
-            <div className="h-14 w-14 rounded-full bg-[var(--invin-accent-soft)] flex items-center justify-center">
-              <Image style={{ width: 24, height: 24, color: 'var(--invin-accent)' }} />
+            <div className="h-14 w-14 rounded-full bg-[var(--accent-soft)] flex items-center justify-center">
+              <Image style={{ width: 24, height: 24, color: 'var(--accent)' }} />
             </div>
             <div className="text-center">
-              <p className="text-sm font-[600]">Upload cover image</p>
-              <p className="text-xs text-[var(--invin-text-dim)] mt-1">PNG, JPG or WebP. Recommended 1200×630px.</p>
+              <p className="text-label font-[600]">UploadSimple cover image</p>
+              <p className="text-caption text-[var(--muted-foreground)] mt-1">PNG, JPG or WebP. Recommended 1200×630px.</p>
             </div>
             <Button variant="outline" size="sm">Browse Files</Button>
           </div>
@@ -117,8 +117,8 @@ export default function FileUploadDemo() {
             variant="compact"
           >
             <div className="flex items-center gap-3">
-              <FileText style={{ width: 18, height: 18, color: 'var(--invin-text-dim)' }} />
-              <span className="text-sm">Drop a PDF here or <span className="text-[var(--invin-accent)] font-[500]">browse</span></span>
+              <FileText style={{ width: 18, height: 18, color: 'var(--muted-foreground)' }} />
+              <span className="text-label">Drop a PDF here or <span className="text-[var(--accent)] font-[500]">browse</span></span>
             </div>
           </FileUpload>
         </div>
@@ -127,7 +127,7 @@ export default function FileUploadDemo() {
       {/* ─── Disabled ─────────────────────────────────────────── */}
       <PlaygroundSection
         title="Disabled"
-        description="Upload is not interactive when disabled."
+        description="UploadSimple is not interactive when disabled."
       >
         <FileUpload disabled />
       </PlaygroundSection>

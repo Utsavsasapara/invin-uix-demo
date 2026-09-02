@@ -28,10 +28,10 @@ export default function SparklineDemo() {
       <PlaygroundSection
         title="Step 2 — Bar Type"
         description="Set type='bar' for discrete value visualization."
-        code={`<Sparkline data={[1, 3, 2, 5, 4, 6, 3]} height={28} type="bar" color="var(--invin-error)" />`}
+        code={`<Sparkline data={[1, 3, 2, 5, 4, 6, 3]} height={28} type="bar" color="var(--error)" />`}
       >
         <div className="max-w-[200px]">
-          <Sparkline data={[1, 3, 2, 5, 4, 6, 3]} height={32} type="bar" color="var(--invin-error)" />
+          <Sparkline data={[1, 3, 2, 5, 4, 6, 3]} height={32} type="bar" color="var(--error)" />
         </div>
       </PlaygroundSection>
 
@@ -42,9 +42,9 @@ export default function SparklineDemo() {
         description="Embed sparklines in metric cards to show trend context."
         code={`<Card>
   <CardContent>
-    <p className="text-xs text-dim">Requests</p>
-    <p className="text-kpi font-bold">13.2K</p>
-    <Sparkline data={[4,5,3,7,6,8,5,9]} height={24} color="var(--invin-ok)" />
+    <p className="text-caption text-dim">Requests</p>
+    <p className="text-display font-bold">13.2K</p>
+    <Sparkline data={[4,5,3,7,6,8,5,9]} height={24} color="var(--ok)" />
   </CardContent>
 </Card>`}
       >
@@ -52,31 +52,31 @@ export default function SparklineDemo() {
           <Card>
             <CardContent className="pt-4 pb-4">
               <div className="flex items-center justify-between mb-1">
-                <span className="text-[12px] text-[var(--invin-text-dim)]">Requests</span>
+                <span className="text-[12px] text-[var(--muted-foreground)]">Requests</span>
                 <Badge variant="success" size="sm">+12%</Badge>
               </div>
-              <p className="text-[length:var(--invin-text-kpi)] font-[700] mb-2">13.2K</p>
-              <Sparkline data={[4,5,3,7,6,8,5,9,7,8]} height={24} color="var(--invin-ok)" />
+              <p className="text-[var(--foreground)] font-[700] mb-2">13.2K</p>
+              <Sparkline data={[4,5,3,7,6,8,5,9,7,8]} height={24} color="var(--ok)" />
             </CardContent>
           </Card>
           <Card>
             <CardContent className="pt-4 pb-4">
               <div className="flex items-center justify-between mb-1">
-                <span className="text-[12px] text-[var(--invin-text-dim)]">Errors</span>
+                <span className="text-[12px] text-[var(--muted-foreground)]">Errors</span>
                 <Badge variant="destructive" size="sm">+3</Badge>
               </div>
-              <p className="text-[length:var(--invin-text-kpi)] font-[700] mb-2">24</p>
-              <Sparkline data={[1,0,2,1,3,0,1,2,4,3]} height={24} color="var(--invin-error)" type="bar" />
+              <p className="text-[var(--foreground)] font-[700] mb-2">24</p>
+              <Sparkline data={[1,0,2,1,3,0,1,2,4,3]} height={24} color="var(--error)" type="bar" />
             </CardContent>
           </Card>
           <Card>
             <CardContent className="pt-4 pb-4">
               <div className="flex items-center justify-between mb-1">
-                <span className="text-[12px] text-[var(--invin-text-dim)]">CPU</span>
+                <span className="text-[12px] text-[var(--muted-foreground)]">CPU</span>
                 <Badge variant="warning" size="sm">67%</Badge>
               </div>
-              <p className="text-[length:var(--invin-text-kpi)] font-[700] mb-2">67%</p>
-              <Sparkline data={[45,52,48,67,72,65,58,70]} height={24} color="var(--invin-warn)" />
+              <p className="text-[var(--foreground)] font-[700] mb-2">67%</p>
+              <Sparkline data={[45,52,48,67,72,65,58,70]} height={24} color="var(--degraded)" />
             </CardContent>
           </Card>
         </div>
@@ -87,7 +87,7 @@ export default function SparklineDemo() {
       <PlaygroundSection
         title="Step 4 — In Table Cells"
         description="Inline sparklines with fixed width inside tables."
-        code={`<Sparkline data={svc.trend} height={20} width={80} color="var(--invin-ok)" />`}
+        code={`<Sparkline data={svc.trend} height={20} width={80} color="var(--ok)" />`}
       >
         <Card>
           <CardContent className="p-0">
@@ -109,7 +109,7 @@ export default function SparklineDemo() {
                   <TableRow key={svc.name}>
                     <TableCell className="font-[500]">{svc.name}</TableCell>
                     <TableCell><Badge variant={svc.ok ? 'success' : 'warning'} size="sm">{svc.ok ? 'Healthy' : 'Warning'}</Badge></TableCell>
-                    <TableCell><Sparkline data={svc.data} height={20} width={80} color={svc.ok ? 'var(--invin-ok)' : 'var(--invin-warn)'} /></TableCell>
+                    <TableCell><Sparkline data={svc.data} height={20} width={80} color={svc.ok ? 'var(--ok)' : 'var(--degraded)'} /></TableCell>
                     <TableCell className="text-right font-mono text-[12px]">{svc.rps}</TableCell>
                   </TableRow>
                 ))}

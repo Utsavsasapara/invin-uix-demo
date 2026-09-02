@@ -47,7 +47,7 @@ export default function AccordionDemo() {
             </AccordionItem>
             <AccordionItem value="item-2">
               <AccordionTrigger>How do I install it?</AccordionTrigger>
-              <AccordionContent>Run <code className="font-mono bg-[var(--invin-surface-hover)] px-1 py-0.5 rounded text-[11px]">pnpm add invin-uix</code> and import tokens.css in your entry file.</AccordionContent>
+              <AccordionContent>Run <code className="font-mono bg-[var(--secondary)] px-1 py-0.5 rounded text-[11px]">pnpm add invin-uix</code> and import tokens.css in your entry file.</AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-3">
               <AccordionTrigger>Does it work with Next.js?</AccordionTrigger>
@@ -94,7 +94,7 @@ export default function AccordionDemo() {
       >
         <div className="space-y-6 w-full">
           <div>
-            <p className="text-[10px] text-[var(--invin-text-faint)] uppercase tracking-[0.05em] mb-2">Bordered</p>
+            <p className="text-[10px] text-[var(--muted-foreground-faint)] uppercase tracking-[0.05em] mb-2">Bordered</p>
             <Accordion type="single" collapsible>
               <AccordionItem value="b1" variant="bordered">
                 <AccordionTrigger>Bordered item</AccordionTrigger>
@@ -107,7 +107,7 @@ export default function AccordionDemo() {
             </Accordion>
           </div>
           <div>
-            <p className="text-[10px] text-[var(--invin-text-faint)] uppercase tracking-[0.05em] mb-2">Filled</p>
+            <p className="text-[10px] text-[var(--muted-foreground-faint)] uppercase tracking-[0.05em] mb-2">Filled</p>
             <Accordion type="single" collapsible>
               <AccordionItem value="f1" variant="filled">
                 <AccordionTrigger>Filled item</AccordionTrigger>
@@ -126,8 +126,8 @@ export default function AccordionDemo() {
 
       {/* ─── Use Cases ──────────────────────────────────────────── */}
       <div className="space-y-3">
-        <h3 className="text-[length:var(--invin-text-sub-heading)] font-[700]">Use cases</h3>
-        <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">Common patterns.</p>
+        <h3 className="text-[var(--foreground)] font-[700]">Use cases</h3>
+        <p className="text-[var(--foreground)] text-[var(--muted-foreground)]">Common patterns.</p>
       </div>
 
       <PlaygroundSection

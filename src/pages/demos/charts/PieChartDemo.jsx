@@ -3,16 +3,16 @@ import { PieChart, DonutChart } from 'invin-uix/ui/chart';
 import { Separator } from 'invin-uix/ui/separator';
 
 const severity = [
-  { name: 'Critical', value: 8, color: 'var(--invin-error)' },
-  { name: 'High', value: 23, color: 'var(--invin-warn)' },
-  { name: 'Medium', value: 45, color: 'var(--invin-accent)' },
-  { name: 'Low', value: 67, color: 'var(--invin-ok)' },
+  { name: 'Critical', value: 8, color: 'var(--error)' },
+  { name: 'High', value: 23, color: 'var(--degraded)' },
+  { name: 'Medium', value: 45, color: 'var(--accent)' },
+  { name: 'Low', value: 67, color: 'var(--ok)' },
 ];
 
 const compliance = [
-  { name: 'Compliant', value: 78, color: 'var(--invin-ok)' },
-  { name: 'Partial', value: 15, color: 'var(--invin-warn)' },
-  { name: 'Non-Compliant', value: 7, color: 'var(--invin-error)' },
+  { name: 'Compliant', value: 78, color: 'var(--ok)' },
+  { name: 'Partial', value: 15, color: 'var(--degraded)' },
+  { name: 'Non-Compliant', value: 7, color: 'var(--error)' },
 ];
 
 export default function PieChartDemo() {
@@ -27,10 +27,10 @@ export default function PieChartDemo() {
         title="Step 1 — Pie Chart"
         description="Pass data with name, value, and optional color."
         code={`const data = [
-  { name: 'Critical', value: 8, color: 'var(--invin-error)' },
-  { name: 'High', value: 23, color: 'var(--invin-warn)' },
-  { name: 'Medium', value: 45, color: 'var(--invin-accent)' },
-  { name: 'Low', value: 67, color: 'var(--invin-ok)' },
+  { name: 'Critical', value: 8, color: 'var(--error)' },
+  { name: 'High', value: 23, color: 'var(--degraded)' },
+  { name: 'Medium', value: 45, color: 'var(--accent)' },
+  { name: 'Low', value: 67, color: 'var(--ok)' },
 ];
 
 <PieChart data={data} height={260} />`}

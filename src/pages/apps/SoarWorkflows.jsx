@@ -11,18 +11,18 @@ import {
   Play,
   Plus,
   Star,
-  Search,
-  Pencil,
+  MagnifyingGlass,
+  PencilSimple,
   Copy,
-  Trash2,
-  Download,
-  Upload,
-  MoreVertical,
+  Trash,
+  DownloadSimple,
+  UploadSimple,
+  DotsThreeVertical,
   User,
   Calendar,
   Clock,
-  Filter,
-  RefreshCw,
+  Funnel,
+  ArrowsClockwise,
   Eye,
 } from 'invin-uix/ui/icons';
 
@@ -119,7 +119,7 @@ function WorkflowCard({ workflow }) {
     <Card selected={selectedWorkflow} onClick={() => setSelectedWorkflow(!selectedWorkflow)} className='gap-1'>
       {/* Top row: Name + Star + More */}
       <div className="flex items-start justify-between">
-        <h3 className="text-[length:var(--invin-text-body)] font-[600] text-[var(--invin-text)] leading-tight truncate flex-1">
+        <h3 className="text-[var(--foreground)] font-[600] text-[var(--foreground)] leading-tight truncate flex-1">
           {workflow.name}
         </h3>
         <div className="flex items-center gap-0.5 shrink-0">
@@ -130,32 +130,32 @@ function WorkflowCard({ workflow }) {
           </Tooltip>
           <Tooltip title="More actions">
             <Button variant="ghost" size="icon-sm">
-              <MoreVertical style={{ width: 14, height: 14 }} />
+              <DotsThreeVertical style={{ width: 14, height: 14 }} />
             </Button>
           </Tooltip>
         </div>
       </div>
 
       {/* Description */}
-      <Label className="text-[var(--invin-text-dim)] mb-3 block">
+      <Label className="text-[var(--muted-foreground)] mb-3 block">
         {workflow.description}
       </Label>
 
       {/* Metadata labels */}
       <div className="flex items-center gap-4 mb-0">
-        <Label className="flex-1 flex items-center gap-1 text-[var(--invin-text-faint)] uppercase tracking-[0.03em]">
+        <Label className="flex-1 flex items-center gap-1 text-[var(--muted-foreground-faint)] uppercase tracking-[0.03em]">
           <User style={{ width: 10, height: 10 }} /> Created by
         </Label>
-        <Label className="flex-1 flex items-center gap-1 text-[var(--invin-text-faint)] uppercase tracking-[0.03em]">
+        <Label className="flex-1 flex items-center gap-1 text-[var(--muted-foreground-faint)] uppercase tracking-[0.03em]">
           <Calendar style={{ width: 10, height: 10 }} /> Date Created
         </Label>
-        <Label className="flex-1 flex items-center gap-1 text-[var(--invin-text-faint)] uppercase tracking-[0.03em]">
+        <Label className="flex-1 flex items-center gap-1 text-[var(--muted-foreground-faint)] uppercase tracking-[0.03em]">
           <Clock style={{ width: 10, height: 10 }} /> Last Run
         </Label>
       </div>
 
       {/* Metadata values */}
-      <div className="flex items-center gap-4 text-[11px] text-[var(--invin-text-dim)] mb-4">
+      <div className="flex items-center gap-4 text-[11px] text-[var(--muted-foreground)] mb-4">
         <span className="font-[500] flex-1">{workflow.createdBy}</span>
         <span className="font-[500] flex-1">{workflow.dateCreated}</span>
         <span className="font-[500] flex-1">{workflow.lastRun}</span>
@@ -168,7 +168,7 @@ function WorkflowCard({ workflow }) {
         </Button>
         <Tooltip title="Edit">
           <Button variant="outline" size="icon-sm">
-            <Pencil style={{ width: 13, height: 13 }} />
+            <PencilSimple style={{ width: 13, height: 13 }} />
           </Button>
         </Tooltip>
         <Tooltip title="Clone">
@@ -177,8 +177,8 @@ function WorkflowCard({ workflow }) {
           </Button>
         </Tooltip>
         <Tooltip title="Delete">
-          <Button variant="destructive" size="icon-sm" className="text-[var(--invin-error)] hover:text-[var(--invin-error)]">
-            <Trash2 style={{ width: 13, height: 13 }} />
+          <Button variant="destructive" size="icon-sm" className="text-[var(--error)] hover:text-[var(--error)]">
+            <Trash style={{ width: 13, height: 13 }} />
           </Button>
         </Tooltip>
       </div>
@@ -223,9 +223,9 @@ function ExecutionHistory() {
         <TableBody>
           {executionHistory.map((row) => (
             <TableRow key={row.srNo}>
-              <TableCell className="font-mono text-[12px] text-[var(--invin-text-dim)]">{row.srNo}</TableCell>
+              <TableCell className="font-mono text-[12px] text-[var(--muted-foreground)]">{row.srNo}</TableCell>
               <TableCell>
-                <span className={`font-[500] ${row.status === 'Failed' ? 'text-[var(--invin-error)]' : 'text-[var(--invin-ok)]'}`}>
+                <span className={`font-[500] ${row.status === 'Failed' ? 'text-[var(--error)]' : 'text-[var(--ok)]'}`}>
                   {row.workflow}
                 </span>
               </TableCell>
@@ -234,17 +234,17 @@ function ExecutionHistory() {
                   {row.status}
                 </Badge>
               </TableCell>
-              <TableCell className="text-[12px] font-mono text-[var(--invin-text-dim)]">{row.startedAt}</TableCell>
-              <TableCell className="text-[12px] font-mono text-[var(--invin-text-dim)]">
+              <TableCell className="text-[12px] font-mono text-[var(--muted-foreground)]">{row.startedAt}</TableCell>
+              <TableCell className="text-[12px] font-mono text-[var(--muted-foreground)]">
                 <span className="flex items-center gap-1">
                   <Clock style={{ width: 11, height: 11 }} /> {row.duration}
                 </span>
               </TableCell>
               <TableCell>
                 <span className={`font-[600] text-[13px] ${
-                  row.successTotal.startsWith('0') ? 'text-[var(--invin-error)]' :
-                  row.successTotal.split('/')[0] === row.successTotal.split('/')[1] ? 'text-[var(--invin-ok)]' :
-                  'text-[var(--invin-warn)]'
+                  row.successTotal.startsWith('0') ? 'text-[var(--error)]' :
+                  row.successTotal.split('/')[0] === row.successTotal.split('/')[1] ? 'text-[var(--ok)]' :
+                  'text-[var(--degraded)]'
                 }`}>
                   {row.successTotal}
                 </span>
@@ -283,10 +283,10 @@ export default function SoarWorkflows() {
       {/* ─── Page Header ──────────────────────────────────── */}
       <div id="workflow-header" className="flex items-start justify-between">
         <div>
-          <h1 className="text-[length:var(--invin-text-page-title)] font-[700] tracking-[-0.02em]">
+          <h1 className="text-[var(--foreground)] font-[700] tracking-[-0.02em]">
             {activeTab === 'execution-history' ? 'Execution History' : 'Workflows'}
           </h1>
-          <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)] mt-1">
+          <p className="text-[var(--foreground)] text-[var(--muted-foreground)] mt-1">
             {activeTab === 'execution-history'
               ? 'View workflow execution history and monitor running tasks'
               : 'Create and manage automation workflows'}
@@ -296,19 +296,19 @@ export default function SoarWorkflows() {
           {activeTab === 'execution-history' ? (
             <>
               <Button variant="outline" size="sm">
-                <Filter style={{ width: 13, height: 13 }} /> Filters
+                <Funnel style={{ width: 13, height: 13 }} /> Filters
               </Button>
               <Button variant="outline" size="sm">
-                <RefreshCw style={{ width: 13, height: 13 }} /> Refresh
+                <ArrowsClockwise style={{ width: 13, height: 13 }} /> Refresh
               </Button>
             </>
           ) : (
             <>
               <Button variant="outline">
-                <Download style={{ width: 13, height: 13 }} /> Export
+                <DownloadSimple style={{ width: 13, height: 13 }} /> Export
               </Button>
               <Button variant="outline">
-                <Upload style={{ width: 13, height: 13 }} /> Import
+                <UploadSimple style={{ width: 13, height: 13 }} /> Import
               </Button>
               <Button>
                 <Plus style={{ width: 13, height: 13 }} /> Create Workflow
@@ -331,14 +331,14 @@ export default function SoarWorkflows() {
         <ExecutionHistory />
       ) : (
       <>
-      {/* ─── Search + Filter Bar ──────────────────────────── */}
+      {/* ─── MagnifyingGlass + Funnel Bar ──────────────────────────── */}
       <div id="workflow-stats" className="flex items-center justify-between gap-4">
         <div className="relative flex-1 max-w-[400px]">
-          <Search
-            style={{ width: 14, height: 14, position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: 'var(--invin-text-faint)', pointerEvents: 'none' }}
+          <MagnifyingGlass
+            style={{ width: 14, height: 14, position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: 'var(--muted-foreground-faint)', pointerEvents: 'none' }}
           />
           <Input
-            placeholder="Search... #tag to filter"
+            placeholder="MagnifyingGlass... #tag to filter"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="pl-9"

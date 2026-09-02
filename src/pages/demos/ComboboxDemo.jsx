@@ -4,7 +4,7 @@ import { Combobox } from 'invin-uix/ui/combobox';
 import { Badge } from 'invin-uix/ui/badge';
 import { Label } from 'invin-uix/ui/label';
 import { Separator } from 'invin-uix/ui/separator';
-import { Users, Globe, Shield, Zap, Database, Cloud } from 'invin-uix/ui/icons';
+import { Users, Globe, Shield, Lightning, Database, Cloud } from 'invin-uix/ui/icons';
 
 // ─── Mock Data ───────────────────────────────────────────────────────────────
 
@@ -38,7 +38,7 @@ const integrations = [
   { value: 'slack', label: 'Slack', icon: <Cloud style={{ width: 14, height: 14 }} />, description: 'Team messaging' },
   { value: 'jira', label: 'Jira', icon: <Database style={{ width: 14, height: 14 }} />, description: 'Issue tracking' },
   { value: 'pagerduty', label: 'PagerDuty', icon: <Shield style={{ width: 14, height: 14 }} />, description: 'Incident management' },
-  { value: 'datadog', label: 'Datadog', icon: <Zap style={{ width: 14, height: 14 }} />, description: 'Monitoring & analytics' },
+  { value: 'datadog', label: 'Datadog', icon: <Lightning style={{ width: 14, height: 14 }} />, description: 'Monitoring & analytics' },
   { value: 'splunk', label: 'Splunk', icon: <Database style={{ width: 14, height: 14 }} />, description: 'Log management' },
   { value: 'crowdstrike', label: 'CrowdStrike', icon: <Shield style={{ width: 14, height: 14 }} />, description: 'Endpoint protection' },
   { value: 'okta', label: 'Okta', icon: <Users style={{ width: 14, height: 14 }} />, description: 'Identity provider' },
@@ -113,7 +113,7 @@ export default function ComboboxDemo() {
             placeholder="Choose a framework..."
             fullWidth
           />
-          {single && <p className="text-xs text-[var(--invin-text-dim)]">Selected: {single}</p>}
+          {single && <p className="text-caption text-[var(--muted-foreground)]">Selected: {single}</p>}
         </div>
       </PlaygroundSection>
 
@@ -148,7 +148,7 @@ export default function ComboboxDemo() {
             fullWidth
           />
           {multi.length > 0 && (
-            <p className="text-xs text-[var(--invin-text-dim)]">{multi.length} selected</p>
+            <p className="text-caption text-[var(--muted-foreground)]">{multi.length} selected</p>
           )}
         </div>
       </PlaygroundSection>
@@ -169,7 +169,7 @@ export default function ComboboxDemo() {
             placeholder="Add integrations..."
             fullWidth
           />
-          <p className="text-[10px] text-[var(--invin-text-faint)]">{tags.length}/3 selected</p>
+          <p className="text-[10px] text-[var(--muted-foreground-faint)]">{tags.length}/3 selected</p>
         </div>
       </PlaygroundSection>
 
@@ -224,7 +224,7 @@ export default function ComboboxDemo() {
         <div className="space-y-3 max-w-xs">
           {(['sm', 'md', 'lg']).map((s) => (
             <div key={s} className="space-y-1">
-              <Label className="text-[10px] uppercase text-[var(--invin-text-faint)]">{s}</Label>
+              <Label className="text-[10px] uppercase text-[var(--muted-foreground-faint)]">{s}</Label>
               <Combobox
                 options={frameworks.slice(0, 5)}
                 size={s}

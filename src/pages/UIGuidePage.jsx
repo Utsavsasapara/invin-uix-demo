@@ -4,8 +4,8 @@ import { Badge } from 'invin-uix/ui/badge';
 import { Button } from 'invin-uix/ui/button';
 import { Separator } from 'invin-uix/ui/separator';
 import {
-  Palette, Code, Layout, Sparkles, Moon, SquareStack,
-  CheckCircle2, XCircle,
+  Palette, Code, Layout, Sparkle, Moon, Stack,
+  CheckCircle, XCircle,
 } from 'invin-uix/ui/icons';
 
 const accents = [
@@ -20,8 +20,8 @@ const principles = [
   { num: '1', title: 'One shell', desc: 'Fixed left sidebar + fixed top bar + scrolling main. Identical dimensions: sidebar 262px, topbar 58px.', icon: Layout },
   { num: '2', title: 'Accent, not layout', desc: 'A product expresses itself through one accent colour only. Structure stays constant.', icon: Palette },
   { num: '3', title: 'Tokens over hexes', desc: 'Never hardcode colours. Read CSS variables so theme + branding cascade everywhere.', icon: Code },
-  { num: '4', title: 'Same components', desc: 'Reuse the shared component set — cards, KPIs, badges, tables — with the same markup.', icon: SquareStack },
-  { num: '5', title: 'Guided by default', desc: 'Every module ships a guided tour that auto-starts and can be replayed.', icon: Sparkles },
+  { num: '4', title: 'Same components', desc: 'Reuse the shared component set — cards, KPIs, badges, tables — with the same markup.', icon: Stack },
+  { num: '5', title: 'Guided by default', desc: 'Every module ships a guided tour that auto-starts and can be replayed.', icon: Sparkle },
   { num: '6', title: 'Dark + light', desc: 'Support both themes via html[data-theme]. All colours resolve from tokens.', icon: Moon },
 ];
 
@@ -51,9 +51,9 @@ const contents = [
 function SectionHeader({ num, title, desc }) {
   return (
     <div>
-      <span className="text-[var(--invin-accent)] text-[length:var(--invin-text-label)] font-[600]">{num}</span>
-      <h2 className="text-[length:var(--invin-text-sub-heading)] font-[700] tracking-[-0.02em] mt-1">{title}</h2>
-      {desc && <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)] mt-1">{desc}</p>}
+      <span className="text-[var(--accent)] text-[var(--muted-foreground)] font-[600]">{num}</span>
+      <h2 className="text-[var(--foreground)] font-[700] tracking-[-0.02em] mt-1">{title}</h2>
+      {desc && <p className="text-[var(--foreground)] text-[var(--muted-foreground)] mt-1">{desc}</p>}
     </div>
   );
 }
@@ -75,16 +75,16 @@ export default function UIGuidePage() {
           <Badge variant="info" size="sm">Module UI Guide</Badge>
           <Badge variant="outline" size="sm">v1.0</Badge>
         </div>
-        <h1 className="text-[length:var(--invin-text-page-title)] font-[700] tracking-[-0.02em]">
+        <h1 className="text-[var(--foreground)] font-[700] tracking-[-0.02em]">
           Build modules that look and feel like the launcher
         </h1>
-        <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)] max-w-2xl leading-relaxed">
-          Every Invinsense product module shares <strong className="text-[var(--invin-text)]">one shell</strong>: the same header, the same side menu, the same components. Only the <strong className="text-[var(--invin-accent)]">accent colour</strong> changes per product.
+        <p className="text-[var(--foreground)] text-[var(--muted-foreground)] max-w-2xl leading-relaxed">
+          Every Invinsense product module shares <strong className="text-[var(--foreground)]">one shell</strong>: the same header, the same side menu, the same components. Only the <strong className="text-[var(--accent)]">accent colour</strong> changes per product.
         </p>
         <div className="flex flex-wrap items-center gap-2 pt-2">
-          <span className="text-[length:var(--invin-text-label)] text-[var(--invin-text-faint)] mr-1">Preview accent:</span>
+          <span className="text-[var(--muted-foreground)] text-[var(--muted-foreground-faint)] mr-1">Preview accent:</span>
           {accents.map(a => (
-            <button key={a.name} onClick={() => switchAccent(a.name)} className={`flex items-center gap-2 px-3 py-1.5 rounded-full border text-[12px] font-[500] cursor-pointer transition-all ${activeAccent === a.name ? 'border-[var(--invin-accent)] bg-[var(--invin-accent-soft)]' : 'border-[var(--invin-border)] hover:bg-[var(--invin-surface-hover)]'}`}>
+            <button key={a.name} onClick={() => switchAccent(a.name)} className={`flex items-center gap-2 px-3 py-1.5 rounded-full border text-[12px] font-[500] cursor-pointer transition-all ${activeAccent === a.name ? 'border-[var(--accent)] bg-[var(--accent-soft)]' : 'border-[var(--border)] hover:bg-[var(--secondary)]'}`}>
               <span className="h-2.5 w-2.5 rounded-full shrink-0" style={{ background: a.color }} />
               {a.module}
             </button>
@@ -95,12 +95,12 @@ export default function UIGuidePage() {
       {/* TOC */}
       <Card>
         <CardContent>
-          <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)] mb-3">Contents</p>
+          <p className="text-[var(--muted-foreground)] font-[600] uppercase tracking-[0.05em] text-[var(--muted-foreground-faint)] mb-3">Contents</p>
           <div className="grid grid-cols-3 sm:grid-cols-5 gap-2">
             {contents.map(c => (
-              <div key={c.num} className="flex items-center gap-1.5 py-1.5 px-2 rounded-[6px] hover:bg-[var(--invin-surface-hover)] cursor-pointer">
-                <span className="text-[var(--invin-accent)] text-[10px] font-[600]">{c.num}</span>
-                <span className="text-[length:var(--invin-text-label)] font-[500] truncate">{c.title}</span>
+              <div key={c.num} className="flex items-center gap-1.5 py-1.5 px-2 rounded-[6px] hover:bg-[var(--secondary)] cursor-pointer">
+                <span className="text-[var(--accent)] text-[10px] font-[600]">{c.num}</span>
+                <span className="text-[var(--muted-foreground)] font-[500] truncate">{c.title}</span>
               </div>
             ))}
           </div>
@@ -117,12 +117,12 @@ export default function UIGuidePage() {
             <Card key={p.num} hover>
               <CardContent>
                 <div className="flex items-start gap-3">
-                  <div className="h-8 w-8 rounded-[8px] bg-[var(--invin-accent-soft)] flex items-center justify-center shrink-0">
-                    <p.icon style={{ width: 16, height: 16, color: 'var(--invin-accent)' }} />
+                  <div className="h-8 w-8 rounded-[8px] bg-[var(--accent-soft)] flex items-center justify-center shrink-0">
+                    <p.icon style={{ width: 16, height: 16, color: 'var(--accent)' }} />
                   </div>
                   <div>
-                    <p className="text-[length:var(--invin-text-card-title)] font-[600]"><span className="text-[var(--invin-accent)] mr-1">{p.num} ·</span>{p.title}</p>
-                    <p className="text-[length:var(--invin-text-label)] text-[var(--invin-text-dim)] mt-1 leading-relaxed">{p.desc}</p>
+                    <p className="text-[var(--foreground)] font-[600]"><span className="text-[var(--accent)] mr-1">{p.num} ·</span>{p.title}</p>
+                    <p className="text-[var(--muted-foreground)] text-[var(--muted-foreground)] mt-1 leading-relaxed">{p.desc}</p>
                   </div>
                 </div>
               </CardContent>
@@ -138,30 +138,30 @@ export default function UIGuidePage() {
         <SectionHeader num="02" title="The shell — anatomy & layout" desc="Every module is assembled from exactly these regions." />
         <Card>
           <CardContent>
-            <div className="border border-[var(--invin-border)] rounded-[12px] overflow-hidden h-[260px] flex">
-              <div className="w-[56px] border-r border-[var(--invin-border)] bg-[var(--invin-bg-elev)] flex flex-col items-center py-3 gap-2.5 shrink-0">
-                <div className="h-5 w-5 rounded-[5px] bg-[var(--invin-accent)]" />
+            <div className="border border-[var(--border)] rounded-[12px] overflow-hidden h-[260px] flex">
+              <div className="w-[56px] border-r border-[var(--border)] bg-[var(--card)] flex flex-col items-center py-3 gap-2.5 shrink-0">
+                <div className="h-5 w-5 rounded-[5px] bg-[var(--accent)]" />
                 <div className="flex-1 flex flex-col items-center gap-2 mt-2">
-                  {[1,2,3,4,5].map(i => <div key={i} className="h-3.5 w-3.5 rounded bg-[var(--invin-surface-hover)]" />)}
+                  {[1,2,3,4,5].map(i => <div key={i} className="h-3.5 w-3.5 rounded bg-[var(--secondary)]" />)}
                 </div>
-                <div className="h-4 w-4 rounded-full bg-[var(--invin-surface-hover)]" />
+                <div className="h-4 w-4 rounded-full bg-[var(--secondary)]" />
               </div>
               <div className="flex-1 flex flex-col">
-                <div className="h-[34px] border-b border-[var(--invin-border)] flex items-center px-3 shrink-0">
-                  <div className="h-2 w-16 rounded bg-[var(--invin-surface-hover)]" />
-                  <div className="ml-auto flex gap-1.5">{[1,2,3].map(i => <div key={i} className="h-3.5 w-3.5 rounded bg-[var(--invin-surface-hover)]" />)}</div>
+                <div className="h-[34px] border-b border-[var(--border)] flex items-center px-3 shrink-0">
+                  <div className="h-2 w-16 rounded bg-[var(--secondary)]" />
+                  <div className="ml-auto flex gap-1.5">{[1,2,3].map(i => <div key={i} className="h-3.5 w-3.5 rounded bg-[var(--secondary)]" />)}</div>
                 </div>
                 <div className="flex-1 p-3 space-y-2">
-                  <div className="h-2.5 w-28 rounded bg-[var(--invin-surface-hover)]" />
-                  <div className="grid grid-cols-3 gap-2">{[1,2,3].map(i => <div key={i} className="h-14 rounded-[8px] border border-[var(--invin-border)]" />)}</div>
-                  <div className="h-20 rounded-[8px] border border-[var(--invin-border)]" />
+                  <div className="h-2.5 w-28 rounded bg-[var(--secondary)]" />
+                  <div className="grid grid-cols-3 gap-2">{[1,2,3].map(i => <div key={i} className="h-14 rounded-[8px] border border-[var(--border)]" />)}</div>
+                  <div className="h-20 rounded-[8px] border border-[var(--border)]" />
                 </div>
               </div>
             </div>
-            <div className="grid grid-cols-3 gap-4 mt-4 text-[length:var(--invin-text-label)]">
-              <div><span className="text-[var(--invin-accent)] font-[600]">Sidebar</span><p className="text-[var(--invin-text-dim)] mt-0.5">262px → 76px</p></div>
-              <div><span className="text-[var(--invin-accent)] font-[600]">Topbar</span><p className="text-[var(--invin-text-dim)] mt-0.5">58px, sticky, blur</p></div>
-              <div><span className="text-[var(--invin-accent)] font-[600]">Content</span><p className="text-[var(--invin-text-dim)] mt-0.5">Scrollable main</p></div>
+            <div className="grid grid-cols-3 gap-4 mt-4 text-[var(--muted-foreground)]">
+              <div><span className="text-[var(--accent)] font-[600]">Sidebar</span><p className="text-[var(--muted-foreground)] mt-0.5">262px → 76px</p></div>
+              <div><span className="text-[var(--accent)] font-[600]">Topbar</span><p className="text-[var(--muted-foreground)] mt-0.5">58px, sticky, blur</p></div>
+              <div><span className="text-[var(--accent)] font-[600]">Content</span><p className="text-[var(--muted-foreground)] mt-0.5">Scrollable main</p></div>
             </div>
           </CardContent>
         </Card>
@@ -175,24 +175,24 @@ export default function UIGuidePage() {
         <Card>
           <CardContent>
             <div className="overflow-x-auto">
-              <table className="w-full text-[length:var(--invin-text-body)]">
+              <table className="w-full text-[var(--foreground)]">
                 <thead>
-                  <tr className="border-b border-[var(--invin-border)]">
-                    <th className="text-left py-2 pr-4 text-[10px] font-[600] text-[var(--invin-text-faint)] uppercase tracking-[0.05em]">Module</th>
-                    <th className="text-left py-2 pr-4 text-[10px] font-[600] text-[var(--invin-text-faint)] uppercase tracking-[0.05em]">Product</th>
-                    <th className="text-left py-2 pr-4 text-[10px] font-[600] text-[var(--invin-text-faint)] uppercase tracking-[0.05em]">--accent</th>
-                    <th className="text-left py-2 pr-4 text-[10px] font-[600] text-[var(--invin-text-faint)] uppercase tracking-[0.05em]">--accent-2</th>
-                    <th className="text-left py-2 text-[10px] font-[600] text-[var(--invin-text-faint)] uppercase tracking-[0.05em]">Note</th>
+                  <tr className="border-b border-[var(--border)]">
+                    <th className="text-left py-2 pr-4 text-[10px] font-[600] text-[var(--muted-foreground-faint)] uppercase tracking-[0.05em]">Module</th>
+                    <th className="text-left py-2 pr-4 text-[10px] font-[600] text-[var(--muted-foreground-faint)] uppercase tracking-[0.05em]">Product</th>
+                    <th className="text-left py-2 pr-4 text-[10px] font-[600] text-[var(--muted-foreground-faint)] uppercase tracking-[0.05em]">--accent</th>
+                    <th className="text-left py-2 pr-4 text-[10px] font-[600] text-[var(--muted-foreground-faint)] uppercase tracking-[0.05em]">--accent-2</th>
+                    <th className="text-left py-2 text-[10px] font-[600] text-[var(--muted-foreground-faint)] uppercase tracking-[0.05em]">Note</th>
                   </tr>
                 </thead>
                 <tbody>
                   {accents.map(a => (
-                    <tr key={a.name} className="border-b border-[var(--invin-border)] last:border-0 cursor-pointer hover:bg-[var(--invin-surface-hover)] transition-colors" onClick={() => switchAccent(a.name)}>
+                    <tr key={a.name} className="border-b border-[var(--border)] last:border-0 cursor-pointer hover:bg-[var(--secondary)] transition-colors" onClick={() => switchAccent(a.name)}>
                       <td className="py-2.5 pr-4 font-[500]"><span className="inline-flex items-center gap-2"><span className="h-3 w-3 rounded-full shrink-0" style={{ background: a.color }} />{a.module}</span></td>
-                      <td className="py-2.5 pr-4 text-[var(--invin-text-dim)]">{a.desc}</td>
-                      <td className="py-2.5 pr-4 font-mono text-[length:var(--invin-text-mono)]">{a.color}</td>
-                      <td className="py-2.5 pr-4 font-mono text-[length:var(--invin-text-mono)]">{a.color2}</td>
-                      <td className="py-2.5 text-[var(--invin-text-faint)] text-[length:var(--invin-text-label)]">{a.note}</td>
+                      <td className="py-2.5 pr-4 text-[var(--muted-foreground)]">{a.desc}</td>
+                      <td className="py-2.5 pr-4 font-mono font-mono">{a.color}</td>
+                      <td className="py-2.5 pr-4 font-mono font-mono">{a.color2}</td>
+                      <td className="py-2.5 text-[var(--muted-foreground-faint)] text-[var(--muted-foreground)]">{a.note}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -211,21 +211,21 @@ export default function UIGuidePage() {
           <Card>
             <CardContent>
               <div className="space-y-3">
-                <p className="text-[length:var(--invin-text-page-title)] font-[700] tracking-[-0.02em]">Page title · 26 / 700</p>
-                <p className="text-[length:var(--invin-text-sub-heading)] font-[700] tracking-[-0.02em]">Sub-heading · 18 / 700</p>
-                <p className="text-[length:var(--invin-text-card-title)] font-[700] tracking-[-0.02em]">Card title · 14.5 / 700</p>
-                <p className="text-[length:var(--invin-text-body)]">Body copy · 13.5 / 400 — the base reading size.</p>
-                <p className="text-[length:var(--invin-text-label)] font-[500]">Label & meta · 12 / 500</p>
-                <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)]">Eyebrow · 10.5 / 600</p>
-                <p className="font-mono text-[length:var(--invin-text-mono)]">019f1759-a9bd · mono 11.5</p>
+                <p className="text-[var(--foreground)] font-[700] tracking-[-0.02em]">Page title · 26 / 700</p>
+                <p className="text-[var(--foreground)] font-[700] tracking-[-0.02em]">Sub-heading · 18 / 700</p>
+                <p className="text-[var(--foreground)] font-[700] tracking-[-0.02em]">Card title · 14.5 / 700</p>
+                <p className="text-[var(--foreground)]">Body copy · 13.5 / 400 — the base reading size.</p>
+                <p className="text-[var(--muted-foreground)] font-[500]">Label & meta · 12 / 500</p>
+                <p className="text-[var(--muted-foreground)] font-[600] uppercase tracking-[0.05em] text-[var(--muted-foreground-faint)]">Eyebrow · 10.5 / 600</p>
+                <p className="font-mono font-mono">019f1759-a9bd · mono 11.5</p>
               </div>
             </CardContent>
           </Card>
           <Card>
             <CardContent>
-              <table className="w-full text-[length:var(--invin-text-label)]">
-                <thead><tr className="border-b border-[var(--invin-border)]"><th className="text-left py-1.5 pr-3 font-[600] text-[var(--invin-text-faint)] text-[10px] uppercase tracking-[0.05em]">Role</th><th className="text-left py-1.5 pr-3 font-[600] text-[var(--invin-text-faint)] text-[10px] uppercase tracking-[0.05em]">Size</th><th className="text-left py-1.5 pr-3 font-[600] text-[var(--invin-text-faint)] text-[10px] uppercase tracking-[0.05em]">Weight</th><th className="text-left py-1.5 font-[600] text-[var(--invin-text-faint)] text-[10px] uppercase tracking-[0.05em]">Use</th></tr></thead>
-                <tbody>{typeScale.map(t => (<tr key={t.role} className="border-b border-[var(--invin-border)] last:border-0"><td className="py-1.5 pr-3 font-[500]">{t.role}</td><td className="py-1.5 pr-3 font-mono">{t.size}</td><td className="py-1.5 pr-3 font-mono">{t.weight}</td><td className="py-1.5 text-[var(--invin-text-dim)]">{t.use}</td></tr>))}</tbody>
+              <table className="w-full text-[var(--muted-foreground)]">
+                <thead><tr className="border-b border-[var(--border)]"><th className="text-left py-1.5 pr-3 font-[600] text-[var(--muted-foreground-faint)] text-[10px] uppercase tracking-[0.05em]">Role</th><th className="text-left py-1.5 pr-3 font-[600] text-[var(--muted-foreground-faint)] text-[10px] uppercase tracking-[0.05em]">Size</th><th className="text-left py-1.5 pr-3 font-[600] text-[var(--muted-foreground-faint)] text-[10px] uppercase tracking-[0.05em]">Weight</th><th className="text-left py-1.5 font-[600] text-[var(--muted-foreground-faint)] text-[10px] uppercase tracking-[0.05em]">Use</th></tr></thead>
+                <tbody>{typeScale.map(t => (<tr key={t.role} className="border-b border-[var(--border)] last:border-0"><td className="py-1.5 pr-3 font-[500]">{t.role}</td><td className="py-1.5 pr-3 font-mono">{t.size}</td><td className="py-1.5 pr-3 font-mono">{t.weight}</td><td className="py-1.5 text-[var(--muted-foreground)]">{t.use}</td></tr>))}</tbody>
               </table>
             </CardContent>
           </Card>
@@ -240,9 +240,9 @@ export default function UIGuidePage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Card>
             <CardContent>
-              <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)] mb-2">Rules</p>
-              <ul className="space-y-1.5 text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">
-                <li>① Redefine tokens under <code className="text-mono bg-[var(--invin-surface-hover)] px-1 py-0.5 rounded text-[11px]">html[data-theme]</code></li>
+              <p className="text-[var(--muted-foreground)] font-[600] uppercase tracking-[0.05em] text-[var(--muted-foreground-faint)] mb-2">Rules</p>
+              <ul className="space-y-1.5 text-[var(--foreground)] text-[var(--muted-foreground)]">
+                <li>① Redefine tokens under <code className="text-data bg-[var(--secondary)] px-1 py-0.5 rounded text-[11px]">html[data-theme]</code></li>
                 <li>② Logo swaps automatically via CSS</li>
                 <li>③ Theme persists to localStorage</li>
                 <li>④ Accent stays the same hue in both</li>
@@ -251,11 +251,11 @@ export default function UIGuidePage() {
           </Card>
           <Card>
             <CardContent>
-              <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)] mb-2">Token approach</p>
-              <pre className="text-[length:var(--invin-text-mono)] font-mono text-[var(--invin-text-dim)] overflow-x-auto leading-relaxed">{`[data-theme="dark"] {
-  --invin-bg: #0a080e;
-  --invin-text: #e8edf4;
-  --invin-border: rgba(255,255,255,0.08);
+              <p className="text-[var(--muted-foreground)] font-[600] uppercase tracking-[0.05em] text-[var(--muted-foreground-faint)] mb-2">Token approach</p>
+              <pre className="font-mono font-mono text-[var(--muted-foreground)] overflow-x-auto leading-relaxed">{`[data-theme="dark"] {
+  --background: #0a080e;
+  --foreground: #e8edf4;
+  --border: rgba(255,255,255,0.08);
 }`}</pre>
             </CardContent>
           </Card>
@@ -270,16 +270,16 @@ export default function UIGuidePage() {
         <Card>
           <CardContent>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              <div className="p-3 rounded-[8px] text-center"><p className="text-[length:var(--invin-text-label)] text-[var(--invin-text-dim)]">Default</p><p className="text-[10px] text-[var(--invin-text-faint)]">dim text</p></div>
-              <div className="p-3 rounded-[8px] bg-[var(--invin-surface-hover)] text-center"><p className="text-[length:var(--invin-text-label)] text-[var(--invin-text)]">Hover</p><p className="text-[10px] text-[var(--invin-text-faint)]">surface + text</p></div>
-              <div className="p-3 rounded-[8px] bg-[var(--invin-accent-soft)] text-center"><p className="text-[length:var(--invin-text-label)] text-[var(--invin-accent)]">Active</p><p className="text-[10px] text-[var(--invin-text-faint)]">accent bg + text</p></div>
-              <div className="p-3 rounded-[8px] opacity-50 text-center"><p className="text-[length:var(--invin-text-label)] text-[var(--invin-text-dim)]">Disabled</p><p className="text-[10px] text-[var(--invin-text-faint)]">0.5 opacity</p></div>
+              <div className="p-3 rounded-[8px] text-center"><p className="text-[var(--muted-foreground)] text-[var(--muted-foreground)]">Default</p><p className="text-[10px] text-[var(--muted-foreground-faint)]">dim text</p></div>
+              <div className="p-3 rounded-[8px] bg-[var(--secondary)] text-center"><p className="text-[var(--muted-foreground)] text-[var(--foreground)]">Hover</p><p className="text-[10px] text-[var(--muted-foreground-faint)]">surface + text</p></div>
+              <div className="p-3 rounded-[8px] bg-[var(--accent-soft)] text-center"><p className="text-[var(--muted-foreground)] text-[var(--accent)]">Active</p><p className="text-[10px] text-[var(--muted-foreground-faint)]">accent bg + text</p></div>
+              <div className="p-3 rounded-[8px] opacity-50 text-center"><p className="text-[var(--muted-foreground)] text-[var(--muted-foreground)]">Disabled</p><p className="text-[10px] text-[var(--muted-foreground-faint)]">0.5 opacity</p></div>
             </div>
           </CardContent>
         </Card>
         <Card>
           <CardContent>
-            <ul className="space-y-1.5 text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">
+            <ul className="space-y-1.5 text-[var(--foreground)] text-[var(--muted-foreground)]">
               <li>• Group items under uppercase section labels</li>
               <li>• Sub-nav nests one level with a left keyline</li>
               <li>• Active state derives from the current route</li>
@@ -298,8 +298,8 @@ export default function UIGuidePage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Card>
             <CardContent>
-              <p className="text-[length:var(--invin-text-card-title)] font-[600] text-[var(--invin-ok)] mb-2 flex items-center gap-1.5"><CheckCircle2 style={{ width: 14, height: 14 }} /> Do</p>
-              <ul className="space-y-1.5 text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">
+              <p className="text-[var(--foreground)] font-[600] text-[var(--ok)] mb-2 flex items-center gap-1.5"><CheckCircle style={{ width: 14, height: 14 }} /> Do</p>
+              <ul className="space-y-1.5 text-[var(--foreground)] text-[var(--muted-foreground)]">
                 <li>• Reuse the shared shell and component markup</li>
                 <li>• Express product with a single toned-down accent</li>
                 <li>• Read var(--accent) everywhere including charts</li>
@@ -310,8 +310,8 @@ export default function UIGuidePage() {
           </Card>
           <Card>
             <CardContent>
-              <p className="text-[length:var(--invin-text-card-title)] font-[600] text-[var(--invin-error)] mb-2 flex items-center gap-1.5"><XCircle style={{ width: 14, height: 14 }} /> Don't</p>
-              <ul className="space-y-1.5 text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">
+              <p className="text-[var(--foreground)] font-[600] text-[var(--error)] mb-2 flex items-center gap-1.5"><XCircle style={{ width: 14, height: 14 }} /> Don't</p>
+              <ul className="space-y-1.5 text-[var(--foreground)] text-[var(--muted-foreground)]">
                 <li>• Invent a new header, sidebar width or nav pattern</li>
                 <li>• Hardcode hex colours for accent elements</li>
                 <li>• Recolour or replace the Invinsense mark</li>
@@ -344,8 +344,8 @@ export default function UIGuidePage() {
                 'Ship a README with screens, routing, and tour docs',
               ].map((item, i) => (
                 <div key={i} className="flex items-start gap-3 py-1.5">
-                  <span className="text-[var(--invin-accent)] text-[length:var(--invin-text-label)] font-[700] shrink-0 w-5">{i + 1}</span>
-                  <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">{item}</p>
+                  <span className="text-[var(--accent)] text-[var(--muted-foreground)] font-[700] shrink-0 w-5">{i + 1}</span>
+                  <p className="text-[var(--foreground)] text-[var(--muted-foreground)]">{item}</p>
                 </div>
               ))}
             </div>

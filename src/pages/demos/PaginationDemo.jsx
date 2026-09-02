@@ -39,7 +39,7 @@ export default function PaginationDemo() {
       >
         <div className="space-y-3 w-full">
           <Pagination total={100} current={page} onChange={setPage} />
-          <p className="text-[length:var(--invin-text-label)] text-[var(--invin-text-dim)] text-center">Page: {page} of 10</p>
+          <p className="text-[var(--muted-foreground)] text-[var(--muted-foreground)] text-center">Page: {page} of 10</p>
         </div>
       </PlaygroundSection>
 
@@ -51,7 +51,7 @@ export default function PaginationDemo() {
       >
         <div className="space-y-3 w-full">
           <Pagination total={120} pageSize={10} current={page2} onChange={setPage2} variant="outline" />
-          <p className="text-[length:var(--invin-text-label)] text-[var(--invin-text-dim)] text-center">Page: {page2} of 12</p>
+          <p className="text-[var(--muted-foreground)] text-[var(--muted-foreground)] text-center">Page: {page2} of 12</p>
         </div>
       </PlaygroundSection>
 
@@ -73,11 +73,11 @@ export default function PaginationDemo() {
       >
         <div className="space-y-4 w-full">
           <div>
-            <p className="text-[10px] text-[var(--invin-text-faint)] mb-2">md (default)</p>
+            <p className="text-[10px] text-[var(--muted-foreground-faint)] mb-2">md (default)</p>
             <Pagination total={80} defaultCurrent={3} size="md" />
           </div>
           <div>
-            <p className="text-[10px] text-[var(--invin-text-faint)] mb-2">sm</p>
+            <p className="text-[10px] text-[var(--muted-foreground-faint)] mb-2">sm</p>
             <Pagination total={80} defaultCurrent={3} size="sm" />
           </div>
         </div>
@@ -105,8 +105,8 @@ export default function PaginationDemo() {
 
       {/* ─── Use Cases ──────────────────────────────────────────── */}
       <div className="space-y-3">
-        <h3 className="text-[length:var(--invin-text-sub-heading)] font-[700]">Use cases</h3>
-        <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">Common patterns.</p>
+        <h3 className="text-[var(--foreground)] font-[700]">Use cases</h3>
+        <p className="text-[var(--foreground)] text-[var(--muted-foreground)]">Common patterns.</p>
       </div>
 
       <PlaygroundSection
@@ -120,7 +120,7 @@ export default function PaginationDemo() {
         <Card className="w-full">
           <CardContent className="py-3">
             <div className="flex items-center justify-between">
-              <span className="text-[length:var(--invin-text-label)] text-[var(--invin-text-dim)]">Showing 1–10 of 245 results</span>
+              <span className="text-[var(--muted-foreground)] text-[var(--muted-foreground)]">Showing 1–10 of 245 results</span>
               <Pagination total={245} pageSize={10} defaultCurrent={1} size="sm" showLabels={false} />
             </div>
           </CardContent>

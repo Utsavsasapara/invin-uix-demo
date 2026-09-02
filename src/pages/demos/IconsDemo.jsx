@@ -3,34 +3,34 @@ import { Card, CardContent } from 'invin-uix/ui/card';
 import { Separator } from 'invin-uix/ui/separator';
 import { Button } from 'invin-uix/ui/button';
 import {
-  Search, Bell, Settings, Download, Trash2, Plus, Check, X,
-  Mail, Star, Heart, Eye, Lock, Globe, Zap, Shield, Rocket,
-  Database, Cloud, Coffee, Flame, Gift, Music, Phone, Wifi,
-  Camera, Mic, ArrowRight, ChevronDown, MoreHorizontal,
-  Home, User, FileText, Activity, AlertCircle, Info,
+  MagnifyingGlass, Bell, Gear, DownloadSimple, Trash, Plus, Check, X,
+  Envelope, Star, Heart, Eye, Lock, Globe, Lightning, Shield, Rocket,
+  Database, Cloud, Coffee, Fire, Gift, MusicNote, Phone, WifiHigh,
+  Camera, Microphone, ArrowRight, CaretDown, DotsThree,
+  House, User, FileText, Pulse, WarningCircle, Info,
   ProductIcon
 } from 'invin-uix/ui/icons';
 
 export default function IconsDemo() {
   const commonIcons = [
-    { icon: Search, name: 'Search' }, { icon: Bell, name: 'Bell' },
-    { icon: Settings, name: 'Settings' }, { icon: Download, name: 'Download' },
-    { icon: Trash2, name: 'Trash2' }, { icon: Plus, name: 'Plus' },
+    { icon: MagnifyingGlass, name: 'MagnifyingGlass' }, { icon: Bell, name: 'Bell' },
+    { icon: Gear, name: 'Gear' }, { icon: DownloadSimple, name: 'DownloadSimple' },
+    { icon: Trash, name: 'Trash' }, { icon: Plus, name: 'Plus' },
     { icon: Check, name: 'Check' }, { icon: X, name: 'X' },
-    { icon: Mail, name: 'Mail' }, { icon: Star, name: 'Star' },
+    { icon: Envelope, name: 'Envelope' }, { icon: Star, name: 'Star' },
     { icon: Heart, name: 'Heart' }, { icon: Eye, name: 'Eye' },
     { icon: Lock, name: 'Lock' }, { icon: Globe, name: 'Globe' },
-    { icon: Zap, name: 'Zap' }, { icon: Shield, name: 'Shield' },
+    { icon: Lightning, name: 'Lightning' }, { icon: Shield, name: 'Shield' },
     { icon: Rocket, name: 'Rocket' }, { icon: Database, name: 'Database' },
     { icon: Cloud, name: 'Cloud' }, { icon: Coffee, name: 'Coffee' },
-    { icon: Flame, name: 'Flame' }, { icon: Gift, name: 'Gift' },
-    { icon: Music, name: 'Music' }, { icon: Phone, name: 'Phone' },
-    { icon: Wifi, name: 'Wifi' }, { icon: Camera, name: 'Camera' },
-    { icon: Mic, name: 'Mic' }, { icon: Home, name: 'Home' },
+    { icon: Fire, name: 'Fire' }, { icon: Gift, name: 'Gift' },
+    { icon: MusicNote, name: 'MusicNote' }, { icon: Phone, name: 'Phone' },
+    { icon: WifiHigh, name: 'WifiHigh' }, { icon: Camera, name: 'Camera' },
+    { icon: Microphone, name: 'Microphone' }, { icon: House, name: 'House' },
     { icon: User, name: 'User' }, { icon: FileText, name: 'FileText' },
-    { icon: Activity, name: 'Activity' }, { icon: AlertCircle, name: 'AlertCircle' },
-    { icon: ArrowRight, name: 'ArrowRight' }, { icon: ChevronDown, name: 'ChevronDown' },
-    { icon: MoreHorizontal, name: 'MoreHorizontal' }, { icon: Info, name: 'Info' },
+    { icon: Pulse, name: 'Pulse' }, { icon: WarningCircle, name: 'WarningCircle' },
+    { icon: ArrowRight, name: 'ArrowRight' }, { icon: CaretDown, name: 'CaretDown' },
+    { icon: DotsThree, name: 'DotsThree' }, { icon: Info, name: 'Info' },
   ];
 
   const productIcons = ['siem', 'ai-firewall', 'ndr', 'soar', 'asm', 'bas', 'nac', 'vm', 'tip', 'redops', 'ot-firewall', 'nms', 'decoys', 'invin-ai', 'gsos-engineering', 'gsos-management'];
@@ -40,7 +40,7 @@ export default function IconsDemo() {
       name="Icons"
       description="1400+ Lucide icons re-exported (tree-shakeable) plus 26 custom product SVG icons. No need to install lucide-react separately — it's bundled."
       importCode={`// Lucide icons (1400+ available)
-import { Search, Bell, Settings } from 'invin-uix/ui/icons';
+import { MagnifyingGlass, Bell, Gear } from 'invin-uix/ui/icons';
 
 // Custom product icons
 import { ProductIcon } from 'invin-uix/ui/icons';`}
@@ -48,7 +48,7 @@ import { ProductIcon } from 'invin-uix/ui/icons';`}
 
       {/* ─── Props Tables ───────────────────────────────────────── */}
       <div className="space-y-4">
-        <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)]">Lucide Icons</p>
+        <p className="text-[var(--muted-foreground)] font-[600] uppercase tracking-[0.05em] text-[var(--muted-foreground-faint)]">Lucide Icons</p>
         <PropsTable
           props={[
             { name: 'style', type: '{ width, height }', default: '—', description: 'Set size via inline style (recommended)' },
@@ -59,7 +59,7 @@ import { ProductIcon } from 'invin-uix/ui/icons';`}
         />
       </div>
       <div className="space-y-4">
-        <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)]">ProductIcon</p>
+        <p className="text-[var(--muted-foreground)] font-[600] uppercase tracking-[0.05em] text-[var(--muted-foreground-faint)]">ProductIcon</p>
         <PropsTable
           props={[
             { name: 'name', type: 'ProductIconName', default: '—', description: "Product identifier (e.g. 'siem', 'ndr', 'ai-firewall')" },
@@ -74,10 +74,10 @@ import { ProductIcon } from 'invin-uix/ui/icons';`}
       <PlaygroundSection
         title="Common Lucide icons"
         description="A sample of frequently used icons. Import any of the 1400+ icons by name."
-        code={`import { Search, Bell, Settings } from 'invin-uix/ui/icons';
+        code={`import { MagnifyingGlass, Bell, Gear } from 'invin-uix/ui/icons';
 
 // Use with inline style (recommended for consistent sizing)
-<Search style={{ width: 16, height: 16 }} />
+<MagnifyingGlass style={{ width: 16, height: 16 }} />
 
 // Or Tailwind classes
 <Bell className="h-4 w-4" />`}
@@ -85,10 +85,10 @@ import { ProductIcon } from 'invin-uix/ui/icons';`}
         <div className="flex flex-wrap gap-3">
           {commonIcons.map(({ icon: Icon, name }) => (
             <div key={name} className="flex flex-col items-center gap-1 w-14">
-              <div className="flex items-center justify-center h-9 w-9 rounded-md border border-[var(--invin-border)] hover:bg-[var(--invin-surface-hover)] transition-colors">
+              <div className="flex items-center justify-center h-9 w-9 rounded-md border border-[var(--border)] hover:bg-[var(--secondary)] transition-colors">
                 <Icon style={{ width: 16, height: 16 }} />
               </div>
-              <span className="text-[9px] text-[var(--invin-text-faint)] truncate w-full text-center">{name}</span>
+              <span className="text-[9px] text-[var(--muted-foreground-faint)] truncate w-full text-center">{name}</span>
             </div>
           ))}
         </div>
@@ -98,17 +98,17 @@ import { ProductIcon } from 'invin-uix/ui/icons';`}
       <PlaygroundSection
         title="Sizing"
         description="Icons have no intrinsic size — you control it. Use style or className."
-        code={`<Zap style={{ width: 12, height: 12 }} />  // 12px
-<Zap style={{ width: 16, height: 16 }} />  // 16px (common for buttons)
-<Zap style={{ width: 20, height: 20 }} />  // 20px
-<Zap style={{ width: 24, height: 24 }} />  // 24px
-<Zap style={{ width: 32, height: 32 }} />  // 32px`}
+        code={`<Lightning style={{ width: 12, height: 12 }} />  // 12px
+<Lightning style={{ width: 16, height: 16 }} />  // 16px (common for buttons)
+<Lightning style={{ width: 20, height: 20 }} />  // 20px
+<Lightning style={{ width: 24, height: 24 }} />  // 24px
+<Lightning style={{ width: 32, height: 32 }} />  // 32px`}
       >
         <div className="flex items-end gap-6">
           {[12, 16, 20, 24, 32].map(s => (
             <div key={s} className="flex flex-col items-center gap-2">
-              <Zap style={{ width: s, height: s }} />
-              <span className="text-[10px] text-[var(--invin-text-faint)]">{s}px</span>
+              <Lightning style={{ width: s, height: s }} />
+              <span className="text-[10px] text-[var(--muted-foreground-faint)]">{s}px</span>
             </div>
           ))}
         </div>
@@ -118,18 +118,18 @@ import { ProductIcon } from 'invin-uix/ui/icons';`}
       <PlaygroundSection
         title="Colours"
         description="Icons inherit currentColor by default. Override with style or token variables."
-        code={`<Heart style={{ width: 20, height: 20, color: 'var(--invin-error)' }} />
-<Star style={{ width: 20, height: 20, color: 'var(--invin-warn)' }} />
-<Check style={{ width: 20, height: 20, color: 'var(--invin-ok)' }} />
-<Shield style={{ width: 20, height: 20, color: 'var(--invin-accent)' }} />
-<Info style={{ width: 20, height: 20, color: 'var(--invin-info)' }} />`}
+        code={`<Heart style={{ width: 20, height: 20, color: 'var(--error)' }} />
+<Star style={{ width: 20, height: 20, color: 'var(--degraded)' }} />
+<Check style={{ width: 20, height: 20, color: 'var(--ok)' }} />
+<Shield style={{ width: 20, height: 20, color: 'var(--accent)' }} />
+<Info style={{ width: 20, height: 20, color: 'var(--info)' }} />`}
       >
         <div className="flex items-center gap-5">
-          <Heart style={{ width: 20, height: 20, color: 'var(--invin-error)' }} />
-          <Star style={{ width: 20, height: 20, color: 'var(--invin-warn)' }} />
-          <Check style={{ width: 20, height: 20, color: 'var(--invin-ok)' }} />
-          <Shield style={{ width: 20, height: 20, color: 'var(--invin-accent)' }} />
-          <Info style={{ width: 20, height: 20, color: 'var(--invin-info)' }} />
+          <Heart style={{ width: 20, height: 20, color: 'var(--error)' }} />
+          <Star style={{ width: 20, height: 20, color: 'var(--degraded)' }} />
+          <Check style={{ width: 20, height: 20, color: 'var(--ok)' }} />
+          <Shield style={{ width: 20, height: 20, color: 'var(--accent)' }} />
+          <Info style={{ width: 20, height: 20, color: 'var(--info)' }} />
         </div>
       </PlaygroundSection>
 
@@ -149,10 +149,10 @@ import { ProductIcon } from 'invin-uix/ui/icons';`}
         <div className="flex flex-wrap gap-3">
           {productIcons.map(name => (
             <div key={name} className="flex flex-col items-center gap-1 w-16">
-              <div className="flex items-center justify-center h-10 w-10 rounded-md border border-[var(--invin-border)] hover:bg-[var(--invin-surface-hover)] transition-colors">
+              <div className="flex items-center justify-center h-10 w-10 rounded-md border border-[var(--border)] hover:bg-[var(--secondary)] transition-colors">
                 <ProductIcon name={name} size="sm" />
               </div>
-              <span className="text-[9px] text-[var(--invin-text-faint)] truncate w-full text-center">{name}</span>
+              <span className="text-[9px] text-[var(--muted-foreground-faint)] truncate w-full text-center">{name}</span>
             </div>
           ))}
         </div>
@@ -171,7 +171,7 @@ import { ProductIcon } from 'invin-uix/ui/icons';`}
           {['sm', 'md', 'lg', 'xl'].map(s => (
             <div key={s} className="flex flex-col items-center gap-2">
               <ProductIcon name="siem" size={s} />
-              <span className="text-[10px] text-[var(--invin-text-faint)]">{s}</span>
+              <span className="text-[10px] text-[var(--muted-foreground-faint)]">{s}</span>
             </div>
           ))}
         </div>
@@ -181,22 +181,22 @@ import { ProductIcon } from 'invin-uix/ui/icons';`}
 
       {/* ─── Use Cases ──────────────────────────────────────────── */}
       <div className="space-y-3">
-        <h3 className="text-[length:var(--invin-text-sub-heading)] font-[700]">Use cases</h3>
-        <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">Icons in context.</p>
+        <h3 className="text-[var(--foreground)] font-[700]">Use cases</h3>
+        <p className="text-[var(--foreground)] text-[var(--muted-foreground)]">Icons in context.</p>
       </div>
 
       <PlaygroundSection
         title="In buttons"
         description="Icons as children inside buttons. The button gap handles spacing."
-        code={`<Button><Download style={{ width: 14, height: 14 }} /> Download</Button>
-<Button variant="ghost" size="icon-sm"><Settings style={{ width: 14, height: 14 }} /></Button>`}
+        code={`<Button><DownloadSimple style={{ width: 14, height: 14 }} /> DownloadSimple</Button>
+<Button variant="ghost" size="icon-sm"><Gear style={{ width: 14, height: 14 }} /></Button>`}
       >
         <div className="flex flex-wrap items-center gap-3">
-          <Button><Download style={{ width: 14, height: 14 }} /> Download</Button>
-          <Button variant="outline"><Search style={{ width: 14, height: 14 }} /> Search</Button>
-          <Button variant="ghost" size="icon-sm" aria-label="Settings"><Settings style={{ width: 14, height: 14 }} /></Button>
+          <Button><DownloadSimple style={{ width: 14, height: 14 }} /> DownloadSimple</Button>
+          <Button variant="outline"><MagnifyingGlass style={{ width: 14, height: 14 }} /> MagnifyingGlass</Button>
+          <Button variant="ghost" size="icon-sm" aria-label="Gear"><Gear style={{ width: 14, height: 14 }} /></Button>
           <Button variant="ghost" size="icon-sm" aria-label="Bell"><Bell style={{ width: 14, height: 14 }} /></Button>
-          <Button variant="ghost" size="icon-sm" aria-label="More"><MoreHorizontal style={{ width: 14, height: 14 }} /></Button>
+          <Button variant="ghost" size="icon-sm" aria-label="More"><DotsThree style={{ width: 14, height: 14 }} /></Button>
         </div>
       </PlaygroundSection>
 
@@ -204,7 +204,7 @@ import { ProductIcon } from 'invin-uix/ui/icons';`}
         title="Navigation items"
         description="Icons paired with text in sidebar or menu items."
         code={`<div className="flex items-center gap-2">
-  <Home style={{ width: 16, height: 16 }} />
+  <House style={{ width: 16, height: 16 }} />
   <span>Dashboard</span>
 </div>`}
       >
@@ -212,14 +212,14 @@ import { ProductIcon } from 'invin-uix/ui/icons';`}
           <CardContent className="py-2">
             <div className="space-y-0.5">
               {[
-                { icon: Home, label: 'Dashboard', active: true },
+                { icon: House, label: 'Dashboard', active: true },
                 { icon: User, label: 'Users', active: false },
                 { icon: FileText, label: 'Documents', active: false },
-                { icon: Settings, label: 'Settings', active: false },
+                { icon: Gear, label: 'Gear', active: false },
               ].map(item => (
-                <div key={item.label} className={`flex items-center gap-2 px-2 py-2 rounded-md ${item.active ? 'bg-[var(--invin-accent-soft)] text-[var(--invin-accent)]' : 'text-[var(--invin-text-dim)] hover:bg-[var(--invin-surface-hover)]'}`}>
+                <div key={item.label} className={`flex items-center gap-2 px-2 py-2 rounded-md ${item.active ? 'bg-[var(--accent-soft)] text-[var(--accent)]' : 'text-[var(--muted-foreground)] hover:bg-[var(--secondary)]'}`}>
                   <item.icon style={{ width: 16, height: 16 }} />
-                  <span className="text-[length:var(--invin-text-body)] font-[500]">{item.label}</span>
+                  <span className="text-[var(--foreground)] font-[500]">{item.label}</span>
                 </div>
               ))}
             </div>

@@ -81,7 +81,7 @@ export default function SpinnerDemo() {
               <Spinner variant={v} size="sm" />
               <Spinner variant={v} size="md" />
               <Spinner variant={v} size="lg" />
-              <span className="text-[10px] text-[var(--invin-text-faint)] capitalize">{v}</span>
+              <span className="text-[10px] text-[var(--muted-foreground-faint)] capitalize">{v}</span>
             </div>
           ))}
         </div>
@@ -117,15 +117,15 @@ export default function SpinnerDemo() {
       >
         <div className="w-full space-y-3">
           <div className="flex items-center gap-3">
-            <Label htmlFor="wrapper-toggle" className="text-[length:var(--invin-text-body)]">Loading:</Label>
+            <Label htmlFor="wrapper-toggle" className="text-[var(--foreground)]">Loading:</Label>
             <Switch id="wrapper-toggle" size="sm" checked={loading} onCheckedChange={setLoading} />
           </div>
           <Spinner spinning={loading} tip="Fetching data...">
             <Card>
               <CardContent className="py-4">
-                <p className="text-[length:var(--invin-text-card-title)] font-[600]">Dashboard Stats</p>
-                <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)] mt-1">Revenue: $45,231 | Users: 2,350 | Active: 573</p>
-                <p className="text-[10px] text-[var(--invin-text-faint)] mt-2">Last updated: 2 minutes ago</p>
+                <p className="text-[var(--foreground)] font-[600]">Dashboard Stats</p>
+                <p className="text-[var(--foreground)] text-[var(--muted-foreground)] mt-1">Revenue: $45,231 | Users: 2,350 | Active: 573</p>
+                <p className="text-[10px] text-[var(--muted-foreground-faint)] mt-2">Last updated: 2 minutes ago</p>
               </CardContent>
             </Card>
           </Spinner>
@@ -151,7 +151,7 @@ export default function SpinnerDemo() {
           <Button variant="outline" onClick={() => { setFullscreen(true); setTimeout(() => setFullscreen(false), 3000); }}>
             Show Fullscreen (3 seconds)
           </Button>
-          <span className="text-[10px] text-[var(--invin-text-faint)]">Auto-dismisses after 3s</span>
+          <span className="text-[10px] text-[var(--muted-foreground-faint)]">Auto-dismisses after 3s</span>
         </div>
         <Spinner spinning={fullscreen} fullscreen tip="Loading application..." size="lg" />
       </PlaygroundSection>
@@ -165,7 +165,7 @@ export default function SpinnerDemo() {
 <Spinner indicator={
   <div style={{
     width: 24, height: 24,
-    border: '3px dotted var(--invin-accent)',
+    border: '3px dotted var(--accent)',
     borderRadius: '50%',
     animation: 'spinner-rotate 2s linear infinite',
   }} />
@@ -174,10 +174,10 @@ export default function SpinnerDemo() {
         <div className="flex flex-wrap items-start gap-8">
           <Spinner indicator={<span style={{ fontSize: 24, animation: 'spinner-rotate 1s linear infinite', display: 'inline-block' }}>⏳</span>} tip="Emoji" />
           <Spinner indicator={
-            <div style={{ width: 24, height: 24, border: '3px dotted var(--invin-accent)', borderRadius: '50%', animation: 'spinner-rotate 2s linear infinite' }} />
+            <div style={{ width: 24, height: 24, border: '3px dotted var(--accent)', borderRadius: '50%', animation: 'spinner-rotate 2s linear infinite' }} />
           } tip="Dotted ring" />
           <Spinner indicator={
-            <div style={{ width: 20, height: 20, backgroundColor: 'var(--invin-accent)', borderRadius: 4, animation: 'spinner-rotate 0.8s ease-in-out infinite' }} />
+            <div style={{ width: 20, height: 20, backgroundColor: 'var(--accent)', borderRadius: 4, animation: 'spinner-rotate 0.8s ease-in-out infinite' }} />
           } tip="Square" />
         </div>
       </PlaygroundSection>
@@ -186,8 +186,8 @@ export default function SpinnerDemo() {
 
       {/* ─── Use Cases ──────────────────────────────────────────── */}
       <div className="space-y-3">
-        <h3 className="text-[length:var(--invin-text-sub-heading)] font-[700]">Use cases</h3>
-        <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">Common loading patterns.</p>
+        <h3 className="text-[var(--foreground)] font-[700]">Use cases</h3>
+        <p className="text-[var(--foreground)] text-[var(--muted-foreground)]">Common loading patterns.</p>
       </div>
 
       <PlaygroundSection
@@ -202,9 +202,9 @@ export default function SpinnerDemo() {
             <CardContent className="py-3">
               <div className="space-y-2">
                 {['Alice Johnson', 'Bob Smith', 'Carol Davis', 'David Lee'].map(name => (
-                  <div key={name} className="flex items-center justify-between py-1.5 border-b border-[var(--invin-border)] last:border-0">
-                    <span className="text-[length:var(--invin-text-body)]">{name}</span>
-                    <span className="text-[10px] text-[var(--invin-text-faint)]">Active</span>
+                  <div key={name} className="flex items-center justify-between py-1.5 border-b border-[var(--border)] last:border-0">
+                    <span className="text-[var(--foreground)]">{name}</span>
+                    <span className="text-[10px] text-[var(--muted-foreground-faint)]">Active</span>
                   </div>
                 ))}
               </div>
@@ -223,7 +223,7 @@ export default function SpinnerDemo() {
       >
         <div className="flex items-center gap-2">
           <Spinner size="sm" variant="ring" />
-          <span className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">Saving changes...</span>
+          <span className="text-[var(--foreground)] text-[var(--muted-foreground)]">Saving changes...</span>
         </div>
       </PlaygroundSection>
 

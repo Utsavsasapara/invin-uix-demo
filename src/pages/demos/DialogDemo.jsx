@@ -7,7 +7,7 @@ import { Input } from 'invin-uix/ui/input';
 import { Label } from 'invin-uix/ui/label';
 import { Separator } from 'invin-uix/ui/separator';
 import { Card, CardContent } from 'invin-uix/ui/card';
-import { Trash2, AlertTriangle } from 'invin-uix/ui/icons';
+import { Trash, Warning } from 'invin-uix/ui/icons';
 
 export default function DialogDemo() {
   return (
@@ -22,7 +22,7 @@ import { AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader,
     >
 
       <div className="space-y-4">
-        <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)]">Dialog</p>
+        <p className="text-[var(--muted-foreground)] font-[600] uppercase tracking-[0.05em] text-[var(--muted-foreground-faint)]">Dialog</p>
         <PropsTable
           props={[
             { name: 'open', type: 'boolean', default: '—', description: 'Controlled open state' },
@@ -32,14 +32,14 @@ import { AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader,
         />
       </div>
       <div className="space-y-4">
-        <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)]">AlertDialog</p>
+        <p className="text-[var(--muted-foreground)] font-[600] uppercase tracking-[0.05em] text-[var(--muted-foreground-faint)]">AlertDialog</p>
         <PropsTable
           props={[
             { name: 'open', type: 'boolean', default: '—', description: 'Controlled open state' },
             { name: 'onOpenChange', type: '(open: boolean) => void', default: '—', description: 'Open/close callback' },
           ]}
         />
-        <p className="text-[length:var(--invin-text-label)] text-[var(--invin-text-dim)]">
+        <p className="text-[var(--muted-foreground)] text-[var(--muted-foreground)]">
           AlertDialog cannot be dismissed by clicking overlay or pressing Escape — user must choose Cancel or Action.
         </p>
       </div>
@@ -119,7 +119,7 @@ import { AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader,
       >
         <AlertDialog>
           <AlertDialogTrigger asChild>
-            <Button variant="destructive"><Trash2 style={{ width: 14, height: 14 }} /> Delete Account</Button>
+            <Button variant="destructive"><Trash style={{ width: 14, height: 14 }} /> Delete Account</Button>
           </AlertDialogTrigger>
           <AlertDialogContent>
             <AlertDialogHeader>
@@ -130,7 +130,7 @@ import { AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader,
             </AlertDialogHeader>
             <AlertDialogFooter>
               <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction className="bg-[var(--invin-error)] border-transparent hover:brightness-110">Delete</AlertDialogAction>
+              <AlertDialogAction className="bg-[var(--error)] border-transparent hover:brightness-110">Delete</AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
@@ -172,8 +172,8 @@ import { AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader,
 
       {/* ─── Use Cases ──────────────────────────────────────────── */}
       <div className="space-y-3">
-        <h3 className="text-[length:var(--invin-text-sub-heading)] font-[700]">Use cases</h3>
-        <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">When to use Dialog vs AlertDialog.</p>
+        <h3 className="text-[var(--foreground)] font-[700]">Use cases</h3>
+        <p className="text-[var(--foreground)] text-[var(--muted-foreground)]">When to use Dialog vs AlertDialog.</p>
       </div>
 
       <PlaygroundSection
@@ -245,7 +245,7 @@ import { AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader,
       >
         <AlertDialog>
           <AlertDialogTrigger asChild>
-            <Button variant="destructive" size="sm"><Trash2 style={{ width: 14, height: 14 }} /> Remove Member</Button>
+            <Button variant="destructive" size="sm"><Trash style={{ width: 14, height: 14 }} /> Remove Member</Button>
           </AlertDialogTrigger>
           <AlertDialogContent>
             <AlertDialogHeader>
@@ -256,7 +256,7 @@ import { AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader,
             </AlertDialogHeader>
             <AlertDialogFooter>
               <AlertDialogCancel>Keep Member</AlertDialogCancel>
-              <AlertDialogAction className="bg-[var(--invin-error)] border-transparent">Remove</AlertDialogAction>
+              <AlertDialogAction className="bg-[var(--error)] border-transparent">Remove</AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
@@ -283,7 +283,7 @@ import { AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader,
       >
         <AlertDialog>
           <AlertDialogTrigger asChild>
-            <Button variant="outline"><AlertTriangle style={{ width: 14, height: 14 }} /> Deploy to Production</Button>
+            <Button variant="outline"><Warning style={{ width: 14, height: 14 }} /> Deploy to Production</Button>
           </AlertDialogTrigger>
           <AlertDialogContent>
             <AlertDialogHeader>

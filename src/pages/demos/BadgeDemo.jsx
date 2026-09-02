@@ -4,7 +4,7 @@ import { Button } from 'invin-uix/ui/button';
 import { Card, CardContent } from 'invin-uix/ui/card';
 import { Separator } from 'invin-uix/ui/separator';
 import { Avatar, AvatarImage, AvatarFallback } from 'invin-uix/ui/avatar';
-import { Bell, Mail, Star, Check, Zap, User, Shield, Clock, Activity } from 'invin-uix/ui/icons';
+import { Bell, Envelope, Star, Check, Lightning, User, Shield, Clock, Pulse } from 'invin-uix/ui/icons';
 
 export default function BadgeDemo() {
   return (
@@ -16,7 +16,7 @@ export default function BadgeDemo() {
 
       {/* ─── Props Table ────────────────────────────────────────── */}
       <div className="space-y-4">
-        <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)]">Badge (label pill)</p>
+        <p className="text-[var(--muted-foreground)] font-[600] uppercase tracking-[0.05em] text-[var(--muted-foreground-faint)]">Badge (label pill)</p>
         <PropsTable
           props={[
             { name: 'variant', type: "'default' | 'secondary' | 'destructive' | 'success' | 'warning' | 'info' | 'outline'", default: "'default'", description: 'Colour variant' },
@@ -26,7 +26,7 @@ export default function BadgeDemo() {
         />
       </div>
       <div className="space-y-4">
-        <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)]">NotificationBadge (count / dot)</p>
+        <p className="text-[var(--muted-foreground)] font-[600] uppercase tracking-[0.05em] text-[var(--muted-foreground-faint)]">NotificationBadge (count / dot)</p>
         <PropsTable
           props={[
             { name: 'count', type: 'number | ReactNode', default: '—', description: 'Count bubble value' },
@@ -41,7 +41,7 @@ export default function BadgeDemo() {
         />
       </div>
       <div className="space-y-4">
-        <p className="text-[length:var(--invin-text-eyebrow)] font-[600] uppercase tracking-[0.05em] text-[var(--invin-text-faint)]">StatusBadge (dot + text)</p>
+        <p className="text-[var(--muted-foreground)] font-[600] uppercase tracking-[0.05em] text-[var(--muted-foreground-faint)]">StatusBadge (dot + text)</p>
         <PropsTable
           props={[
             { name: 'status', type: "'default' | 'success' | 'processing' | 'error' | 'warning'", default: '—', description: 'Drives dot colour; processing pulses' },
@@ -121,7 +121,7 @@ export default function BadgeDemo() {
             <Button size="icon" variant="outline" aria-label="Notifications"><Bell style={{ width: 16, height: 16 }} /></Button>
           </NotificationBadge>
           <NotificationBadge count={12}>
-            <Button size="icon" variant="outline" aria-label="Messages"><Mail style={{ width: 16, height: 16 }} /></Button>
+            <Button size="icon" variant="outline" aria-label="Messages"><Envelope style={{ width: 16, height: 16 }} /></Button>
           </NotificationBadge>
           <NotificationBadge count={120} overflowCount={99}>
             <Avatar size="md"><AvatarImage src="https://i.pravatar.cc/100?u=badge3" /><AvatarFallback>U</AvatarFallback></Avatar>
@@ -171,7 +171,7 @@ export default function BadgeDemo() {
 </NotificationBadge>
 
 // Custom dot colour
-<NotificationBadge dot color="var(--invin-ok)">
+<NotificationBadge dot color="var(--ok)">
   <Avatar size="sm"><AvatarFallback>U</AvatarFallback></Avatar>
 </NotificationBadge>`}
       >
@@ -182,10 +182,10 @@ export default function BadgeDemo() {
           <NotificationBadge dot>
             <Avatar size="sm"><AvatarImage src="https://i.pravatar.cc/100?u=dot1" /><AvatarFallback>U</AvatarFallback></Avatar>
           </NotificationBadge>
-          <NotificationBadge dot color="var(--invin-ok)">
+          <NotificationBadge dot color="var(--ok)">
             <Avatar size="sm"><AvatarImage src="https://i.pravatar.cc/100?u=dot2" /><AvatarFallback>U</AvatarFallback></Avatar>
           </NotificationBadge>
-          <NotificationBadge dot color="var(--invin-warn)">
+          <NotificationBadge dot color="var(--degraded)">
             <Avatar size="sm"><AvatarImage src="https://i.pravatar.cc/100?u=dot3" /><AvatarFallback>U</AvatarFallback></Avatar>
           </NotificationBadge>
         </div>
@@ -195,22 +195,22 @@ export default function BadgeDemo() {
       <PlaygroundSection
         title="Custom Colours"
         description="Override the default red counter/dot colour with any CSS colour value."
-        code={`<NotificationBadge count={3} color="var(--invin-ok)">...</NotificationBadge>
-<NotificationBadge count={2} color="var(--invin-warn)">...</NotificationBadge>
-<NotificationBadge count={1} color="var(--invin-accent)">...</NotificationBadge>`}
+        code={`<NotificationBadge count={3} color="var(--ok)">...</NotificationBadge>
+<NotificationBadge count={2} color="var(--degraded)">...</NotificationBadge>
+<NotificationBadge count={1} color="var(--accent)">...</NotificationBadge>`}
       >
         <div className="flex flex-wrap items-center gap-5">
-          <NotificationBadge count={8} color="var(--invin-purple)">
+          <NotificationBadge count={8} color="var(--accent)">
             <Button size="icon" variant="outline" aria-label="Stars"><Star style={{ width: 16, height: 16 }} /></Button>
           </NotificationBadge>
-          <NotificationBadge count={3} color="var(--invin-ok)">
+          <NotificationBadge count={3} color="var(--ok)">
             <Button size="icon" variant="outline" aria-label="Done"><Check style={{ width: 16, height: 16 }} /></Button>
           </NotificationBadge>
-          <NotificationBadge count={2} color="var(--invin-warn)">
-            <Button size="icon" variant="outline" aria-label="Alerts"><Zap style={{ width: 16, height: 16 }} /></Button>
+          <NotificationBadge count={2} color="var(--degraded)">
+            <Button size="icon" variant="outline" aria-label="Alerts"><Lightning style={{ width: 16, height: 16 }} /></Button>
           </NotificationBadge>
-          <NotificationBadge count={1} color="var(--invin-accent)">
-            <Button size="icon" variant="outline" aria-label="Activity"><Activity style={{ width: 16, height: 16 }} /></Button>
+          <NotificationBadge count={1} color="var(--accent)">
+            <Button size="icon" variant="outline" aria-label="Pulse"><Pulse style={{ width: 16, height: 16 }} /></Button>
           </NotificationBadge>
         </div>
       </PlaygroundSection>
@@ -240,8 +240,8 @@ export default function BadgeDemo() {
 
       {/* ─── Real-world Use Cases ───────────────────────────────── */}
       <div className="space-y-3">
-        <h3 className="text-[length:var(--invin-text-sub-heading)] font-[700]">Use cases</h3>
-        <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">Common patterns you'll use in your project.</p>
+        <h3 className="text-[var(--foreground)] font-[700]">Use cases</h3>
+        <p className="text-[var(--foreground)] text-[var(--muted-foreground)]">Common patterns you'll use in your project.</p>
       </div>
 
       <PlaygroundSection
@@ -251,12 +251,12 @@ export default function BadgeDemo() {
   <Button variant="ghost" size="icon-sm"><Bell /></Button>
 </NotificationBadge>`}
       >
-        <div className="flex items-center gap-1 p-1 rounded-[8px] border border-[var(--invin-border)] w-fit">
+        <div className="flex items-center gap-1 p-1 rounded-[8px] border border-[var(--border)] w-fit">
           <NotificationBadge count={3} size="sm">
             <Button variant="ghost" size="icon-sm" aria-label="Notifications"><Bell style={{ width: 16, height: 16 }} /></Button>
           </NotificationBadge>
-          <NotificationBadge count={7} size="sm" color="var(--invin-accent)">
-            <Button variant="ghost" size="icon-sm" aria-label="Messages"><Mail style={{ width: 16, height: 16 }} /></Button>
+          <NotificationBadge count={7} size="sm" color="var(--accent)">
+            <Button variant="ghost" size="icon-sm" aria-label="Messages"><Envelope style={{ width: 16, height: 16 }} /></Button>
           </NotificationBadge>
           <Button variant="ghost" size="icon-sm" aria-label="User"><User style={{ width: 16, height: 16 }} /></Button>
         </div>
@@ -266,26 +266,26 @@ export default function BadgeDemo() {
         title="User list with status"
         description="Avatar with online/offline dot indicator."
         code={`// Online / away / offline via token colours
-<NotificationBadge dot color="var(--invin-ok)">
+<NotificationBadge dot color="var(--ok)">
   <Avatar size="sm"><AvatarFallback>SC</AvatarFallback></Avatar>
 </NotificationBadge>
 
-<NotificationBadge dot color="var(--invin-warn)">
+<NotificationBadge dot color="var(--degraded)">
   <Avatar size="sm"><AvatarFallback>LP</AvatarFallback></Avatar>
 </NotificationBadge>`}
       >
         <div className="flex flex-wrap items-center gap-4">
           {[
-            { name: 'Sarah C.', color: 'var(--invin-ok)', img: 'u=team10' },
-            { name: 'John R.', color: 'var(--invin-ok)', img: 'u=team11' },
-            { name: 'Lisa P.', color: 'var(--invin-warn)', img: 'u=team12' },
-            { name: 'Mike C.', color: 'var(--invin-text-faint)', img: 'u=team13' },
+            { name: 'Sarah C.', color: 'var(--ok)', img: 'u=team10' },
+            { name: 'John R.', color: 'var(--ok)', img: 'u=team11' },
+            { name: 'Lisa P.', color: 'var(--degraded)', img: 'u=team12' },
+            { name: 'Mike C.', color: 'var(--muted-foreground-faint)', img: 'u=team13' },
           ].map(u => (
             <div key={u.name} className="flex items-center gap-2">
               <NotificationBadge dot color={u.color}>
                 <Avatar size="sm"><AvatarImage src={`https://i.pravatar.cc/100?${u.img}`} /><AvatarFallback>{u.name[0]}</AvatarFallback></Avatar>
               </NotificationBadge>
-              <span className="text-[length:var(--invin-text-body)]">{u.name}</span>
+              <span className="text-[var(--foreground)]">{u.name}</span>
             </div>
           ))}
         </div>
@@ -310,8 +310,8 @@ export default function BadgeDemo() {
               ].map(s => (
                 <div key={s.name} className="flex items-center justify-between py-1">
                   <div>
-                    <p className="text-[length:var(--invin-text-body)] font-[500]">{s.name}</p>
-                    <p className="text-[10px] text-[var(--invin-text-faint)]">{s.env}</p>
+                    <p className="text-[var(--foreground)] font-[500]">{s.name}</p>
+                    <p className="text-[10px] text-[var(--muted-foreground-faint)]">{s.env}</p>
                   </div>
                   <StatusBadge status={s.status} text={s.text} />
                 </div>
@@ -335,8 +335,8 @@ export default function BadgeDemo() {
               <Badge variant="success" size="sm">Resolved</Badge>
               <Badge variant="outline" size="sm">v2.1</Badge>
             </div>
-            <p className="text-[length:var(--invin-text-card-title)] font-[600]">Fix authentication bypass vulnerability</p>
-            <p className="text-[length:var(--invin-text-label)] text-[var(--invin-text-dim)] mt-1">Patched JWT validation to prevent token replay attacks on the auth service.</p>
+            <p className="text-[var(--foreground)] font-[600]">Fix authentication bypass vulnerability</p>
+            <p className="text-[var(--muted-foreground)] text-[var(--muted-foreground)] mt-1">Patched JWT validation to prevent token replay attacks on the auth service.</p>
           </CardContent>
         </Card>
       </PlaygroundSection>
@@ -355,13 +355,13 @@ export default function BadgeDemo() {
             <div className="space-y-3">
               {[
                 { icon: Shield, label: 'Role-Based Access', badge: 'success', text: 'Enabled' },
-                { icon: Activity, label: 'Real-time Sync', badge: 'warning', text: 'Beta' },
-                { icon: Zap, label: 'AI Copilot', badge: 'info', text: 'Preview' },
+                { icon: Pulse, label: 'Real-time Sync', badge: 'warning', text: 'Beta' },
+                { icon: Lightning, label: 'AI Copilot', badge: 'info', text: 'Preview' },
                 { icon: Clock, label: 'Scheduled Reports', badge: 'secondary', text: 'Disabled' },
               ].map(f => (
                 <div key={f.label} className="flex items-center gap-2">
-                  <f.icon style={{ width: 14, height: 14, color: 'var(--invin-text-dim)' }} />
-                  <span className="text-[length:var(--invin-text-body)] flex-1">{f.label}</span>
+                  <f.icon style={{ width: 14, height: 14, color: 'var(--muted-foreground)' }} />
+                  <span className="text-[var(--foreground)] flex-1">{f.label}</span>
                   <Badge variant={f.badge} size="sm">{f.text}</Badge>
                 </div>
               ))}

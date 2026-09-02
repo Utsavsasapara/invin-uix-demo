@@ -33,8 +33,8 @@ export default function BarChartDemo() {
   data={data}
   xKey="category"
   bars={[
-    { key: 'detected', name: 'Detected', color: 'var(--invin-error)', radius: 4 },
-    { key: 'blocked', name: 'Blocked', color: 'var(--invin-ok)', radius: 4 },
+    { key: 'detected', name: 'Detected', color: 'var(--error)', radius: 4 },
+    { key: 'blocked', name: 'Blocked', color: 'var(--ok)', radius: 4 },
   ]}
   height={280}
 />`}
@@ -43,8 +43,8 @@ export default function BarChartDemo() {
           data={threats}
           xKey="category"
           bars={[
-            { key: 'detected', name: 'Detected', color: 'var(--invin-error)', radius: 4 },
-            { key: 'blocked', name: 'Blocked', color: 'var(--invin-ok)', radius: 4 },
+            { key: 'detected', name: 'Detected', color: 'var(--error)', radius: 4 },
+            { key: 'blocked', name: 'Blocked', color: 'var(--ok)', radius: 4 },
           ]}
           height={280}
         />
@@ -58,7 +58,7 @@ export default function BarChartDemo() {
         code={`<BarChart
   data={data}
   xKey="asset"
-  bars={[{ key: 'risk', name: 'Risk Score', color: 'var(--invin-warn)', radius: 4 }]}
+  bars={[{ key: 'risk', name: 'Risk Score', color: 'var(--degraded)', radius: 4 }]}
   horizontal
   height={220}
 />`}
@@ -66,7 +66,7 @@ export default function BarChartDemo() {
         <BarChart
           data={riskAssets}
           xKey="asset"
-          bars={[{ key: 'risk', name: 'Risk Score', color: 'var(--invin-warn)', radius: 4 }]}
+          bars={[{ key: 'risk', name: 'Risk Score', color: 'var(--degraded)', radius: 4 }]}
           horizontal
           height={220}
         />
@@ -81,8 +81,8 @@ export default function BarChartDemo() {
   data={data}
   xKey="category"
   bars={[
-    { key: 'blocked', name: 'Blocked', color: 'var(--invin-ok)' },
-    { key: 'detected', name: 'Unblocked', color: 'var(--invin-error)' },
+    { key: 'blocked', name: 'Blocked', color: 'var(--ok)' },
+    { key: 'detected', name: 'Unblocked', color: 'var(--error)' },
   ]}
   stacked
   height={250}
@@ -92,8 +92,8 @@ export default function BarChartDemo() {
           data={threats}
           xKey="category"
           bars={[
-            { key: 'blocked', name: 'Blocked', color: 'var(--invin-ok)' },
-            { key: 'detected', name: 'Detected', color: 'var(--invin-error)' },
+            { key: 'blocked', name: 'Blocked', color: 'var(--ok)' },
+            { key: 'detected', name: 'Detected', color: 'var(--error)' },
           ]}
           stacked
           height={250}

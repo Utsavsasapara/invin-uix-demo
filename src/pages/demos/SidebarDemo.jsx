@@ -8,7 +8,7 @@ import { Separator } from 'invin-uix/ui/separator';
 import { Switch } from 'invin-uix/ui/switch';
 import { Avatar, AvatarFallback } from 'invin-uix/ui/avatar';
 import {
-  LayoutDashboard, Users, Settings, FileText, Shield, Activity,
+  SquaresFour, Users, Gear, FileText, Shield, Pulse,
   Sun, Moon,
 } from 'invin-uix/ui/icons';
 import { useTheme } from '../../useTheme.jsx';
@@ -19,7 +19,7 @@ const demoItems = [
   {
     key: 'main', type: 'group', label: 'Main',
     children: [
-      { key: 'dashboard', label: 'Dashboard', icon: icon(LayoutDashboard) },
+      { key: 'dashboard', label: 'Dashboard', icon: icon(SquaresFour) },
       { key: 'users', label: 'Users', icon: icon(Users) },
       { key: 'reports', label: 'Reports', icon: icon(FileText) },
     ],
@@ -28,8 +28,8 @@ const demoItems = [
     key: 'admin', type: 'group', label: 'Administration',
     children: [
       { key: 'security', label: 'Security', icon: icon(Shield) },
-      { key: 'activity', label: 'Activity Log', icon: icon(Activity) },
-      { key: 'settings', label: 'Settings', icon: icon(Settings) },
+      { key: 'activity', label: 'Pulse Log', icon: icon(Pulse) },
+      { key: 'settings', label: 'Gear', icon: icon(Gear) },
     ],
   },
 ];
@@ -64,19 +64,19 @@ import { Menu } from 'invin-uix/ui/menu';`}
         title="Interactive sidebar"
         description="A contained preview of the Sidebar component. Toggle collapse and click nav items."
       >
-        <div className="border border-[var(--invin-border)] rounded-xl overflow-hidden h-[420px] relative">
+        <div className="border border-[var(--border)] rounded-xl overflow-hidden h-[420px] relative">
           <div className="absolute inset-0 flex">
             {/* Sidebar in a contained box */}
-            <div className={`shrink-0 transition-[width] duration-200 ${collapsed ? 'w-[76px]' : 'w-[260px]'} h-full border-r border-[var(--invin-border)] bg-[var(--invin-sidebar-bg)] flex flex-col overflow-hidden`}>
+            <div className={`shrink-0 transition-[width] duration-200 ${collapsed ? 'w-[76px]' : 'w-[260px]'} h-full border-r border-[var(--border)] bg-[var(--sidebar)] flex flex-col overflow-hidden`}>
               {/* Header */}
-              <div className={`h-[58px] flex items-center border-b border-[var(--invin-border)] shrink-0 ${collapsed ? 'justify-center px-3' : 'px-4 gap-2'}`}>
+              <div className={`h-[58px] flex items-center border-b border-[var(--border)] shrink-0 ${collapsed ? 'justify-center px-3' : 'px-4 gap-2'}`}>
                 {collapsed ? (
-                  <div className="h-7 w-7 rounded-[8px] bg-[var(--invin-accent)] flex items-center justify-center text-white text-[11px] font-[700]">S</div>
+                  <div className="h-7 w-7 rounded-[8px] bg-[var(--accent)] flex items-center justify-center text-white text-[11px] font-[700]">S</div>
                 ) : (
                   <>
-                    <div className="h-6 w-6 rounded-[6px] bg-[var(--invin-accent)] flex items-center justify-center text-white text-[9px] font-[700]">IS</div>
-                    <span className="text-sm font-[600]">Invinsense</span>
-                    <span className="text-[10px] font-[600] uppercase text-[var(--invin-text-dim)]">SOAR</span>
+                    <div className="h-6 w-6 rounded-[6px] bg-[var(--accent)] flex items-center justify-center text-white text-[9px] font-[700]">IS</div>
+                    <span className="text-label font-[600]">Invinsense</span>
+                    <span className="text-[10px] font-[600] uppercase text-[var(--muted-foreground)]">SOAR</span>
                   </>
                 )}
               </div>
@@ -96,12 +96,12 @@ import { Menu } from 'invin-uix/ui/menu';`}
 
               {/* Footer */}
               {!collapsed && (
-                <div className="border-t border-[var(--invin-border)] p-3">
+                <div className="border-t border-[var(--border)] p-3">
                   <div className="flex items-center gap-2">
                     <Avatar size="sm"><AvatarFallback>AD</AvatarFallback></Avatar>
                     <div className="flex-1 min-w-0">
                       <p className="text-[11px] font-[500] truncate">Admin</p>
-                      <p className="text-[10px] text-[var(--invin-text-faint)]">admin@invin.io</p>
+                      <p className="text-[10px] text-[var(--muted-foreground-faint)]">admin@invin.io</p>
                     </div>
                   </div>
                 </div>
@@ -110,13 +110,13 @@ import { Menu } from 'invin-uix/ui/menu';`}
 
             {/* Main area */}
             <div className="flex-1 flex flex-col">
-              <div className="h-[58px] border-b border-[var(--invin-border)] flex items-center px-4 justify-between shrink-0">
-                <span className="text-sm font-[600] capitalize">{selected}</span>
+              <div className="h-[58px] border-b border-[var(--border)] flex items-center px-4 justify-between shrink-0">
+                <span className="text-label font-[600] capitalize">{selected}</span>
                 <Button variant="ghost" size="sm" onClick={() => setCollapsed(!collapsed)}>
                   {collapsed ? 'Expand' : 'Collapse'}
                 </Button>
               </div>
-              <div className="flex-1 p-4 flex items-center justify-center text-sm text-[var(--invin-text-dim)]">
+              <div className="flex-1 p-4 flex items-center justify-center text-label text-[var(--muted-foreground)]">
                 Content area — "{selected}" selected
               </div>
             </div>
@@ -136,8 +136,8 @@ import { Menu } from 'invin-uix/ui/menu';`}
             </div>
           ))}
         </div>
-        <p className="text-xs text-[var(--invin-text-dim)] mt-3">
-          Pass <code className="text-[11px] bg-[var(--invin-surface-hover)] px-1 py-0.5 rounded">product="Soar"</code> to auto-show the SOAR icon when sidebar is collapsed.
+        <p className="text-caption text-[var(--muted-foreground)] mt-3">
+          Pass <code className="text-[11px] bg-[var(--secondary)] px-1 py-0.5 rounded">product="Soar"</code> to auto-show the SOAR icon when sidebar is collapsed.
         </p>
       </PlaygroundSection>
 

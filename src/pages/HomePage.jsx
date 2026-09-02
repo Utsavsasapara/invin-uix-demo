@@ -4,9 +4,9 @@ import { Badge } from 'invin-uix/ui/badge';
 import { Button } from 'invin-uix/ui/button';
 import { Separator } from 'invin-uix/ui/separator';
 import {
-  LayoutDashboard, BookOpen, Package, ArrowRight,
-  Shield, Activity, FileText, Users, BarChart3, Settings,
-  ShoppingCart, Mail, Calendar, Kanban, ProductIcon
+  SquaresFour, BookOpen, Package, ArrowRight,
+  Shield, Pulse, FileText, Users, ChartBar, Gear,
+  ShoppingCart, Envelope, Calendar, Kanban, ProductIcon
 } from 'invin-uix/ui/icons';
 
 // ─── Demo Apps Registry ──────────────────────────────────────────────────────
@@ -34,7 +34,7 @@ const demoApps = [
     key: 'analytics',
     title: 'Analytics Platform',
     description: 'Data analytics with charts, date range filters, and drill-down views.',
-    icon: BarChart3,
+    icon: ChartBar,
     path: '/apps/analytics',
     status: 'coming-soon',
     tags: ['Chart', 'DatePicker', 'Select', 'Card'],
@@ -70,16 +70,16 @@ const demoApps = [
     key: 'email-client',
     title: 'Email Client',
     description: 'Inbox, compose, folders, and email thread viewer.',
-    icon: Mail,
+    icon: Envelope,
     path: '/apps/email-client',
     status: 'coming-soon',
     tags: ['Sheet', 'Table', 'Avatar', 'Badge'],
   },
   {
     key: 'settings-panel',
-    title: 'Settings Panel',
+    title: 'Gear Panel',
     description: 'Multi-section settings with forms, toggles, and account management.',
-    icon: Settings,
+    icon: Gear,
     path: '/apps/settings-panel',
     status: 'coming-soon',
     tags: ['Switch', 'Input', 'Accordion', 'Tabs'],
@@ -127,11 +127,11 @@ export default function HomePage() {
 
       {/* Hero */}
       <section className="space-y-3">
-        <h1 className="text-[length:var(--invin-text-page-title)] font-[700] tracking-[-0.02em]">
+        <h1 className="text-[var(--foreground)] font-[700] tracking-[-0.02em]">
           Invin UI — Demo Showcase
         </h1>
-        <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)] max-w-2xl leading-relaxed">
-          Explore real-world applications built with <strong className="text-[var(--invin-text)]">invin-uix</strong>. 
+        <p className="text-[var(--foreground)] text-[var(--muted-foreground)] max-w-2xl leading-relaxed">
+          Explore real-world applications built with <strong className="text-[var(--foreground)]">invin-uix</strong>. 
           Each demo app shows how the component library works together to build production-ready interfaces.
         </p>
       </section>
@@ -143,14 +143,14 @@ export default function HomePage() {
             <Card hover className="h-full">
               <CardContent>
                 <div className="flex items-start gap-3">
-                  <div className="h-10 w-10 rounded-[10px] bg-[var(--invin-accent-soft)] flex items-center justify-center shrink-0">
-                    <link.icon style={{ width: 20, height: 20, color: 'var(--invin-accent)' }} />
+                  <div className="h-10 w-10 rounded-[10px] bg-[var(--accent-soft)] flex items-center justify-center shrink-0">
+                    <link.icon style={{ width: 20, height: 20, color: 'var(--accent)' }} />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-[length:var(--invin-text-card-title)] font-[600]">{link.title}</p>
-                    <p className="text-[length:var(--invin-text-label)] text-[var(--invin-text-dim)] mt-0.5">{link.description}</p>
+                    <p className="text-[var(--foreground)] font-[600]">{link.title}</p>
+                    <p className="text-[var(--muted-foreground)] text-[var(--muted-foreground)] mt-0.5">{link.description}</p>
                   </div>
-                  <ArrowRight style={{ width: 16, height: 16, color: 'var(--invin-text-faint)', marginTop: 2 }} />
+                  <ArrowRight style={{ width: 16, height: 16, color: 'var(--muted-foreground-faint)', marginTop: 2 }} />
                 </div>
               </CardContent>
             </Card>
@@ -174,11 +174,11 @@ export default function HomePage() {
                   <div className="space-y-3">
                     {/* Header */}
                     <div className="flex items-start justify-between">
-                      <div className="h-10 w-10 rounded-[10px] bg-[var(--invin-accent-soft)] flex items-center justify-center">
+                      <div className="h-10 w-10 rounded-[10px] bg-[var(--accent-soft)] flex items-center justify-center">
                         {typeof app.icon === 'string' ? (
                           <ProductIcon name={app.icon} size="sm" />
                         ) : (
-                          <app.icon style={{ width: 20, height: 20, color: 'var(--invin-accent)' }} />
+                          <app.icon style={{ width: 20, height: 20, color: 'var(--accent)' }} />
                         )}
                       </div>
                       <StatusBadge status={app.status} />
@@ -186,8 +186,8 @@ export default function HomePage() {
 
                     {/* Title & Description */}
                     <div>
-                      <p className="text-[length:var(--invin-text-card-title)] font-[600]">{app.title}</p>
-                      <p className="text-[length:var(--invin-text-label)] text-[var(--invin-text-dim)] mt-1 leading-relaxed line-clamp-2">
+                      <p className="text-[var(--foreground)] font-[600]">{app.title}</p>
+                      <p className="text-[var(--muted-foreground)] text-[var(--muted-foreground)] mt-1 leading-relaxed line-clamp-2">
                         {app.description}
                       </p>
                     </div>
@@ -197,7 +197,7 @@ export default function HomePage() {
                       {app.tags.map(tag => (
                         <span
                           key={tag}
-                          className="text-[10px] font-[500] px-1.5 py-0.5 rounded bg-[var(--invin-surface-hover)] text-[var(--invin-text-dim)]"
+                          className="text-[10px] font-[500] px-1.5 py-0.5 rounded bg-[var(--secondary)] text-[var(--muted-foreground)]"
                         >
                           {tag}
                         </span>
@@ -207,7 +207,7 @@ export default function HomePage() {
                     {/* Action */}
                     {isReady && (
                       <div className="pt-1">
-                        <Button variant="ghost" size="sm" className="px-0 text-[var(--invin-accent)]">
+                        <Button variant="ghost" size="sm" className="px-0 text-[var(--accent)]">
                           Open App <ArrowRight style={{ width: 14, height: 14, marginLeft: 4 }} />
                         </Button>
                       </div>
@@ -222,7 +222,7 @@ export default function HomePage() {
 
       {/* Footer info */}
       <div className="text-center py-8">
-        <p className="text-[length:var(--invin-text-label)] text-[var(--invin-text-faint)]">
+        <p className="text-[var(--muted-foreground)] text-[var(--muted-foreground-faint)]">
           More demo apps will be added over time. Each one demonstrates different component combinations and patterns.
         </p>
       </div>

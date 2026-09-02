@@ -36,11 +36,11 @@ export default function SeparatorDemo() {
       >
         <div className="w-full space-y-6">
           <div>
-            <p className="text-[length:var(--invin-text-label)] text-[var(--invin-text-faint)] mb-2">Default (1px)</p>
+            <p className="text-[var(--muted-foreground)] text-[var(--muted-foreground-faint)] mb-2">Default (1px)</p>
             <Separator />
           </div>
           <div>
-            <p className="text-[length:var(--invin-text-label)] text-[var(--invin-text-faint)] mb-2">Bold (2px)</p>
+            <p className="text-[var(--muted-foreground)] text-[var(--muted-foreground-faint)] mb-2">Bold (2px)</p>
             <Separator variant="bold" />
           </div>
         </div>
@@ -114,7 +114,7 @@ export default function SeparatorDemo() {
   <span>About</span>
 </div>`}
       >
-        <div className="flex items-center text-[length:var(--invin-text-body)]">
+        <div className="flex items-center text-[var(--foreground)]">
           <span>Home</span>
           <Separator orientation="vertical" />
           <span>Products</span>
@@ -129,8 +129,8 @@ export default function SeparatorDemo() {
 
       {/* ─── Use Cases ──────────────────────────────────────────── */}
       <div className="space-y-3">
-        <h3 className="text-[length:var(--invin-text-sub-heading)] font-[700]">Use cases</h3>
-        <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">Common patterns in real layouts.</p>
+        <h3 className="text-[var(--foreground)] font-[700]">Use cases</h3>
+        <p className="text-[var(--foreground)] text-[var(--muted-foreground)]">Common patterns in real layouts.</p>
       </div>
 
       <PlaygroundSection
@@ -149,18 +149,18 @@ export default function SeparatorDemo() {
         <Card>
           <CardContent className="py-4 space-y-3">
             <div>
-              <p className="text-[length:var(--invin-text-card-title)] font-[600]">Profile</p>
-              <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)] mt-1">Name, email, avatar and other details</p>
+              <p className="text-[var(--foreground)] font-[600]">Profile</p>
+              <p className="text-[var(--foreground)] text-[var(--muted-foreground)] mt-1">Name, email, avatar and other details</p>
             </div>
             <Separator />
             <div>
-              <p className="text-[length:var(--invin-text-card-title)] font-[600]">Preferences</p>
-              <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)] mt-1">Theme, language, notifications</p>
+              <p className="text-[var(--foreground)] font-[600]">Preferences</p>
+              <p className="text-[var(--foreground)] text-[var(--muted-foreground)] mt-1">Theme, language, notifications</p>
             </div>
             <Separator />
             <div>
-              <p className="text-[length:var(--invin-text-card-title)] font-[600]">Danger Zone</p>
-              <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)] mt-1">Delete account, export data</p>
+              <p className="text-[var(--foreground)] font-[600]">Danger Zone</p>
+              <p className="text-[var(--foreground)] text-[var(--muted-foreground)] mt-1">Delete account, export data</p>
             </div>
           </CardContent>
         </Card>
@@ -177,13 +177,13 @@ export default function SeparatorDemo() {
         <div className="w-full space-y-3">
           <Separator titlePlacement="left">Personal Info</Separator>
           <div className="grid grid-cols-2 gap-3 pl-1">
-            <div className="h-8 rounded-[8px] border border-[var(--invin-border)] bg-[var(--invin-field-bg)]" />
-            <div className="h-8 rounded-[8px] border border-[var(--invin-border)] bg-[var(--invin-field-bg)]" />
+            <div className="h-8 rounded-[8px] border border-[var(--border)] bg-[var(--input)]" />
+            <div className="h-8 rounded-[8px] border border-[var(--border)] bg-[var(--input)]" />
           </div>
           <Separator titlePlacement="left">Address</Separator>
           <div className="grid grid-cols-2 gap-3 pl-1">
-            <div className="h-8 rounded-[8px] border border-[var(--invin-border)] bg-[var(--invin-field-bg)]" />
-            <div className="h-8 rounded-[8px] border border-[var(--invin-border)] bg-[var(--invin-field-bg)]" />
+            <div className="h-8 rounded-[8px] border border-[var(--border)] bg-[var(--input)]" />
+            <div className="h-8 rounded-[8px] border border-[var(--border)] bg-[var(--input)]" />
           </div>
         </div>
       </PlaygroundSection>
@@ -200,7 +200,7 @@ export default function SeparatorDemo() {
   <Badge variant="outline" size="sm">Saved</Badge>
 </div>`}
       >
-        <div className="flex items-center gap-1 p-1.5 rounded-[8px] border border-[var(--invin-border)] w-fit">
+        <div className="flex items-center gap-1 p-1.5 rounded-[8px] border border-[var(--border)] w-fit">
           <Button variant="ghost" size="icon-sm">B</Button>
           <Button variant="ghost" size="icon-sm">I</Button>
           <Button variant="ghost" size="icon-sm">U</Button>

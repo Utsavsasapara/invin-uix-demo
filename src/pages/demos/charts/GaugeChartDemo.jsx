@@ -26,19 +26,19 @@ export default function GaugeChartDemo() {
       <PlaygroundSection
         title="Step 2 — Custom Colors"
         description="Match the color to the metric's meaning."
-        code={`<GaugeChart value={72} label="Uptime" color="var(--invin-ok)" height={180} />
-<GaugeChart value={38} label="Risk" color="var(--invin-warn)" height={180} />
-<GaugeChart value={12} label="Critical" color="var(--invin-error)" max={20} height={180} />`}
+        code={`<GaugeChart value={72} label="Uptime" color="var(--ok)" height={180} />
+<GaugeChart value={38} label="Risk" color="var(--degraded)" height={180} />
+<GaugeChart value={12} label="Critical" color="var(--error)" max={20} height={180} />`}
       >
         <div className="grid grid-cols-3 gap-4">
           <Card><CardContent className="pt-3 pb-3">
-            <GaugeChart value={72} label="Uptime" color="var(--invin-ok)" height={150} />
+            <GaugeChart value={72} label="Uptime" color="var(--ok)" height={150} />
           </CardContent></Card>
           <Card><CardContent className="pt-3 pb-3">
-            <GaugeChart value={38} label="Risk" color="var(--invin-warn)" height={150} />
+            <GaugeChart value={38} label="Risk" color="var(--degraded)" height={150} />
           </CardContent></Card>
           <Card><CardContent className="pt-3 pb-3">
-            <GaugeChart value={12} label="Critical" color="var(--invin-error)" max={20} height={150} />
+            <GaugeChart value={12} label="Critical" color="var(--error)" max={20} height={150} />
           </CardContent></Card>
         </div>
       </PlaygroundSection>
@@ -48,10 +48,10 @@ export default function GaugeChartDemo() {
       <PlaygroundSection
         title="Step 3 — Custom Max Value"
         description="Set max for non-percentage ranges. Displays as value/max."
-        code={`<GaugeChart value={7} max={50} label="Open Incidents" color="var(--invin-error)" height={200} />`}
+        code={`<GaugeChart value={7} max={50} label="Open Incidents" color="var(--error)" height={200} />`}
       >
         <div className="max-w-xs mx-auto">
-          <GaugeChart value={7} max={50} label="Open Incidents" color="var(--invin-error)" height={200} />
+          <GaugeChart value={7} max={50} label="Open Incidents" color="var(--error)" height={200} />
         </div>
       </PlaygroundSection>
 

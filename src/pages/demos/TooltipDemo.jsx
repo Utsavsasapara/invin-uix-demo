@@ -2,7 +2,7 @@ import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/P
 import { Button } from 'invin-uix/ui/button';
 import { Tooltip } from 'invin-uix/ui/tooltip';
 import { Separator } from 'invin-uix/ui/separator';
-import { Search, Bell, Settings, Copy, Download, Trash2, Info } from 'invin-uix/ui/icons';
+import { MagnifyingGlass, Bell, Gear, Copy, DownloadSimple, Trash, Info } from 'invin-uix/ui/icons';
 
 export default function TooltipDemo() {
   return (
@@ -31,16 +31,16 @@ export default function TooltipDemo() {
       <PlaygroundSection
         title="Basic"
         description="Wrap any element. Tooltip shows on hover with a short delay."
-        code={`<Tooltip title="Search your workspace">
+        code={`<Tooltip title="MagnifyingGlass your workspace">
   <Button variant="outline" size="icon-sm">
-    <Search style={{ width: 14, height: 14 }} />
+    <MagnifyingGlass style={{ width: 14, height: 14 }} />
   </Button>
 </Tooltip>`}
       >
         <div className="flex items-center gap-3">
-          <Tooltip title="Search"><Button variant="outline" size="icon-sm"><Search style={{ width: 14, height: 14 }} /></Button></Tooltip>
+          <Tooltip title="MagnifyingGlass"><Button variant="outline" size="icon-sm"><MagnifyingGlass style={{ width: 14, height: 14 }} /></Button></Tooltip>
           <Tooltip title="Notifications"><Button variant="outline" size="icon-sm"><Bell style={{ width: 14, height: 14 }} /></Button></Tooltip>
-          <Tooltip title="Settings"><Button variant="outline" size="icon-sm"><Settings style={{ width: 14, height: 14 }} /></Button></Tooltip>
+          <Tooltip title="Gear"><Button variant="outline" size="icon-sm"><Gear style={{ width: 14, height: 14 }} /></Button></Tooltip>
           <Tooltip title="This is a text tooltip"><Button variant="outline">Hover me</Button></Tooltip>
         </div>
       </PlaygroundSection>
@@ -89,15 +89,15 @@ export default function TooltipDemo() {
       <PlaygroundSection
         title="Custom colours"
         description="Override background with color prop. Text auto-sets to white."
-        code={`<Tooltip title="Info" color="var(--invin-info)">...</Tooltip>
-<Tooltip title="Success" color="var(--invin-ok)">...</Tooltip>
-<Tooltip title="Error" color="var(--invin-error)">...</Tooltip>
+        code={`<Tooltip title="Info" color="var(--info)">...</Tooltip>
+<Tooltip title="Success" color="var(--ok)">...</Tooltip>
+<Tooltip title="Error" color="var(--error)">...</Tooltip>
 <Tooltip title="Purple" color="#8b5cf6">...</Tooltip>`}
       >
         <div className="flex items-center gap-3">
-          <Tooltip title="Info tooltip" color="var(--invin-info)"><Button variant="outline">Info</Button></Tooltip>
-          <Tooltip title="Success!" color="var(--invin-ok)"><Button variant="outline">Success</Button></Tooltip>
-          <Tooltip title="Error state" color="var(--invin-error)"><Button variant="outline">Error</Button></Tooltip>
+          <Tooltip title="Info tooltip" color="var(--info)"><Button variant="outline">Info</Button></Tooltip>
+          <Tooltip title="Success!" color="var(--ok)"><Button variant="outline">Success</Button></Tooltip>
+          <Tooltip title="Error state" color="var(--error)"><Button variant="outline">Error</Button></Tooltip>
           <Tooltip title="Custom purple" color="#8b5cf6"><Button variant="outline">Purple</Button></Tooltip>
         </div>
       </PlaygroundSection>
@@ -120,8 +120,8 @@ export default function TooltipDemo() {
 
       {/* ─── Use Cases ──────────────────────────────────────────── */}
       <div className="space-y-3">
-        <h3 className="text-[length:var(--invin-text-sub-heading)] font-[700]">Use cases</h3>
-        <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)]">Common patterns.</p>
+        <h3 className="text-[var(--foreground)] font-[700]">Use cases</h3>
+        <p className="text-[var(--foreground)] text-[var(--muted-foreground)]">Common patterns.</p>
       </div>
 
       <PlaygroundSection
@@ -129,14 +129,14 @@ export default function TooltipDemo() {
         description="Tooltips on icon-only buttons explain what each action does."
         code={`<div className="flex items-center gap-1">
   <Tooltip title="Copy"><Button variant="ghost" size="icon-sm"><Copy /></Button></Tooltip>
-  <Tooltip title="Download"><Button variant="ghost" size="icon-sm"><Download /></Button></Tooltip>
-  <Tooltip title="Delete"><Button variant="ghost" size="icon-sm"><Trash2 /></Button></Tooltip>
+  <Tooltip title="DownloadSimple"><Button variant="ghost" size="icon-sm"><DownloadSimple /></Button></Tooltip>
+  <Tooltip title="Delete"><Button variant="ghost" size="icon-sm"><Trash /></Button></Tooltip>
 </div>`}
       >
-        <div className="flex items-center gap-1 p-1.5 rounded-[8px] border border-[var(--invin-border)] w-fit">
+        <div className="flex items-center gap-1 p-1.5 rounded-[8px] border border-[var(--border)] w-fit">
           <Tooltip title="Copy to clipboard"><Button variant="ghost" size="icon-sm"><Copy style={{ width: 14, height: 14 }} /></Button></Tooltip>
-          <Tooltip title="Download file"><Button variant="ghost" size="icon-sm"><Download style={{ width: 14, height: 14 }} /></Button></Tooltip>
-          <Tooltip title="Delete item"><Button variant="ghost" size="icon-sm"><Trash2 style={{ width: 14, height: 14 }} /></Button></Tooltip>
+          <Tooltip title="DownloadSimple file"><Button variant="ghost" size="icon-sm"><DownloadSimple style={{ width: 14, height: 14 }} /></Button></Tooltip>
+          <Tooltip title="Delete item"><Button variant="ghost" size="icon-sm"><Trash style={{ width: 14, height: 14 }} /></Button></Tooltip>
         </div>
       </PlaygroundSection>
 
@@ -146,14 +146,14 @@ export default function TooltipDemo() {
         code={`<div className="flex items-center gap-1.5">
   <span>API Key</span>
   <Tooltip title="Your API key is used to authenticate requests. Keep it secret.">
-    <Info style={{ width: 14, height: 14, color: 'var(--invin-text-dim)', cursor: 'help' }} />
+    <Info style={{ width: 14, height: 14, color: 'var(--muted-foreground)', cursor: 'help' }} />
   </Tooltip>
 </div>`}
       >
         <div className="flex items-center gap-1.5">
-          <span className="text-[length:var(--invin-text-body)] font-[500]">API Key</span>
+          <span className="text-[var(--foreground)] font-[500]">API Key</span>
           <Tooltip title="Your API key is used to authenticate requests. Keep it secret and never expose it in client-side code.">
-            <Info style={{ width: 14, height: 14, color: 'var(--invin-text-dim)', cursor: 'help' }} />
+            <Info style={{ width: 14, height: 14, color: 'var(--muted-foreground)', cursor: 'help' }} />
           </Tooltip>
         </div>
       </PlaygroundSection>
@@ -161,14 +161,14 @@ export default function TooltipDemo() {
       <PlaygroundSection
         title="Keyboard shortcut hint"
         description="Show keyboard shortcuts in tooltips for power users."
-        code={`<Tooltip title="Search (⌘K)">
-  <Button variant="ghost" size="icon-sm"><Search /></Button>
+        code={`<Tooltip title="MagnifyingGlass (⌘K)">
+  <Button variant="ghost" size="icon-sm"><MagnifyingGlass /></Button>
 </Tooltip>`}
       >
         <div className="flex items-center gap-2">
-          <Tooltip title="Search (⌘K)"><Button variant="ghost" size="icon-sm"><Search style={{ width: 14, height: 14 }} /></Button></Tooltip>
+          <Tooltip title="MagnifyingGlass (⌘K)"><Button variant="ghost" size="icon-sm"><MagnifyingGlass style={{ width: 14, height: 14 }} /></Button></Tooltip>
           <Tooltip title="Notifications (⌘N)"><Button variant="ghost" size="icon-sm"><Bell style={{ width: 14, height: 14 }} /></Button></Tooltip>
-          <Tooltip title="Settings (⌘,)"><Button variant="ghost" size="icon-sm"><Settings style={{ width: 14, height: 14 }} /></Button></Tooltip>
+          <Tooltip title="Gear (⌘,)"><Button variant="ghost" size="icon-sm"><Gear style={{ width: 14, height: 14 }} /></Button></Tooltip>
         </div>
       </PlaygroundSection>
 

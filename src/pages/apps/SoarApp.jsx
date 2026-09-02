@@ -16,12 +16,12 @@ import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from 'i
 import { LineChart, RadarChart as InvinRadarChart } from 'invin-uix/ui/chart';
 import { Tour, TourFAB } from 'invin-uix/ui/tour';
 import {
-  LayoutDashboard, Workflow, Plug, Boxes, Store, Code2,
-  Users, UserCog, Tag, Key, FileText, ShieldCheck,
-  KeyRound, Lock, ScrollText, Settings as SettingsIcon, Cpu,
-  MessageSquare, BookOpen, Sun, Moon,
-  Sparkles, ArrowUpRight, Home,
-  CalendarDays, HelpCircle, LayoutGrid, ChevronDown, LogOut,
+  SquaresFour, FlowArrow, Plug, StackSimple, Storefront, Code,
+  Users, UserGear, Tag, Key, FileText, ShieldCheck,
+  Lock, Scroll, Gear as SettingsIcon, Cpu,
+  ChatCircle, BookOpen, Sun, Moon,
+  Sparkle, ArrowUpRight, House,
+  CalendarBlank, Question, CaretDown, SignOut,
 } from 'invin-uix/ui/icons';
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator } from 'invin-uix/ui/dropdown-menu';
 import { useTheme } from '../../useTheme.jsx';
@@ -32,30 +32,30 @@ const icon = (Icon) => <Icon style={{ width: 16, height: 16 }} />;
 const iconKPI = (Icon) => <Icon style={{ width: 14, height: 14 }} />;
 
 const sidebarItems = [
-  { key: 'dashboard', label: 'Dashboard', icon: icon(LayoutDashboard) },
+  { key: 'dashboard', label: 'Dashboard', icon: icon(SquaresFour) },
   {
     key: 'automate', type: 'group', label: 'Automate',
     children: [
-      { key: 'workflows', label: 'Workflows', icon: icon(Workflow), children: [
+      { key: 'workflows', label: 'Workflows', icon: icon(FlowArrow), children: [
         { key: 'my-workflows', label: 'My Workflows' },
         { key: 'execution-history', label: 'Execution History' },
-        { key: 'workflow-builder', label: 'Workflow Builder' },
+        { key: 'workflow-builder', label: 'FlowArrow Builder' },
       ]},
       { key: 'integrations', label: 'Integrations', icon: icon(Plug), children: [
         { key: 'connected', label: 'Connected' },
         { key: 'mcp-servers', label: 'MCP Servers' },
       ]},
-      { key: 'types', label: 'Types', icon: icon(Boxes) },
-      { key: 'marketplace', label: 'Marketplace', icon: icon(Store) },
-      { key: 'blueprints', label: 'Blueprints', icon: icon(Code2) },
-      { key: 'api-explorer', label: 'API Explorer', icon: icon(ScrollText) },
+      { key: 'types', label: 'Types', icon: icon(StackSimple) },
+      { key: 'marketplace', label: 'Marketplace', icon: icon(Storefront) },
+      { key: 'blueprints', label: 'Blueprints', icon: icon(Code) },
+      { key: 'api-explorer', label: 'API Explorer', icon: icon(Scroll) },
     ],
   },
   {
     key: 'access-control', type: 'group', label: 'Access Control',
     children: [
       { key: 'users', label: 'Users Management', icon: icon(Users) },
-      { key: 'roles', label: 'Roles', icon: icon(UserCog) },
+      { key: 'roles', label: 'Roles', icon: icon(UserGear) },
       { key: 'groups', label: 'Groups', icon: icon(Users) },
       { key: 'tags', label: 'Tags', icon: icon(Tag) },
       { key: 'api-keys', label: 'API Keys', icon: icon(Key) },
@@ -65,17 +65,17 @@ const sidebarItems = [
   {
     key: 'api-executor', type: 'group', label: 'API Executor',
     children: [
-      { key: 'executor-keys', label: 'Executor Keys', icon: icon(KeyRound) },
+      { key: 'executor-keys', label: 'Executor Keys', icon: icon(Key) },
       { key: 'credentials', label: 'Credentials', icon: icon(Lock) },
       { key: 'executor-permissions', label: 'Executor Permissions', icon: icon(ShieldCheck) },
       { key: 'api-configurations', label: 'API Configurations', icon: icon(Cpu) },
-      { key: 'executor-audit', label: 'Executor Audit Logs', icon: icon(ScrollText) },
+      { key: 'executor-audit', label: 'Executor Audit Logs', icon: icon(Scroll) },
     ],
   },
   {
     key: 'intelligence', type: 'group', label: 'Intelligence',
     children: [
-      { key: 'ai-chat', label: 'AI Chat', icon: icon(MessageSquare) },
+      { key: 'ai-chat', label: 'AI Chat', icon: icon(ChatCircle) },
     ],
   },
   {
@@ -123,8 +123,8 @@ function DashboardContent({ kpis, chartRange, setChartRange }) {
     <div className="p-6 space-y-6">
       {/* Page Header */}
       <div>
-        <h1 className="text-[length:var(--invin-text-page-title)] font-[700] tracking-[-0.02em]">Dashboard</h1>
-        <p className="text-[length:var(--invin-text-body)] text-[var(--invin-text-dim)] mt-1">
+        <h1 className="text-[var(--foreground)] font-[700] tracking-[-0.02em]">Dashboard</h1>
+        <p className="text-[var(--foreground)] text-[var(--muted-foreground)] mt-1">
           Overview of your organization activity and key metrics
         </p>
       </div>
@@ -140,7 +140,7 @@ function DashboardContent({ kpis, chartRange, setChartRange }) {
             onClick={kpi.onClick}
             selected={kpi.selected}
           >
-            <p className="text-[11px] text-[var(--invin-text-dim)] mt-0.5">{kpi.subtitle}</p>
+            <p className="text-[11px] text-[var(--muted-foreground)] mt-0.5">{kpi.subtitle}</p>
           </KpiCard>
         ))}
       </div>
@@ -153,10 +153,10 @@ function DashboardContent({ kpis, chartRange, setChartRange }) {
           <CardHeader className="pb-2">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <Sparkles style={{ width: 16, height: 16, color: 'var(--invin-accent)' }} />
+                <Sparkle style={{ width: 16, height: 16, color: 'var(--accent)' }} />
                 <div>
-                  <CardTitle className="text-base">Execution Trends</CardTitle>
-                  <p className="text-[11px] text-[var(--invin-text-dim)] mt-0.5">Workflow runs, success vs failure</p>
+                  <CardTitle className="text-body">Execution Trends</CardTitle>
+                  <p className="text-[11px] text-[var(--muted-foreground)] mt-0.5">FlowArrow runs, success vs failure</p>
                 </div>
               </div>
               <div className="flex items-center gap-0.5">
@@ -166,8 +166,8 @@ function DashboardContent({ kpis, chartRange, setChartRange }) {
                     onClick={() => setChartRange(range)}
                     className={`px-2.5 py-1 rounded text-[11px] font-[500] cursor-pointer transition-colors ${
                       chartRange === range
-                        ? 'bg-[var(--invin-accent)] text-white'
-                        : 'text-[var(--invin-text-dim)] hover:bg-[var(--invin-surface-hover)]'
+                        ? 'bg-[var(--accent)] text-white'
+                        : 'text-[var(--muted-foreground)] hover:bg-[var(--secondary)]'
                     }`}
                   >
                     {range}
@@ -181,8 +181,8 @@ function DashboardContent({ kpis, chartRange, setChartRange }) {
               data={executionData}
               xKey="day"
               lines={[
-                { key: 'failed', name: 'Failed', color: 'var(--invin-error)' },
-                { key: 'succeeded', name: 'Succeeded', color: 'var(--invin-ok)' },
+                { key: 'failed', name: 'Failed', color: 'var(--error)' },
+                { key: 'succeeded', name: 'Succeeded', color: 'var(--ok)' },
               ]}
               height={220}
             />
@@ -193,8 +193,8 @@ function DashboardContent({ kpis, chartRange, setChartRange }) {
         <Card>
           <CardHeader className="pb-2">
             <div className="flex items-center gap-2">
-              <Sparkles style={{ width: 16, height: 16, color: 'var(--invin-accent)' }} />
-              <CardTitle className="text-base">Most Executed Workflows</CardTitle>
+              <Sparkle style={{ width: 16, height: 16, color: 'var(--accent)' }} />
+              <CardTitle className="text-body">Most Executed Workflows</CardTitle>
             </div>
           </CardHeader>
           <CardContent>
@@ -212,8 +212,8 @@ function DashboardContent({ kpis, chartRange, setChartRange }) {
       <Card id="integration-table">
         <CardHeader className="pb-2">
           <div className="flex items-center gap-2">
-            <Sparkles style={{ width: 16, height: 16, color: 'var(--invin-accent)' }} />
-            <CardTitle className="text-base">Integration Health</CardTitle>
+            <Sparkle style={{ width: 16, height: 16, color: 'var(--accent)' }} />
+            <CardTitle className="text-body">Integration Health</CardTitle>
           </div>
         </CardHeader>
         <CardContent>
@@ -235,8 +235,8 @@ function DashboardContent({ kpis, chartRange, setChartRange }) {
                   <TableCell>
                     <Badge variant="outline" size="sm" className="text-ok bg-ok-bg font-[600]">{row.status}</Badge>
                   </TableCell>
-                  <TableCell className="text-[var(--invin-text-dim)]">{row.avail24h}</TableCell>
-                  <TableCell className="text-[var(--invin-text-dim)]">{row.avail7d}</TableCell>
+                  <TableCell className="text-[var(--muted-foreground)]">{row.avail24h}</TableCell>
+                  <TableCell className="text-[var(--muted-foreground)]">{row.avail7d}</TableCell>
                   <TableCell>{row.uptime}</TableCell>
                   <TableCell>{row.avgResponse}</TableCell>
                 </TableRow>
@@ -288,7 +288,7 @@ export default function SoarApp() {
     },
     {
       target: '#workflow-stats',
-      title: 'Workflow Summary — quick health check',
+      title: 'FlowArrow Summary — quick health check',
       description: 'See how many workflows are Active, Paused, and total runs in the last 30 days. This gives you an instant overview of your automation health.',
       section: 'WORKFLOWS',
       page: '/apps/soar-dashboard/workflows',
@@ -296,7 +296,7 @@ export default function SoarApp() {
     {
       target: '#workflow-table',
       title: 'All Workflows — manage your automation',
-      description: 'Every workflow is listed with its type, status, run count, and last execution time. Click any row to edit, or use the + New Workflow button to create one.',
+      description: 'Every workflow is listed with its type, status, run count, and last execution time. Click any row to edit, or use the + New FlowArrow button to create one.',
       section: 'WORKFLOWS',
       placement: 'top',
       page: '/apps/soar-dashboard/workflows',
@@ -305,8 +305,8 @@ export default function SoarApp() {
 
 
   const kpis = [
-    { label: 'WORKFLOWS', value: '11', subtitle: 'Across the organization', icon: iconKPI(Workflow) },
-    { label: 'EXECUTIONS (30D)', value: '5', subtitle: 'Manual + triggered runs', icon: iconKPI(Sparkles) },
+    { label: 'WORKFLOWS', value: '11', subtitle: 'Across the organization', icon: iconKPI(FlowArrow) },
+    { label: 'EXECUTIONS (30D)', value: '5', subtitle: 'Manual + triggered runs', icon: iconKPI(Sparkle) },
     { label: 'INTEGRATIONS', value: '18', subtitle: 'All currently active', icon: iconKPI(Plug) },
     { label: 'USERS', value: '4', subtitle: '3 admins · 1 viewer', icon: iconKPI(Users), onClick: () => { setSelectedKpi(selectedKpi === 'users' ? '' : 'users') }, selected: selectedKpi === 'users' },
   ];
@@ -322,12 +322,12 @@ export default function SoarApp() {
         footer={
           <div className={`flex items-center gap-2 ${collapsed ? 'justify-center' : ''}`}>
             <Avatar size="sm">
-              <AvatarFallback className="bg-[var(--invin-accent)] text-white text-[10px] font-[600]">OA</AvatarFallback>
+              <AvatarFallback className="bg-[var(--accent)] text-white text-[10px] font-[600]">OA</AvatarFallback>
             </Avatar>
             {!collapsed && (
               <div className="flex-1 min-w-0">
-                <p className="text-[length:var(--invin-text-label)] font-[500] truncate">Org Administrator</p>
-                <p className="text-[10px] text-[var(--invin-text-faint)] truncate">Admin</p>
+                <p className="text-[var(--muted-foreground)] font-[500] truncate">Org Administrator</p>
+                <p className="text-[10px] text-[var(--muted-foreground-faint)] truncate">Admin</p>
               </div>
             )}
             {!collapsed && (
@@ -361,32 +361,32 @@ export default function SoarApp() {
       {/* ─── Main ─────────────────────────────────────────────── */}
       <main
         className="transition-[margin-left] duration-200 ease-out"
-        style={{ marginLeft: collapsed ? 'var(--invin-sidebar-collapsed-w)' : 'var(--invin-sidebar-w)' }}
+        style={{ marginLeft: collapsed ? 'var(--sidebar-collapsed-width)' : 'var(--sidebar-width)' }}
       >
         {/* Topbar */}
         <Topbar
           left={
             <Link to="/">
               <Button variant="ghost" size="sm">
-                <Home style={{ width: 14, height: 14 }} /> Home
+                <House style={{ width: 14, height: 14 }} /> House
               </Button>
             </Link>
           }
           right={
             <div className="flex items-center gap-3">
-              <Tooltip title="Settings">
+              <Tooltip title="Gear">
                 <Button variant="ghost" size="icon">
                   <SettingsIcon style={{ width: 16, height: 16 }} />
                 </Button>
               </Tooltip>
               <Tooltip title="Calendar">
                 <Button variant="ghost" size="icon">
-                  <CalendarDays style={{ width: 16, height: 16 }} />
+                  <CalendarBlank style={{ width: 16, height: 16 }} />
                 </Button>
               </Tooltip>
               <Tooltip title="Help">
                 <Button variant="ghost" size="icon">
-                  <HelpCircle style={{ width: 16, height: 16 }} />
+                  <Question style={{ width: 16, height: 16 }} />
                 </Button>
               </Tooltip>
               <Tooltip title={dark ? 'Switch to light mode' : 'Switch to dark mode'}>
@@ -396,7 +396,7 @@ export default function SoarApp() {
               </Tooltip>
               <Tooltip title="Apps">
                 <Button variant="ghost" size="icon">
-                  <LayoutGrid style={{ width: 16, height: 16 }} />
+                  <SquaresFour style={{ width: 16, height: 16 }} />
                 </Button>
               </Tooltip>
 
@@ -404,9 +404,9 @@ export default function SoarApp() {
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button className="" variant="outline">
-                    <Sparkles style={{ width: 14, height: 14, color: 'var(--invin-text-dim)' }} />
+                    <Sparkle style={{ width: 14, height: 14, color: 'var(--muted-foreground)' }} />
                     <span className="text-[12px] font-[500]">Org Administrator</span>
-                    <ChevronDown style={{ width: 12, height: 12, color: 'var(--invin-text-dim)' }} />
+                    <CaretDown style={{ width: 12, height: 12, color: 'var(--muted-foreground)' }} />
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" style={{ minWidth: '200px' }}>
@@ -414,11 +414,11 @@ export default function SoarApp() {
                     <Users style={{ width: 14, height: 14 }} /> Profile
                   </DropdownMenuItem>
                   <DropdownMenuItem>
-                    <SettingsIcon style={{ width: 14, height: 14 }} /> Organization Settings
+                    <SettingsIcon style={{ width: 14, height: 14 }} /> Organization Gear
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>
-                    <LogOut style={{ width: 14, height: 14 }} /> Sign out
+                    <SignOut style={{ width: 14, height: 14 }} /> Sign out
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>

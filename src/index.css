@@ -1,17 +1,20 @@
 @import "tailwindcss";
 @import "invin-uix/tokens.css";
-@config "../tailwind.config.js";
 @source "../node_modules/invin-uix/dist";
 
 /* ═══════════════════════════════════════════════════════════════════
-   BASE STYLES - Required for theming to work properly
+   BASE STYLES — v2 semantic tokens (bare guide names, no --invin- prefix)
+   Tokens + @theme inline utilities come from invin-uix/tokens.css.
+
+   Fonts: Geist + Geist Mono are self-hosted by invin-uix (bundled @font-face
+   in tokens.css). No @fontsource install and no font-name bridge needed.
    ═══════════════════════════════════════════════════════════════════ */
 
 html, body, #root {
   min-height: 100vh;
-  background-color: var(--invin-bg);
-  color: var(--invin-text);
-  font-family: var(--invin-font-sans), system-ui, sans-serif;
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
   line-height: 1.5;
 }
 

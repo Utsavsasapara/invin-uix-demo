@@ -6,7 +6,7 @@ import {
 } from 'invin-uix/ui/alert-dialog';
 import { Button } from 'invin-uix/ui/button';
 import { Separator } from 'invin-uix/ui/separator';
-import { Trash2, AlertTriangle, LogOut } from 'invin-uix/ui/icons';
+import { Trash, Warning, SignOut } from 'invin-uix/ui/icons';
 
 export default function AlertDialogDemo() {
   return (
@@ -37,7 +37,7 @@ export default function AlertDialogDemo() {
       >
         <AlertDialog>
           <AlertDialogTrigger asChild>
-            <Button variant="destructive"><Trash2 style={{ width: 14, height: 14 }} /> Delete Account</Button>
+            <Button variant="destructive"><Trash style={{ width: 14, height: 14 }} /> Delete Account</Button>
           </AlertDialogTrigger>
           <AlertDialogContent>
             <AlertDialogHeader>
@@ -85,7 +85,7 @@ export default function AlertDialogDemo() {
       >
         <AlertDialog>
           <AlertDialogTrigger asChild>
-            <Button variant="ghost"><LogOut style={{ width: 14, height: 14 }} /> Sign out</Button>
+            <Button variant="ghost"><SignOut style={{ width: 14, height: 14 }} /> Sign out</Button>
           </AlertDialogTrigger>
           <AlertDialogContent>
             <AlertDialogHeader>
@@ -109,13 +109,13 @@ export default function AlertDialogDemo() {
       >
         <AlertDialog>
           <AlertDialogTrigger asChild>
-            <Button variant="outline"><AlertTriangle style={{ width: 14, height: 14 }} /> Reset System</Button>
+            <Button variant="outline"><Warning style={{ width: 14, height: 14 }} /> Reset System</Button>
           </AlertDialogTrigger>
           <AlertDialogContent>
             <AlertDialogHeader>
               <div className="flex items-center gap-3">
-                <div className="h-10 w-10 rounded-full bg-[var(--invin-error-bg)] flex items-center justify-center shrink-0">
-                  <AlertTriangle style={{ width: 20, height: 20, color: 'var(--invin-error)' }} />
+                <div className="h-10 w-10 rounded-full bg-[var(--error-wash)] flex items-center justify-center shrink-0">
+                  <Warning style={{ width: 20, height: 20, color: 'var(--error)' }} />
                 </div>
                 <div>
                   <AlertDialogTitle>Reset all settings?</AlertDialogTitle>

@@ -4,7 +4,7 @@ import { Button } from 'invin-uix/ui/button';
 import { Avatar, AvatarImage, AvatarFallback } from 'invin-uix/ui/avatar';
 import { Badge } from 'invin-uix/ui/badge';
 import { Separator } from 'invin-uix/ui/separator';
-import { Bell, Search, Settings, Menu } from 'invin-uix/ui/icons';
+import { Bell, MagnifyingGlass, Gear, List } from 'invin-uix/ui/icons';
 
 export default function TopbarDemo() {
   return (
@@ -28,14 +28,14 @@ export default function TopbarDemo() {
         title="Basic — Right Slot (default)"
         description="Children go to the right slot by default. Useful for action buttons."
         code={`<Topbar>
-  <Button variant="ghost" size="icon-sm"><Search /></Button>
+  <Button variant="ghost" size="icon-sm"><MagnifyingGlass /></Button>
   <Button variant="ghost" size="icon-sm"><Bell /></Button>
   <Avatar size="sm"><AvatarFallback>U</AvatarFallback></Avatar>
 </Topbar>`}
       >
-        <div className="w-full rounded-[var(--invin-radius-card)] overflow-hidden border border-[var(--invin-border)]">
+        <div className="w-full rounded-[var(--radius-lg)] overflow-hidden border border-[var(--border)]">
           <Topbar className="!sticky !relative">
-            <Button variant="ghost" size="icon-sm"><Search style={{ width: 16, height: 16 }} /></Button>
+            <Button variant="ghost" size="icon-sm"><MagnifyingGlass style={{ width: 16, height: 16 }} /></Button>
             <Button variant="ghost" size="icon-sm"><Bell style={{ width: 16, height: 16 }} /></Button>
             <Avatar size="sm"><AvatarImage src="https://i.pravatar.cc/100?u=topbar" /><AvatarFallback>U</AvatarFallback></Avatar>
           </Topbar>
@@ -46,7 +46,7 @@ export default function TopbarDemo() {
         title="Left + Right"
         description="Title on the left, actions on the right."
         code={`<Topbar
-  left={<h1 className="text-card-title">Dashboard</h1>}
+  left={<h1 className="text-page-title">Dashboard</h1>}
   right={
     <>
       <Button variant="outline" size="sm">Export</Button>
@@ -55,9 +55,9 @@ export default function TopbarDemo() {
   }
 />`}
       >
-        <div className="w-full rounded-[var(--invin-radius-card)] overflow-hidden border border-[var(--invin-border)]">
+        <div className="w-full rounded-[var(--radius-lg)] overflow-hidden border border-[var(--border)]">
           <Topbar className="!sticky !relative"
-            left={<h1 className="text-[length:var(--invin-text-card-title)] font-[700] tracking-[-0.02em]">Dashboard</h1>}
+            left={<h1 className="text-[var(--foreground)] font-[700] tracking-[-0.02em]">Dashboard</h1>}
             right={
               <>
                 <Button variant="outline" size="sm">Export</Button>
@@ -74,8 +74,8 @@ export default function TopbarDemo() {
         code={`<Topbar
   left={<span className="font-bold">Invin</span>}
   center={
-    <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-[var(--invin-border)] text-[var(--invin-text-dim)] text-label">
-      <Search /> Search...
+    <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-[var(--border)] text-[var(--muted-foreground)] text-label">
+      <MagnifyingGlass /> MagnifyingGlass...
     </div>
   }
   right={
@@ -86,12 +86,12 @@ export default function TopbarDemo() {
   }
 />`}
       >
-        <div className="w-full rounded-[var(--invin-radius-card)] overflow-hidden border border-[var(--invin-border)]">
+        <div className="w-full rounded-[var(--radius-lg)] overflow-hidden border border-[var(--border)]">
           <Topbar className="!sticky !relative"
-            left={<span className="text-[length:var(--invin-text-card-title)] font-[700]">Invin</span>}
+            left={<span className="text-[var(--foreground)] font-[700]">Invin</span>}
             center={
-              <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-[var(--invin-border)] text-[var(--invin-text-dim)] text-[length:var(--invin-text-label)] cursor-pointer hover:bg-[var(--invin-surface-hover)]">
-                <Search style={{ width: 14, height: 14 }} /> Search...
+              <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-[var(--border)] text-[var(--muted-foreground)] text-[var(--muted-foreground)] cursor-pointer hover:bg-[var(--secondary)]">
+                <MagnifyingGlass style={{ width: 14, height: 14 }} /> MagnifyingGlass...
               </div>
             }
             right={
@@ -107,30 +107,30 @@ export default function TopbarDemo() {
       </PlaygroundSection>
 
       <PlaygroundSection
-        title="With Mobile Menu Trigger"
+        title="With Mobile List Trigger"
         description="Common pattern: hamburger menu on left for mobile, title + actions."
         code={`<Topbar
   left={
     <>
-      <Button variant="ghost" size="icon-sm" className="lg:hidden"><Menu /></Button>
-      <h1 className="text-card-title">Settings</h1>
+      <Button variant="ghost" size="icon-sm" className="lg:hidden"><List /></Button>
+      <h1 className="text-page-title">Gear</h1>
     </>
   }
   right={
-    <Button variant="ghost" size="icon-sm"><Settings /></Button>
+    <Button variant="ghost" size="icon-sm"><Gear /></Button>
   }
 />`}
       >
-        <div className="w-full rounded-[var(--invin-radius-card)] overflow-hidden border border-[var(--invin-border)]">
+        <div className="w-full rounded-[var(--radius-lg)] overflow-hidden border border-[var(--border)]">
           <Topbar className="!sticky !relative"
             left={
               <>
-                <Button variant="ghost" size="icon-sm"><Menu style={{ width: 16, height: 16 }} /></Button>
-                <h1 className="text-[length:var(--invin-text-card-title)] font-[700] tracking-[-0.02em]">Settings</h1>
+                <Button variant="ghost" size="icon-sm"><List style={{ width: 16, height: 16 }} /></Button>
+                <h1 className="text-[var(--foreground)] font-[700] tracking-[-0.02em]">Gear</h1>
               </>
             }
             right={
-              <Button variant="ghost" size="icon-sm"><Settings style={{ width: 16, height: 16 }} /></Button>
+              <Button variant="ghost" size="icon-sm"><Gear style={{ width: 16, height: 16 }} /></Button>
             }
           />
         </div>
