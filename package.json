@@ -17,7 +17,7 @@
     "@phosphor-icons/react": "^2.1.10",
     "@tailwindcss/vite": "^4.3.2",
     "@xyflow/react": "^12.11.3",
-    "invin-uix": "file:../../Invin-ui/invin-ui-poc",
+    "invin-uix": "^1.1.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "react-remove-scroll": "^2.6.3",
