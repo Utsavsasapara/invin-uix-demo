@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable, InteractiveDemo } from '../../components/PlaygroundSection.jsx';
 import { Spinner } from 'invin-uix/ui/spinner';
 import { Switch } from 'invin-uix/ui/switch';
 import { Button } from 'invin-uix/ui/button';
@@ -18,6 +18,48 @@ export default function SpinnerDemo() {
       description="Loading indicator with 4 animation variants, 3 sizes, tip text, delay, content wrapper overlay, fullscreen mode, and custom indicator support."
       importCode={`import { Spinner } from 'invin-uix/ui/spinner';`}
     >
+
+      {/* ─── Interactive Playground ─────────────────────────────── */}
+      <InteractiveDemo
+        title="Spinner Playground"
+        description="Experiment with different spinner configurations."
+        controls={[
+          {
+            name: 'variant',
+            type: 'select',
+            label: 'Variant',
+            default: 'default',
+            options: [
+              { value: 'default', label: 'Default' },
+              { value: 'dots', label: 'Dots' },
+              { value: 'ring', label: 'Ring' },
+              { value: 'bars', label: 'Bars' },
+            ],
+          },
+          {
+            name: 'size',
+            type: 'select',
+            label: 'Size',
+            default: 'md',
+            options: [
+              { value: 'sm', label: 'Small (16px)' },
+              { value: 'md', label: 'Medium (24px)' },
+              { value: 'lg', label: 'Large (40px)' },
+            ],
+          },
+          { name: 'tip', type: 'text', label: 'Tip Text', default: 'Loading...', placeholder: 'Enter tip text' },
+        ]}
+      >
+        {(props) => (
+          <Spinner
+            variant={props.variant}
+            size={props.size}
+            tip={props.tip || undefined}
+          />
+        )}
+      </InteractiveDemo>
+
+      <Separator variant="bold" />
 
       {/* ─── Props Table ────────────────────────────────────────── */}
       <PropsTable

@@ -1,4 +1,4 @@
-import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable, InteractiveDemo } from '../../components/PlaygroundSection.jsx';
 import { Table, TableHeader, TableBody, TableFooter, TableRow, TableHead, TableCell, TableCaption } from 'invin-uix/ui/table';
 import { Badge } from 'invin-uix/ui/badge';
 import { Avatar, AvatarImage, AvatarFallback } from 'invin-uix/ui/avatar';
@@ -23,6 +23,37 @@ export default function TableDemo() {
       importCode={`import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from 'invin-uix/ui/table';
 // Optional: TableFooter, TableCaption`}
     >
+      {/* ─── Interactive Playground ─────────────────────────────── */}
+      <InteractiveDemo
+        title="Table Playground"
+        description="Experiment with Table layouts."
+        controls={[]}
+      >
+        {() => (
+          <div className="w-full">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Invoice</TableHead>
+                  <TableHead>Status</TableHead>
+                  <TableHead className="text-right">Amount</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {invoices.slice(0, 3).map(inv => (
+                  <TableRow key={inv.id}>
+                    <TableCell className="font-[500]">{inv.id}</TableCell>
+                    <TableCell><Badge variant={inv.status === 'Paid' ? 'success' : 'warning'} size="sm">{inv.status}</Badge></TableCell>
+                    <TableCell className="text-right font-[500]">{inv.amount}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+        )}
+      </InteractiveDemo>
+      <Separator variant="bold" />
+
       <PropsTable
         props={[
           { name: 'Table', type: 'wrapper', default: '—', description: 'Root <table> with overflow scroll container' },

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable, InteractiveDemo } from '../../components/PlaygroundSection.jsx';
 import { Slider } from 'invin-uix/ui/slider';
 import { Label } from 'invin-uix/ui/label';
 import { Card, CardContent } from 'invin-uix/ui/card';
@@ -16,6 +16,40 @@ export default function SliderDemo() {
       description="Range slider built on Radix UI. Supports single thumb, dual-thumb range, discrete steps with visible markers, and step labels. Keyboard accessible (arrow keys)."
       importCode={`import { Slider } from 'invin-uix/ui/slider';`}
     >
+
+      {/* ─── Interactive Playground ─────────────────────────────── */}
+      <InteractiveDemo
+        title="Slider Playground"
+        description="Experiment with slider configurations. Drag the slider or use arrow keys."
+        controls={[
+          { name: 'value', type: 'number', label: 'Value', default: 50, min: 0, max: 100 },
+          { name: 'min', type: 'number', label: 'Min', default: 0, min: 0, max: 50 },
+          { name: 'max', type: 'number', label: 'Max', default: 100, min: 50, max: 200 },
+          { name: 'step', type: 'number', label: 'Step', default: 1, min: 1, max: 20 },
+          { name: 'showSteps', type: 'boolean', label: 'Show Steps', default: false },
+          { name: 'disabled', type: 'boolean', label: 'Disabled', default: false },
+        ]}
+      >
+        {(props) => (
+          <div className="w-full max-w-sm space-y-3">
+            <div className="flex items-center justify-between">
+              <Label>Value</Label>
+              <span className="text-[var(--accent)] font-semibold">{props.value}</span>
+            </div>
+            <Slider
+              value={[props.value]}
+              min={props.min}
+              max={props.max}
+              step={props.step}
+              showSteps={props.showSteps}
+              disabled={props.disabled}
+            />
+          </div>
+        )}
+      </InteractiveDemo>
+
+      <Separator variant="bold" />
+
       <PropsTable
         props={[
           { name: 'value', type: 'number[]', default: '—', description: 'Controlled value(s). [50] for single, [25, 75] for range' },

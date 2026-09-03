@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable, InteractiveDemo } from '../../components/PlaygroundSection.jsx';
 import { Switch } from 'invin-uix/ui/switch';
 import { Label } from 'invin-uix/ui/label';
 import { Card, CardContent } from 'invin-uix/ui/card';
@@ -14,6 +14,43 @@ export default function SwitchDemo() {
       description="Toggle switch for binary on/off controls. Built on Radix UI with keyboard support (Space to toggle), 3 sizes, and accent fill when checked."
       importCode={`import { Switch } from 'invin-uix/ui/switch';`}
     >
+
+      {/* ─── Interactive Playground ─────────────────────────────── */}
+      <InteractiveDemo
+        title="Switch Playground"
+        description="Experiment with different switch configurations."
+        controls={[
+          {
+            name: 'size',
+            type: 'select',
+            label: 'Size',
+            default: 'md',
+            options: [
+              { value: 'sm', label: 'Small' },
+              { value: 'md', label: 'Medium' },
+              { value: 'lg', label: 'Large' },
+            ],
+          },
+          { name: 'checked', type: 'boolean', label: 'Checked', default: true },
+          { name: 'disabled', type: 'boolean', label: 'Disabled', default: false },
+        ]}
+      >
+        {(props) => (
+          <div className="flex items-center gap-3">
+            <Switch
+              size={props.size}
+              checked={props.checked}
+              disabled={props.disabled}
+              id="demo-switch"
+            />
+            <Label htmlFor="demo-switch" className={props.disabled ? 'opacity-50' : ''}>
+              {props.checked ? 'Enabled' : 'Disabled'}
+            </Label>
+          </div>
+        )}
+      </InteractiveDemo>
+
+      <Separator variant="bold" />
 
       {/* ─── Props Table ────────────────────────────────────────── */}
       <PropsTable

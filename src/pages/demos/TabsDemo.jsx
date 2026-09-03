@@ -1,4 +1,4 @@
-import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable, InteractiveDemo } from '../../components/PlaygroundSection.jsx';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from 'invin-uix/ui/tabs';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from 'invin-uix/ui/card';
 import { Input } from 'invin-uix/ui/input';
@@ -13,6 +13,60 @@ export default function TabsDemo() {
       description="Tabbed interface built on Radix UI. Three style variants (underline, pill, enclosed), size options, and keyboard navigation (arrow keys)."
       importCode={`import { Tabs, TabsList, TabsTrigger, TabsContent } from 'invin-uix/ui/tabs';`}
     >
+
+      {/* ─── Interactive Playground ─────────────────────────────── */}
+      <InteractiveDemo
+        title="Tabs Playground"
+        description="Experiment with different tab configurations."
+        controls={[
+          {
+            name: 'variant',
+            type: 'select',
+            label: 'Variant',
+            default: 'default',
+            options: [
+              { value: 'default', label: 'Default (Underline)' },
+              { value: 'pill', label: 'Pill' },
+              { value: 'enclosed', label: 'Enclosed' },
+            ],
+          },
+          {
+            name: 'size',
+            type: 'select',
+            label: 'Size',
+            default: 'md',
+            options: [
+              { value: 'sm', label: 'Small (32px)' },
+              { value: 'md', label: 'Medium (38px)' },
+              { value: 'lg', label: 'Large (44px)' },
+            ],
+          },
+        ]}
+      >
+        {(props) => (
+          <div className="w-full max-w-md">
+            <Tabs defaultValue="tab1">
+              <TabsList variant={props.variant} size={props.size}>
+                <TabsTrigger variant={props.variant} value="tab1">Overview</TabsTrigger>
+                <TabsTrigger variant={props.variant} value="tab2">Analytics</TabsTrigger>
+                <TabsTrigger variant={props.variant} value="tab3">Settings</TabsTrigger>
+              </TabsList>
+              <TabsContent value="tab1">
+                <p className="text-[var(--muted-foreground)] py-4">Overview content goes here.</p>
+              </TabsContent>
+              <TabsContent value="tab2">
+                <p className="text-[var(--muted-foreground)] py-4">Analytics and metrics.</p>
+              </TabsContent>
+              <TabsContent value="tab3">
+                <p className="text-[var(--muted-foreground)] py-4">Settings and configuration.</p>
+              </TabsContent>
+            </Tabs>
+          </div>
+        )}
+      </InteractiveDemo>
+
+      <Separator variant="bold" />
+
       <div className="space-y-4">
         <p className="text-[var(--muted-foreground)] font-[600] uppercase tracking-[0.05em] text-[var(--muted-foreground-faint)]">TabsList</p>
         <PropsTable

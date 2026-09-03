@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable, InteractiveDemo } from '../../components/PlaygroundSection.jsx';
 import { Toggle, ToggleGroup, ToggleGroupItem } from 'invin-uix/ui/toggle';
 import { Separator } from 'invin-uix/ui/separator';
 import { Card, CardContent } from 'invin-uix/ui/card';
@@ -14,6 +14,51 @@ export default function ToggleDemo() {
       description="Two-state button (on/off). Supports standalone usage and grouped selection (single/multiple). Inline styles ensure proper dark/light mode rendering."
       importCode={`import { Toggle, ToggleGroup, ToggleGroupItem } from 'invin-uix/ui/toggle';`}
     >
+
+      {/* ─── Interactive Playground ─────────────────────────────── */}
+      <InteractiveDemo
+        title="Toggle Playground"
+        description="Experiment with different toggle configurations."
+        controls={[
+          {
+            name: 'variant',
+            type: 'select',
+            label: 'Variant',
+            default: 'outline',
+            options: [
+              { value: 'default', label: 'Default' },
+              { value: 'outline', label: 'Outline' },
+            ],
+          },
+          {
+            name: 'size',
+            type: 'select',
+            label: 'Size',
+            default: 'md',
+            options: [
+              { value: 'sm', label: 'Small (28px)' },
+              { value: 'md', label: 'Medium (38px)' },
+              { value: 'lg', label: 'Large (44px)' },
+            ],
+          },
+          { name: 'pressed', type: 'boolean', label: 'Pressed', default: true },
+          { name: 'disabled', type: 'boolean', label: 'Disabled', default: false },
+        ]}
+      >
+        {(props) => (
+          <Toggle
+            variant={props.variant}
+            size={props.size}
+            pressed={props.pressed}
+            disabled={props.disabled}
+          >
+            <TextB style={{ width: 16, height: 16 }} /> Bold
+          </Toggle>
+        )}
+      </InteractiveDemo>
+
+      <Separator variant="bold" />
+
       <PropsTable
         props={[
           { name: 'variant', type: "'default' | 'outline'", default: "'default'", description: 'Default (no border) or outline (with border)' },

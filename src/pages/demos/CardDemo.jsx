@@ -1,4 +1,4 @@
-import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable, InteractiveDemo } from '../../components/PlaygroundSection.jsx';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from 'invin-uix/ui/card';
 import { Button } from 'invin-uix/ui/button';
 import { Badge } from 'invin-uix/ui/badge';
@@ -13,6 +13,42 @@ export default function CardDemo() {
       description="Container component with gradient background, card-specific tokens (padding, gap, radius, shadow, border), hover lift effect, and selected accent border. Composed from 6 sub-components."
       importCode={`import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from 'invin-uix/ui/card';`}
     >
+
+      {/* ─── Interactive Playground ─────────────────────────────── */}
+      <InteractiveDemo
+        title="Card Playground"
+        description="Experiment with different card configurations."
+        controls={[
+          { name: 'hover', type: 'boolean', label: 'Hover Effect', default: false },
+          { name: 'selected', type: 'boolean', label: 'Selected', default: false },
+          { name: 'showHeader', type: 'boolean', label: 'Show Header', default: true },
+          { name: 'showFooter', type: 'boolean', label: 'Show Footer', default: true },
+        ]}
+      >
+        {(props) => (
+          <Card hover={props.hover} selected={props.selected} className="w-full max-w-sm">
+            {props.showHeader && (
+              <CardHeader>
+                <CardTitle>Card Title</CardTitle>
+                <CardDescription>Card description goes here.</CardDescription>
+              </CardHeader>
+            )}
+            <CardContent>
+              <p className="text-[var(--muted-foreground)]">
+                This is the card content area. Add your components here.
+              </p>
+            </CardContent>
+            {props.showFooter && (
+              <CardFooter>
+                <Button variant="outline" size="sm">Cancel</Button>
+                <Button size="sm">Save</Button>
+              </CardFooter>
+            )}
+          </Card>
+        )}
+      </InteractiveDemo>
+
+      <Separator variant="bold" />
 
       {/* ─── Props Table ────────────────────────────────────────── */}
       <PropsTable

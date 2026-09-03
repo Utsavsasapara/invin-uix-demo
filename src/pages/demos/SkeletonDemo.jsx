@@ -1,4 +1,4 @@
-import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable, InteractiveDemo } from '../../components/PlaygroundSection.jsx';
 import { Skeleton } from 'invin-uix/ui/skeleton';
 import { Card, CardContent } from 'invin-uix/ui/card';
 import { Separator } from 'invin-uix/ui/separator';
@@ -10,6 +10,44 @@ export default function SkeletonDemo() {
       description="Animated loading placeholder that mimics content shape while data loads. Three shape variants, plus a lines prop for multi-line text paragraphs — compose them to match any layout."
       importCode={`import { Skeleton } from 'invin-uix/ui/skeleton';`}
     >
+
+      {/* ─── Interactive Playground ─────────────────────────────── */}
+      <InteractiveDemo
+        title="Skeleton Playground"
+        description="Experiment with different skeleton configurations."
+        controls={[
+          {
+            name: 'variant',
+            type: 'select',
+            label: 'Variant',
+            default: 'default',
+            options: [
+              { value: 'default', label: 'Default (Rectangle)' },
+              { value: 'circle', label: 'Circle' },
+              { value: 'text', label: 'Text Line' },
+            ],
+          },
+          { name: 'lines', type: 'number', label: 'Lines', default: 1, min: 1, max: 5 },
+          { name: 'width', type: 'number', label: 'Width (px)', default: 200, min: 50, max: 400 },
+          { name: 'height', type: 'number', label: 'Height (px)', default: 40, min: 20, max: 200 },
+        ]}
+      >
+        {(props) => (
+          <div className="flex items-center justify-center">
+            {props.lines > 1 ? (
+              <Skeleton lines={props.lines} className={`w-[${props.width}px]`} style={{ width: props.width }} />
+            ) : props.variant === 'circle' ? (
+              <Skeleton variant="circle" style={{ width: props.height, height: props.height }} />
+            ) : props.variant === 'text' ? (
+              <Skeleton variant="text" style={{ width: props.width }} />
+            ) : (
+              <Skeleton style={{ width: props.width, height: props.height }} />
+            )}
+          </div>
+        )}
+      </InteractiveDemo>
+
+      <Separator variant="bold" />
 
       {/* ─── Props Table ────────────────────────────────────────── */}
       <PropsTable

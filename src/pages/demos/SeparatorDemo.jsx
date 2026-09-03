@@ -1,4 +1,4 @@
-import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable, InteractiveDemo } from '../../components/PlaygroundSection.jsx';
 import { Separator } from 'invin-uix/ui/separator';
 import { Card, CardContent } from 'invin-uix/ui/card';
 import { Badge } from 'invin-uix/ui/badge';
@@ -11,6 +11,51 @@ export default function SeparatorDemo() {
       description="Horizontal or vertical divider line. Supports text labels with placement, dashed style, bold variant, and vertical orientation for inline content."
       importCode={`import { Separator } from 'invin-uix/ui/separator';`}
     >
+
+      {/* ─── Interactive Playground ─────────────────────────────── */}
+      <InteractiveDemo
+        title="Separator Playground"
+        description="Experiment with different separator configurations."
+        controls={[
+          {
+            name: 'variant',
+            type: 'select',
+            label: 'Variant',
+            default: 'default',
+            options: [
+              { value: 'default', label: 'Default (1px)' },
+              { value: 'bold', label: 'Bold (2px)' },
+            ],
+          },
+          {
+            name: 'titlePlacement',
+            type: 'select',
+            label: 'Title Placement',
+            default: 'center',
+            options: [
+              { value: 'left', label: 'Left' },
+              { value: 'center', label: 'Center' },
+              { value: 'right', label: 'Right' },
+            ],
+          },
+          { name: 'dashed', type: 'boolean', label: 'Dashed', default: false },
+          { name: 'showLabel', type: 'boolean', label: 'Show Label', default: true },
+        ]}
+      >
+        {(props) => (
+          <div className="w-full max-w-md">
+            <Separator
+              variant={props.variant}
+              dashed={props.dashed}
+              titlePlacement={props.titlePlacement}
+            >
+              {props.showLabel ? 'Section Title' : null}
+            </Separator>
+          </div>
+        )}
+      </InteractiveDemo>
+
+      <Separator variant="bold" />
 
       {/* ─── Props Table ────────────────────────────────────────── */}
       <PropsTable

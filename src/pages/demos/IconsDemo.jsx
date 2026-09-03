@@ -38,8 +38,8 @@ export default function IconsDemo() {
   return (
     <ComponentPage
       name="Icons"
-      description="1400+ Lucide icons re-exported (tree-shakeable) plus 26 custom product SVG icons. No need to install lucide-react separately — it's bundled."
-      importCode={`// Lucide icons (1400+ available)
+      description="Full Phosphor icon set re-exported (tree-shakeable) plus 26 custom product SVG icons. No need to install @phosphor-icons/react separately — it's bundled."
+      importCode={`// Phosphor icons (6000+ available, all weights)
 import { MagnifyingGlass, Bell, Gear } from 'invin-uix/ui/icons';
 
 // Custom product icons
@@ -48,13 +48,13 @@ import { ProductIcon } from 'invin-uix/ui/icons';`}
 
       {/* ─── Props Tables ───────────────────────────────────────── */}
       <div className="space-y-4">
-        <p className="text-[var(--muted-foreground)] font-[600] uppercase tracking-[0.05em] text-[var(--muted-foreground-faint)]">Lucide Icons</p>
+        <p className="text-[var(--muted-foreground)] font-[600] uppercase tracking-[0.05em] text-[var(--muted-foreground-faint)]">Phosphor Icons</p>
         <PropsTable
           props={[
             { name: 'style', type: '{ width, height }', default: '—', description: 'Set size via inline style (recommended)' },
             { name: 'className', type: 'string', default: '—', description: 'Tailwind classes (h-4 w-4, etc.)' },
-            { name: 'color', type: 'string', default: 'currentColor', description: 'Stroke colour (inherits from parent by default)' },
-            { name: 'strokeWidth', type: 'number', default: '2', description: 'Stroke thickness' },
+            { name: 'color', type: 'string', default: 'currentColor', description: 'Fill/stroke colour (inherits from parent by default)' },
+            { name: 'weight', type: "'thin' | 'light' | 'regular' | 'bold' | 'fill' | 'duotone'", default: "'regular'", description: 'Icon weight/style. Bold is recommended for UI.' },
           ]}
         />
       </div>
@@ -70,10 +70,10 @@ import { ProductIcon } from 'invin-uix/ui/icons';`}
 
       <Separator variant="bold" />
 
-      {/* ─── Lucide Grid ────────────────────────────────────────── */}
+      {/* ─── Phosphor Grid ────────────────────────────────────────── */}
       <PlaygroundSection
-        title="Common Lucide icons"
-        description="A sample of frequently used icons. Import any of the 1400+ icons by name."
+        title="Common Phosphor icons"
+        description="A sample of frequently used icons. Import any Phosphor icon by its name."
         code={`import { MagnifyingGlass, Bell, Gear } from 'invin-uix/ui/icons';
 
 // Use with inline style (recommended for consistent sizing)

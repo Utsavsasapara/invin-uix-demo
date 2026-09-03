@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable, InteractiveDemo } from '../../components/PlaygroundSection.jsx';
 import { Combobox } from 'invin-uix/ui/combobox';
 import { Badge } from 'invin-uix/ui/badge';
 import { Label } from 'invin-uix/ui/label';
@@ -78,6 +78,33 @@ export default function ComboboxDemo() {
       description="Searchable select with type-ahead filtering, keyboard navigation, single or multi-select mode, async loading, and creatable options. The power of a Select with the usability of an autocomplete."
       importCode={`import { Combobox } from 'invin-uix/ui/combobox';`}
     >
+
+      {/* ─── Interactive Playground ─────────────────────────────── */}
+      <InteractiveDemo
+        title="Combobox Playground"
+        description="Experiment with Combobox configurations."
+        controls={[
+          { name: 'size', type: 'select', label: 'Size', default: 'md', options: [{ value: 'sm', label: 'Small' }, { value: 'md', label: 'Medium' }, { value: 'lg', label: 'Large' }] },
+          { name: 'multiple', type: 'boolean', label: 'Multiple', default: false },
+          { name: 'disabled', type: 'boolean', label: 'Disabled', default: false },
+          { name: 'error', type: 'boolean', label: 'Error', default: false },
+        ]}
+      >
+        {(props) => (
+          <div className="max-w-xs">
+            <Combobox
+              options={frameworks.slice(0, 6)}
+              size={props.size}
+              multiple={props.multiple}
+              disabled={props.disabled}
+              error={props.error}
+              placeholder="Select a framework..."
+              fullWidth
+            />
+          </div>
+        )}
+      </InteractiveDemo>
+      <Separator variant="bold" />
 
       <PropsTable
         props={[

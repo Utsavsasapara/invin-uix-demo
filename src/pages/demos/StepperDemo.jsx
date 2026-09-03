@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable, InteractiveDemo } from '../../components/PlaygroundSection.jsx';
 import { Stepper, Step } from 'invin-uix/ui/stepper';
 import { Button } from 'invin-uix/ui/button';
 import { Input } from 'invin-uix/ui/input';
@@ -18,6 +18,28 @@ export default function StepperDemo() {
       description="Multi-step progress indicator for wizard flows, onboarding, and checkout processes. Supports horizontal and vertical orientations with multiple visual variants."
       importCode={`import { Stepper, Step } from 'invin-uix/ui/stepper';`}
     >
+
+      {/* ─── Interactive Playground ─────────────────────────────── */}
+      <InteractiveDemo
+        title="Stepper Playground"
+        description="Experiment with Stepper configurations."
+        controls={[
+          { name: 'activeStep', type: 'select', label: 'Active Step', default: '1', options: [{ value: '0', label: 'Step 1' }, { value: '1', label: 'Step 2' }, { value: '2', label: 'Step 3' }, { value: '3', label: 'Step 4' }] },
+          { name: 'variant', type: 'select', label: 'Variant', default: 'default', options: [{ value: 'default', label: 'Default' }, { value: 'dots', label: 'Dots' }, { value: 'numbered', label: 'Numbered' }] },
+          { name: 'size', type: 'select', label: 'Size', default: 'md', options: [{ value: 'sm', label: 'Small' }, { value: 'md', label: 'Medium' }, { value: 'lg', label: 'Large' }] },
+          { name: 'clickable', type: 'boolean', label: 'Clickable', default: true },
+        ]}
+      >
+        {(props) => (
+          <Stepper activeStep={parseInt(props.activeStep)} variant={props.variant} size={props.size} clickable={props.clickable}>
+            <Step title="Account" description="Create account" />
+            <Step title="Profile" description="Set up profile" />
+            <Step title="Preferences" description="Configure" />
+            <Step title="Complete" description="All done" />
+          </Stepper>
+        )}
+      </InteractiveDemo>
+      <Separator variant="bold" />
 
       {/* ─── Props ──────────────────────────────────────────── */}
       <PropsTable

@@ -1,4 +1,4 @@
-import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable, InteractiveDemo } from '../../components/PlaygroundSection.jsx';
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from 'invin-uix/ui/accordion';
 import { Button } from 'invin-uix/ui/button';
 import { Card, CardContent } from 'invin-uix/ui/card';
@@ -12,6 +12,63 @@ export default function AccordionDemo() {
       description="Expandable content sections. Single or multiple open at once. Four visual variants. Also includes Collapsible for single-section expand/collapse."
       importCode={`import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from 'invin-uix/ui/accordion';`}
     >
+
+      {/* ─── Interactive Playground ─────────────────────────────── */}
+      <InteractiveDemo
+        title="Accordion Playground"
+        description="Experiment with different accordion configurations."
+        controls={[
+          {
+            name: 'type',
+            type: 'select',
+            label: 'Type',
+            default: 'single',
+            options: [
+              { value: 'single', label: 'Single' },
+              { value: 'multiple', label: 'Multiple' },
+            ],
+          },
+          {
+            name: 'variant',
+            type: 'select',
+            label: 'Variant',
+            default: 'default',
+            options: [
+              { value: 'default', label: 'Default' },
+              { value: 'bordered', label: 'Bordered' },
+              { value: 'filled', label: 'Filled' },
+              { value: 'ghost', label: 'Ghost' },
+            ],
+          },
+          { name: 'collapsible', type: 'boolean', label: 'Collapsible', default: true },
+        ]}
+      >
+        {(props) => (
+          <div className="w-full max-w-md">
+            <Accordion 
+              type={props.type} 
+              collapsible={props.collapsible} 
+              defaultValue={props.type === 'multiple' ? ['item-1'] : 'item-1'}
+            >
+              <AccordionItem value="item-1" variant={props.variant}>
+                <AccordionTrigger>What is Invin UI?</AccordionTrigger>
+                <AccordionContent>A production-ready React component library with 40+ components.</AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="item-2" variant={props.variant}>
+                <AccordionTrigger>How do I install it?</AccordionTrigger>
+                <AccordionContent>Run pnpm add invin-uix and import tokens.css in your entry file.</AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="item-3" variant={props.variant}>
+                <AccordionTrigger>Is it accessible?</AccordionTrigger>
+                <AccordionContent>Yes, built on Radix UI with full keyboard support and ARIA labels.</AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          </div>
+        )}
+      </InteractiveDemo>
+
+      <Separator variant="bold" />
+
       <PropsTable
         props={[
           { name: 'type', type: "'single' | 'multiple'", default: '—', description: 'single = only one open at a time, multiple = any number open' },

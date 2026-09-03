@@ -1,4 +1,4 @@
-import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable, InteractiveDemo } from '../../components/PlaygroundSection.jsx';
 import { KpiCard } from 'invin-uix/ui/kpi-card';
 import { Progress } from 'invin-uix/ui/progress';
 import { Badge } from 'invin-uix/ui/badge';
@@ -16,16 +16,38 @@ export default function KpiCardDemo() {
       importCode={`import { KpiCard } from 'invin-uix/ui/kpi-card';`}
     >
 
+      {/* ─── Interactive Playground ─────────────────────────────── */}
+      <InteractiveDemo
+        title="KPI Card Playground"
+        description="Experiment with KPI Card configurations."
+        controls={[
+          { name: 'up', type: 'boolean', label: 'Positive Change', default: true },
+          { name: 'selected', type: 'boolean', label: 'Selected', default: false },
+          { name: 'label', type: 'text', label: 'Label', default: 'Total Users', placeholder: 'Enter label' },
+          { name: 'value', type: 'text', label: 'Value', default: '2,350', placeholder: 'Enter value' },
+        ]}
+      >
+        {(props) => (
+          <KpiCard 
+            label={props.label}
+            value={props.value}
+            change={props.up ? "+12.5%" : "-8.3%"} 
+            up={props.up} 
+            selected={props.selected}
+            icon={<Users style={{ width: 16, height: 16 }} />} 
+          />
+        )}
+      </InteractiveDemo>
+      <Separator variant="bold" />
+
       <PropsTable
         props={[
-          { name: 'label', type: 'string', default: '—', description: 'Metric label (e.g. "Total Users")' },
-          { name: 'value', type: 'string', default: '—', description: 'Big number display value' },
+          { name: 'label', type: 'string', default: '—', description: 'Metric label (e.g. "Total Users")', required: true },
+          { name: 'value', type: 'string', default: '—', description: 'Big number display value', required: true },
           { name: 'change', type: 'string', default: '—', description: 'Change text (e.g. "+12.5%")' },
           { name: 'up', type: 'boolean', default: '—', description: 'Is the change positive?' },
           { name: 'icon', type: 'ReactNode', default: '—', description: 'Icon in top-right corner' },
-          { name: 'variant', type: "'default' | 'bordered' | 'filled'", default: "'default'", description: 'Visual style' },
-          { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Padding and border radius' },
-          { name: 'children', type: 'ReactNode', default: '—', description: 'Extra content below value (progress bars, sparklines)' },
+          { name: 'selected', type: 'boolean', default: 'false', description: 'Active/selected state (accent border + glow)' },
         ]}
       />
 

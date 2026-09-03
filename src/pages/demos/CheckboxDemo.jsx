@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable, InteractiveDemo } from '../../components/PlaygroundSection.jsx';
 import { Checkbox } from 'invin-uix/ui/checkbox';
 import { Label } from 'invin-uix/ui/label';
 import { Card, CardContent } from 'invin-uix/ui/card';
@@ -25,6 +25,43 @@ export default function CheckboxDemo() {
       description="Toggle control for binary or multi-select choices. Built on Radix UI with keyboard support, indeterminate state, and 3 sizes. Accent fill on checked."
       importCode={`import { Checkbox } from 'invin-uix/ui/checkbox';`}
     >
+
+      {/* ─── Interactive Playground ─────────────────────────────── */}
+      <InteractiveDemo
+        title="Checkbox Playground"
+        description="Experiment with different checkbox configurations."
+        controls={[
+          {
+            name: 'size',
+            type: 'select',
+            label: 'Size',
+            default: 'md',
+            options: [
+              { value: 'sm', label: 'Small' },
+              { value: 'md', label: 'Medium' },
+              { value: 'lg', label: 'Large' },
+            ],
+          },
+          { name: 'checked', type: 'boolean', label: 'Checked', default: true },
+          { name: 'disabled', type: 'boolean', label: 'Disabled', default: false },
+        ]}
+      >
+        {(props) => (
+          <div className="flex items-center gap-3">
+            <Checkbox
+              size={props.size}
+              checked={props.checked}
+              disabled={props.disabled}
+              id="demo-checkbox"
+            />
+            <Label htmlFor="demo-checkbox" className={props.disabled ? 'opacity-50' : ''}>
+              Accept terms and conditions
+            </Label>
+          </div>
+        )}
+      </InteractiveDemo>
+
+      <Separator variant="bold" />
 
       {/* ─── Props Table ────────────────────────────────────────── */}
       <PropsTable

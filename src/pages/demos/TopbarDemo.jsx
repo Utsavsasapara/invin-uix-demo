@@ -1,4 +1,4 @@
-import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable, InteractiveDemo } from '../../components/PlaygroundSection.jsx';
 import { Topbar } from 'invin-uix/ui/topbar';
 import { Button } from 'invin-uix/ui/button';
 import { Avatar, AvatarImage, AvatarFallback } from 'invin-uix/ui/avatar';
@@ -13,6 +13,28 @@ export default function TopbarDemo() {
       description="Sticky header with glassmorphism background, backdrop blur, and left/center/right content slots. Uses topbar-specific tokens for height, background, and blur."
       importCode={`import { Topbar } from 'invin-uix/ui/topbar';`}
     >
+      {/* ─── Interactive Playground ─────────────────────────────── */}
+      <InteractiveDemo
+        title="Topbar Playground"
+        description="Experiment with Topbar layouts."
+        controls={[]}
+      >
+        {() => (
+          <div className="w-full rounded-[var(--radius-lg)] overflow-hidden border border-[var(--border)]">
+            <Topbar className="!sticky !relative"
+              left={<span className="text-[var(--foreground)] font-[700]">Invinsense</span>}
+              right={
+                <>
+                  <Button variant="ghost" size="icon-sm"><Bell style={{ width: 16, height: 16 }} /></Button>
+                  <Avatar size="sm"><AvatarFallback>U</AvatarFallback></Avatar>
+                </>
+              }
+            />
+          </div>
+        )}
+      </InteractiveDemo>
+      <Separator variant="bold" />
+
       <PropsTable
         props={[
           { name: 'left', type: 'ReactNode', default: '—', description: 'Content aligned to the left (title, breadcrumb)' },

@@ -1,4 +1,4 @@
-import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable, InteractiveDemo } from '../../components/PlaygroundSection.jsx';
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from 'invin-uix/ui/resizable';
 import { Separator } from 'invin-uix/ui/separator';
 
@@ -17,6 +17,31 @@ export default function ResizableDemo() {
       description="Split-pane layout with draggable resize handles. Supports horizontal and vertical directions, min/max constraints, grip handles, and localStorage persistence."
       importCode={`import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from 'invin-uix/ui/resizable';`}
     >
+
+      {/* ─── Interactive Playground ─────────────────────────────── */}
+      <InteractiveDemo
+        title="Resizable Playground"
+        description="Experiment with Resizable panels."
+        controls={[
+          { name: 'direction', type: 'select', label: 'Direction', default: 'horizontal', options: [{ value: 'horizontal', label: 'Horizontal' }, { value: 'vertical', label: 'Vertical' }] },
+          { name: 'withHandle', type: 'boolean', label: 'With Grip Handle', default: true },
+        ]}
+      >
+        {(props) => (
+          <div className="border border-[var(--border)] rounded-xl overflow-hidden h-[200px]">
+            <ResizablePanelGroup direction={props.direction}>
+              <ResizablePanel defaultSize={40} minSize={20}>
+                <PanelContent label="Panel A (40%)" className="bg-[var(--secondary)]/50" />
+              </ResizablePanel>
+              <ResizableHandle withHandle={props.withHandle} />
+              <ResizablePanel defaultSize={60} minSize={20}>
+                <PanelContent label="Panel B (60%)" />
+              </ResizablePanel>
+            </ResizablePanelGroup>
+          </div>
+        )}
+      </InteractiveDemo>
+      <Separator variant="bold" />
 
       <div className="space-y-4">
         <p className="text-[var(--muted-foreground)] font-[600] uppercase tracking-[0.05em] text-[var(--muted-foreground-faint)]">ResizablePanelGroup</p>

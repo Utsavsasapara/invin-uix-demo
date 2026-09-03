@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable, InteractiveDemo } from '../../components/PlaygroundSection.jsx';
 import { Calendar } from 'invin-uix/ui/calendar';
 import { Separator } from 'invin-uix/ui/separator';
 import { Card, CardContent } from 'invin-uix/ui/card';
@@ -15,6 +15,34 @@ export default function CalendarDemo() {
       description="Full-featured calendar component. Supports single/range/multiple selection, month/year dropdowns, week numbers, outside days, multiple months side-by-side, disabled dates, and RTL. Zero external dependencies."
       importCode={`import { Calendar } from 'invin-uix/ui/calendar';`}
     >
+      {/* ─── Interactive Playground ─────────────────────────────── */}
+      <InteractiveDemo
+        title="Calendar Playground"
+        description="Experiment with Calendar configurations."
+        controls={[
+          { name: 'captionLayout', type: 'select', label: 'Caption Layout', default: 'label', options: [{ value: 'label', label: 'Label' }, { value: 'dropdown', label: 'Dropdown' }] },
+          { name: 'showOutsideDays', type: 'boolean', label: 'Show Outside Days', default: false },
+          { name: 'showWeekNumber', type: 'boolean', label: 'Show Week Numbers', default: false },
+          { name: 'fixedWeeks', type: 'boolean', label: 'Fixed Weeks', default: false },
+        ]}
+      >
+        {(props) => (
+          <Card><CardContent className="p-0">
+            <Calendar
+              selected={date}
+              onSelect={setDate}
+              captionLayout={props.captionLayout}
+              showOutsideDays={props.showOutsideDays}
+              showWeekNumber={props.showWeekNumber}
+              fixedWeeks={props.fixedWeeks}
+              fromYear={1990}
+              toYear={2030}
+            />
+          </CardContent></Card>
+        )}
+      </InteractiveDemo>
+      <Separator variant="bold" />
+
       <PropsTable
         props={[
           { name: 'mode', type: "'single' | 'range' | 'multiple'", default: "'single'", description: 'Selection mode' },

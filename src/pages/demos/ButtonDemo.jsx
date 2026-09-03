@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable, InteractiveDemo } from '../../components/PlaygroundSection.jsx';
 import { Button, ButtonGroup } from 'invin-uix/ui/button';
 import { Card, CardContent } from 'invin-uix/ui/card';
 import { Separator } from 'invin-uix/ui/separator';
@@ -26,10 +26,80 @@ export default function ButtonDemo() {
       importCode={`import { Button, ButtonGroup } from 'invin-uix/ui/button';`}
     >
 
+      {/* ─── Interactive Playground ────────────────────────────── */}
+      <InteractiveDemo
+        title="Interactive Playground"
+        description="Experiment with Button props in real-time. Adjust the controls to see how different combinations affect the component."
+        controls={[
+          {
+            name: 'variant',
+            label: 'Variant',
+            type: 'select',
+            default: 'primary',
+            options: [
+              { value: 'primary', label: 'Primary' },
+              { value: 'secondary', label: 'Secondary' },
+              { value: 'outline', label: 'Outline' },
+              { value: 'ghost', label: 'Ghost' },
+              { value: 'destructive', label: 'Destructive' },
+              { value: 'destructive-solid', label: 'Destructive Solid' },
+            ]
+          },
+          {
+            name: 'size',
+            label: 'Size',
+            type: 'select',
+            default: 'md',
+            options: [
+              { value: 'sm', label: 'Small' },
+              { value: 'md', label: 'Medium' },
+              { value: 'icon', label: 'Icon' },
+              { value: 'icon-sm', label: 'Icon Small' },
+            ]
+          },
+          {
+            name: 'shape',
+            label: 'Shape',
+            type: 'select',
+            default: 'default',
+            options: [
+              { value: 'default', label: 'Default' },
+              { value: 'pill', label: 'Pill' },
+            ]
+          },
+          { name: 'disabled', label: 'Disabled', type: 'boolean', default: false },
+          { name: 'loading', label: 'Loading', type: 'boolean', default: false },
+          { name: 'fullWidth', label: 'Full Width', type: 'boolean', default: false },
+          { name: 'showIcon', label: 'Show Icon', type: 'boolean', default: false },
+        ]}
+      >
+        {(props) => (
+          <div className={props.fullWidth ? 'w-full' : ''}>
+            <Button
+              variant={props.variant}
+              size={props.size}
+              shape={props.shape}
+              disabled={props.disabled}
+              loading={props.loading}
+              fullWidth={props.fullWidth}
+              leftIcon={props.showIcon && !['icon', 'icon-sm'].includes(props.size) ? <DownloadSimple style={{ width: 14, height: 14 }} /> : undefined}
+            >
+              {['icon', 'icon-sm'].includes(props.size) ? (
+                <Plus style={{ width: props.size === 'icon' ? 16 : 14, height: props.size === 'icon' ? 16 : 14 }} />
+              ) : (
+                'Button'
+              )}
+            </Button>
+          </div>
+        )}
+      </InteractiveDemo>
+
+      <Separator />
+
       {/* ─── Props Table ────────────────────────────────────────── */}
       <PropsTable
         props={[
-          { name: 'variant', type: "'primary' | 'outline' | 'ghost' | 'destructive' | 'destructive-solid'", default: "'primary'", description: 'Visual style. destructive is subtle (default danger); destructive-solid is a full red fill.' },
+          { name: 'variant', type: "'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'destructive-solid'", default: "'primary'", description: 'Visual style. primary is accent fill, secondary is neutral fill, outline is bordered, ghost is transparent, destructive is subtle danger, destructive-solid is solid red fill.' },
           { name: 'size', type: "'sm' | 'md' | 'icon' | 'icon-sm'", default: "'md'", description: 'Size preset — md is default, icon/icon-sm for square icon buttons' },
           { name: 'shape', type: "'default' | 'pill'", default: "'default'", description: 'Border radius — pill gives fully rounded corners' },
           { name: 'leftIcon', type: 'ReactNode', default: '—', description: 'Icon before the label. Replaced by the spinner while loading (width stays stable).' },
@@ -48,8 +118,9 @@ export default function ButtonDemo() {
       {/* ─── All Variants ───────────────────────────────────────── */}
       <PlaygroundSection
         title="Variants"
-        description="Five visual styles. Primary is the default action, outline for secondary, ghost for toolbar/subtle. Destructive comes in two weights: subtle (default danger) and solid (a confirmed, loud danger action)."
+        description="Six visual styles. Primary is the default action, secondary for second-tier actions, outline for tertiary, ghost for toolbar/subtle. Destructive comes in two weights: subtle (default danger) and solid (a confirmed, loud danger action)."
         code={`<Button>Primary</Button>
+<Button variant="secondary">Secondary</Button>
 <Button variant="outline">Outline</Button>
 <Button variant="ghost">Ghost</Button>
 <Button variant="destructive">Destructive</Button>
@@ -57,6 +128,7 @@ export default function ButtonDemo() {
       >
         <div className="flex flex-wrap items-center gap-3">
           <Button>Primary</Button>
+          <Button variant="secondary">Secondary</Button>
           <Button variant="outline">Outline</Button>
           <Button variant="ghost">Ghost</Button>
           <Button variant="destructive">Destructive</Button>
@@ -293,12 +365,14 @@ export default function ButtonDemo() {
         title="Disabled"
         description="Disabled buttons have 50% opacity and no pointer events."
         code={`<Button disabled>Primary</Button>
+<Button variant="secondary" disabled>Secondary</Button>
 <Button variant="outline" disabled>Outline</Button>
 <Button variant="ghost" disabled>Ghost</Button>
 <Button variant="destructive" disabled>Destructive</Button>`}
       >
         <div className="flex flex-wrap items-center gap-3">
           <Button disabled>Primary</Button>
+          <Button variant="secondary" disabled>Secondary</Button>
           <Button variant="outline" disabled>Outline</Button>
           <Button variant="ghost" disabled>Ghost</Button>
           <Button variant="destructive" disabled>Destructive</Button>
@@ -330,10 +404,10 @@ export default function ButtonDemo() {
 
       <PlaygroundSection
         title="Form actions"
-        description="Primary for submit, outline for cancel, ghost for tertiary."
+        description="Primary for submit, secondary for cancel, ghost for tertiary."
         code={`<div className="flex items-center gap-2 justify-end">
   <Button variant="ghost">Reset</Button>
-  <Button variant="outline">Cancel</Button>
+  <Button variant="secondary">Cancel</Button>
   <Button>Submit</Button>
 </div>`}
       >
@@ -343,7 +417,7 @@ export default function ButtonDemo() {
               <p className="text-[var(--foreground)] text-[var(--muted-foreground)]">Are you sure you want to save these changes?</p>
               <div className="flex items-center gap-2 justify-end">
                 <Button variant="ghost">Reset</Button>
-                <Button variant="outline">Cancel</Button>
+                <Button variant="secondary">Cancel</Button>
                 <Button>Submit</Button>
               </div>
             </div>

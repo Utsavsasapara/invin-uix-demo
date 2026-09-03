@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable, InteractiveDemo } from '../../components/PlaygroundSection.jsx';
 import { DatePicker, DateRangePicker } from 'invin-uix/ui/date-picker';
 import { Label } from 'invin-uix/ui/label';
 import { Separator } from 'invin-uix/ui/separator';
@@ -16,6 +16,23 @@ export default function DatePickerDemo() {
       description="Input trigger + Calendar popover. Single date or range selection. Supports min/max, disabled dates, dropdowns, and custom format. Also includes DateRangePicker for dual-month range selection."
       importCode={`import { DatePicker, DateRangePicker } from 'invin-uix/ui/date-picker';`}
     >
+      {/* ─── Interactive Playground ─────────────────────────────── */}
+      <InteractiveDemo
+        title="Date Picker Playground"
+        description="Experiment with Date Picker configurations."
+        controls={[
+          { name: 'captionLayout', type: 'select', label: 'Caption Layout', default: 'label', options: [{ value: 'label', label: 'Label' }, { value: 'dropdown', label: 'Dropdown' }] },
+        ]}
+      >
+        {(props) => (
+          <div className="space-y-2 w-full max-w-xs">
+            <Label>Select date</Label>
+            <DatePicker value={date} onChange={setDate} captionLayout={props.captionLayout} toDate={props.captionLayout === 'dropdown' ? new Date() : undefined} />
+          </div>
+        )}
+      </InteractiveDemo>
+      <Separator variant="bold" />
+
       <div className="space-y-4">
         <p className="text-[var(--muted-foreground)] font-[600] uppercase tracking-[0.05em] text-[var(--muted-foreground-faint)]">DatePicker</p>
         <PropsTable

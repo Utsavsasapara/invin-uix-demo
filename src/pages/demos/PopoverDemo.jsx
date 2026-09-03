@@ -1,4 +1,4 @@
-import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable, InteractiveDemo } from '../../components/PlaygroundSection.jsx';
 import { Popover, PopoverTrigger, PopoverContent } from 'invin-uix/ui/popover';
 import { Button } from 'invin-uix/ui/button';
 import { Input } from 'invin-uix/ui/input';
@@ -15,6 +15,55 @@ export default function PopoverDemo() {
       description="Floating panel triggered by click, positioned relative to a trigger element. Built on Radix — portal rendering, focus trap, keyboard dismiss (Escape), outside-click dismiss. For forms, settings, and contextual content."
       importCode={`import { Popover, PopoverTrigger, PopoverContent } from 'invin-uix/ui/popover';`}
     >
+
+      {/* ─── Interactive Playground ─────────────────────────────── */}
+      <InteractiveDemo
+        title="Popover Playground"
+        description="Experiment with different popover configurations."
+        controls={[
+          {
+            name: 'side',
+            type: 'select',
+            label: 'Side',
+            default: 'bottom',
+            options: [
+              { value: 'top', label: 'Top' },
+              { value: 'bottom', label: 'Bottom' },
+              { value: 'left', label: 'Left' },
+              { value: 'right', label: 'Right' },
+            ],
+          },
+          {
+            name: 'align',
+            type: 'select',
+            label: 'Align',
+            default: 'center',
+            options: [
+              { value: 'start', label: 'Start' },
+              { value: 'center', label: 'Center' },
+              { value: 'end', label: 'End' },
+            ],
+          },
+          { name: 'sideOffset', type: 'number', label: 'Side Offset', default: 4, min: 0, max: 20 },
+        ]}
+      >
+        {(props) => (
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button variant="outline">Open Popover</Button>
+            </PopoverTrigger>
+            <PopoverContent side={props.side} align={props.align} sideOffset={props.sideOffset}>
+              <div className="space-y-2">
+                <p className="text-[var(--foreground)] font-[600]">Popover Content</p>
+                <p className="text-[var(--muted-foreground)]">This is a sample popover. Click outside or press Escape to close.</p>
+              </div>
+            </PopoverContent>
+          </Popover>
+        )}
+      </InteractiveDemo>
+
+      <Separator variant="bold" />
+
       <PropsTable
         props={[
           { name: 'align', type: "'start' | 'center' | 'end'", default: "'center'", description: 'Horizontal alignment relative to trigger (on PopoverContent)' },

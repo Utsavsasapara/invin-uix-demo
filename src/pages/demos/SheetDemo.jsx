@@ -1,4 +1,4 @@
-import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable, InteractiveDemo } from '../../components/PlaygroundSection.jsx';
 import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetFooter, SheetTitle, SheetDescription, SheetClose } from 'invin-uix/ui/sheet';
 import { Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerFooter, DrawerTitle, DrawerDescription, DrawerClose } from 'invin-uix/ui/drawer';
 import { Button } from 'invin-uix/ui/button';
@@ -19,6 +19,50 @@ import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle, SheetDescri
 // Drawer (bottom sheet with drag)
 import { Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerTitle, DrawerDescription } from 'invin-uix/ui/drawer';`}
     >
+
+      {/* ─── Interactive Playground ─────────────────────────────── */}
+      <InteractiveDemo
+        title="Sheet Playground"
+        description="Experiment with different sheet configurations. Click the button to open."
+        controls={[
+          {
+            name: 'side',
+            type: 'select',
+            label: 'Side',
+            default: 'right',
+            options: [
+              { value: 'left', label: 'Left' },
+              { value: 'right', label: 'Right' },
+              { value: 'top', label: 'Top' },
+              { value: 'bottom', label: 'Bottom' },
+            ],
+          },
+          { name: 'hideClose', type: 'boolean', label: 'Hide Close', default: false },
+        ]}
+      >
+        {(props) => (
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="outline">Open Sheet ({props.side})</Button>
+            </SheetTrigger>
+            <SheetContent side={props.side} hideClose={props.hideClose}>
+              <SheetHeader>
+                <SheetTitle>Sheet Title</SheetTitle>
+                <SheetDescription>This is a {props.side} sheet panel.</SheetDescription>
+              </SheetHeader>
+              <div className="py-4">
+                <p className="text-[var(--muted-foreground)]">Your content goes here.</p>
+              </div>
+              <SheetFooter>
+                <SheetClose asChild><Button variant="outline">Close</Button></SheetClose>
+                <Button>Save</Button>
+              </SheetFooter>
+            </SheetContent>
+          </Sheet>
+        )}
+      </InteractiveDemo>
+
+      <Separator variant="bold" />
 
       {/* ─── Sheet Props ────────────────────────────────────────── */}
       <div className="space-y-4">

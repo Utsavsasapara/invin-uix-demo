@@ -1,6 +1,7 @@
-import { ComponentPage, PlaygroundSection } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, InteractiveDemo } from '../../components/PlaygroundSection.jsx';
 import { Toaster, toast } from 'invin-uix/ui/toast';
 import { Button } from 'invin-uix/ui/button';
+import { Separator } from 'invin-uix/ui/separator';
 
 export default function ToastDemo() {
   return (
@@ -11,6 +12,46 @@ export default function ToastDemo() {
 // Place <Toaster /> once in your app root`}
     >
       <Toaster position="top-right" />
+
+      {/* ─── Interactive Playground ─────────────────────────────── */}
+      <InteractiveDemo
+        title="Toast Playground"
+        description="Experiment with different toast configurations. Click the button to trigger a toast."
+        controls={[
+          {
+            name: 'variant',
+            type: 'select',
+            label: 'Variant',
+            default: 'default',
+            options: [
+              { value: 'default', label: 'Default' },
+              { value: 'success', label: 'Success' },
+              { value: 'warning', label: 'Warning' },
+              { value: 'destructive', label: 'Destructive' },
+              { value: 'info', label: 'Info' },
+            ],
+          },
+          { name: 'duration', type: 'number', label: 'Duration (ms)', default: 4000, min: 1000, max: 10000 },
+          { name: 'title', type: 'text', label: 'Title', default: 'Notification', placeholder: 'Toast title' },
+          { name: 'description', type: 'text', label: 'Description', default: 'This is a toast message.', placeholder: 'Toast description' },
+        ]}
+      >
+        {(props) => (
+          <Button 
+            variant="outline" 
+            onClick={() => toast({ 
+              title: props.title, 
+              description: props.description, 
+              variant: props.variant,
+              duration: props.duration
+            })}
+          >
+            Show Toast
+          </Button>
+        )}
+      </InteractiveDemo>
+
+      <Separator variant="bold" />
 
       <PlaygroundSection
         title="Variants"

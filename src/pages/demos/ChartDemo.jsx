@@ -1,4 +1,4 @@
-import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable, InteractiveDemo } from '../../components/PlaygroundSection.jsx';
 import {
   LineChart, AreaChart, BarChart, PieChart, DonutChart,
   RadarChart, GaugeChart, Sparkline,
@@ -99,6 +99,27 @@ export default function ChartDemo() {
   RadarChart, GaugeChart, Sparkline,
 } from 'invin-uix/ui/chart';`}
     >
+
+      {/* ─── Interactive Playground ─────────────────────────────── */}
+      <InteractiveDemo
+        title="Chart Playground"
+        description="Experiment with chart configurations."
+        controls={[
+          { name: 'chartType', type: 'select', label: 'Chart Type', default: 'line', options: [{ value: 'line', label: 'Line' }, { value: 'bar', label: 'Bar' }, { value: 'area', label: 'Area' }] },
+          { name: 'showGrid', type: 'boolean', label: 'Show Grid', default: true },
+        ]}
+      >
+        {(props) => {
+          if (props.chartType === 'line') {
+            return <LineChart data={incidentTrends.slice(0, 5)} xKey="month" lines={[{ key: 'incidents', name: 'Incidents', color: 'var(--accent)' }]} showGrid={props.showGrid} height={200} />;
+          } else if (props.chartType === 'bar') {
+            return <BarChart data={threatCategories.slice(0, 4)} xKey="category" bars={[{ key: 'count', name: 'Count', color: 'var(--accent)', radius: 4 }]} showGrid={props.showGrid} height={200} />;
+          } else {
+            return <AreaChart data={networkTraffic.slice(0, 5)} xKey="hour" areas={[{ key: 'inbound', name: 'Inbound', color: 'var(--accent)' }]} showGrid={props.showGrid} height={200} />;
+          }
+        }}
+      </InteractiveDemo>
+      <Separator variant="bold" />
 
       {/* ─── Common Props ─────────────────────────────────────── */}
       <PropsTable

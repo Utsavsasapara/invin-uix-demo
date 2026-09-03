@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable, InteractiveDemo } from '../../components/PlaygroundSection.jsx';
 import { Button } from 'invin-uix/ui/button';
 import {
   DropdownMenu, DropdownMenuTrigger, DropdownMenuContent,
@@ -13,6 +13,7 @@ import {
   Cloud, Users, Keyboard, Smiley, Copy, Scissors,
   Clipboard, PencilSimple, Trash, Archive, ShareNetwork
 } from 'invin-uix/ui/icons';
+import { Separator } from 'invin-uix/ui/separator';
 
 export default function DropdownDemo() {
   const [bookmarks, setBookmarks] = useState(true);
@@ -31,6 +32,54 @@ export default function DropdownDemo() {
   // DropdownMenuGroup, DropdownMenuRadioGroup
 } from 'invin-uix/ui/dropdown-menu';`}
     >
+
+      {/* ─── Interactive Playground ─────────────────────────────── */}
+      <InteractiveDemo
+        title="Dropdown Menu Playground"
+        description="Experiment with dropdown configurations. Click to open."
+        controls={[
+          {
+            name: 'side',
+            type: 'select',
+            label: 'Side',
+            default: 'bottom',
+            options: [
+              { value: 'top', label: 'Top' },
+              { value: 'bottom', label: 'Bottom' },
+              { value: 'left', label: 'Left' },
+              { value: 'right', label: 'Right' },
+            ],
+          },
+          {
+            name: 'align',
+            type: 'select',
+            label: 'Align',
+            default: 'start',
+            options: [
+              { value: 'start', label: 'Start' },
+              { value: 'center', label: 'Center' },
+              { value: 'end', label: 'End' },
+            ],
+          },
+        ]}
+      >
+        {(props) => (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline">Open Menu</Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent side={props.side} align={props.align}>
+              <DropdownMenuItem><User style={{ width: 14, height: 14 }} />Profile</DropdownMenuItem>
+              <DropdownMenuItem><Gear style={{ width: 14, height: 14 }} />Settings</DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem danger><SignOut style={{ width: 14, height: 14 }} />Log out</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )}
+      </InteractiveDemo>
+
+      <Separator variant="bold" />
+
       <PropsTable
         props={[
           { name: 'danger', type: 'boolean', default: 'false', description: 'Red text for destructive actions (on DropdownMenuItem)' },

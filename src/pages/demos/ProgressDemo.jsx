@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable, InteractiveDemo } from '../../components/PlaygroundSection.jsx';
 import { Progress } from 'invin-uix/ui/progress';
 import { Label } from 'invin-uix/ui/label';
 import { Card, CardContent } from 'invin-uix/ui/card';
@@ -21,6 +21,55 @@ export default function ProgressDemo() {
       description="Determinate progress bar built on Radix UI. 3 sizes, 4 colour variants, smooth animation. Use for uploads, tasks, or any measurable progress."
       importCode={`import { Progress } from 'invin-uix/ui/progress';`}
     >
+
+      {/* ─── Interactive Playground ─────────────────────────────── */}
+      <InteractiveDemo
+        title="Progress Playground"
+        description="Experiment with different progress bar configurations."
+        controls={[
+          {
+            name: 'variant',
+            type: 'select',
+            label: 'Variant',
+            default: 'default',
+            options: [
+              { value: 'default', label: 'Default' },
+              { value: 'success', label: 'Success' },
+              { value: 'warning', label: 'Warning' },
+              { value: 'destructive', label: 'Destructive' },
+            ],
+          },
+          {
+            name: 'size',
+            type: 'select',
+            label: 'Size',
+            default: 'md',
+            options: [
+              { value: 'sm', label: 'Small (4px)' },
+              { value: 'md', label: 'Medium (8px)' },
+              { value: 'lg', label: 'Large (12px)' },
+            ],
+          },
+          { name: 'value', type: 'number', label: 'Value', default: 65, min: 0, max: 100 },
+        ]}
+      >
+        {(props) => (
+          <div className="w-full max-w-md space-y-2">
+            <div className="flex justify-between text-[var(--muted-foreground)]">
+              <span>Progress</span>
+              <span>{props.value}%</span>
+            </div>
+            <Progress
+              value={props.value}
+              size={props.size}
+              variant={props.variant}
+            />
+          </div>
+        )}
+      </InteractiveDemo>
+
+      <Separator variant="bold" />
+
       <PropsTable
         props={[
           { name: 'value', type: 'number (0–100)', default: '0', description: 'Current progress percentage' },

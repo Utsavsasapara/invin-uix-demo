@@ -368,7 +368,7 @@ export default function SoarApp() {
           left={
             <Link to="/">
               <Button variant="ghost" size="sm">
-                <House style={{ width: 14, height: 14 }} /> House
+                <House style={{ width: 14, height: 14 }} /> Home
               </Button>
             </Link>
           }

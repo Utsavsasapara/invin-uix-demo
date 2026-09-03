@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable, InteractiveDemo } from '../../components/PlaygroundSection.jsx';
 import { FileUpload } from 'invin-uix/ui/file-upload';
 import { Button } from 'invin-uix/ui/button';
 import { Separator } from 'invin-uix/ui/separator';
@@ -19,6 +19,28 @@ export default function FileUploadDemo() {
       description="Drag & drop file upload zone with file list, progress indicators, and validation. Supports accept filters, size limits, and multiple files."
       importCode={`import { FileUpload } from 'invin-uix/ui/file-upload';`}
     >
+
+      {/* ─── Interactive Playground ─────────────────────────────── */}
+      <InteractiveDemo
+        title="File Upload Playground"
+        description="Experiment with File Upload configurations."
+        controls={[
+          { name: 'variant', type: 'select', label: 'Variant', default: 'default', options: [{ value: 'default', label: 'Default' }, { value: 'compact', label: 'Compact' }] },
+          { name: 'multiple', type: 'boolean', label: 'Multiple', default: true },
+          { name: 'disabled', type: 'boolean', label: 'Disabled', default: false },
+        ]}
+      >
+        {(props) => (
+          <div className="max-w-sm">
+            <FileUpload
+              variant={props.variant}
+              multiple={props.multiple}
+              disabled={props.disabled}
+            />
+          </div>
+        )}
+      </InteractiveDemo>
+      <Separator variant="bold" />
 
       <PropsTable
         props={[

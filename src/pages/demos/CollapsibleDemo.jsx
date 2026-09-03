@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable, InteractiveDemo } from '../../components/PlaygroundSection.jsx';
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from 'invin-uix/ui/collapsible';
 import { Button } from 'invin-uix/ui/button';
 import { Card, CardContent } from 'invin-uix/ui/card';
@@ -17,6 +17,37 @@ export default function CollapsibleDemo() {
       description="A disclosure primitive that expands/collapses content with smooth animated height transitions. Use for progressive disclosure, expandable sections, and FAQ-style patterns."
       importCode={`import { Collapsible, CollapsibleTrigger, CollapsibleContent } from 'invin-uix/ui/collapsible';`}
     >
+
+      {/* ─── Interactive Playground ─────────────────────────────── */}
+      <InteractiveDemo
+        title="Collapsible Playground"
+        description="Experiment with Collapsible configurations."
+        controls={[
+          { name: 'defaultOpen', type: 'boolean', label: 'Default Open', default: false },
+          { name: 'disabled', type: 'boolean', label: 'Disabled', default: false },
+        ]}
+      >
+        {(props) => (
+          <div className="max-w-md">
+            <Collapsible defaultOpen={props.defaultOpen} disabled={props.disabled}>
+              <div className="flex items-center justify-between px-3 py-2 rounded-lg border border-[var(--border)]">
+                <span className="text-label font-[500]">Click to expand</span>
+                <CollapsibleTrigger asChild>
+                  <Button variant="ghost" size="icon-sm" disabled={props.disabled}>
+                    <CaretDown style={{ width: 14, height: 14 }} />
+                  </Button>
+                </CollapsibleTrigger>
+              </div>
+              <CollapsibleContent>
+                <div className="mt-2 px-3 py-2 rounded-md border border-[var(--border)] text-label text-[var(--muted-foreground)]">
+                  This is the collapsible content that animates open and closed.
+                </div>
+              </CollapsibleContent>
+            </Collapsible>
+          </div>
+        )}
+      </InteractiveDemo>
+      <Separator variant="bold" />
 
       <PropsTable
         props={[

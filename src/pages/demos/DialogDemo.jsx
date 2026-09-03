@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable, InteractiveDemo } from '../../components/PlaygroundSection.jsx';
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogFooter, DialogTitle, DialogDescription, DialogClose } from 'invin-uix/ui/dialog';
 import { AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader, AlertDialogFooter, AlertDialogTitle, AlertDialogDescription, AlertDialogAction, AlertDialogCancel } from 'invin-uix/ui/alert-dialog';
 import { Button } from 'invin-uix/ui/button';
@@ -20,6 +20,42 @@ import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogFooter, Dialo
 // Alert dialog (forced-choice, no overlay dismiss)
 import { AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader, AlertDialogFooter, AlertDialogTitle, AlertDialogDescription, AlertDialogAction, AlertDialogCancel } from 'invin-uix/ui/alert-dialog';`}
     >
+
+      {/* ─── Interactive Playground ─────────────────────────────── */}
+      <InteractiveDemo
+        title="Dialog Playground"
+        description="Experiment with Dialog configurations."
+        controls={[
+          { name: 'hideClose', type: 'boolean', label: 'Hide Close Button', default: false },
+        ]}
+      >
+        {(props) => (
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant="outline">Open Dialog</Button>
+            </DialogTrigger>
+            <DialogContent hideClose={props.hideClose}>
+              <DialogHeader>
+                <DialogTitle>Edit Profile</DialogTitle>
+                <DialogDescription>Make changes to your profile.</DialogDescription>
+              </DialogHeader>
+              <div className="space-y-3 my-2">
+                <div className="space-y-1.5">
+                  <Label htmlFor="demo-name">Name</Label>
+                  <Input id="demo-name" defaultValue="Admin User" />
+                </div>
+              </div>
+              <DialogFooter>
+                <DialogClose asChild>
+                  <Button variant="outline">Cancel</Button>
+                </DialogClose>
+                <Button>Save</Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+        )}
+      </InteractiveDemo>
+      <Separator variant="bold" />
 
       <div className="space-y-4">
         <p className="text-[var(--muted-foreground)] font-[600] uppercase tracking-[0.05em] text-[var(--muted-foreground-faint)]">Dialog</p>

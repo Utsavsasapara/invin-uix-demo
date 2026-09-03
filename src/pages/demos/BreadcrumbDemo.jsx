@@ -1,4 +1,4 @@
-import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable, InteractiveDemo } from '../../components/PlaygroundSection.jsx';
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from 'invin-uix/ui/breadcrumb';
 import { Separator } from 'invin-uix/ui/separator';
 import { House, Gear } from 'invin-uix/ui/icons';
@@ -11,6 +11,41 @@ export default function BreadcrumbDemo() {
       importCode={`import { Breadcrumb } from 'invin-uix/ui/breadcrumb';
 // Compound: BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator, BreadcrumbEllipsis`}
     >
+
+      {/* ─── Interactive Playground ─────────────────────────────── */}
+      <InteractiveDemo
+        title="Breadcrumb Playground"
+        description="Experiment with different breadcrumb configurations."
+        controls={[
+          {
+            name: 'separator',
+            type: 'select',
+            label: 'Separator',
+            default: '/',
+            options: [
+              { value: '/', label: '/' },
+              { value: '>', label: '>' },
+              { value: '→', label: '→' },
+              { value: '|', label: '|' },
+            ],
+          },
+          { name: 'showIcons', type: 'boolean', label: 'Show Icons', default: false },
+        ]}
+      >
+        {(props) => (
+          <Breadcrumb
+            separator={<span style={{ margin: '0 8px', color: 'var(--muted-foreground-faint)' }}>{props.separator}</span>}
+            items={[
+              { title: 'Home', href: '#', icon: props.showIcons ? <House style={{ width: 14, height: 14, marginRight: 4, display: 'inline' }} /> : undefined },
+              { title: 'Settings', href: '#', icon: props.showIcons ? <Gear style={{ width: 14, height: 14, marginRight: 4, display: 'inline' }} /> : undefined },
+              { title: 'Profile' },
+            ]}
+          />
+        )}
+      </InteractiveDemo>
+
+      <Separator variant="bold" />
+
       <PropsTable
         props={[
           { name: 'items', type: 'BreadcrumbItemType[]', default: '—', description: 'Simple API: array of { title, href?, icon?, onClick? }' },

@@ -1,4 +1,4 @@
-import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable, InteractiveDemo } from '../../components/PlaygroundSection.jsx';
 import {
   AlertDialog, AlertDialogTrigger, AlertDialogContent,
   AlertDialogHeader, AlertDialogFooter, AlertDialogTitle,
@@ -19,6 +19,40 @@ export default function AlertDialogDemo() {
   AlertDialogDescription, AlertDialogAction, AlertDialogCancel,
 } from 'invin-uix/ui/alert-dialog';`}
     >
+
+      {/* ─── Interactive Playground ─────────────────────────────── */}
+      <InteractiveDemo
+        title="Alert Dialog Playground"
+        description="Experiment with Alert Dialog configurations."
+        controls={[
+          { name: 'variant', type: 'select', label: 'Action Style', default: 'destructive', options: [{ value: 'destructive', label: 'Destructive' }, { value: 'default', label: 'Default' }] },
+        ]}
+      >
+        {(props) => (
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button variant={props.variant === 'destructive' ? 'destructive' : 'outline'}>
+                <Trash style={{ width: 14, height: 14 }} /> Delete Item
+              </Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                <AlertDialogDescription>
+                  This action cannot be undone. This will permanently delete the item.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <AlertDialogAction className={props.variant === 'destructive' ? 'bg-[var(--error)] border-transparent' : ''}>
+                  Confirm
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+        )}
+      </InteractiveDemo>
+      <Separator variant="bold" />
 
       <PropsTable
         props={[

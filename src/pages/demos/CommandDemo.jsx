@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable, InteractiveDemo } from '../../components/PlaygroundSection.jsx';
 import {
   Command, CommandInput, CommandList, CommandEmpty,
   CommandGroup, CommandItem, CommandSeparator, CommandShortcut, CommandDialog,
@@ -27,6 +27,32 @@ export default function CommandDemo() {
 } from 'invin-uix/ui/command';`}
     >
       <Toaster position="top-right" />
+
+      {/* ─── Interactive Playground ─────────────────────────────── */}
+      <InteractiveDemo
+        title="Command Playground"
+        description="Experiment with Command list."
+        controls={[]}
+      >
+        {() => (
+          <Card className="max-w-sm">
+            <CardContent className="p-0">
+              <Command onValueChange={(v) => toast({ title: `Selected: ${v}` })}>
+                <CommandInput placeholder="Search commands..." />
+                <CommandList>
+                  <CommandEmpty>No results.</CommandEmpty>
+                  <CommandGroup heading="Navigation">
+                    <CommandItem value="dashboard"><SquaresFour style={{ width: 14, height: 14 }} /> Dashboard</CommandItem>
+                    <CommandItem value="users"><Users style={{ width: 14, height: 14 }} /> Users</CommandItem>
+                    <CommandItem value="settings"><Gear style={{ width: 14, height: 14 }} /> Settings</CommandItem>
+                  </CommandGroup>
+                </CommandList>
+              </Command>
+            </CardContent>
+          </Card>
+        )}
+      </InteractiveDemo>
+      <Separator variant="bold" />
 
       <div className="space-y-4">
         <p className="text-[var(--muted-foreground)] font-[600] uppercase tracking-[0.05em] text-[var(--muted-foreground-faint)]">Command</p>

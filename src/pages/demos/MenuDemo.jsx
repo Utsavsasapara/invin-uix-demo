@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { ComponentPage, PlaygroundSection } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, InteractiveDemo } from '../../components/PlaygroundSection.jsx';
 import { Menu } from 'invin-uix/ui/menu';
 import { Badge } from 'invin-uix/ui/badge';
 import { Switch } from 'invin-uix/ui/switch';
+import { Separator } from 'invin-uix/ui/separator';
 import {
   House, Users, Gear, Envelope, Calendar,
   FileText, ChartBar as BarChart, Shield, Tray,
@@ -28,6 +29,32 @@ export default function MenuDemo() {
       description="Navigation menu with horizontal, vertical, and inline modes. Supports icons, descriptions, badges, sub-menus, groups, collapsed mode, and danger items."
       importCode={`import { Menu } from 'invin-uix/ui/menu';`}
     >
+      {/* ─── Interactive Playground ─────────────────────────────── */}
+      <InteractiveDemo
+        title="Menu Playground"
+        description="Experiment with Menu configurations."
+        controls={[
+          { name: 'mode', type: 'select', label: 'Mode', default: 'vertical', options: [{ value: 'horizontal', label: 'Horizontal' }, { value: 'vertical', label: 'Vertical' }, { value: 'sidebar', label: 'Sidebar' }] },
+          { name: 'activeVariant', type: 'select', label: 'Active Variant', default: 'background', options: [{ value: 'background', label: 'Background' }, { value: 'border', label: 'Border' }, { value: 'filled', label: 'Filled' }] },
+        ]}
+      >
+        {(props) => (
+          <div style={{ maxWidth: props.mode === 'horizontal' ? '100%' : '220px' }}>
+            <Menu
+              mode={props.mode}
+              activeVariant={props.activeVariant}
+              selectedKeys={['dashboard']}
+              items={[
+                { key: 'dashboard', label: 'Dashboard', icon: icon(House) },
+                { key: 'users', label: 'Users', icon: icon(Users) },
+                { key: 'settings', label: 'Settings', icon: icon(Gear) },
+              ]}
+            />
+          </div>
+        )}
+      </InteractiveDemo>
+      <Separator variant="bold" />
+
       <PlaygroundSection
         title="Horizontal (Top Nav)"
         description="Horizontal navigation bar for top-level pages."

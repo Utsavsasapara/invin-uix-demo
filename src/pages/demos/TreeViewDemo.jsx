@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable, InteractiveDemo } from '../../components/PlaygroundSection.jsx';
 import { TreeView } from 'invin-uix/ui/tree-view';
 import { Badge } from 'invin-uix/ui/badge';
 import { Card, CardContent } from 'invin-uix/ui/card';
@@ -103,6 +103,33 @@ export default function TreeViewDemo() {
       importCode={`import { TreeView } from 'invin-uix/ui/tree-view';`}
     >
       <Toaster position="top-right" />
+
+      {/* ─── Interactive Playground ─────────────────────────────── */}
+      <InteractiveDemo
+        title="Tree View Playground"
+        description="Experiment with Tree View configurations."
+        controls={[
+          { name: 'size', type: 'select', label: 'Size', default: 'md', options: [{ value: 'sm', label: 'Small' }, { value: 'md', label: 'Medium' }, { value: 'lg', label: 'Large' }] },
+          { name: 'showLines', type: 'boolean', label: 'Show Lines', default: false },
+          { name: 'multiSelect', type: 'boolean', label: 'Multi-Select', default: false },
+        ]}
+      >
+        {(props) => (
+          <Card className="max-w-sm">
+            <CardContent className="py-3 px-1">
+              <TreeView
+                data={fileTree}
+                defaultExpanded={['src']}
+                size={props.size}
+                showLines={props.showLines}
+                multiSelect={props.multiSelect}
+                onSelect={(id) => toast({ title: `Selected: ${id}` })}
+              />
+            </CardContent>
+          </Card>
+        )}
+      </InteractiveDemo>
+      <Separator variant="bold" />
 
       <PropsTable
         props={[

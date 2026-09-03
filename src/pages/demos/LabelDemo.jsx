@@ -1,4 +1,4 @@
-import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable, InteractiveDemo } from '../../components/PlaygroundSection.jsx';
 import { Label } from 'invin-uix/ui/label';
 import { Input } from 'invin-uix/ui/input';
 import { Checkbox } from 'invin-uix/ui/checkbox';
@@ -14,6 +14,28 @@ export default function LabelDemo() {
       description="Accessible form label that pairs with any input control via htmlFor. Automatically dims when the connected input is disabled (peer-disabled pattern)."
       importCode={`import { Label } from 'invin-uix/ui/label';`}
     >
+
+      {/* ─── Interactive Playground ─────────────────────────────── */}
+      <InteractiveDemo
+        title="Label Playground"
+        description="Experiment with different label configurations."
+        controls={[
+          { name: 'required', type: 'boolean', label: 'Required', default: false },
+          { name: 'disabled', type: 'boolean', label: 'Disabled', default: false },
+          { name: 'text', type: 'text', label: 'Label Text', default: 'Email address', placeholder: 'Enter label text' },
+        ]}
+      >
+        {(props) => (
+          <div className="space-y-2 w-full max-w-sm">
+            <Label htmlFor="demo-input" required={props.required} className={props.disabled ? 'opacity-50' : ''}>
+              {props.text || 'Label'}
+            </Label>
+            <Input id="demo-input" placeholder="Enter value..." disabled={props.disabled} />
+          </div>
+        )}
+      </InteractiveDemo>
+
+      <Separator variant="bold" />
 
       {/* ─── Props Table ────────────────────────────────────────── */}
       <PropsTable

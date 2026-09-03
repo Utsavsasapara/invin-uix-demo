@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable, InteractiveDemo } from '../../components/PlaygroundSection.jsx';
 import { Pagination } from 'invin-uix/ui/pagination';
 import { Separator } from 'invin-uix/ui/separator';
 import { Card, CardContent } from 'invin-uix/ui/card';
@@ -14,6 +14,52 @@ export default function PaginationDemo() {
       description="Smart pagination component with 3 variants (default, outline, simple), auto-ellipsis, controlled/uncontrolled, and size options. One prop-based API — no manual assembly needed."
       importCode={`import { Pagination } from 'invin-uix/ui/pagination';`}
     >
+
+      {/* ─── Interactive Playground ─────────────────────────────── */}
+      <InteractiveDemo
+        title="Pagination Playground"
+        description="Experiment with different pagination configurations."
+        controls={[
+          {
+            name: 'variant',
+            type: 'select',
+            label: 'Variant',
+            default: 'default',
+            options: [
+              { value: 'default', label: 'Default' },
+              { value: 'outline', label: 'Outline' },
+              { value: 'simple', label: 'Simple' },
+            ],
+          },
+          {
+            name: 'size',
+            type: 'select',
+            label: 'Size',
+            default: 'md',
+            options: [
+              { value: 'sm', label: 'Small' },
+              { value: 'md', label: 'Medium' },
+            ],
+          },
+          { name: 'total', type: 'number', label: 'Total Items', default: 100, min: 10, max: 500 },
+          { name: 'pageSize', type: 'number', label: 'Page Size', default: 10, min: 5, max: 50 },
+          { name: 'showLabels', type: 'boolean', label: 'Show Labels', default: true },
+        ]}
+      >
+        {(props) => (
+          <Pagination
+            variant={props.variant}
+            size={props.size}
+            total={props.total}
+            pageSize={props.pageSize}
+            showLabels={props.showLabels}
+            defaultCurrent={1}
+          />
+        )}
+      </InteractiveDemo>
+
+      <Separator variant="bold" />
+
       <PropsTable
         props={[
           { name: 'total', type: 'number (required)', default: '—', description: 'Total number of items' },

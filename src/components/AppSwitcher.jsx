@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from 'invin-uix/ui/button';
 import {
   DropdownMenu,
@@ -13,29 +13,56 @@ import { SquaresFour, Check } from 'invin-uix/ui/icons';
 // ─── Product / accent families (UI Guide v2.0 §04) ──────────────────────────
 
 export const ACCENTS = [
-  { key: 'xdr', label: 'ISOC Core', desc: 'XDR · blue', color: '#2769FC' },
-  { key: 'xdrplus', label: 'ISOC Extension', desc: 'XDR+ · purple', color: '#8A3FFC' },
-  { key: 'oxdr', label: 'UEMP', desc: 'OXDR · red', color: '#DD3731' },
-  { key: 'gsos', label: 'GRC', desc: 'GSOS · magenta', color: '#D02670' },
-  { key: 'pulse', label: 'CPS Pulse', desc: 'Pulse · orange', color: '#FF832B' },
-  { key: 'regimentAI', label: 'RegimentAI', desc: 'AI · green', color: '#0CB04A' },
-  { key: 'assentra', label: 'Assentra', desc: 'Assets · violet', color: '#9752D9' },
+  { key: 'xdr',        label: 'ISOC Core',      desc: 'XDR · blue',       color: '#2769FC' },
+  { key: 'xdrplus',    label: 'ISOC Extension',  desc: 'XDR+ · purple',    color: '#8A3FFC' },
+  { key: 'oxdr',       label: 'UEMP',            desc: 'OXDR · red',       color: '#DD3731' },
+  { key: 'gsos',       label: 'GRC',             desc: 'GSOS · magenta',   color: '#D02670' },
+  { key: 'pulse',      label: 'CPS Pulse',       desc: 'Pulse · orange',   color: '#FF832B' },
+  { key: 'regimentAI', label: 'RegimentAI',      desc: 'AI · green',       color: '#0CB04A' },
+  { key: 'assentra',   label: 'Assentra',        desc: 'Assets · violet',  color: '#9752D9' },
 ];
 
+// ─── Shared event bus for two-way accent sync ────────────────────────────────
+// Any component that calls applyAccent() fires 'accent-change' on window.
+// Every component using useAccent() listens for that event and stays in sync.
+// This means the guide page buttons and the topbar dropdown always agree —
+// switching in either place updates the other with no prop-drilling or context.
+
+const ACCENT_EVENT = 'accent-change';
+
+export function applyAccent(key) {
+  document.documentElement.setAttribute('data-accent', key);
+  window.dispatchEvent(new CustomEvent(ACCENT_EVENT, { detail: key }));
+}
+
 /**
- * AppSwitcher — the topbar product navigator. Switches the live UI accent by
- * setting html[data-accent]. Shared across the demo layout and the home page.
+ * useAccent() — returns [currentKey, apply(key)].
+ * Subscribes to the shared event bus so any update from any source is reflected.
  */
-export function AppSwitcher() {
+export function useAccent() {
   const [accent, setAccent] = useState(
     () => document.documentElement.getAttribute('data-accent') || 'xdr'
   );
 
-  const apply = (key) => {
-    document.documentElement.setAttribute('data-accent', key);
-    setAccent(key);
-  };
+  useEffect(() => {
+    const handler = (e) => setAccent(e.detail);
+    window.addEventListener(ACCENT_EVENT, handler);
+    return () => window.removeEventListener(ACCENT_EVENT, handler);
+  }, []);
 
+  return [accent, applyAccent];
+}
+
+// ─── AppSwitcher component ───────────────────────────────────────────────────
+
+/**
+ * AppSwitcher — the topbar product navigator. Switches the live UI accent by
+ * setting html[data-accent]. Shared across the demo layout and the home page.
+ * Two-way synced with useAccent(): picking here updates the guide page buttons,
+ * and picking in the guide page updates this dropdown.
+ */
+export function AppSwitcher() {
+  const [accent, apply] = useAccent();
   const current = ACCENTS.find((a) => a.key === accent) || ACCENTS[0];
 
   return (

@@ -1,4 +1,4 @@
-import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable, InteractiveDemo } from '../../components/PlaygroundSection.jsx';
 import { Avatar, AvatarImage, AvatarFallback, AvatarGroup } from 'invin-uix/ui/avatar';
 import { NotificationBadge } from 'invin-uix/ui/badge';
 import { Card, CardContent } from 'invin-uix/ui/card';
@@ -11,6 +11,38 @@ export default function AvatarDemo() {
       description="Circular user image with automatic fallback to initials. Supports 5 sizes, image loading detection, delayed fallback, and composable patterns (stacked groups, status badges)."
       importCode={`import { Avatar, AvatarImage, AvatarFallback } from 'invin-uix/ui/avatar';`}
     >
+
+      {/* ─── Interactive Playground ────────────────────────────── */}
+      <InteractiveDemo
+        title="Interactive Playground"
+        description="Experiment with Avatar props in real-time."
+        controls={[
+          {
+            name: 'size',
+            label: 'Size',
+            type: 'select',
+            default: 'md',
+            options: [
+              { value: 'xs', label: 'XS (24px)' },
+              { value: 'sm', label: 'SM (32px)' },
+              { value: 'md', label: 'MD (40px)' },
+              { value: 'lg', label: 'LG (48px)' },
+              { value: 'xl', label: 'XL (64px)' },
+            ]
+          },
+          { name: 'initials', label: 'Initials', type: 'text', default: 'JD' },
+          { name: 'showImage', label: 'Show Image', type: 'boolean', default: true },
+        ]}
+      >
+        {(props) => (
+          <Avatar size={props.size}>
+            {props.showImage && <AvatarImage src="https://i.pravatar.cc/100?u=demo" alt="Demo user" />}
+            <AvatarFallback>{props.initials}</AvatarFallback>
+          </Avatar>
+        )}
+      </InteractiveDemo>
+
+      <Separator />
 
       {/* ─── Props Table ────────────────────────────────────────── */}
       <div className="space-y-4">

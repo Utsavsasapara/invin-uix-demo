@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable, InteractiveDemo } from '../../components/PlaygroundSection.jsx';
 import { Input } from 'invin-uix/ui/input';
 import { Label } from 'invin-uix/ui/label';
 import { Button } from 'invin-uix/ui/button';
@@ -16,6 +16,56 @@ export default function InputDemo() {
       description="Form text input with 3 sizes, built-in leftIcon/rightIcon slots, focus ring, disabled state, error validation styling (aria-invalid), and file input support."
       importCode={`import { Input } from 'invin-uix/ui/input';`}
     >
+
+      {/* ─── Interactive Playground ────────────────────────────── */}
+      <InteractiveDemo
+        title="Interactive Playground"
+        description="Experiment with Input props in real-time."
+        controls={[
+          {
+            name: 'size',
+            label: 'Size',
+            type: 'select',
+            default: 'md',
+            options: [
+              { value: 'sm', label: 'Small' },
+              { value: 'md', label: 'Medium' },
+              { value: 'lg', label: 'Large' },
+            ]
+          },
+          {
+            name: 'type',
+            label: 'Type',
+            type: 'select',
+            default: 'text',
+            options: [
+              { value: 'text', label: 'Text' },
+              { value: 'email', label: 'Email' },
+              { value: 'password', label: 'Password' },
+              { value: 'number', label: 'Number' },
+            ]
+          },
+          { name: 'placeholder', label: 'Placeholder', type: 'text', default: 'Enter text...' },
+          { name: 'disabled', label: 'Disabled', type: 'boolean', default: false },
+          { name: 'showIcon', label: 'Show Icon', type: 'boolean', default: false },
+          { name: 'hasError', label: 'Has Error', type: 'boolean', default: false },
+        ]}
+      >
+        {(props) => (
+          <div className="w-full max-w-xs">
+            <Input
+              size={props.size}
+              type={props.type}
+              placeholder={props.placeholder}
+              disabled={props.disabled}
+              leftIcon={props.showIcon ? <MagnifyingGlass style={{ width: 16, height: 16 }} /> : undefined}
+              error={props.hasError ? 'This field is required' : undefined}
+            />
+          </div>
+        )}
+      </InteractiveDemo>
+
+      <Separator />
 
       {/* ─── Props Table ────────────────────────────────────────── */}
       <PropsTable

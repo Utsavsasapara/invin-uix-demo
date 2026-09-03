@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable, InteractiveDemo } from '../../components/PlaygroundSection.jsx';
 import { AspectRatio } from 'invin-uix/ui/aspect-ratio';
 import { Label } from 'invin-uix/ui/label';
 import { Slider } from 'invin-uix/ui/slider';
@@ -26,6 +26,29 @@ export default function AspectRatioDemo() {
       description="Maintains a consistent width-to-height ratio for child content. Essential for responsive images, video embeds, and media containers that must preserve proportions across screen sizes."
       importCode={`import { AspectRatio } from 'invin-uix/ui/aspect-ratio';`}
     >
+      {/* ─── Interactive Playground ─────────────────────────────── */}
+      <InteractiveDemo
+        title="Aspect Ratio Playground"
+        description="Experiment with different aspect ratios."
+        controls={[
+          { name: 'ratio', type: 'select', label: 'Ratio', default: '16/9', options: [{ value: '1/1', label: '1:1' }, { value: '4/3', label: '4:3' }, { value: '16/9', label: '16:9' }, { value: '21/9', label: '21:9' }, { value: '9/16', label: '9:16' }, { value: '3/2', label: '3:2' }] },
+        ]}
+      >
+        {(props) => {
+          const ratioMap = { '1/1': 1, '4/3': 4/3, '16/9': 16/9, '21/9': 21/9, '9/16': 9/16, '3/2': 3/2 };
+          return (
+            <div className="w-full max-w-[300px]">
+              <AspectRatio ratio={ratioMap[props.ratio]}>
+                <div className="w-full h-full rounded-lg bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/20 flex items-center justify-center">
+                  <span className="text-label font-semibold text-primary">{props.ratio}</span>
+                </div>
+              </AspectRatio>
+            </div>
+          );
+        }}
+      </InteractiveDemo>
+      <Separator variant="bold" />
+
       <PropsTable
         props={[
           { name: 'ratio', type: 'number', default: '1', description: 'Width-to-height ratio (e.g. 16/9 = 1.778)' },

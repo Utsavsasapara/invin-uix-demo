@@ -1,4 +1,4 @@
-import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable, InteractiveDemo } from '../../components/PlaygroundSection.jsx';
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem, SelectGroup, SelectLabel, SelectSeparator } from 'invin-uix/ui/select';
 import { Label } from 'invin-uix/ui/label';
 import { Button } from 'invin-uix/ui/button';
@@ -14,6 +14,46 @@ export default function SelectDemo() {
       importCode={`import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from 'invin-uix/ui/select';
 // Optional: SelectGroup, SelectLabel, SelectSeparator`}
     >
+
+      {/* ─── Interactive Playground ─────────────────────────────── */}
+      <InteractiveDemo
+        title="Select Playground"
+        description="Experiment with different select configurations."
+        controls={[
+          {
+            name: 'size',
+            type: 'select',
+            label: 'Size',
+            default: 'md',
+            options: [
+              { value: 'sm', label: 'Small (28px)' },
+              { value: 'md', label: 'Medium (38px)' },
+              { value: 'lg', label: 'Large (44px)' },
+            ],
+          },
+          { name: 'disabled', type: 'boolean', label: 'Disabled', default: false },
+          { name: 'hasError', type: 'boolean', label: 'Show Error', default: false },
+        ]}
+      >
+        {(props) => (
+          <div className="w-64">
+            <Select disabled={props.disabled}>
+              <SelectTrigger size={props.size} error={props.hasError ? "Please select an option" : undefined}>
+                <SelectValue placeholder="Select a fruit" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="apple">Apple</SelectItem>
+                <SelectItem value="banana">Banana</SelectItem>
+                <SelectItem value="cherry">Cherry</SelectItem>
+                <SelectItem value="grape">Grape</SelectItem>
+                <SelectItem value="mango">Mango</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        )}
+      </InteractiveDemo>
+
+      <Separator variant="bold" />
 
       {/* ─── Props Table ────────────────────────────────────────── */}
       <div className="space-y-4">

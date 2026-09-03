@@ -1,4 +1,4 @@
-import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable, InteractiveDemo } from '../../components/PlaygroundSection.jsx';
 import { ScrollArea, ScrollBar } from 'invin-uix/ui/scroll-area';
 import { Card, CardContent } from 'invin-uix/ui/card';
 import { Badge } from 'invin-uix/ui/badge';
@@ -27,6 +27,34 @@ export default function ScrollAreaDemo() {
       description="Custom-styled scrollable container with thin, auto-hiding scrollbars that match the design system. Works for both vertical and horizontal overflow."
       importCode={`import { ScrollArea, ScrollBar } from 'invin-uix/ui/scroll-area';`}
     >
+
+      {/* ─── Interactive Playground ─────────────────────────────── */}
+      <InteractiveDemo
+        title="Scroll Area Playground"
+        description="Experiment with different scroll area configurations."
+        controls={[
+          { name: 'height', type: 'number', label: 'Height (px)', default: 200, min: 100, max: 400 },
+          { name: 'itemCount', type: 'number', label: 'Item Count', default: 15, min: 5, max: 30 },
+        ]}
+      >
+        {(props) => (
+          <Card>
+            <CardContent className="p-0">
+              <ScrollArea className="w-full" style={{ height: props.height }}>
+                <div className="p-4 space-y-2">
+                  {Array.from({ length: props.itemCount }, (_, i) => (
+                    <div key={i} className="py-2 px-3 rounded-md border border-[var(--border)] text-[var(--foreground)]">
+                      Item {i + 1}
+                    </div>
+                  ))}
+                </div>
+              </ScrollArea>
+            </CardContent>
+          </Card>
+        )}
+      </InteractiveDemo>
+
+      <Separator variant="bold" />
 
       <PropsTable
         props={[

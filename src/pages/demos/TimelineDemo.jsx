@@ -1,4 +1,4 @@
-import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable, InteractiveDemo } from '../../components/PlaygroundSection.jsx';
 import { Timeline, TimelineItem } from 'invin-uix/ui/timeline';
 import { Badge } from 'invin-uix/ui/badge';
 import { Button } from 'invin-uix/ui/button';
@@ -16,6 +16,25 @@ export default function TimelineDemo() {
       description="Vertical activity timeline for displaying events, audit logs, and activity feeds in chronological order."
       importCode={`import { Timeline, TimelineItem } from 'invin-uix/ui/timeline';`}
     >
+
+      {/* ─── Interactive Playground ─────────────────────────────── */}
+      <InteractiveDemo
+        title="Timeline Playground"
+        description="Experiment with Timeline configurations."
+        controls={[
+          { name: 'size', type: 'select', label: 'Size', default: 'md', options: [{ value: 'sm', label: 'Small' }, { value: 'md', label: 'Medium' }, { value: 'lg', label: 'Large' }] },
+          { name: 'lineVariant', type: 'select', label: 'Line Variant', default: 'solid', options: [{ value: 'solid', label: 'Solid' }, { value: 'dashed', label: 'Dashed' }] },
+        ]}
+      >
+        {(props) => (
+          <Timeline size={props.size} lineVariant={props.lineVariant}>
+            <TimelineItem time="2 min ago" title="First event" color="var(--ok)" active />
+            <TimelineItem time="1 hour ago" title="Second event" color="var(--accent)" />
+            <TimelineItem time="3 hours ago" title="Third event" />
+          </Timeline>
+        )}
+      </InteractiveDemo>
+      <Separator variant="bold" />
 
       {/* ─── Props ──────────────────────────────────────────── */}
       <div className="space-y-4">

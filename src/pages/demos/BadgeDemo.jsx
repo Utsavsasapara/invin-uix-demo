@@ -1,4 +1,4 @@
-import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable, InteractiveDemo } from '../../components/PlaygroundSection.jsx';
 import { Badge, NotificationBadge, StatusBadge } from 'invin-uix/ui/badge';
 import { Button } from 'invin-uix/ui/button';
 import { Card, CardContent } from 'invin-uix/ui/card';
@@ -13,6 +13,49 @@ export default function BadgeDemo() {
       description="Three focused components: Badge (inline label pill), NotificationBadge (count/dot on an element), and StatusBadge (status dot + text). Badge also accepts count/dot/status for back-compat and delegates automatically."
       importCode={`import { Badge, NotificationBadge, StatusBadge } from 'invin-uix/ui/badge';`}
     >
+
+      {/* ─── Interactive Playground ────────────────────────────── */}
+      <InteractiveDemo
+        title="Interactive Playground"
+        description="Experiment with Badge props in real-time."
+        controls={[
+          {
+            name: 'variant',
+            label: 'Variant',
+            type: 'select',
+            default: 'default',
+            options: [
+              { value: 'default', label: 'Default' },
+              { value: 'secondary', label: 'Secondary' },
+              { value: 'destructive', label: 'Destructive' },
+              { value: 'success', label: 'Success' },
+              { value: 'warning', label: 'Warning' },
+              { value: 'info', label: 'Info' },
+              { value: 'outline', label: 'Outline' },
+            ]
+          },
+          {
+            name: 'size',
+            label: 'Size',
+            type: 'select',
+            default: 'md',
+            options: [
+              { value: 'sm', label: 'Small' },
+              { value: 'md', label: 'Medium' },
+              { value: 'lg', label: 'Large' },
+            ]
+          },
+          { name: 'text', label: 'Text', type: 'text', default: 'Badge' },
+        ]}
+      >
+        {(props) => (
+          <Badge variant={props.variant} size={props.size}>
+            {props.text}
+          </Badge>
+        )}
+      </InteractiveDemo>
+
+      <Separator />
 
       {/* ─── Props Table ────────────────────────────────────────── */}
       <div className="space-y-4">

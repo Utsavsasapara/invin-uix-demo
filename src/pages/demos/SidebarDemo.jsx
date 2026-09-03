@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable, InteractiveDemo } from '../../components/PlaygroundSection.jsx';
 import { Sidebar } from 'invin-uix/ui/sidebar';
 import { Menu } from 'invin-uix/ui/menu';
 import { Button } from 'invin-uix/ui/button';
@@ -46,6 +46,48 @@ export default function SidebarDemo() {
       importCode={`import { Sidebar } from 'invin-uix/ui/sidebar';
 import { Menu } from 'invin-uix/ui/menu';`}
     >
+
+      {/* ─── Interactive Playground ─────────────────────────────── */}
+      <InteractiveDemo
+        title="Sidebar Playground"
+        description="Toggle the sidebar collapsed state."
+        controls={[
+          { name: 'collapsed', type: 'boolean', label: 'Collapsed', default: false },
+        ]}
+      >
+        {(props) => (
+          <div className="border border-[var(--border)] rounded-xl overflow-hidden h-[320px] relative">
+            <div className="absolute inset-0 flex">
+              <div className={`shrink-0 transition-[width] duration-200 ${props.collapsed ? 'w-[76px]' : 'w-[220px]'} h-full border-r border-[var(--border)] bg-[var(--sidebar)] flex flex-col`}>
+                <div className={`h-[50px] flex items-center border-b border-[var(--border)] ${props.collapsed ? 'justify-center px-3' : 'px-4 gap-2'}`}>
+                  {props.collapsed ? (
+                    <div className="h-7 w-7 rounded-[8px] bg-[var(--accent)] flex items-center justify-center text-white text-[11px] font-[700]">S</div>
+                  ) : (
+                    <span className="text-label font-[600]">Invinsense</span>
+                  )}
+                </div>
+                <div className="flex-1 p-2">
+                  <Menu
+                    mode="sidebar"
+                    collapsed={props.collapsed}
+                    collapsedTooltip
+                    selectedKeys={['dashboard']}
+                    items={[
+                      { key: 'dashboard', label: 'Dashboard', icon: icon(SquaresFour) },
+                      { key: 'users', label: 'Users', icon: icon(Users) },
+                      { key: 'settings', label: 'Settings', icon: icon(Gear) },
+                    ]}
+                  />
+                </div>
+              </div>
+              <div className="flex-1 flex items-center justify-center text-label text-[var(--muted-foreground)]">
+                Content area
+              </div>
+            </div>
+          </div>
+        )}
+      </InteractiveDemo>
+      <Separator variant="bold" />
 
       <PropsTable
         props={[

@@ -1,4 +1,4 @@
-import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable, InteractiveDemo } from '../../components/PlaygroundSection.jsx';
 import { Textarea } from 'invin-uix/ui/textarea';
 import { Input } from 'invin-uix/ui/input';
 import { Label } from 'invin-uix/ui/label';
@@ -13,6 +13,44 @@ export default function TextareaDemo() {
       description="Multi-line text input with 3 sizes, vertical resize, focus ring, disabled state, error validation via aria-invalid, and a built-in character counter (showCount). Same design language as Input."
       importCode={`import { Textarea } from 'invin-uix/ui/textarea';`}
     >
+
+      {/* ─── Interactive Playground ─────────────────────────────── */}
+      <InteractiveDemo
+        title="Textarea Playground"
+        description="Experiment with different textarea configurations."
+        controls={[
+          {
+            name: 'size',
+            type: 'select',
+            label: 'Size',
+            default: 'md',
+            options: [
+              { value: 'sm', label: 'Small' },
+              { value: 'md', label: 'Medium' },
+              { value: 'lg', label: 'Large' },
+            ],
+          },
+          { name: 'rows', type: 'number', label: 'Rows', default: 4, min: 2, max: 10 },
+          { name: 'showCount', type: 'boolean', label: 'Show Count', default: false },
+          { name: 'disabled', type: 'boolean', label: 'Disabled', default: false },
+          { name: 'placeholder', type: 'text', label: 'Placeholder', default: 'Enter your message...', placeholder: 'Placeholder text' },
+        ]}
+      >
+        {(props) => (
+          <div className="w-full max-w-sm">
+            <Textarea
+              size={props.size}
+              rows={props.rows}
+              showCount={props.showCount}
+              disabled={props.disabled}
+              placeholder={props.placeholder}
+              maxLength={props.showCount ? 200 : undefined}
+            />
+          </div>
+        )}
+      </InteractiveDemo>
+
+      <Separator variant="bold" />
 
       {/* ─── Props Table ────────────────────────────────────────── */}
       <PropsTable

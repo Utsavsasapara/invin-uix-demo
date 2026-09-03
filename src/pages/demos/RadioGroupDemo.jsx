@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable, InteractiveDemo } from '../../components/PlaygroundSection.jsx';
 import { RadioGroup, RadioGroupItem } from 'invin-uix/ui/radio-group';
 import { Label } from 'invin-uix/ui/label';
 import { Card, CardContent } from 'invin-uix/ui/card';
@@ -16,6 +16,59 @@ export default function RadioGroupDemo() {
       description="Single-selection from a list of options. Built on Radix UI with arrow-key navigation, focus management, and ARIA roles. Accent dot indicator on selected."
       importCode={`import { RadioGroup, RadioGroupItem } from 'invin-uix/ui/radio-group';`}
     >
+
+      {/* ─── Interactive Playground ─────────────────────────────── */}
+      <InteractiveDemo
+        title="Radio Group Playground"
+        description="Experiment with different radio group configurations."
+        controls={[
+          {
+            name: 'size',
+            type: 'select',
+            label: 'Size',
+            default: 'md',
+            options: [
+              { value: 'sm', label: 'Small (14px)' },
+              { value: 'md', label: 'Medium (16px)' },
+              { value: 'lg', label: 'Large (20px)' },
+            ],
+          },
+          {
+            name: 'orientation',
+            type: 'select',
+            label: 'Orientation',
+            default: 'vertical',
+            options: [
+              { value: 'vertical', label: 'Vertical' },
+              { value: 'horizontal', label: 'Horizontal' },
+            ],
+          },
+          { name: 'disabled', type: 'boolean', label: 'Disabled', default: false },
+        ]}
+      >
+        {(props) => (
+          <RadioGroup 
+            defaultValue="option2" 
+            disabled={props.disabled}
+            className={props.orientation === 'horizontal' ? 'flex gap-6' : 'space-y-2'}
+          >
+            <div className="flex items-center gap-2">
+              <RadioGroupItem value="option1" size={props.size} id="pg-r1" />
+              <Label htmlFor="pg-r1" className={props.disabled ? 'opacity-50' : ''}>Option 1</Label>
+            </div>
+            <div className="flex items-center gap-2">
+              <RadioGroupItem value="option2" size={props.size} id="pg-r2" />
+              <Label htmlFor="pg-r2" className={props.disabled ? 'opacity-50' : ''}>Option 2</Label>
+            </div>
+            <div className="flex items-center gap-2">
+              <RadioGroupItem value="option3" size={props.size} id="pg-r3" />
+              <Label htmlFor="pg-r3" className={props.disabled ? 'opacity-50' : ''}>Option 3</Label>
+            </div>
+          </RadioGroup>
+        )}
+      </InteractiveDemo>
+
+      <Separator variant="bold" />
 
       {/* ─── Props Table ────────────────────────────────────────── */}
       <div className="space-y-4">

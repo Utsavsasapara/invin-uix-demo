@@ -1,8 +1,9 @@
-import { ComponentPage, PlaygroundSection } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, InteractiveDemo } from '../../components/PlaygroundSection.jsx';
 import { HoverCard, HoverCardTrigger, HoverCardContent } from 'invin-uix/ui/hover-card';
 import { Avatar, AvatarImage, AvatarFallback } from 'invin-uix/ui/avatar';
 import { Button } from 'invin-uix/ui/button';
 import { Badge } from 'invin-uix/ui/badge';
+import { Separator } from 'invin-uix/ui/separator';
 
 export default function HoverCardDemo() {
   return (
@@ -11,6 +12,61 @@ export default function HoverCardDemo() {
       description="A floating card that appears when hovering over a trigger. Useful for previews of user profiles, links, or any content you want to show on hover."
       importCode={`import { HoverCard, HoverCardTrigger, HoverCardContent } from 'invin-uix/ui/hover-card';`}
     >
+
+      {/* ─── Interactive Playground ─────────────────────────────── */}
+      <InteractiveDemo
+        title="Hover Card Playground"
+        description="Hover over the trigger to see the card."
+        controls={[
+          {
+            name: 'side',
+            type: 'select',
+            label: 'Side',
+            default: 'bottom',
+            options: [
+              { value: 'top', label: 'Top' },
+              { value: 'bottom', label: 'Bottom' },
+              { value: 'left', label: 'Left' },
+              { value: 'right', label: 'Right' },
+            ],
+          },
+          {
+            name: 'align',
+            type: 'select',
+            label: 'Align',
+            default: 'center',
+            options: [
+              { value: 'start', label: 'Start' },
+              { value: 'center', label: 'Center' },
+              { value: 'end', label: 'End' },
+            ],
+          },
+        ]}
+      >
+        {(props) => (
+          <HoverCard>
+            <HoverCardTrigger asChild>
+              <Button variant="link">Hover over me</Button>
+            </HoverCardTrigger>
+            <HoverCardContent side={props.side} align={props.align}>
+              <div className="flex gap-3">
+                <Avatar>
+                  <AvatarImage src="https://i.pravatar.cc/100?u=demo" />
+                  <AvatarFallback>DM</AvatarFallback>
+                </Avatar>
+                <div className="space-y-1">
+                  <h4 className="text-label font-semibold">Demo User</h4>
+                  <p className="text-caption text-muted-foreground">This is a hover card preview</p>
+                  <Badge variant="secondary" size="sm">Preview</Badge>
+                </div>
+              </div>
+            </HoverCardContent>
+          </HoverCard>
+        )}
+      </InteractiveDemo>
+
+      <Separator variant="bold" />
+
       <PlaygroundSection
         title="User Profile Preview"
         description="Hover over the link to see a profile preview card."

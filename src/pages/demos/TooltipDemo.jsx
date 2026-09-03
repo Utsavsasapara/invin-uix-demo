@@ -1,4 +1,4 @@
-import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable, InteractiveDemo } from '../../components/PlaygroundSection.jsx';
 import { Button } from 'invin-uix/ui/button';
 import { Tooltip } from 'invin-uix/ui/tooltip';
 import { Separator } from 'invin-uix/ui/separator';
@@ -11,6 +11,57 @@ export default function TooltipDemo() {
       description="Contextual text popup on hover/focus/click. Portal-based positioning with auto-flip at viewport edges, 12 placements, arrow, custom colours, and delay control."
       importCode={`import { Tooltip } from 'invin-uix/ui/tooltip';`}
     >
+
+      {/* ─── Interactive Playground ─────────────────────────────── */}
+      <InteractiveDemo
+        title="Tooltip Playground"
+        description="Experiment with different tooltip configurations."
+        controls={[
+          {
+            name: 'placement',
+            type: 'select',
+            label: 'Placement',
+            default: 'top',
+            options: [
+              { value: 'top', label: 'Top' },
+              { value: 'bottom', label: 'Bottom' },
+              { value: 'left', label: 'Left' },
+              { value: 'right', label: 'Right' },
+              { value: 'topLeft', label: 'Top Left' },
+              { value: 'topRight', label: 'Top Right' },
+              { value: 'bottomLeft', label: 'Bottom Left' },
+              { value: 'bottomRight', label: 'Bottom Right' },
+            ],
+          },
+          {
+            name: 'trigger',
+            type: 'select',
+            label: 'Trigger',
+            default: 'hover',
+            options: [
+              { value: 'hover', label: 'Hover' },
+              { value: 'click', label: 'Click' },
+              { value: 'focus', label: 'Focus' },
+            ],
+          },
+          { name: 'arrow', type: 'boolean', label: 'Show Arrow', default: true },
+          { name: 'content', type: 'text', label: 'Content', default: 'This is a tooltip', placeholder: 'Tooltip text' },
+        ]}
+      >
+        {(props) => (
+          <Tooltip 
+            title={props.content || 'Tooltip content'} 
+            placement={props.placement}
+            trigger={props.trigger}
+            arrow={props.arrow}
+          >
+            <Button variant="outline">Hover or Click Me</Button>
+          </Tooltip>
+        )}
+      </InteractiveDemo>
+
+      <Separator variant="bold" />
+
       <PropsTable
         props={[
           { name: 'title', type: 'ReactNode', default: '—', description: 'Tooltip content. If empty/falsy, tooltip is disabled.' },

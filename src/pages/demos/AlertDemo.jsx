@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable, InteractiveDemo } from '../../components/PlaygroundSection.jsx';
 import { Alert, AlertTitle, AlertDescription } from 'invin-uix/ui/alert';
 import { Separator } from 'invin-uix/ui/separator';
 import { Button } from 'invin-uix/ui/button';
@@ -14,6 +14,57 @@ export default function AlertDemo() {
       description="Status message component with 5 semantic variants. Pass an icon via the icon prop (auto-positioned + coloured to match the variant), plus title + description and dismissible mode."
       importCode={`import { Alert, AlertTitle, AlertDescription } from 'invin-uix/ui/alert';`}
     >
+
+      {/* ─── Interactive Playground ────────────────────────────── */}
+      <InteractiveDemo
+        title="Interactive Playground"
+        description="Experiment with Alert props in real-time."
+        controls={[
+          {
+            name: 'variant',
+            label: 'Variant',
+            type: 'select',
+            default: 'default',
+            options: [
+              { value: 'default', label: 'Default' },
+              { value: 'info', label: 'Info' },
+              { value: 'success', label: 'Success' },
+              { value: 'warning', label: 'Warning' },
+              { value: 'destructive', label: 'Destructive' },
+            ]
+          },
+          { name: 'title', label: 'Title', type: 'text', default: 'Alert Title' },
+          { name: 'description', label: 'Description', type: 'text', default: 'This is the alert description message.' },
+          { name: 'showIcon', label: 'Show Icon', type: 'boolean', default: true },
+          { name: 'closable', label: 'Closable', type: 'boolean', default: false },
+        ]}
+      >
+        {(props) => {
+          const iconMap = {
+            default: Terminal,
+            info: Info,
+            success: CheckCircle,
+            warning: Warning,
+            destructive: WarningCircle,
+          };
+          const IconComponent = iconMap[props.variant];
+          return (
+            <div className="w-full max-w-md">
+              <Alert 
+                variant={props.variant} 
+                icon={props.showIcon ? <IconComponent style={{ width: 16, height: 16 }} /> : undefined}
+                closable={props.closable}
+                onClose={() => {}}
+              >
+                <AlertTitle>{props.title}</AlertTitle>
+                <AlertDescription>{props.description}</AlertDescription>
+              </Alert>
+            </div>
+          );
+        }}
+      </InteractiveDemo>
+
+      <Separator />
 
       {/* ─── Props Table ────────────────────────────────────────── */}
       <PropsTable

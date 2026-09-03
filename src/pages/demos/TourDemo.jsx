@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable, InteractiveDemo } from '../../components/PlaygroundSection.jsx';
 import { Tour, TourFAB } from 'invin-uix/ui/tour';
 import { Button } from 'invin-uix/ui/button';
 import { Card, CardContent } from 'invin-uix/ui/card';
@@ -68,6 +68,22 @@ export default function TourDemo() {
       description="Guided product tour with step-by-step highlighting, progress tracking, and cross-page navigation support. Composes Button and Progress from the library."
       importCode={`import { Tour, TourFAB } from 'invin-uix/ui/tour';`}
     >
+      {/* ─── Interactive Playground ─────────────────────────────── */}
+      <InteractiveDemo
+        title="Tour Playground"
+        description="Click to start a tour demonstration."
+        controls={[]}
+      >
+        {() => (
+          <div className="flex gap-3">
+            <Button variant="outline" onClick={() => setSingleTour(true)}>
+              Start Tour Demo
+            </Button>
+          </div>
+        )}
+      </InteractiveDemo>
+      <Separator variant="bold" />
+
       {/* ─── Props Tables ───────────────────────────────────────── */}
       <div className="space-y-4">
         <p className="text-[var(--muted-foreground)] font-[600] uppercase tracking-[0.05em] text-[var(--muted-foreground-faint)]">Tour</p>

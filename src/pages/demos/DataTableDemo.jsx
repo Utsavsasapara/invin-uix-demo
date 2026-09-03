@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ComponentPage, PlaygroundSection, PropsTable } from '../../components/PlaygroundSection.jsx';
+import { ComponentPage, PlaygroundSection, PropsTable, InteractiveDemo } from '../../components/PlaygroundSection.jsx';
 import { DataTable } from 'invin-uix/ui/data-table';
 import { Badge } from 'invin-uix/ui/badge';
 import { Button } from 'invin-uix/ui/button';
@@ -136,6 +136,34 @@ export default function DataTableDemo() {
       importCode={`import { DataTable } from 'invin-uix/ui/data-table';`}
     >
       <Toaster position="top-right" />
+
+      {/* ─── Interactive Playground ─────────────────────────────── */}
+      <InteractiveDemo
+        title="Data Table Playground"
+        description="Experiment with Data Table configurations."
+        controls={[
+          { name: 'searchable', type: 'boolean', label: 'Searchable', default: true },
+          { name: 'paginated', type: 'boolean', label: 'Paginated', default: true },
+          { name: 'selectable', type: 'boolean', label: 'Selectable', default: false },
+          { name: 'striped', type: 'boolean', label: 'Striped', default: false },
+          { name: 'dense', type: 'boolean', label: 'Dense', default: false },
+        ]}
+      >
+        {(props) => (
+          <DataTable
+            columns={incidentColumns}
+            data={incidents.slice(0, 5)}
+            rowKey="id"
+            searchable={props.searchable}
+            paginated={props.paginated}
+            selectable={props.selectable}
+            striped={props.striped}
+            dense={props.dense}
+            pageSize={5}
+          />
+        )}
+      </InteractiveDemo>
+      <Separator variant="bold" />
 
       <PropsTable
         props={[
