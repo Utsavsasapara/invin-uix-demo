@@ -16,6 +16,7 @@ import { AppSwitcher } from '../components/AppSwitcher.jsx';
 // Getting Started
 const GettingStartedDemo = lazy(() => import('./demos/GettingStartedDemo.jsx'));
 const UIGuideV2 = lazy(() => import('./demos/UIGuideV2.jsx'));
+const ShowcaseDemo = lazy(() => import('./demos/ShowcaseDemo.jsx'));
 
 // Tier 1: Display
 const ButtonDemo = lazy(() => import('./demos/ButtonDemo.jsx'));
@@ -90,6 +91,16 @@ const ComboboxDemo = lazy(() => import('./demos/ComboboxDemo.jsx'));
 const CommandDemo = lazy(() => import('./demos/CommandDemo.jsx'));
 const TreeViewDemo = lazy(() => import('./demos/TreeViewDemo.jsx'));
 
+// Tier 7: Latest additions (v1.1.0)
+const ErrorBoundaryDemo = lazy(() => import('./demos/ErrorBoundaryDemo.jsx'));
+const NumberInputDemo = lazy(() => import('./demos/NumberInputDemo.jsx'));
+const FormDemo = lazy(() => import('./demos/FormDemo.jsx'));
+
+// Tier 8: New input components (v1.2.0)
+const ColorPickerDemo = lazy(() => import('./demos/ColorPickerDemo.jsx'));
+const SearchInputDemo = lazy(() => import('./demos/SearchInputDemo.jsx'));
+const TagInputDemo = lazy(() => import('./demos/TagInputDemo.jsx'));
+
 // ─── Component Registry ─────────────────────────────────────────────────────
 
 const categories = [
@@ -99,6 +110,7 @@ const categories = [
     type: 'group',
     children: [
       { key: 'getting-started', label: 'Getting Started', component: GettingStartedDemo },
+      { key: 'showcase', label: 'Showcase', component: ShowcaseDemo, badge: 'New' },
       { key: 'ui-guide', label: 'UI Guide', component: UIGuideV2 },
       { key: 'typography', label: 'Typography', component: TypographyDemo },
       { key: 'icons', label: 'Icons', component: IconsDemo },
@@ -126,7 +138,10 @@ const categories = [
     label: 'Form & Input',
     type: 'group',
     children: [
+      { key: 'form', label: 'Form', component: FormDemo },
       { key: 'input', label: 'Input', component: InputDemo },
+      { key: 'number-input', label: 'Number Input', component: NumberInputDemo },
+      { key: 'search-input', label: 'Search Input', component: SearchInputDemo, badge: 'New' },
       { key: 'textarea', label: 'Textarea', component: TextareaDemo },
       { key: 'select', label: 'Select', component: SelectDemo },
       { key: 'combobox', label: 'Combobox', component: ComboboxDemo },
@@ -135,6 +150,8 @@ const categories = [
       { key: 'switch', label: 'Switch', component: SwitchDemo },
       { key: 'slider', label: 'Slider', component: SliderDemo },
       { key: 'toggle', label: 'Toggle', component: ToggleDemo },
+      { key: 'tag-input', label: 'Tag Input', component: TagInputDemo, badge: 'New' },
+      { key: 'color-picker', label: 'Color Picker', component: ColorPickerDemo, badge: 'New' },
     ],
   },
   {
@@ -157,6 +174,7 @@ const categories = [
       { key: 'progress', label: 'Progress', component: ProgressDemo },
       { key: 'toast', label: 'Toast', component: ToastDemo },
       { key: 'tooltip', label: 'Tooltip', component: TooltipDemo },
+      { key: 'error-boundary', label: 'Error Boundary', component: ErrorBoundaryDemo },
     ],
   },
   {
@@ -288,7 +306,7 @@ export default function DemoLayout() {
       >
         <Topbar
           left={
-            <h1 className="text-[var(--foreground)] font-[700] tracking-[-0.02em]">{activeEntry?.label || 'Component'}</h1>
+            <h1 className="text-page-title font-semibold text-[var(--foreground)] tracking-[-0.01em]">{activeEntry?.label || 'Component'}</h1>
           }
           right={
             <div className="flex items-center gap-1">
@@ -300,14 +318,14 @@ export default function DemoLayout() {
               </Tooltip>
               <Link to="/">
                 <Button variant="ghost" size="sm">
-                  <House style={{ width: 14, height: 14 }} /> House
+                  <House style={{ width: 14, height: 14 }} /> Home
                 </Button>
               </Link>
             </div>
           }
         />
 
-        <div className="max-w-4xl mx-auto px-6 py-8">
+        <div className="px-6 py-6">
           <Suspense fallback={<LoadingFallback />}>
             <ActiveComponent />
           </Suspense>
